@@ -1,0 +1,868 @@
+{"city": "Corquilleroy", "country": "France", "customer_id": "C15644", "gender": "F", "source_id": 15644, "state": "Centre-Val de Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C03853", "gender": "F", "source_id": 3853, "state": "\u00cele-de-France"}
+{"city": "Comines", "country": "France", "customer_id": "C13422", "gender": "F", "source_id": 13422, "state": "Hauts-de-France"}
+{"city": "Le Havre", "country": "France", "customer_id": "C37166", "gender": "F", "source_id": 37166, "state": "Normandie"}
+{"city": "Paris", "country": "France", "customer_id": "C32624", "gender": "F", "source_id": 32624, "state": "\u00cele-de-France"}
+{"city": "Frontignan", "country": "France", "customer_id": "C64803", "gender": "F", "source_id": 64803, "state": "Occitanie"}
+{"city": "Agen", "country": "France", "customer_id": "C63351", "gender": "F", "source_id": 63351, "state": "Nouvelle-Aquitaine"}
+{"city": "Niort", "country": "France", "customer_id": "C69327", "gender": "F", "source_id": 69327, "state": "Nouvelle-Aquitaine"}
+{"city": "Arcangues", "country": "France", "customer_id": "C79440", "gender": "F", "source_id": 79440, "state": "Nouvelle-Aquitaine"}
+{"city": "Pau", "country": "France", "customer_id": "C35277", "gender": "F", "source_id": 35277, "state": "Nouvelle-Aquitaine"}
+{"city": "Honfleur", "country": "France", "customer_id": "C97832", "gender": "F", "source_id": 97832, "state": "Normandie"}
+{"city": "Saint-Maurice-de-Gourdans", "country": "France", "customer_id": "C48139", "gender": "F", "source_id": 48139, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saintes", "country": "France", "customer_id": "C03025", "gender": "F", "source_id": 3025, "state": "Nouvelle-Aquitaine"}
+{"city": "Rillieux-la-Pape", "country": "France", "customer_id": "C93675", "gender": "F", "source_id": 93675, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ess\u00f4mes-sur-Marne", "country": "France", "customer_id": "C72953", "gender": "F", "source_id": 72953, "state": "Hauts-de-France"}
+{"city": "Gien", "country": "France", "customer_id": "C07028", "gender": "F", "source_id": 7028, "state": "Centre-Val de Loire"}
+{"city": "B\u00e9ziers", "country": "France", "customer_id": "C27602", "gender": "F", "source_id": 27602, "state": "Occitanie"}
+{"city": "L\u00e9zignan-Corbi\u00e8res", "country": "France", "customer_id": "C61468", "gender": "F", "source_id": 61468, "state": "Occitanie"}
+{"city": "Cr\u00e9teil", "country": "France", "customer_id": "C29064", "gender": "F", "source_id": 29064, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C72255", "gender": "F", "source_id": 72255, "state": "\u00cele-de-France"}
+{"city": "Louviers", "country": "France", "customer_id": "C74732", "gender": "F", "source_id": 74732, "state": "Normandie"}
+{"city": "Thonon-les-Bains", "country": "France", "customer_id": "C75084", "gender": "F", "source_id": 75084, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Vienne", "country": "France", "customer_id": "C50903", "gender": "F", "source_id": 50903, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Laon", "country": "France", "customer_id": "C49994", "gender": "F", "source_id": 49994, "state": "Hauts-de-France"}
+{"city": "Segr\u00e9-en-Anjou Bleu", "country": "France", "customer_id": "C08979", "gender": "F", "source_id": 8979, "state": "Pays de la Loire"}
+{"city": "Mandelieu-la-Napoule", "country": "France", "customer_id": "C87815", "gender": "F", "source_id": 87815, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Suresnes", "country": "France", "customer_id": "C59066", "gender": "F", "source_id": 59066, "state": "\u00cele-de-France"}
+{"city": "Bagneux", "country": "France", "customer_id": "C95438", "gender": "F", "source_id": 95438, "state": "\u00cele-de-France"}
+{"city": "Lille", "country": "France", "customer_id": "C15097", "gender": "F", "source_id": 15097, "state": "Hauts-de-France"}
+{"city": "Saint-Symphorien-d'Ozon", "country": "France", "customer_id": "C87378", "gender": "F", "source_id": 87378, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Castres", "country": "France", "customer_id": "C61654", "gender": "F", "source_id": 61654, "state": "Occitanie"}
+{"city": "Mazaugues", "country": "France", "customer_id": "C05702", "gender": "F", "source_id": 5702, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Arras", "country": "France", "customer_id": "C28597", "gender": "F", "source_id": 28597, "state": "Hauts-de-France"}
+{"city": "Saint-Martin-de-Seignanx", "country": "France", "customer_id": "C51207", "gender": "F", "source_id": 51207, "state": "Nouvelle-Aquitaine"}
+{"city": "Limoges", "country": "France", "customer_id": "C57659", "gender": "F", "source_id": 57659, "state": "Nouvelle-Aquitaine"}
+{"city": "Quimper", "country": "France", "customer_id": "C26592", "gender": "F", "source_id": 26592, "state": "Bretagne"}
+{"city": "Amiens", "country": "France", "customer_id": "C02536", "gender": "F", "source_id": 2536, "state": "Hauts-de-France"}
+{"city": "Hanches", "country": "France", "customer_id": "C24946", "gender": "F", "source_id": 24946, "state": "Centre-Val de Loire"}
+{"city": "Gli\u00e8res-Val-de-Borne", "country": "France", "customer_id": "C76698", "gender": "F", "source_id": 76698, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Arsac", "country": "France", "customer_id": "C62322", "gender": "F", "source_id": 62322, "state": "Nouvelle-Aquitaine"}
+{"city": "Bulles", "country": "France", "customer_id": "C00883", "gender": "F", "source_id": 883, "state": "Hauts-de-France"}
+{"city": "Avignonet-Lauragais", "country": "France", "customer_id": "C02835", "gender": "F", "source_id": 2835, "state": "Occitanie"}
+{"city": "Noyon", "country": "France", "customer_id": "C66642", "gender": "F", "source_id": 66642, "state": "Hauts-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C85809", "gender": "F", "source_id": 85809, "state": "\u00cele-de-France"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C86087", "gender": "F", "source_id": 86087, "state": "Nouvelle-Aquitaine"}
+{"city": "Roubaix", "country": "France", "customer_id": "C02518", "gender": "F", "source_id": 2518, "state": "Hauts-de-France"}
+{"city": "Chevilly-Larue", "country": "France", "customer_id": "C45672", "gender": "F", "source_id": 45672, "state": "\u00cele-de-France"}
+{"city": "Oyonnax", "country": "France", "customer_id": "C66388", "gender": "F", "source_id": 66388, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Vaur\u00e9al", "country": "France", "customer_id": "C66594", "gender": "F", "source_id": 66594, "state": "\u00cele-de-France"}
+{"city": "Gagny", "country": "France", "customer_id": "C24426", "gender": "F", "source_id": 24426, "state": "\u00cele-de-France"}
+{"city": "Salon-de-Provence", "country": "France", "customer_id": "C24552", "gender": "F", "source_id": 24552, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Treis-Sants-en-Ouche", "country": "France", "customer_id": "C86690", "gender": "F", "source_id": 86690, "state": "Normandie"}
+{"city": "Nanterre", "country": "France", "customer_id": "C96255", "gender": "F", "source_id": 96255, "state": "\u00cele-de-France"}
+{"city": "Jou\u00e9-l\u00e8s-Tours", "country": "France", "customer_id": "C02529", "gender": "F", "source_id": 2529, "state": "Centre-Val de Loire"}
+{"city": "Cournon-d'Auvergne", "country": "France", "customer_id": "C67406", "gender": "F", "source_id": 67406, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Tendu", "country": "France", "customer_id": "C34666", "gender": "F", "source_id": 34666, "state": "Centre-Val de Loire"}
+{"city": "Saint-Paul-l\u00e8s-Dax", "country": "France", "customer_id": "C58317", "gender": "F", "source_id": 58317, "state": "Nouvelle-Aquitaine"}
+{"city": "Plogastel-Saint-Germain", "country": "France", "customer_id": "C13401", "gender": "F", "source_id": 13401, "state": "Bretagne"}
+{"city": "Marseille", "country": "France", "customer_id": "C79154", "gender": "F", "source_id": 79154, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Izeaux", "country": "France", "customer_id": "C40338", "gender": "F", "source_id": 40338, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Grasse", "country": "France", "customer_id": "C70966", "gender": "F", "source_id": 70966, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-Martin-la-Garenne", "country": "France", "customer_id": "C63786", "gender": "F", "source_id": 63786, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C36316", "gender": "F", "source_id": 36316, "state": "\u00cele-de-France"}
+{"city": "Ploufragan", "country": "France", "customer_id": "C21678", "gender": "F", "source_id": 21678, "state": "Bretagne"}
+{"city": "Castelnau-de-L\u00e9vis", "country": "France", "customer_id": "C48715", "gender": "F", "source_id": 48715, "state": "Occitanie"}
+{"city": "Mauguio", "country": "France", "customer_id": "C25209", "gender": "F", "source_id": 25209, "state": "Occitanie"}
+{"city": "Le Blanc-Mesnil", "country": "France", "customer_id": "C20847", "gender": "F", "source_id": 20847, "state": "\u00cele-de-France"}
+{"city": "Tulle", "country": "France", "customer_id": "C31484", "gender": "F", "source_id": 31484, "state": "Nouvelle-Aquitaine"}
+{"city": "Aiffres", "country": "France", "customer_id": "C73877", "gender": "F", "source_id": 73877, "state": "Nouvelle-Aquitaine"}
+{"city": "Angoul\u00eame", "country": "France", "customer_id": "C49365", "gender": "F", "source_id": 49365, "state": "Nouvelle-Aquitaine"}
+{"city": "Marey-sur-Tille", "country": "France", "customer_id": "C94523", "gender": "F", "source_id": 94523, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Br\u00e9al-sous-Montfort", "country": "France", "customer_id": "C72413", "gender": "F", "source_id": 72413, "state": "Bretagne"}
+{"city": "Esmery-Hallon", "country": "France", "customer_id": "C29038", "gender": "F", "source_id": 29038, "state": "Hauts-de-France"}
+{"city": "\u00c9toile-sur-Rh\u00f4ne", "country": "France", "customer_id": "C36834", "gender": "F", "source_id": 36834, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C73889", "gender": "F", "source_id": 73889, "state": "\u00cele-de-France"}
+{"city": "Ch\u00e2teau-Th\u00e9baud", "country": "France", "customer_id": "C58701", "gender": "F", "source_id": 58701, "state": "Pays de la Loire"}
+{"city": "Sainte-Agn\u00e9s", "country": "France", "customer_id": "C77051", "gender": "F", "source_id": 77051, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Maur-des-Foss\u00e9s", "country": "France", "customer_id": "C64842", "gender": "F", "source_id": 64842, "state": "\u00cele-de-France"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C91770", "gender": "F", "source_id": 91770, "state": "Nouvelle-Aquitaine"}
+{"city": "Montarnaud", "country": "France", "customer_id": "C45804", "gender": "F", "source_id": 45804, "state": "Occitanie"}
+{"city": "Enneti\u00e8res-en-Weppes", "country": "France", "customer_id": "C48734", "gender": "F", "source_id": 48734, "state": "Hauts-de-France"}
+{"city": "Les Mureaux", "country": "France", "customer_id": "C51952", "gender": "F", "source_id": 51952, "state": "\u00cele-de-France"}
+{"city": "Rennes", "country": "France", "customer_id": "C68718", "gender": "F", "source_id": 68718, "state": "Bretagne"}
+{"city": "Ch\u00e2teauneuf-sur-Is\u00e8re", "country": "France", "customer_id": "C65021", "gender": "F", "source_id": 65021, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bagneux", "country": "France", "customer_id": "C68970", "gender": "F", "source_id": 68970, "state": "\u00cele-de-France"}
+{"city": "Bonneuil-sur-Marne", "country": "France", "customer_id": "C60253", "gender": "F", "source_id": 60253, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C90099", "gender": "F", "source_id": 90099, "state": "\u00cele-de-France"}
+{"city": "Saint-Chamond", "country": "France", "customer_id": "C32363", "gender": "F", "source_id": 32363, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bonneuil-les-Eaux", "country": "France", "customer_id": "C34892", "gender": "F", "source_id": 34892, "state": "Hauts-de-France"}
+{"city": "Baug\u00e9 en Anjou", "country": "France", "customer_id": "C80650", "gender": "F", "source_id": 80650, "state": "Pays de la Loire"}
+{"city": "Saint-Paul-Trois-Ch\u00e2teaux", "country": "France", "customer_id": "C26556", "gender": "F", "source_id": 26556, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Chatou", "country": "France", "customer_id": "C09348", "gender": "F", "source_id": 9348, "state": "\u00cele-de-France"}
+{"city": "Erstein", "country": "France", "customer_id": "C03254", "gender": "F", "source_id": 3254, "state": "Grand Est"}
+{"city": "Guyancourt", "country": "France", "customer_id": "C57822", "gender": "F", "source_id": 57822, "state": "\u00cele-de-France"}
+{"city": "Castelnau-de-L\u00e9vis", "country": "France", "customer_id": "C89161", "gender": "F", "source_id": 89161, "state": "Occitanie"}
+{"city": "Ris-Orangis", "country": "France", "customer_id": "C30141", "gender": "F", "source_id": 30141, "state": "\u00cele-de-France"}
+{"city": "Rives-de-l'Yon", "country": "France", "customer_id": "C26611", "gender": "F", "source_id": 26611, "state": "Pays de la Loire"}
+{"city": "Bondy", "country": "France", "customer_id": "C92298", "gender": "F", "source_id": 92298, "state": "\u00cele-de-France"}
+{"city": "Le Teich", "country": "France", "customer_id": "C85572", "gender": "F", "source_id": 85572, "state": "Nouvelle-Aquitaine"}
+{"city": "Bellefont-La Rauze", "country": "France", "customer_id": "C73940", "gender": "F", "source_id": 73940, "state": "Occitanie"}
+{"city": "Caluire-et-Cuire", "country": "France", "customer_id": "C70080", "gender": "F", "source_id": 70080, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bonneuil-les-Eaux", "country": "France", "customer_id": "C19091", "gender": "F", "source_id": 19091, "state": "Hauts-de-France"}
+{"city": "Saint-Josse", "country": "France", "customer_id": "C47837", "gender": "F", "source_id": 47837, "state": "Hauts-de-France"}
+{"city": "Brive-la-Gaillarde", "country": "France", "customer_id": "C86831", "gender": "F", "source_id": 86831, "state": "Nouvelle-Aquitaine"}
+{"city": "Joux", "country": "France", "customer_id": "C53113", "gender": "F", "source_id": 53113, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Grasse", "country": "France", "customer_id": "C51388", "gender": "F", "source_id": 51388, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Lyon", "country": "France", "customer_id": "C67176", "gender": "F", "source_id": 67176, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Outreau", "country": "France", "customer_id": "C41063", "gender": "F", "source_id": 41063, "state": "Hauts-de-France"}
+{"city": "Bron", "country": "France", "customer_id": "C69538", "gender": "F", "source_id": 69538, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "\u00c9lancourt", "country": "France", "customer_id": "C17065", "gender": "F", "source_id": 17065, "state": "\u00cele-de-France"}
+{"city": "Saint-Laurent-d'Aigouze", "country": "France", "customer_id": "C13436", "gender": "F", "source_id": 13436, "state": "Occitanie"}
+{"city": "Obernai", "country": "France", "customer_id": "C60959", "gender": "F", "source_id": 60959, "state": "Grand Est"}
+{"city": "Saint-\u00c9tienne-du-Valdonnez", "country": "France", "customer_id": "C59650", "gender": "F", "source_id": 59650, "state": "Occitanie"}
+{"city": "\u00c9tampes", "country": "France", "customer_id": "C29572", "gender": "F", "source_id": 29572, "state": "\u00cele-de-France"}
+{"city": "Grasse", "country": "France", "customer_id": "C46157", "gender": "F", "source_id": 46157, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Pr\u00e9cign\u00e9", "country": "France", "customer_id": "C72783", "gender": "F", "source_id": 72783, "state": "Pays de la Loire"}
+{"city": "Le Fidelaire", "country": "France", "customer_id": "C93468", "gender": "F", "source_id": 93468, "state": "Normandie"}
+{"city": "Le Cannet", "country": "France", "customer_id": "C65346", "gender": "F", "source_id": 65346, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Le Blanc-Mesnil", "country": "France", "customer_id": "C37850", "gender": "F", "source_id": 37850, "state": "\u00cele-de-France"}
+{"city": "Dijon", "country": "France", "customer_id": "C79783", "gender": "F", "source_id": 79783, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Le Mesnil-Saint-Denis", "country": "France", "customer_id": "C82362", "gender": "F", "source_id": 82362, "state": "\u00cele-de-France"}
+{"city": "Marcq-en-Bar\u0153ul", "country": "France", "customer_id": "C58561", "gender": "F", "source_id": 58561, "state": "Hauts-de-France"}
+{"city": "Saint-Brice-sous-For\u00eat", "country": "France", "customer_id": "C70407", "gender": "F", "source_id": 70407, "state": "\u00cele-de-France"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C25139", "gender": "F", "source_id": 25139, "state": "Nouvelle-Aquitaine"}
+{"city": "Brest", "country": "France", "customer_id": "C34127", "gender": "F", "source_id": 34127, "state": "Bretagne"}
+{"city": "Dieppe", "country": "France", "customer_id": "C36761", "gender": "F", "source_id": 36761, "state": "Normandie"}
+{"city": "Gien", "country": "France", "customer_id": "C85933", "gender": "F", "source_id": 85933, "state": "Centre-Val de Loire"}
+{"city": "Saint-Vigor-d'Ymonville", "country": "France", "customer_id": "C66488", "gender": "F", "source_id": 66488, "state": "Normandie"}
+{"city": "Gonesse", "country": "France", "customer_id": "C11929", "gender": "F", "source_id": 11929, "state": "\u00cele-de-France"}
+{"city": "Cesson-S\u00e9vign\u00e9", "country": "France", "customer_id": "C64233", "gender": "F", "source_id": 64233, "state": "Bretagne"}
+{"city": "Rivi\u00e8re-Saas-et-Gourby", "country": "France", "customer_id": "C16389", "gender": "F", "source_id": 16389, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Priest", "country": "France", "customer_id": "C37346", "gender": "F", "source_id": 37346, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Alfortville", "country": "France", "customer_id": "C19274", "gender": "F", "source_id": 19274, "state": "\u00cele-de-France"}
+{"city": "Toulouse", "country": "France", "customer_id": "C46187", "gender": "F", "source_id": 46187, "state": "Occitanie"}
+{"city": "Angoul\u00eame", "country": "France", "customer_id": "C68056", "gender": "F", "source_id": 68056, "state": "Nouvelle-Aquitaine"}
+{"city": "Violaines", "country": "France", "customer_id": "C37327", "gender": "F", "source_id": 37327, "state": "Hauts-de-France"}
+{"city": "Chelles", "country": "France", "customer_id": "C25550", "gender": "F", "source_id": 25550, "state": "\u00cele-de-France"}
+{"city": "Nantes", "country": "France", "customer_id": "C22620", "gender": "F", "source_id": 22620, "state": "Pays de la Loire"}
+{"city": "Ch\u00e2teauroux", "country": "France", "customer_id": "C68339", "gender": "F", "source_id": 68339, "state": "Centre-Val de Loire"}
+{"city": "Rez\u00e9", "country": "France", "customer_id": "C75664", "gender": "F", "source_id": 75664, "state": "Pays de la Loire"}
+{"city": "Appietto", "country": "France", "customer_id": "C59799", "gender": "F", "source_id": 59799, "state": "Corse"}
+{"city": "Paris", "country": "France", "customer_id": "C67726", "gender": "F", "source_id": 67726, "state": "\u00cele-de-France"}
+{"city": "Amiens", "country": "France", "customer_id": "C19307", "gender": "F", "source_id": 19307, "state": "Hauts-de-France"}
+{"city": "Sainte-Marie-Kerque", "country": "France", "customer_id": "C79637", "gender": "F", "source_id": 79637, "state": "Hauts-de-France"}
+{"city": "Bois-Colombes", "country": "France", "customer_id": "C80129", "gender": "F", "source_id": 80129, "state": "\u00cele-de-France"}
+{"city": "Libourne", "country": "France", "customer_id": "C55807", "gender": "F", "source_id": 55807, "state": "Nouvelle-Aquitaine"}
+{"city": "Erstein", "country": "France", "customer_id": "C90858", "gender": "F", "source_id": 90858, "state": "Grand Est"}
+{"city": "Paris", "country": "France", "customer_id": "C01761", "gender": "F", "source_id": 1761, "state": "\u00cele-de-France"}
+{"city": "Clermont-Ferrand", "country": "France", "customer_id": "C59215", "gender": "F", "source_id": 59215, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ch\u00e2teaurenard", "country": "France", "customer_id": "C42773", "gender": "F", "source_id": 42773, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Toulouse", "country": "France", "customer_id": "C52735", "gender": "F", "source_id": 52735, "state": "Occitanie"}
+{"city": "Ch\u00e2teauroux", "country": "France", "customer_id": "C08081", "gender": "F", "source_id": 8081, "state": "Centre-Val de Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C27379", "gender": "F", "source_id": 27379, "state": "\u00cele-de-France"}
+{"city": "Montreuil", "country": "France", "customer_id": "C25772", "gender": "F", "source_id": 25772, "state": "\u00cele-de-France"}
+{"city": "Colombes", "country": "France", "customer_id": "C85413", "gender": "F", "source_id": 85413, "state": "\u00cele-de-France"}
+{"city": "Auxonne", "country": "France", "customer_id": "C33223", "gender": "F", "source_id": 33223, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Paris", "country": "France", "customer_id": "C86377", "gender": "F", "source_id": 86377, "state": "\u00cele-de-France"}
+{"city": "Pomponne", "country": "France", "customer_id": "C80490", "gender": "F", "source_id": 80490, "state": "\u00cele-de-France"}
+{"city": "L\u00e9zignan-Corbi\u00e8res", "country": "France", "customer_id": "C92164", "gender": "F", "source_id": 92164, "state": "Occitanie"}
+{"city": "Bonneuil-les-Eaux", "country": "France", "customer_id": "C76521", "gender": "F", "source_id": 76521, "state": "Hauts-de-France"}
+{"city": "Blois", "country": "France", "customer_id": "C40472", "gender": "F", "source_id": 40472, "state": "Centre-Val de Loire"}
+{"city": "Montigny-le-Bretonneux", "country": "France", "customer_id": "C02977", "gender": "F", "source_id": 2977, "state": "\u00cele-de-France"}
+{"city": "Frencq", "country": "France", "customer_id": "C95651", "gender": "F", "source_id": 95651, "state": "Hauts-de-France"}
+{"city": "Lyon", "country": "France", "customer_id": "C55276", "gender": "F", "source_id": 55276, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lyon", "country": "France", "customer_id": "C08595", "gender": "F", "source_id": 8595, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Plabennec", "country": "France", "customer_id": "C26152", "gender": "F", "source_id": 26152, "state": "Bretagne"}
+{"city": "B\u00e9ziers", "country": "France", "customer_id": "C43175", "gender": "F", "source_id": 43175, "state": "Occitanie"}
+{"city": "Noyal-Ch\u00e2tillon-sur-Seiche", "country": "France", "customer_id": "C32521", "gender": "F", "source_id": 32521, "state": "Bretagne"}
+{"city": "Moz\u00e9-sur-Louet", "country": "France", "customer_id": "C53108", "gender": "F", "source_id": 53108, "state": "Pays de la Loire"}
+{"city": "Collias", "country": "France", "customer_id": "C01149", "gender": "F", "source_id": 1149, "state": "Occitanie"}
+{"city": "Malay-le-Grand", "country": "France", "customer_id": "C67922", "gender": "F", "source_id": 67922, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Loire-Authion", "country": "France", "customer_id": "C87212", "gender": "F", "source_id": 87212, "state": "Pays de la Loire"}
+{"city": "Le Cannet", "country": "France", "customer_id": "C06055", "gender": "F", "source_id": 6055, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Tignieu-Jameyzieu", "country": "France", "customer_id": "C25474", "gender": "F", "source_id": 25474, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lons", "country": "France", "customer_id": "C79825", "gender": "F", "source_id": 79825, "state": "Nouvelle-Aquitaine"}
+{"city": "Marans", "country": "France", "customer_id": "C99513", "gender": "F", "source_id": 99513, "state": "Nouvelle-Aquitaine"}
+{"city": "Arles", "country": "France", "customer_id": "C25008", "gender": "F", "source_id": 25008, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "\u00c9lancourt", "country": "France", "customer_id": "C16324", "gender": "F", "source_id": 16324, "state": "\u00cele-de-France"}
+{"city": "Montigny-l\u00e8s-Metz", "country": "France", "customer_id": "C81774", "gender": "F", "source_id": 81774, "state": "Grand Est"}
+{"city": "Nantes", "country": "France", "customer_id": "C78432", "gender": "F", "source_id": 78432, "state": "Pays de la Loire"}
+{"city": "Toulouse", "country": "France", "customer_id": "C16381", "gender": "F", "source_id": 16381, "state": "Occitanie"}
+{"city": "Saint-\u00c9pain", "country": "France", "customer_id": "C72353", "gender": "F", "source_id": 72353, "state": "Centre-Val de Loire"}
+{"city": "Gagny", "country": "France", "customer_id": "C70593", "gender": "F", "source_id": 70593, "state": "\u00cele-de-France"}
+{"city": "La Neuville-en-Hez", "country": "France", "customer_id": "C21182", "gender": "F", "source_id": 21182, "state": "Hauts-de-France"}
+{"city": "Cl\u00e9ry-sur-Somme", "country": "France", "customer_id": "C09583", "gender": "F", "source_id": 9583, "state": "Hauts-de-France"}
+{"city": "M\u00e9rignac", "country": "France", "customer_id": "C79834", "gender": "F", "source_id": 79834, "state": "Nouvelle-Aquitaine"}
+{"city": "Pithiviers-le-Vieil", "country": "France", "customer_id": "C59796", "gender": "F", "source_id": 59796, "state": "Centre-Val de Loire"}
+{"city": "Perdreauville", "country": "France", "customer_id": "C15757", "gender": "F", "source_id": 15757, "state": "\u00cele-de-France"}
+{"city": "Deuil-la-Barre", "country": "France", "customer_id": "C61768", "gender": "F", "source_id": 61768, "state": "\u00cele-de-France"}
+{"city": "Auch", "country": "France", "customer_id": "C61771", "gender": "F", "source_id": 61771, "state": "Occitanie"}
+{"city": "Illkirch-Graffenstaden", "country": "France", "customer_id": "C99253", "gender": "F", "source_id": 99253, "state": "Grand Est"}
+{"city": "Plourin-l\u00e8s-Morlaix", "country": "France", "customer_id": "C47561", "gender": "F", "source_id": 47561, "state": "Bretagne"}
+{"city": "Villethierry", "country": "France", "customer_id": "C42836", "gender": "F", "source_id": 42836, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Boissy-Saint-L\u00e9ger", "country": "France", "customer_id": "C09358", "gender": "F", "source_id": 9358, "state": "\u00cele-de-France"}
+{"city": "Lorient", "country": "France", "customer_id": "C34196", "gender": "F", "source_id": 34196, "state": "Bretagne"}
+{"city": "Plumergat", "country": "France", "customer_id": "C37421", "gender": "F", "source_id": 37421, "state": "Bretagne"}
+{"city": "Nantes", "country": "France", "customer_id": "C76547", "gender": "F", "source_id": 76547, "state": "Pays de la Loire"}
+{"city": "Osny", "country": "France", "customer_id": "C31980", "gender": "F", "source_id": 31980, "state": "\u00cele-de-France"}
+{"city": "Le Plessis-Tr\u00e9vise", "country": "France", "customer_id": "C50450", "gender": "F", "source_id": 50450, "state": "\u00cele-de-France"}
+{"city": "Maisons-Alfort", "country": "France", "customer_id": "C17125", "gender": "F", "source_id": 17125, "state": "\u00cele-de-France"}
+{"city": "Triel-sur-Seine", "country": "France", "customer_id": "C67963", "gender": "F", "source_id": 67963, "state": "\u00cele-de-France"}
+{"city": "Angoul\u00eame", "country": "France", "customer_id": "C78351", "gender": "F", "source_id": 78351, "state": "Nouvelle-Aquitaine"}
+{"city": "\u00c9pieds-en-Beauce", "country": "France", "customer_id": "C71956", "gender": "F", "source_id": 71956, "state": "Centre-Val de Loire"}
+{"city": "Saint-\u00c9tienne", "country": "France", "customer_id": "C50103", "gender": "F", "source_id": 50103, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Avold", "country": "France", "customer_id": "C26439", "gender": "F", "source_id": 26439, "state": "Grand Est"}
+{"city": "B\u00e9zaudun-les-Alpes", "country": "France", "customer_id": "C09585", "gender": "F", "source_id": 9585, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Alfortville", "country": "France", "customer_id": "C34993", "gender": "F", "source_id": 34993, "state": "\u00cele-de-France"}
+{"city": "Saulx-les-Chartreux", "country": "France", "customer_id": "C96847", "gender": "F", "source_id": 96847, "state": "\u00cele-de-France"}
+{"city": "Courbevoie", "country": "France", "customer_id": "C88589", "gender": "F", "source_id": 88589, "state": "\u00cele-de-France"}
+{"city": "La Seyne-sur-Mer", "country": "France", "customer_id": "C07408", "gender": "F", "source_id": 7408, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Dorlisheim", "country": "France", "customer_id": "C14417", "gender": "F", "source_id": 14417, "state": "Grand Est"}
+{"city": "Saint-Didier-de-la-Tour", "country": "France", "customer_id": "C98806", "gender": "F", "source_id": 98806, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Gaillac", "country": "France", "customer_id": "C91713", "gender": "F", "source_id": 91713, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C36697", "gender": "F", "source_id": 36697, "state": "\u00cele-de-France"}
+{"city": "Le Bas-S\u00e9gala", "country": "France", "customer_id": "C74464", "gender": "F", "source_id": 74464, "state": "Occitanie"}
+{"city": "Pl\u00e9rin", "country": "France", "customer_id": "C35160", "gender": "F", "source_id": 35160, "state": "Bretagne"}
+{"city": "Reims", "country": "France", "customer_id": "C04222", "gender": "F", "source_id": 4222, "state": "Grand Est"}
+{"city": "La Grande-Paroisse", "country": "France", "customer_id": "C88031", "gender": "F", "source_id": 88031, "state": "\u00cele-de-France"}
+{"city": "Saint-P\u00e9e-sur-Nivelle", "country": "France", "customer_id": "C58562", "gender": "F", "source_id": 58562, "state": "Nouvelle-Aquitaine"}
+{"city": "Montierchaume", "country": "France", "customer_id": "C57229", "gender": "F", "source_id": 57229, "state": "Centre-Val de Loire"}
+{"city": "Le Castellet", "country": "France", "customer_id": "C58995", "gender": "F", "source_id": 58995, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Carri\u00e8res-sur-Seine", "country": "France", "customer_id": "C45972", "gender": "F", "source_id": 45972, "state": "\u00cele-de-France"}
+{"city": "Anneyron", "country": "France", "customer_id": "C45917", "gender": "F", "source_id": 45917, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Nice", "country": "France", "customer_id": "C81574", "gender": "F", "source_id": 81574, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Montfermeil", "country": "France", "customer_id": "C20204", "gender": "F", "source_id": 20204, "state": "\u00cele-de-France"}
+{"city": "Cherbourg-en-Cotentin", "country": "France", "customer_id": "C57970", "gender": "F", "source_id": 57970, "state": "Normandie"}
+{"city": "Brest", "country": "France", "customer_id": "C02732", "gender": "F", "source_id": 2732, "state": "Bretagne"}
+{"city": "Lamballe-Armor", "country": "France", "customer_id": "C06140", "gender": "F", "source_id": 6140, "state": "Bretagne"}
+{"city": "Saint-Orens-de-Gameville", "country": "France", "customer_id": "C48937", "gender": "F", "source_id": 48937, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C32043", "gender": "F", "source_id": 32043, "state": "\u00cele-de-France"}
+{"city": "L\u00e9ogeats", "country": "France", "customer_id": "C79437", "gender": "F", "source_id": 79437, "state": "Nouvelle-Aquitaine"}
+{"city": "Guichainville", "country": "France", "customer_id": "C02213", "gender": "F", "source_id": 2213, "state": "Normandie"}
+{"city": "Bury", "country": "France", "customer_id": "C29813", "gender": "F", "source_id": 29813, "state": "Hauts-de-France"}
+{"city": "Mercury", "country": "France", "customer_id": "C23276", "gender": "F", "source_id": 23276, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Rouans", "country": "France", "customer_id": "C23782", "gender": "F", "source_id": 23782, "state": "Pays de la Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C36647", "gender": "F", "source_id": 36647, "state": "\u00cele-de-France"}
+{"city": "Marseille", "country": "France", "customer_id": "C29465", "gender": "F", "source_id": 29465, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "La Courneuve", "country": "France", "customer_id": "C01522", "gender": "F", "source_id": 1522, "state": "\u00cele-de-France"}
+{"city": "Beausoleil", "country": "France", "customer_id": "C27943", "gender": "F", "source_id": 27943, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Verdun", "country": "France", "customer_id": "C28924", "gender": "F", "source_id": 28924, "state": "Grand Est"}
+{"city": "Ville-sous-Anjou", "country": "France", "customer_id": "C80266", "gender": "F", "source_id": 80266, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Cernay", "country": "France", "customer_id": "C88970", "gender": "F", "source_id": 88970, "state": "Grand Est"}
+{"city": "Beuzeville", "country": "France", "customer_id": "C91130", "gender": "F", "source_id": 91130, "state": "Normandie"}
+{"city": "Meudon", "country": "France", "customer_id": "C04289", "gender": "F", "source_id": 4289, "state": "\u00cele-de-France"}
+{"city": "Baug\u00e9 en Anjou", "country": "France", "customer_id": "C10697", "gender": "F", "source_id": 10697, "state": "Pays de la Loire"}
+{"city": "\u00c9ragny", "country": "France", "customer_id": "C14703", "gender": "F", "source_id": 14703, "state": "\u00cele-de-France"}
+{"city": "Saint-\u00c9tienne-du-Rouvray", "country": "France", "customer_id": "C14289", "gender": "F", "source_id": 14289, "state": "Normandie"}
+{"city": "Thionville", "country": "France", "customer_id": "C24476", "gender": "F", "source_id": 24476, "state": "Grand Est"}
+{"city": "Tours", "country": "France", "customer_id": "C08119", "gender": "F", "source_id": 8119, "state": "Centre-Val de Loire"}
+{"city": "Nanterre", "country": "France", "customer_id": "C36082", "gender": "F", "source_id": 36082, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C98817", "gender": "F", "source_id": 98817, "state": "\u00cele-de-France"}
+{"city": "Bonneuil-sur-Marne", "country": "France", "customer_id": "C69740", "gender": "F", "source_id": 69740, "state": "\u00cele-de-France"}
+{"city": "Les Ventes", "country": "France", "customer_id": "C73727", "gender": "F", "source_id": 73727, "state": "Normandie"}
+{"city": "V\u00e9traz-Monthoux", "country": "France", "customer_id": "C18209", "gender": "F", "source_id": 18209, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Gaillon-sur-Montcient", "country": "France", "customer_id": "C44589", "gender": "F", "source_id": 44589, "state": "\u00cele-de-France"}
+{"city": "Laplume", "country": "France", "customer_id": "C83392", "gender": "F", "source_id": 83392, "state": "Nouvelle-Aquitaine"}
+{"city": "Dou\u00e9-en-Anjou", "country": "France", "customer_id": "C65342", "gender": "F", "source_id": 65342, "state": "Pays de la Loire"}
+{"city": "Lille", "country": "France", "customer_id": "C85062", "gender": "F", "source_id": 85062, "state": "Hauts-de-France"}
+{"city": "Marquise", "country": "France", "customer_id": "C99618", "gender": "F", "source_id": 99618, "state": "Hauts-de-France"}
+{"city": "Laventie", "country": "France", "customer_id": "C71384", "gender": "F", "source_id": 71384, "state": "Hauts-de-France"}
+{"city": "Verri\u00e8res-le-Buisson", "country": "France", "customer_id": "C06649", "gender": "F", "source_id": 6649, "state": "\u00cele-de-France"}
+{"city": "Saint-Maurice-l'Exil", "country": "France", "customer_id": "C29304", "gender": "F", "source_id": 29304, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Brest", "country": "France", "customer_id": "C61436", "gender": "F", "source_id": 61436, "state": "Bretagne"}
+{"city": "Villers-Cotter\u00eats", "country": "France", "customer_id": "C00279", "gender": "F", "source_id": 279, "state": "Hauts-de-France"}
+{"city": "Brest", "country": "France", "customer_id": "C72811", "gender": "F", "source_id": 72811, "state": "Bretagne"}
+{"city": "Arras", "country": "France", "customer_id": "C77224", "gender": "F", "source_id": 77224, "state": "Hauts-de-France"}
+{"city": "Amilly", "country": "France", "customer_id": "C49628", "gender": "F", "source_id": 49628, "state": "Centre-Val de Loire"}
+{"city": "Cenon", "country": "France", "customer_id": "C41759", "gender": "F", "source_id": 41759, "state": "Nouvelle-Aquitaine"}
+{"city": "Le Mans", "country": "France", "customer_id": "C76842", "gender": "F", "source_id": 76842, "state": "Pays de la Loire"}
+{"city": "Argenteuil", "country": "France", "customer_id": "C86128", "gender": "F", "source_id": 86128, "state": "\u00cele-de-France"}
+{"city": "La Tour-d'Aigues", "country": "France", "customer_id": "C90505", "gender": "F", "source_id": 90505, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Le Havre", "country": "France", "customer_id": "C16246", "gender": "F", "source_id": 16246, "state": "Normandie"}
+{"city": "Saint-Andr\u00e9-de-Cubzac", "country": "France", "customer_id": "C69570", "gender": "F", "source_id": 69570, "state": "Nouvelle-Aquitaine"}
+{"city": "Brest", "country": "France", "customer_id": "C50543", "gender": "F", "source_id": 50543, "state": "Bretagne"}
+{"city": "Paris", "country": "France", "customer_id": "C65344", "gender": "F", "source_id": 65344, "state": "\u00cele-de-France"}
+{"city": "Anse", "country": "France", "customer_id": "C91268", "gender": "F", "source_id": 91268, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ploufragan", "country": "France", "customer_id": "C91466", "gender": "F", "source_id": 91466, "state": "Bretagne"}
+{"city": "Yerres", "country": "France", "customer_id": "C22152", "gender": "F", "source_id": 22152, "state": "\u00cele-de-France"}
+{"city": "Nice", "country": "France", "customer_id": "C07558", "gender": "F", "source_id": 7558, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Toulouse", "country": "France", "customer_id": "C36357", "gender": "F", "source_id": 36357, "state": "Occitanie"}
+{"city": "Locon", "country": "France", "customer_id": "C82217", "gender": "F", "source_id": 82217, "state": "Hauts-de-France"}
+{"city": "Le Kremlin-Bic\u00eatre", "country": "France", "customer_id": "C86317", "gender": "F", "source_id": 86317, "state": "\u00cele-de-France"}
+{"city": "Corbie", "country": "France", "customer_id": "C02083", "gender": "F", "source_id": 2083, "state": "Hauts-de-France"}
+{"city": "Fontaine-Chaalis", "country": "France", "customer_id": "C48232", "gender": "F", "source_id": 48232, "state": "Hauts-de-France"}
+{"city": "Hy\u00e8res", "country": "France", "customer_id": "C22477", "gender": "F", "source_id": 22477, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Coupvray", "country": "France", "customer_id": "C64774", "gender": "F", "source_id": 64774, "state": "\u00cele-de-France"}
+{"city": "Beuzeville", "country": "France", "customer_id": "C14238", "gender": "F", "source_id": 14238, "state": "Normandie"}
+{"city": "Gourg\u00e9", "country": "France", "customer_id": "C81534", "gender": "F", "source_id": 81534, "state": "Nouvelle-Aquitaine"}
+{"city": "Marseille", "country": "France", "customer_id": "C60461", "gender": "F", "source_id": 60461, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-Est\u00e8ve", "country": "France", "customer_id": "C68627", "gender": "F", "source_id": 68627, "state": "Occitanie"}
+{"city": "Rennes", "country": "France", "customer_id": "C51557", "gender": "F", "source_id": 51557, "state": "Bretagne"}
+{"city": "Paris", "country": "France", "customer_id": "C18783", "gender": "F", "source_id": 18783, "state": "\u00cele-de-France"}
+{"city": "Salses-le-Ch\u00e2teau", "country": "France", "customer_id": "C83521", "gender": "F", "source_id": 83521, "state": "Occitanie"}
+{"city": "L'\u00cele-Saint-Denis", "country": "France", "customer_id": "C53688", "gender": "F", "source_id": 53688, "state": "\u00cele-de-France"}
+{"city": "Ronchin", "country": "France", "customer_id": "C47699", "gender": "F", "source_id": 47699, "state": "Hauts-de-France"}
+{"city": "Leymen", "country": "France", "customer_id": "C04183", "gender": "F", "source_id": 4183, "state": "Grand Est"}
+{"city": "S\u00e8vres", "country": "France", "customer_id": "C35648", "gender": "F", "source_id": 35648, "state": "\u00cele-de-France"}
+{"city": "Lure", "country": "France", "customer_id": "C68653", "gender": "F", "source_id": 68653, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "B\u00e8gles", "country": "France", "customer_id": "C30020", "gender": "F", "source_id": 30020, "state": "Nouvelle-Aquitaine"}
+{"city": "Vand\u0153uvre-l\u00e8s-Nancy", "country": "France", "customer_id": "C75692", "gender": "F", "source_id": 75692, "state": "Grand Est"}
+{"city": "Ch\u00e2teauneuf-sur-Is\u00e8re", "country": "France", "customer_id": "C96241", "gender": "F", "source_id": 96241, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Kervignac", "country": "France", "customer_id": "C23249", "gender": "F", "source_id": 23249, "state": "Bretagne"}
+{"city": "Reyrieux", "country": "France", "customer_id": "C17484", "gender": "F", "source_id": 17484, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lyon", "country": "France", "customer_id": "C26309", "gender": "F", "source_id": 26309, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Colmar", "country": "France", "customer_id": "C95492", "gender": "F", "source_id": 95492, "state": "Grand Est"}
+{"city": "Lyon", "country": "France", "customer_id": "C42041", "gender": "F", "source_id": 42041, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Arcueil", "country": "France", "customer_id": "C05024", "gender": "F", "source_id": 5024, "state": "\u00cele-de-France"}
+{"city": "Tours", "country": "France", "customer_id": "C36994", "gender": "F", "source_id": 36994, "state": "Centre-Val de Loire"}
+{"city": "Rouen", "country": "France", "customer_id": "C61396", "gender": "F", "source_id": 61396, "state": "Normandie"}
+{"city": "Brumath", "country": "France", "customer_id": "C50275", "gender": "F", "source_id": 50275, "state": "Grand Est"}
+{"city": "La Roche-sur-Yon", "country": "France", "customer_id": "C70557", "gender": "F", "source_id": 70557, "state": "Pays de la Loire"}
+{"city": "V\u00e9lizy-Villacoublay", "country": "France", "customer_id": "C20152", "gender": "F", "source_id": 20152, "state": "\u00cele-de-France"}
+{"city": "Montrouge", "country": "France", "customer_id": "C72217", "gender": "F", "source_id": 72217, "state": "\u00cele-de-France"}
+{"city": "N\u00e9ron", "country": "France", "customer_id": "C60018", "gender": "F", "source_id": 60018, "state": "Centre-Val de Loire"}
+{"city": "Villeurbanne", "country": "France", "customer_id": "C81776", "gender": "F", "source_id": 81776, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C67636", "gender": "F", "source_id": 67636, "state": "\u00cele-de-France"}
+{"city": "Marseille", "country": "France", "customer_id": "C78035", "gender": "F", "source_id": 78035, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Paris", "country": "France", "customer_id": "C48606", "gender": "F", "source_id": 48606, "state": "\u00cele-de-France"}
+{"city": "Vaulx-en-Velin", "country": "France", "customer_id": "C48118", "gender": "F", "source_id": 48118, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Marseille", "country": "France", "customer_id": "C52220", "gender": "F", "source_id": 52220, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Le Mans", "country": "France", "customer_id": "C46470", "gender": "F", "source_id": 46470, "state": "Pays de la Loire"}
+{"city": "Argenteuil", "country": "France", "customer_id": "C56441", "gender": "F", "source_id": 56441, "state": "\u00cele-de-France"}
+{"city": "Saint-Jean-d'Illac", "country": "France", "customer_id": "C37022", "gender": "F", "source_id": 37022, "state": "Nouvelle-Aquitaine"}
+{"city": "Talence", "country": "France", "customer_id": "C86494", "gender": "F", "source_id": 86494, "state": "Nouvelle-Aquitaine"}
+{"city": "Laval", "country": "France", "customer_id": "C02419", "gender": "F", "source_id": 2419, "state": "Pays de la Loire"}
+{"city": "Gli\u00e8res-Val-de-Borne", "country": "France", "customer_id": "C96434", "gender": "F", "source_id": 96434, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ch\u00e2tillon", "country": "France", "customer_id": "C13346", "gender": "F", "source_id": 13346, "state": "\u00cele-de-France"}
+{"city": "Venette", "country": "France", "customer_id": "C28940", "gender": "F", "source_id": 28940, "state": "Hauts-de-France"}
+{"city": "Orange", "country": "France", "customer_id": "C65042", "gender": "F", "source_id": 65042, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Vitry-sur-Seine", "country": "France", "customer_id": "C75398", "gender": "F", "source_id": 75398, "state": "\u00cele-de-France"}
+{"city": "Sainte-Flaive-des-Loups", "country": "France", "customer_id": "C97754", "gender": "F", "source_id": 97754, "state": "Pays de la Loire"}
+{"city": "Rueil-Malmaison", "country": "France", "customer_id": "C89858", "gender": "F", "source_id": 89858, "state": "\u00cele-de-France"}
+{"city": "Sainte-Gemme-la-Plaine", "country": "France", "customer_id": "C17244", "gender": "F", "source_id": 17244, "state": "Pays de la Loire"}
+{"city": "Montpellier", "country": "France", "customer_id": "C22039", "gender": "F", "source_id": 22039, "state": "Occitanie"}
+{"city": "Lattes", "country": "France", "customer_id": "C70194", "gender": "F", "source_id": 70194, "state": "Occitanie"}
+{"city": "Villemaury", "country": "France", "customer_id": "C45783", "gender": "F", "source_id": 45783, "state": "Centre-Val de Loire"}
+{"city": "Lyon", "country": "France", "customer_id": "C25182", "gender": "F", "source_id": 25182, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C81417", "gender": "F", "source_id": 81417, "state": "\u00cele-de-France"}
+{"city": "Chamali\u00e8res", "country": "France", "customer_id": "C01015", "gender": "F", "source_id": 1015, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bury", "country": "France", "customer_id": "C33117", "gender": "F", "source_id": 33117, "state": "Hauts-de-France"}
+{"city": "Illfurth", "country": "France", "customer_id": "C14607", "gender": "F", "source_id": 14607, "state": "Grand Est"}
+{"city": "Paris", "country": "France", "customer_id": "C11620", "gender": "F", "source_id": 11620, "state": "\u00cele-de-France"}
+{"city": "Bourges", "country": "France", "customer_id": "C74038", "gender": "F", "source_id": 74038, "state": "Centre-Val de Loire"}
+{"city": "Noroy-le-Bourg", "country": "France", "customer_id": "C00937", "gender": "F", "source_id": 937, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Taden", "country": "France", "customer_id": "C36475", "gender": "F", "source_id": 36475, "state": "Bretagne"}
+{"city": "Livet-et-Gavet", "country": "France", "customer_id": "C17904", "gender": "F", "source_id": 17904, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Avignon", "country": "France", "customer_id": "C81287", "gender": "F", "source_id": 81287, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Andr\u00e9sy", "country": "France", "customer_id": "C56867", "gender": "F", "source_id": 56867, "state": "\u00cele-de-France"}
+{"city": "Metz", "country": "France", "customer_id": "C38552", "gender": "F", "source_id": 38552, "state": "Grand Est"}
+{"city": "Saint-Martin-la-Garenne", "country": "France", "customer_id": "C32866", "gender": "F", "source_id": 32866, "state": "\u00cele-de-France"}
+{"city": "Chaumont-en-Vexin", "country": "France", "customer_id": "C94028", "gender": "F", "source_id": 94028, "state": "Hauts-de-France"}
+{"city": "La Fl\u00e8che", "country": "France", "customer_id": "C14538", "gender": "F", "source_id": 14538, "state": "Pays de la Loire"}
+{"city": "Antibes", "country": "France", "customer_id": "C57735", "gender": "F", "source_id": 57735, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Lyon", "country": "France", "customer_id": "C55648", "gender": "F", "source_id": 55648, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C26907", "gender": "F", "source_id": 26907, "state": "Nouvelle-Aquitaine"}
+{"city": "Compi\u00e8gne", "country": "France", "customer_id": "C48773", "gender": "F", "source_id": 48773, "state": "Hauts-de-France"}
+{"city": "Aigaliers", "country": "France", "customer_id": "C39772", "gender": "F", "source_id": 39772, "state": "Occitanie"}
+{"city": "Albi", "country": "France", "customer_id": "C37634", "gender": "F", "source_id": 37634, "state": "Occitanie"}
+{"city": "Br\u00e9aut\u00e9", "country": "France", "customer_id": "C70771", "gender": "F", "source_id": 70771, "state": "Normandie"}
+{"city": "Dieppe", "country": "France", "customer_id": "C64221", "gender": "F", "source_id": 64221, "state": "Normandie"}
+{"city": "Marcq-en-Bar\u0153ul", "country": "France", "customer_id": "C36125", "gender": "F", "source_id": 36125, "state": "Hauts-de-France"}
+{"city": "Rennes", "country": "France", "customer_id": "C64344", "gender": "F", "source_id": 64344, "state": "Bretagne"}
+{"city": "La Celle-Saint-Cloud", "country": "France", "customer_id": "C27499", "gender": "F", "source_id": 27499, "state": "\u00cele-de-France"}
+{"city": "Ploemeur", "country": "France", "customer_id": "C74506", "gender": "F", "source_id": 74506, "state": "Bretagne"}
+{"city": "Bischwiller", "country": "France", "customer_id": "C37596", "gender": "F", "source_id": 37596, "state": "Grand Est"}
+{"city": "Commequiers", "country": "France", "customer_id": "C45143", "gender": "F", "source_id": 45143, "state": "Pays de la Loire"}
+{"city": "Lamballe-Armor", "country": "France", "customer_id": "C10210", "gender": "F", "source_id": 10210, "state": "Bretagne"}
+{"city": "Clermont-Ferrand", "country": "France", "customer_id": "C26095", "gender": "F", "source_id": 26095, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Nice", "country": "France", "customer_id": "C93138", "gender": "F", "source_id": 93138, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Narbonne", "country": "France", "customer_id": "C26131", "gender": "F", "source_id": 26131, "state": "Occitanie"}
+{"city": "Fresnes", "country": "France", "customer_id": "C80612", "gender": "F", "source_id": 80612, "state": "\u00cele-de-France"}
+{"city": "Grenoble", "country": "France", "customer_id": "C13609", "gender": "F", "source_id": 13609, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Rapha\u00ebl", "country": "France", "customer_id": "C67491", "gender": "F", "source_id": 67491, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Montpellier", "country": "France", "customer_id": "C88769", "gender": "F", "source_id": 88769, "state": "Occitanie"}
+{"city": "Noyon", "country": "France", "customer_id": "C86991", "gender": "F", "source_id": 86991, "state": "Hauts-de-France"}
+{"city": "Carcassonne", "country": "France", "customer_id": "C99288", "gender": "F", "source_id": 99288, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C84647", "gender": "F", "source_id": 84647, "state": "\u00cele-de-France"}
+{"city": "Palaiseau", "country": "France", "customer_id": "C48797", "gender": "F", "source_id": 48797, "state": "\u00cele-de-France"}
+{"city": "Versailles", "country": "France", "customer_id": "C73434", "gender": "F", "source_id": 73434, "state": "\u00cele-de-France"}
+{"city": "Saint-Chamond", "country": "France", "customer_id": "C65238", "gender": "F", "source_id": 65238, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Les Deserts", "country": "France", "customer_id": "C03131", "gender": "F", "source_id": 3131, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Cannes", "country": "France", "customer_id": "C13758", "gender": "F", "source_id": 13758, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Cr\u00e9teil", "country": "France", "customer_id": "C98528", "gender": "F", "source_id": 98528, "state": "\u00cele-de-France"}
+{"city": "B\u00e8gles", "country": "France", "customer_id": "C13594", "gender": "F", "source_id": 13594, "state": "Nouvelle-Aquitaine"}
+{"city": "Bruz", "country": "France", "customer_id": "C62590", "gender": "F", "source_id": 62590, "state": "Bretagne"}
+{"city": "La Roche-sur-Yon", "country": "France", "customer_id": "C21501", "gender": "F", "source_id": 21501, "state": "Pays de la Loire"}
+{"city": "Saint-Germain-en-Cogl\u00e8s", "country": "France", "customer_id": "C25640", "gender": "F", "source_id": 25640, "state": "Bretagne"}
+{"city": "\u00c9vry-Courcouronnes", "country": "France", "customer_id": "C66870", "gender": "F", "source_id": 66870, "state": "\u00cele-de-France"}
+{"city": "Vaur\u00e9al", "country": "France", "customer_id": "C91901", "gender": "F", "source_id": 91901, "state": "\u00cele-de-France"}
+{"city": "Thonon-les-Bains", "country": "France", "customer_id": "C03694", "gender": "F", "source_id": 3694, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Villebon-sur-Yvette", "country": "France", "customer_id": "C12220", "gender": "F", "source_id": 12220, "state": "\u00cele-de-France"}
+{"city": "Taverny", "country": "France", "customer_id": "C15516", "gender": "F", "source_id": 15516, "state": "\u00cele-de-France"}
+{"city": "Valr\u00e9as", "country": "France", "customer_id": "C26336", "gender": "F", "source_id": 26336, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Gradignan", "country": "France", "customer_id": "C07205", "gender": "F", "source_id": 7205, "state": "Nouvelle-Aquitaine"}
+{"city": "Clairmarais", "country": "France", "customer_id": "C95551", "gender": "F", "source_id": 95551, "state": "Hauts-de-France"}
+{"city": "Ronchin", "country": "France", "customer_id": "C78125", "gender": "F", "source_id": 78125, "state": "Hauts-de-France"}
+{"city": "Villethierry", "country": "France", "customer_id": "C68972", "gender": "F", "source_id": 68972, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "\u00c9pinay-sur-Seine", "country": "France", "customer_id": "C39767", "gender": "F", "source_id": 39767, "state": "\u00cele-de-France"}
+{"city": "Mouliets-et-Villemartin", "country": "France", "customer_id": "C84411", "gender": "F", "source_id": 84411, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Pierre-l\u00e8s-Elbeuf", "country": "France", "customer_id": "C46942", "gender": "F", "source_id": 46942, "state": "Normandie"}
+{"city": "Luzarches", "country": "France", "customer_id": "C45171", "gender": "F", "source_id": 45171, "state": "\u00cele-de-France"}
+{"city": "Le Mans", "country": "France", "customer_id": "C41640", "gender": "F", "source_id": 41640, "state": "Pays de la Loire"}
+{"city": "Jebsheim", "country": "France", "customer_id": "C23789", "gender": "F", "source_id": 23789, "state": "Grand Est"}
+{"city": "Valserh\u00f4ne", "country": "France", "customer_id": "C54478", "gender": "F", "source_id": 54478, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bourges", "country": "France", "customer_id": "C86673", "gender": "F", "source_id": 86673, "state": "Centre-Val de Loire"}
+{"city": "Castres", "country": "France", "customer_id": "C64602", "gender": "F", "source_id": 64602, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C75599", "gender": "F", "source_id": 75599, "state": "\u00cele-de-France"}
+{"city": "Ch\u00e2tel-Saint-Germain", "country": "France", "customer_id": "C34375", "gender": "F", "source_id": 34375, "state": "Grand Est"}
+{"city": "Douai", "country": "France", "customer_id": "C73279", "gender": "F", "source_id": 73279, "state": "Hauts-de-France"}
+{"city": "Marseille", "country": "France", "customer_id": "C06939", "gender": "F", "source_id": 6939, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Champigny-sur-Marne", "country": "France", "customer_id": "C12055", "gender": "F", "source_id": 12055, "state": "\u00cele-de-France"}
+{"city": "Saint-Junien", "country": "France", "customer_id": "C35183", "gender": "F", "source_id": 35183, "state": "Nouvelle-Aquitaine"}
+{"city": "Avignon", "country": "France", "customer_id": "C52596", "gender": "F", "source_id": 52596, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Carcassonne", "country": "France", "customer_id": "C02636", "gender": "F", "source_id": 2636, "state": "Occitanie"}
+{"city": "P\u00e9rigueux", "country": "France", "customer_id": "C90883", "gender": "F", "source_id": 90883, "state": "Nouvelle-Aquitaine"}
+{"city": "Taden", "country": "France", "customer_id": "C64422", "gender": "F", "source_id": 64422, "state": "Bretagne"}
+{"city": "Nantes", "country": "France", "customer_id": "C02715", "gender": "F", "source_id": 2715, "state": "Pays de la Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C97124", "gender": "F", "source_id": 97124, "state": "\u00cele-de-France"}
+{"city": "Chelles", "country": "France", "customer_id": "C82489", "gender": "F", "source_id": 82489, "state": "\u00cele-de-France"}
+{"city": "S\u00e8vremont", "country": "France", "customer_id": "C43673", "gender": "F", "source_id": 43673, "state": "Pays de la Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C14002", "gender": "F", "source_id": 14002, "state": "\u00cele-de-France"}
+{"city": "Villiers-sur-Marne", "country": "France", "customer_id": "C55831", "gender": "F", "source_id": 55831, "state": "\u00cele-de-France"}
+{"city": "Montreuil", "country": "France", "customer_id": "C83743", "gender": "F", "source_id": 83743, "state": "\u00cele-de-France"}
+{"city": "\u00c9chirolles", "country": "France", "customer_id": "C57995", "gender": "F", "source_id": 57995, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bri\u00e9-et-Angonnes", "country": "France", "customer_id": "C29834", "gender": "F", "source_id": 29834, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Denis", "country": "France", "customer_id": "C45872", "gender": "F", "source_id": 45872, "state": "\u00cele-de-France"}
+{"city": "Annecy", "country": "France", "customer_id": "C64286", "gender": "F", "source_id": 64286, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ch\u00e2bons", "country": "France", "customer_id": "C59168", "gender": "F", "source_id": 59168, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lyon", "country": "France", "customer_id": "C51318", "gender": "F", "source_id": 51318, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Blanquefort", "country": "France", "customer_id": "C13881", "gender": "F", "source_id": 13881, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Dizier", "country": "France", "customer_id": "C68536", "gender": "F", "source_id": 68536, "state": "Grand Est"}
+{"city": "Paris", "country": "France", "customer_id": "C33655", "gender": "F", "source_id": 33655, "state": "\u00cele-de-France"}
+{"city": "Villeurbanne", "country": "France", "customer_id": "C19897", "gender": "F", "source_id": 19897, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Valenciennes", "country": "France", "customer_id": "C44441", "gender": "F", "source_id": 44441, "state": "Hauts-de-France"}
+{"city": "Le Chesnay-Rocquencourt", "country": "France", "customer_id": "C07151", "gender": "F", "source_id": 7151, "state": "\u00cele-de-France"}
+{"city": "Lille", "country": "France", "customer_id": "C61245", "gender": "F", "source_id": 61245, "state": "Hauts-de-France"}
+{"city": "Chaumont-en-Vexin", "country": "France", "customer_id": "C14386", "gender": "F", "source_id": 14386, "state": "Hauts-de-France"}
+{"city": "Saint-Sulpice-le-Gu\u00e9r\u00e9tois", "country": "France", "customer_id": "C99327", "gender": "F", "source_id": 99327, "state": "Nouvelle-Aquitaine"}
+{"city": "Val d'Oingt", "country": "France", "customer_id": "C22125", "gender": "F", "source_id": 22125, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Izeaux", "country": "France", "customer_id": "C62127", "gender": "F", "source_id": 62127, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Herbignac", "country": "France", "customer_id": "C87283", "gender": "F", "source_id": 87283, "state": "Pays de la Loire"}
+{"city": "\u00c9couves", "country": "France", "customer_id": "C36315", "gender": "F", "source_id": 36315, "state": "Normandie"}
+{"city": "Saint-Offenge", "country": "France", "customer_id": "C35055", "gender": "F", "source_id": 35055, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Villeurbanne", "country": "France", "customer_id": "C21967", "gender": "F", "source_id": 21967, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bri\u00e9-et-Angonnes", "country": "France", "customer_id": "C17812", "gender": "F", "source_id": 17812, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Gien", "country": "France", "customer_id": "C66193", "gender": "F", "source_id": 66193, "state": "Centre-Val de Loire"}
+{"city": "Nanterre", "country": "France", "customer_id": "C88427", "gender": "F", "source_id": 88427, "state": "\u00cele-de-France"}
+{"city": "Villeneuve-l\u00e8s-Avignon", "country": "France", "customer_id": "C61869", "gender": "F", "source_id": 61869, "state": "Occitanie"}
+{"city": "Saint-Antoine-l'Abbaye", "country": "France", "customer_id": "C07693", "gender": "F", "source_id": 7693, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Angoul\u00eame", "country": "France", "customer_id": "C54750", "gender": "F", "source_id": 54750, "state": "Nouvelle-Aquitaine"}
+{"city": "\u00c9pinal", "country": "France", "customer_id": "C54336", "gender": "F", "source_id": 54336, "state": "Grand Est"}
+{"city": "Warloy-Baillon", "country": "France", "customer_id": "C68076", "gender": "F", "source_id": 68076, "state": "Hauts-de-France"}
+{"city": "La Ciotat", "country": "France", "customer_id": "C45999", "gender": "F", "source_id": 45999, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Besan\u00e7on", "country": "France", "customer_id": "C96468", "gender": "F", "source_id": 96468, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Aurillac", "country": "France", "customer_id": "C46770", "gender": "F", "source_id": 46770, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Le Havre", "country": "France", "customer_id": "C14675", "gender": "F", "source_id": 14675, "state": "Normandie"}
+{"city": "P\u00e9zenas", "country": "France", "customer_id": "C00555", "gender": "F", "source_id": 555, "state": "Occitanie"}
+{"city": "Salses-le-Ch\u00e2teau", "country": "France", "customer_id": "C05102", "gender": "F", "source_id": 5102, "state": "Occitanie"}
+{"city": "N\u00eemes", "country": "France", "customer_id": "C76693", "gender": "F", "source_id": 76693, "state": "Occitanie"}
+{"city": "Carcassonne", "country": "France", "customer_id": "C68264", "gender": "F", "source_id": 68264, "state": "Occitanie"}
+{"city": "Ajaccio", "country": "France", "customer_id": "C96778", "gender": "F", "source_id": 96778, "state": "Corse"}
+{"city": "Paris", "country": "France", "customer_id": "C21964", "gender": "F", "source_id": 21964, "state": "\u00cele-de-France"}
+{"city": "Grenade", "country": "France", "customer_id": "C99717", "gender": "F", "source_id": 99717, "state": "Occitanie"}
+{"city": "Aix-en-Provence", "country": "France", "customer_id": "C20303", "gender": "F", "source_id": 20303, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "La Champenoise", "country": "France", "customer_id": "C42847", "gender": "F", "source_id": 42847, "state": "Centre-Val de Loire"}
+{"city": "Palaiseau", "country": "France", "customer_id": "C34843", "gender": "F", "source_id": 34843, "state": "\u00cele-de-France"}
+{"city": "Coupvray", "country": "France", "customer_id": "C03055", "gender": "F", "source_id": 3055, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C04413", "gender": "F", "source_id": 4413, "state": "\u00cele-de-France"}
+{"city": "V\u00e9nissieux", "country": "France", "customer_id": "C22023", "gender": "F", "source_id": 22023, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Toulouse", "country": "France", "customer_id": "C42146", "gender": "F", "source_id": 42146, "state": "Occitanie"}
+{"city": "Bressolles", "country": "France", "customer_id": "C50127", "gender": "F", "source_id": 50127, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Castelnau-le-Lez", "country": "France", "customer_id": "C24566", "gender": "F", "source_id": 24566, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C51356", "gender": "F", "source_id": 51356, "state": "\u00cele-de-France"}
+{"city": "Poitiers", "country": "France", "customer_id": "C06725", "gender": "F", "source_id": 6725, "state": "Nouvelle-Aquitaine"}
+{"city": "\u00c9vry-Courcouronnes", "country": "France", "customer_id": "C82405", "gender": "F", "source_id": 82405, "state": "\u00cele-de-France"}
+{"city": "Avion", "country": "France", "customer_id": "C68492", "gender": "F", "source_id": 68492, "state": "Hauts-de-France"}
+{"city": "Annecy", "country": "France", "customer_id": "C76065", "gender": "F", "source_id": 76065, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Cherbourg-en-Cotentin", "country": "France", "customer_id": "C38049", "gender": "F", "source_id": 38049, "state": "Normandie"}
+{"city": "Limoges", "country": "France", "customer_id": "C52876", "gender": "F", "source_id": 52876, "state": "Nouvelle-Aquitaine"}
+{"city": "Angers", "country": "France", "customer_id": "C90485", "gender": "F", "source_id": 90485, "state": "Pays de la Loire"}
+{"city": "Cergy", "country": "France", "customer_id": "C81512", "gender": "F", "source_id": 81512, "state": "\u00cele-de-France"}
+{"city": "Villeurbanne", "country": "France", "customer_id": "C46015", "gender": "F", "source_id": 46015, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Grenoble", "country": "France", "customer_id": "C28314", "gender": "F", "source_id": 28314, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Hasparren", "country": "France", "customer_id": "C29321", "gender": "F", "source_id": 29321, "state": "Nouvelle-Aquitaine"}
+{"city": "Boulogne-Billancourt", "country": "France", "customer_id": "C55524", "gender": "F", "source_id": 55524, "state": "\u00cele-de-France"}
+{"city": "Saint-Cyr-l'\u00c9cole", "country": "France", "customer_id": "C93351", "gender": "F", "source_id": 93351, "state": "\u00cele-de-France"}
+{"city": "V\u00e9traz-Monthoux", "country": "France", "customer_id": "C88572", "gender": "F", "source_id": 88572, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Le Chesnay-Rocquencourt", "country": "France", "customer_id": "C72572", "gender": "F", "source_id": 72572, "state": "\u00cele-de-France"}
+{"city": "Plourin-l\u00e8s-Morlaix", "country": "France", "customer_id": "C04651", "gender": "F", "source_id": 4651, "state": "Bretagne"}
+{"city": "Sin-le-Noble", "country": "France", "customer_id": "C26600", "gender": "F", "source_id": 26600, "state": "Hauts-de-France"}
+{"city": "Saint-Andr\u00e9-de-Cubzac", "country": "France", "customer_id": "C74898", "gender": "F", "source_id": 74898, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Junien", "country": "France", "customer_id": "C16598", "gender": "F", "source_id": 16598, "state": "Nouvelle-Aquitaine"}
+{"city": "Athis-Mons", "country": "France", "customer_id": "C22689", "gender": "F", "source_id": 22689, "state": "\u00cele-de-France"}
+{"city": "Castries", "country": "France", "customer_id": "C05480", "gender": "F", "source_id": 5480, "state": "Occitanie"}
+{"city": "B\u00e8gles", "country": "France", "customer_id": "C73009", "gender": "F", "source_id": 73009, "state": "Nouvelle-Aquitaine"}
+{"city": "Marseille", "country": "France", "customer_id": "C72555", "gender": "F", "source_id": 72555, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Viuz-en-Sallaz", "country": "France", "customer_id": "C28490", "gender": "F", "source_id": 28490, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Marseille", "country": "France", "customer_id": "C50198", "gender": "F", "source_id": 50198, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-Laurent-d'Aigouze", "country": "France", "customer_id": "C76997", "gender": "F", "source_id": 76997, "state": "Occitanie"}
+{"city": "Pau", "country": "France", "customer_id": "C26346", "gender": "F", "source_id": 26346, "state": "Nouvelle-Aquitaine"}
+{"city": "Vernon", "country": "France", "customer_id": "C43911", "gender": "F", "source_id": 43911, "state": "Normandie"}
+{"city": "Arpheuilles", "country": "France", "customer_id": "C35976", "gender": "F", "source_id": 35976, "state": "Centre-Val de Loire"}
+{"city": "Marseille", "country": "France", "customer_id": "C16023", "gender": "F", "source_id": 16023, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Auriol", "country": "France", "customer_id": "C08852", "gender": "F", "source_id": 8852, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Chapareillan", "country": "France", "customer_id": "C50318", "gender": "F", "source_id": 50318, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lille", "country": "France", "customer_id": "C99686", "gender": "F", "source_id": 99686, "state": "Hauts-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C12324", "gender": "F", "source_id": 12324, "state": "\u00cele-de-France"}
+{"city": "Clermont-l'H\u00e9rault", "country": "France", "customer_id": "C40450", "gender": "F", "source_id": 40450, "state": "Occitanie"}
+{"city": "Toulouse", "country": "France", "customer_id": "C58191", "gender": "F", "source_id": 58191, "state": "Occitanie"}
+{"city": "Ivry-sur-Seine", "country": "France", "customer_id": "C86107", "gender": "F", "source_id": 86107, "state": "\u00cele-de-France"}
+{"city": "Mont\u00e9limar", "country": "France", "customer_id": "C15251", "gender": "F", "source_id": 15251, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Bain-de-Bretagne", "country": "France", "customer_id": "C14039", "gender": "F", "source_id": 14039, "state": "Bretagne"}
+{"city": "Erbray", "country": "France", "customer_id": "C38524", "gender": "F", "source_id": 38524, "state": "Pays de la Loire"}
+{"city": "Castelnau-le-Lez", "country": "France", "customer_id": "C66293", "gender": "F", "source_id": 66293, "state": "Occitanie"}
+{"city": "Vitr\u00e9", "country": "France", "customer_id": "C15596", "gender": "F", "source_id": 15596, "state": "Bretagne"}
+{"city": "Gennevilliers", "country": "France", "customer_id": "C13889", "gender": "F", "source_id": 13889, "state": "\u00cele-de-France"}
+{"city": "La Grande-Paroisse", "country": "France", "customer_id": "C57745", "gender": "F", "source_id": 57745, "state": "\u00cele-de-France"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C42781", "gender": "F", "source_id": 42781, "state": "Nouvelle-Aquitaine"}
+{"city": "Biscarrosse", "country": "France", "customer_id": "C98524", "gender": "F", "source_id": 98524, "state": "Nouvelle-Aquitaine"}
+{"city": "Sainte-Foy-Saint-Sulpice", "country": "France", "customer_id": "C14616", "gender": "F", "source_id": 14616, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Suc\u00e9-sur-Erdre", "country": "France", "customer_id": "C19286", "gender": "F", "source_id": 19286, "state": "Pays de la Loire"}
+{"city": "La Seyne-sur-Mer", "country": "France", "customer_id": "C02713", "gender": "F", "source_id": 2713, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Paris", "country": "France", "customer_id": "C50680", "gender": "F", "source_id": 50680, "state": "\u00cele-de-France"}
+{"city": "Antony", "country": "France", "customer_id": "C71043", "gender": "F", "source_id": 71043, "state": "\u00cele-de-France"}
+{"city": "Les Ulis", "country": "France", "customer_id": "C71498", "gender": "F", "source_id": 71498, "state": "\u00cele-de-France"}
+{"city": "Verdun-sur-Garonne", "country": "France", "customer_id": "C98035", "gender": "F", "source_id": 98035, "state": "Occitanie"}
+{"city": "Zoufftgen", "country": "France", "customer_id": "C03739", "gender": "F", "source_id": 3739, "state": "Grand Est"}
+{"city": "Bousse", "country": "France", "customer_id": "C09431", "gender": "F", "source_id": 9431, "state": "Grand Est"}
+{"city": "La Valette-du-Var", "country": "France", "customer_id": "C60092", "gender": "F", "source_id": 60092, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Porte-des-Bonnevaux", "country": "France", "customer_id": "C71284", "gender": "F", "source_id": 71284, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "F\u00e9camp", "country": "France", "customer_id": "C76120", "gender": "F", "source_id": 76120, "state": "Normandie"}
+{"city": "S\u00e8vremont", "country": "France", "customer_id": "C33567", "gender": "F", "source_id": 33567, "state": "Pays de la Loire"}
+{"city": "Aussonne", "country": "France", "customer_id": "C10624", "gender": "F", "source_id": 10624, "state": "Occitanie"}
+{"city": "Agnetz", "country": "France", "customer_id": "C22688", "gender": "F", "source_id": 22688, "state": "Hauts-de-France"}
+{"city": "Le Bouscat", "country": "France", "customer_id": "C80435", "gender": "F", "source_id": 80435, "state": "Nouvelle-Aquitaine"}
+{"city": "\u00c9pinay-sur-Orge", "country": "France", "customer_id": "C25489", "gender": "F", "source_id": 25489, "state": "\u00cele-de-France"}
+{"city": "Perpignan", "country": "France", "customer_id": "C74481", "gender": "F", "source_id": 74481, "state": "Occitanie"}
+{"city": "Claye-Souilly", "country": "France", "customer_id": "C72230", "gender": "F", "source_id": 72230, "state": "\u00cele-de-France"}
+{"city": "Toulouse", "country": "France", "customer_id": "C42730", "gender": "F", "source_id": 42730, "state": "Occitanie"}
+{"city": "Draguignan", "country": "France", "customer_id": "C51968", "gender": "F", "source_id": 51968, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Pontpoint", "country": "France", "customer_id": "C67187", "gender": "F", "source_id": 67187, "state": "Hauts-de-France"}
+{"city": "Lorient", "country": "France", "customer_id": "C25955", "gender": "F", "source_id": 25955, "state": "Bretagne"}
+{"city": "Gourg\u00e9", "country": "France", "customer_id": "C02095", "gender": "F", "source_id": 2095, "state": "Nouvelle-Aquitaine"}
+{"city": "Aulnay-sous-Bois", "country": "France", "customer_id": "C94214", "gender": "F", "source_id": 94214, "state": "\u00cele-de-France"}
+{"city": "Saint-S\u00e9bastien-sur-Loire", "country": "France", "customer_id": "C21516", "gender": "F", "source_id": 21516, "state": "Pays de la Loire"}
+{"city": "Saint-Lon-les-Mines", "country": "France", "customer_id": "C80575", "gender": "F", "source_id": 80575, "state": "Nouvelle-Aquitaine"}
+{"city": "Sainte-Gemme-la-Plaine", "country": "France", "customer_id": "C25004", "gender": "F", "source_id": 25004, "state": "Pays de la Loire"}
+{"city": "Ardon", "country": "France", "customer_id": "C73415", "gender": "F", "source_id": 73415, "state": "Centre-Val de Loire"}
+{"city": "Marseille", "country": "France", "customer_id": "C58860", "gender": "F", "source_id": 58860, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Annecy", "country": "France", "customer_id": "C01598", "gender": "F", "source_id": 1598, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Louviers", "country": "France", "customer_id": "C68013", "gender": "F", "source_id": 68013, "state": "Normandie"}
+{"city": "Le Pertre", "country": "France", "customer_id": "C70811", "gender": "F", "source_id": 70811, "state": "Bretagne"}
+{"city": "Paris", "country": "France", "customer_id": "C10923", "gender": "F", "source_id": 10923, "state": "\u00cele-de-France"}
+{"city": "L'Ha\u00ff-les-Roses", "country": "France", "customer_id": "C20345", "gender": "F", "source_id": 20345, "state": "\u00cele-de-France"}
+{"city": "Vierzon", "country": "France", "customer_id": "C36550", "gender": "F", "source_id": 36550, "state": "Centre-Val de Loire"}
+{"city": "Montivilliers", "country": "France", "customer_id": "C80375", "gender": "F", "source_id": 80375, "state": "Normandie"}
+{"city": "Orl\u00e9ans", "country": "France", "customer_id": "C49881", "gender": "F", "source_id": 49881, "state": "Centre-Val de Loire"}
+{"city": "Saint-Symphorien-d'Ozon", "country": "France", "customer_id": "C37272", "gender": "F", "source_id": 37272, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Chenoise-Cucharmoy", "country": "France", "customer_id": "C30032", "gender": "F", "source_id": 30032, "state": "\u00cele-de-France"}
+{"city": "Lille", "country": "France", "customer_id": "C98092", "gender": "F", "source_id": 98092, "state": "Hauts-de-France"}
+{"city": "Bellefont-La Rauze", "country": "France", "customer_id": "C03763", "gender": "F", "source_id": 3763, "state": "Occitanie"}
+{"city": "Chanteau", "country": "France", "customer_id": "C00981", "gender": "F", "source_id": 981, "state": "Centre-Val de Loire"}
+{"city": "Ploufragan", "country": "France", "customer_id": "C95123", "gender": "F", "source_id": 95123, "state": "Bretagne"}
+{"city": "F\u00e9camp", "country": "France", "customer_id": "C39240", "gender": "F", "source_id": 39240, "state": "Normandie"}
+{"city": "Paris", "country": "France", "customer_id": "C21410", "gender": "F", "source_id": 21410, "state": "\u00cele-de-France"}
+{"city": "Saint-M\u00e9dard-en-Jalles", "country": "France", "customer_id": "C26653", "gender": "F", "source_id": 26653, "state": "Nouvelle-Aquitaine"}
+{"city": "S\u00e9rignan", "country": "France", "customer_id": "C12974", "gender": "F", "source_id": 12974, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C06683", "gender": "F", "source_id": 6683, "state": "\u00cele-de-France"}
+{"city": "Aix-Noulette", "country": "France", "customer_id": "C04648", "gender": "F", "source_id": 4648, "state": "Hauts-de-France"}
+{"city": "Malville", "country": "France", "customer_id": "C43142", "gender": "F", "source_id": 43142, "state": "Pays de la Loire"}
+{"city": "Antibes", "country": "France", "customer_id": "C34613", "gender": "F", "source_id": 34613, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Castries", "country": "France", "customer_id": "C67879", "gender": "F", "source_id": 67879, "state": "Occitanie"}
+{"city": "Pessac", "country": "France", "customer_id": "C45021", "gender": "F", "source_id": 45021, "state": "Nouvelle-Aquitaine"}
+{"city": "Lillers", "country": "France", "customer_id": "C29333", "gender": "F", "source_id": 29333, "state": "Hauts-de-France"}
+{"city": "\u00c9pieds-en-Beauce", "country": "France", "customer_id": "C45231", "gender": "F", "source_id": 45231, "state": "Centre-Val de Loire"}
+{"city": "Saint-Mand\u00e9", "country": "France", "customer_id": "C14453", "gender": "F", "source_id": 14453, "state": "\u00cele-de-France"}
+{"city": "Roche", "country": "France", "customer_id": "C51821", "gender": "F", "source_id": 51821, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Boulazac Isle Manoire", "country": "France", "customer_id": "C79356", "gender": "F", "source_id": 79356, "state": "Nouvelle-Aquitaine"}
+{"city": "Toulouse", "country": "France", "customer_id": "C55667", "gender": "F", "source_id": 55667, "state": "Occitanie"}
+{"city": "Villenave-d'Ornon", "country": "France", "customer_id": "C73511", "gender": "F", "source_id": 73511, "state": "Nouvelle-Aquitaine"}
+{"city": "La Selle-sur-le-Bied", "country": "France", "customer_id": "C36177", "gender": "F", "source_id": 36177, "state": "Centre-Val de Loire"}
+{"city": "\u00c9chirolles", "country": "France", "customer_id": "C12408", "gender": "F", "source_id": 12408, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Laurent-d'Aigouze", "country": "France", "customer_id": "C73906", "gender": "F", "source_id": 73906, "state": "Occitanie"}
+{"city": "Charleville-M\u00e9zi\u00e8res", "country": "France", "customer_id": "C49668", "gender": "F", "source_id": 49668, "state": "Grand Est"}
+{"city": "Grenoble", "country": "France", "customer_id": "C15154", "gender": "F", "source_id": 15154, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Sainte-Anastasie", "country": "France", "customer_id": "C54877", "gender": "F", "source_id": 54877, "state": "Occitanie"}
+{"city": "Az\u00e9", "country": "France", "customer_id": "C83535", "gender": "F", "source_id": 83535, "state": "Centre-Val de Loire"}
+{"city": "Saint-Usuge", "country": "France", "customer_id": "C73961", "gender": "F", "source_id": 73961, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Woippy", "country": "France", "customer_id": "C71492", "gender": "F", "source_id": 71492, "state": "Grand Est"}
+{"city": "Forbach", "country": "France", "customer_id": "C24349", "gender": "F", "source_id": 24349, "state": "Grand Est"}
+{"city": "La Neuville-Chant-d'Oisel", "country": "France", "customer_id": "C57593", "gender": "F", "source_id": 57593, "state": "Normandie"}
+{"city": "Villeneuve-Loubet", "country": "France", "customer_id": "C05130", "gender": "F", "source_id": 5130, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-Martin-d'H\u00e8res", "country": "France", "customer_id": "C48713", "gender": "F", "source_id": 48713, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Cambrai", "country": "France", "customer_id": "C76177", "gender": "F", "source_id": 76177, "state": "Hauts-de-France"}
+{"city": "Chelles", "country": "France", "customer_id": "C37140", "gender": "F", "source_id": 37140, "state": "\u00cele-de-France"}
+{"city": "Saint-Chamond", "country": "France", "customer_id": "C18772", "gender": "F", "source_id": 18772, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Marseille", "country": "France", "customer_id": "C13348", "gender": "F", "source_id": 13348, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Annecy", "country": "France", "customer_id": "C29808", "gender": "F", "source_id": 29808, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Aubagne", "country": "France", "customer_id": "C14773", "gender": "F", "source_id": 14773, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Boulogne-Billancourt", "country": "France", "customer_id": "C86065", "gender": "F", "source_id": 86065, "state": "\u00cele-de-France"}
+{"city": "Levallois-Perret", "country": "France", "customer_id": "C74690", "gender": "F", "source_id": 74690, "state": "\u00cele-de-France"}
+{"city": "Aix-en-Provence", "country": "France", "customer_id": "C87569", "gender": "F", "source_id": 87569, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Haguenau", "country": "France", "customer_id": "C98798", "gender": "F", "source_id": 98798, "state": "Grand Est"}
+{"city": "Nantes", "country": "France", "customer_id": "C35465", "gender": "F", "source_id": 35465, "state": "Pays de la Loire"}
+{"city": "B\u00e9zaudun-les-Alpes", "country": "France", "customer_id": "C66432", "gender": "F", "source_id": 66432, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Ploun\u00e9venter", "country": "France", "customer_id": "C66479", "gender": "F", "source_id": 66479, "state": "Bretagne"}
+{"city": "Paray-Vieille-Poste", "country": "France", "customer_id": "C19103", "gender": "F", "source_id": 19103, "state": "\u00cele-de-France"}
+{"city": "Orthez", "country": "France", "customer_id": "C73337", "gender": "F", "source_id": 73337, "state": "Nouvelle-Aquitaine"}
+{"city": "Mios", "country": "France", "customer_id": "C13952", "gender": "F", "source_id": 13952, "state": "Nouvelle-Aquitaine"}
+{"city": "Lyon", "country": "France", "customer_id": "C56719", "gender": "F", "source_id": 56719, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Versailles", "country": "France", "customer_id": "C61311", "gender": "F", "source_id": 61311, "state": "\u00cele-de-France"}
+{"city": "Bousse", "country": "France", "customer_id": "C47131", "gender": "F", "source_id": 47131, "state": "Grand Est"}
+{"city": "Le Cannet", "country": "France", "customer_id": "C18672", "gender": "F", "source_id": 18672, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-M\u00e9dard-en-Jalles", "country": "France", "customer_id": "C27765", "gender": "F", "source_id": 27765, "state": "Nouvelle-Aquitaine"}
+{"city": "Paris", "country": "France", "customer_id": "C17467", "gender": "F", "source_id": 17467, "state": "\u00cele-de-France"}
+{"city": "Castanet-Tolosan", "country": "France", "customer_id": "C54816", "gender": "F", "source_id": 54816, "state": "Occitanie"}
+{"city": "Saint-Maurice-l'Exil", "country": "France", "customer_id": "C50035", "gender": "F", "source_id": 50035, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C77076", "gender": "F", "source_id": 77076, "state": "\u00cele-de-France"}
+{"city": "Rochecolombe", "country": "France", "customer_id": "C41419", "gender": "F", "source_id": 41419, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Laurent-du-Var", "country": "France", "customer_id": "C64978", "gender": "F", "source_id": 64978, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "La Neuville-Chant-d'Oisel", "country": "France", "customer_id": "C86116", "gender": "F", "source_id": 86116, "state": "Normandie"}
+{"city": "Salon-de-Provence", "country": "France", "customer_id": "C78095", "gender": "F", "source_id": 78095, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Aurillac", "country": "France", "customer_id": "C23244", "gender": "F", "source_id": 23244, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Boulogne-sur-Mer", "country": "France", "customer_id": "C55028", "gender": "F", "source_id": 55028, "state": "Hauts-de-France"}
+{"city": "Brest", "country": "France", "customer_id": "C46873", "gender": "F", "source_id": 46873, "state": "Bretagne"}
+{"city": "Belfort", "country": "France", "customer_id": "C03509", "gender": "F", "source_id": 3509, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Chenac-Saint-Seurin-d'Uzet", "country": "France", "customer_id": "C42872", "gender": "F", "source_id": 42872, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-D\u00e9sir", "country": "France", "customer_id": "C24432", "gender": "F", "source_id": 24432, "state": "Normandie"}
+{"city": "Cou\u00ebron", "country": "France", "customer_id": "C20312", "gender": "F", "source_id": 20312, "state": "Pays de la Loire"}
+{"city": "Neuilly-Plaisance", "country": "France", "customer_id": "C27684", "gender": "F", "source_id": 27684, "state": "\u00cele-de-France"}
+{"city": "Tours", "country": "France", "customer_id": "C30989", "gender": "F", "source_id": 30989, "state": "Centre-Val de Loire"}
+{"city": "Montmagny", "country": "France", "customer_id": "C83273", "gender": "F", "source_id": 83273, "state": "\u00cele-de-France"}
+{"city": "Berch\u00e8res-Saint-Germain", "country": "France", "customer_id": "C63433", "gender": "F", "source_id": 63433, "state": "Centre-Val de Loire"}
+{"city": "Boulogne-Billancourt", "country": "France", "customer_id": "C43737", "gender": "F", "source_id": 43737, "state": "\u00cele-de-France"}
+{"city": "Le Mans", "country": "France", "customer_id": "C42420", "gender": "F", "source_id": 42420, "state": "Pays de la Loire"}
+{"city": "Lyon", "country": "France", "customer_id": "C20833", "gender": "F", "source_id": 20833, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "L'\u00cele-Saint-Denis", "country": "France", "customer_id": "C40882", "gender": "F", "source_id": 40882, "state": "\u00cele-de-France"}
+{"city": "Brest", "country": "France", "customer_id": "C16691", "gender": "F", "source_id": 16691, "state": "Bretagne"}
+{"city": "Marseille", "country": "France", "customer_id": "C58877", "gender": "F", "source_id": 58877, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Villeneuve-Saint-Georges", "country": "France", "customer_id": "C36426", "gender": "F", "source_id": 36426, "state": "\u00cele-de-France"}
+{"city": "Les Sables-d'Olonne", "country": "France", "customer_id": "C55832", "gender": "F", "source_id": 55832, "state": "Pays de la Loire"}
+{"city": "Annecy", "country": "France", "customer_id": "C26680", "gender": "F", "source_id": 26680, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Favi\u00e8res", "country": "France", "customer_id": "C77252", "gender": "F", "source_id": 77252, "state": "\u00cele-de-France"}
+{"city": "Sarlat-la-Can\u00e9da", "country": "France", "customer_id": "C98668", "gender": "F", "source_id": 98668, "state": "Nouvelle-Aquitaine"}
+{"city": "Issy-les-Moulineaux", "country": "France", "customer_id": "C06543", "gender": "F", "source_id": 6543, "state": "\u00cele-de-France"}
+{"city": "Nogent-sur-Marne", "country": "France", "customer_id": "C71149", "gender": "F", "source_id": 71149, "state": "\u00cele-de-France"}
+{"city": "Nice", "country": "France", "customer_id": "C92744", "gender": "F", "source_id": 92744, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Grenoble", "country": "France", "customer_id": "C67473", "gender": "F", "source_id": 67473, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Mornac", "country": "France", "customer_id": "C78689", "gender": "F", "source_id": 78689, "state": "Nouvelle-Aquitaine"}
+{"city": "Pessac", "country": "France", "customer_id": "C54811", "gender": "F", "source_id": 54811, "state": "Nouvelle-Aquitaine"}
+{"city": "Garches", "country": "France", "customer_id": "C10052", "gender": "F", "source_id": 10052, "state": "\u00cele-de-France"}
+{"city": "M\u00e2con", "country": "France", "customer_id": "C21286", "gender": "F", "source_id": 21286, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Lyon", "country": "France", "customer_id": "C72034", "gender": "F", "source_id": 72034, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Dax", "country": "France", "customer_id": "C54095", "gender": "F", "source_id": 54095, "state": "Nouvelle-Aquitaine"}
+{"city": "Clairmarais", "country": "France", "customer_id": "C48026", "gender": "F", "source_id": 48026, "state": "Hauts-de-France"}
+{"city": "Alen\u00e7on", "country": "France", "customer_id": "C60291", "gender": "F", "source_id": 60291, "state": "Normandie"}
+{"city": "Talmont-Saint-Hilaire", "country": "France", "customer_id": "C70986", "gender": "F", "source_id": 70986, "state": "Pays de la Loire"}
+{"city": "Annecy", "country": "France", "customer_id": "C77103", "gender": "F", "source_id": 77103, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Cyr-l'\u00c9cole", "country": "France", "customer_id": "C63631", "gender": "F", "source_id": 63631, "state": "\u00cele-de-France"}
+{"city": "Camp\u00e9n\u00e9ac", "country": "France", "customer_id": "C11809", "gender": "F", "source_id": 11809, "state": "Bretagne"}
+{"city": "La Roche-sur-Yon", "country": "France", "customer_id": "C45767", "gender": "F", "source_id": 45767, "state": "Pays de la Loire"}
+{"city": "Vallauris", "country": "France", "customer_id": "C30064", "gender": "F", "source_id": 30064, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Wattrelos", "country": "France", "customer_id": "C87223", "gender": "F", "source_id": 87223, "state": "Hauts-de-France"}
+{"city": "Lyon", "country": "France", "customer_id": "C61536", "gender": "F", "source_id": 61536, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Marseille", "country": "France", "customer_id": "C09072", "gender": "F", "source_id": 9072, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Saint-Martin-de-Seignanx", "country": "France", "customer_id": "C35108", "gender": "F", "source_id": 35108, "state": "Nouvelle-Aquitaine"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C63586", "gender": "F", "source_id": 63586, "state": "Nouvelle-Aquitaine"}
+{"city": "Cestas", "country": "France", "customer_id": "C77646", "gender": "F", "source_id": 77646, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Rapha\u00ebl", "country": "France", "customer_id": "C87663", "gender": "F", "source_id": 87663, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Beautheil-Saints", "country": "France", "customer_id": "C22861", "gender": "F", "source_id": 22861, "state": "\u00cele-de-France"}
+{"city": "Le Controis-en-Sologne", "country": "France", "customer_id": "C03772", "gender": "F", "source_id": 3772, "state": "Centre-Val de Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C57898", "gender": "F", "source_id": 57898, "state": "\u00cele-de-France"}
+{"city": "Saclay", "country": "France", "customer_id": "C11247", "gender": "F", "source_id": 11247, "state": "\u00cele-de-France"}
+{"city": "Cognac", "country": "France", "customer_id": "C28939", "gender": "F", "source_id": 28939, "state": "Nouvelle-Aquitaine"}
+{"city": "Malakoff", "country": "France", "customer_id": "C64505", "gender": "F", "source_id": 64505, "state": "\u00cele-de-France"}
+{"city": "Reims", "country": "France", "customer_id": "C46566", "gender": "F", "source_id": 46566, "state": "Grand Est"}
+{"city": "Choisy", "country": "France", "customer_id": "C63837", "gender": "F", "source_id": 63837, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "La Roche-sur-Foron", "country": "France", "customer_id": "C26587", "gender": "F", "source_id": 26587, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Viry-Ch\u00e2tillon", "country": "France", "customer_id": "C41352", "gender": "F", "source_id": 41352, "state": "\u00cele-de-France"}
+{"city": "La S\u00e9guini\u00e8re", "country": "France", "customer_id": "C42033", "gender": "F", "source_id": 42033, "state": "Pays de la Loire"}
+{"city": "Vaux-le-P\u00e9nil", "country": "France", "customer_id": "C71238", "gender": "F", "source_id": 71238, "state": "\u00cele-de-France"}
+{"city": "Montrevault-sur-\u00c8vre", "country": "France", "customer_id": "C43332", "gender": "F", "source_id": 43332, "state": "Pays de la Loire"}
+{"city": "Guignen", "country": "France", "customer_id": "C85552", "gender": "F", "source_id": 85552, "state": "Bretagne"}
+{"city": "Pessac", "country": "France", "customer_id": "C30381", "gender": "F", "source_id": 30381, "state": "Nouvelle-Aquitaine"}
+{"city": "Le Plessis-Robinson", "country": "France", "customer_id": "C21071", "gender": "F", "source_id": 21071, "state": "\u00cele-de-France"}
+{"city": "Viuz-en-Sallaz", "country": "France", "customer_id": "C92005", "gender": "F", "source_id": 92005, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Rueil-Malmaison", "country": "France", "customer_id": "C26531", "gender": "F", "source_id": 26531, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C92552", "gender": "F", "source_id": 92552, "state": "\u00cele-de-France"}
+{"city": "Pau", "country": "France", "customer_id": "C75246", "gender": "F", "source_id": 75246, "state": "Nouvelle-Aquitaine"}
+{"city": "Pithiviers-le-Vieil", "country": "France", "customer_id": "C47124", "gender": "F", "source_id": 47124, "state": "Centre-Val de Loire"}
+{"city": "Saint-Offenge", "country": "France", "customer_id": "C76688", "gender": "F", "source_id": 76688, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Hirson", "country": "France", "customer_id": "C97119", "gender": "F", "source_id": 97119, "state": "Hauts-de-France"}
+{"city": "Les Lilas", "country": "France", "customer_id": "C06386", "gender": "F", "source_id": 6386, "state": "\u00cele-de-France"}
+{"city": "Cernay", "country": "France", "customer_id": "C73806", "gender": "F", "source_id": 73806, "state": "Grand Est"}
+{"city": "Tarnos", "country": "France", "customer_id": "C12529", "gender": "F", "source_id": 12529, "state": "Nouvelle-Aquitaine"}
+{"city": "Le Castellet", "country": "France", "customer_id": "C45368", "gender": "F", "source_id": 45368, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Le Sappey-en-Chartreuse", "country": "France", "customer_id": "C92086", "gender": "F", "source_id": 92086, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Westhoffen", "country": "France", "customer_id": "C94482", "gender": "F", "source_id": 94482, "state": "Grand Est"}
+{"city": "Rieumes", "country": "France", "customer_id": "C20574", "gender": "F", "source_id": 20574, "state": "Occitanie"}
+{"city": "Le Raincy", "country": "France", "customer_id": "C59598", "gender": "F", "source_id": 59598, "state": "\u00cele-de-France"}
+{"city": "V\u00e9traz-Monthoux", "country": "France", "customer_id": "C91155", "gender": "F", "source_id": 91155, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Grasse", "country": "France", "customer_id": "C35921", "gender": "F", "source_id": 35921, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Gazost", "country": "France", "customer_id": "C72527", "gender": "F", "source_id": 72527, "state": "Occitanie"}
+{"city": "Brive-la-Gaillarde", "country": "France", "customer_id": "C75465", "gender": "F", "source_id": 75465, "state": "Nouvelle-Aquitaine"}
+{"city": "Mons-en-Bar\u0153ul", "country": "France", "customer_id": "C35978", "gender": "F", "source_id": 35978, "state": "Hauts-de-France"}
+{"city": "Bourneville-Sainte-Croix", "country": "France", "customer_id": "C18803", "gender": "F", "source_id": 18803, "state": "Normandie"}
+{"city": "Thionville", "country": "France", "customer_id": "C61853", "gender": "F", "source_id": 61853, "state": "Grand Est"}
+{"city": "Strasbourg", "country": "France", "customer_id": "C76375", "gender": "F", "source_id": 76375, "state": "Grand Est"}
+{"city": "Versailles", "country": "France", "customer_id": "C53564", "gender": "F", "source_id": 53564, "state": "\u00cele-de-France"}
+{"city": "Narbonne", "country": "France", "customer_id": "C22685", "gender": "F", "source_id": 22685, "state": "Occitanie"}
+{"city": "Gaillac", "country": "France", "customer_id": "C29036", "gender": "F", "source_id": 29036, "state": "Occitanie"}
+{"city": "Rouvroy", "country": "France", "customer_id": "C88022", "gender": "F", "source_id": 88022, "state": "Hauts-de-France"}
+{"city": "Ch\u00e2tenay-Malabry", "country": "France", "customer_id": "C34732", "gender": "F", "source_id": 34732, "state": "\u00cele-de-France"}
+{"city": "Massy", "country": "France", "customer_id": "C38819", "gender": "F", "source_id": 38819, "state": "\u00cele-de-France"}
+{"city": "Saint-\u00c9tienne", "country": "France", "customer_id": "C98801", "gender": "F", "source_id": 98801, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Fontaine-Chaalis", "country": "France", "customer_id": "C92314", "gender": "F", "source_id": 92314, "state": "Hauts-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C74211", "gender": "F", "source_id": 74211, "state": "\u00cele-de-France"}
+{"city": "Lyon", "country": "France", "customer_id": "C05643", "gender": "F", "source_id": 5643, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Villiers-le-Bel", "country": "France", "customer_id": "C51314", "gender": "F", "source_id": 51314, "state": "\u00cele-de-France"}
+{"city": "Coupvray", "country": "France", "customer_id": "C64836", "gender": "F", "source_id": 64836, "state": "\u00cele-de-France"}
+{"city": "Obernai", "country": "France", "customer_id": "C99235", "gender": "F", "source_id": 99235, "state": "Grand Est"}
+{"city": "Poitiers", "country": "France", "customer_id": "C45788", "gender": "F", "source_id": 45788, "state": "Nouvelle-Aquitaine"}
+{"city": "Limoges", "country": "France", "customer_id": "C76686", "gender": "F", "source_id": 76686, "state": "Nouvelle-Aquitaine"}
+{"city": "Montaigu-Vend\u00e9e", "country": "France", "customer_id": "C15632", "gender": "F", "source_id": 15632, "state": "Pays de la Loire"}
+{"city": "Guichainville", "country": "France", "customer_id": "C88616", "gender": "F", "source_id": 88616, "state": "Normandie"}
+{"city": "Lillebonne", "country": "France", "customer_id": "C44507", "gender": "F", "source_id": 44507, "state": "Normandie"}
+{"city": "Bordeaux", "country": "France", "customer_id": "C28000", "gender": "F", "source_id": 28000, "state": "Nouvelle-Aquitaine"}
+{"city": "Pantin", "country": "France", "customer_id": "C26166", "gender": "F", "source_id": 26166, "state": "\u00cele-de-France"}
+{"city": "Coupvray", "country": "France", "customer_id": "C47454", "gender": "F", "source_id": 47454, "state": "\u00cele-de-France"}
+{"city": "Montluel", "country": "France", "customer_id": "C49101", "gender": "F", "source_id": 49101, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Yssingeaux", "country": "France", "customer_id": "C53076", "gender": "F", "source_id": 53076, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lyon", "country": "France", "customer_id": "C23133", "gender": "F", "source_id": 23133, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Brest", "country": "France", "customer_id": "C50331", "gender": "F", "source_id": 50331, "state": "Bretagne"}
+{"city": "Saint-Georges-de-Noisn\u00e9", "country": "France", "customer_id": "C85789", "gender": "F", "source_id": 85789, "state": "Nouvelle-Aquitaine"}
+{"city": "Rives-de-l'Yon", "country": "France", "customer_id": "C93660", "gender": "F", "source_id": 93660, "state": "Pays de la Loire"}
+{"city": "Erstein", "country": "France", "customer_id": "C97996", "gender": "F", "source_id": 97996, "state": "Grand Est"}
+{"city": "Villeneuve-sur-Lot", "country": "France", "customer_id": "C64981", "gender": "F", "source_id": 64981, "state": "Nouvelle-Aquitaine"}
+{"city": "Mouliets-et-Villemartin", "country": "France", "customer_id": "C16633", "gender": "F", "source_id": 16633, "state": "Nouvelle-Aquitaine"}
+{"city": "Feneu", "country": "France", "customer_id": "C92560", "gender": "F", "source_id": 92560, "state": "Pays de la Loire"}
+{"city": "Lyon", "country": "France", "customer_id": "C96662", "gender": "F", "source_id": 96662, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "La Seyne-sur-Mer", "country": "France", "customer_id": "C78840", "gender": "F", "source_id": 78840, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Vigneux-sur-Seine", "country": "France", "customer_id": "C56178", "gender": "F", "source_id": 56178, "state": "\u00cele-de-France"}
+{"city": "Carpentras", "country": "France", "customer_id": "C04822", "gender": "F", "source_id": 4822, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Gonesse", "country": "France", "customer_id": "C12297", "gender": "F", "source_id": 12297, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C12565", "gender": "F", "source_id": 12565, "state": "\u00cele-de-France"}
+{"city": "Le Havre", "country": "France", "customer_id": "C64823", "gender": "F", "source_id": 64823, "state": "Normandie"}
+{"city": "Champagnier", "country": "France", "customer_id": "C03018", "gender": "F", "source_id": 3018, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Villeneuve-sur-Lot", "country": "France", "customer_id": "C39396", "gender": "F", "source_id": 39396, "state": "Nouvelle-Aquitaine"}
+{"city": "Athis-Val-de-Rouvre", "country": "France", "customer_id": "C17570", "gender": "F", "source_id": 17570, "state": "Normandie"}
+{"city": "Marckolsheim", "country": "France", "customer_id": "C58871", "gender": "F", "source_id": 58871, "state": "Grand Est"}
+{"city": "Mulhouse", "country": "France", "customer_id": "C51108", "gender": "F", "source_id": 51108, "state": "Grand Est"}
+{"city": "Coupvray", "country": "France", "customer_id": "C77880", "gender": "F", "source_id": 77880, "state": "\u00cele-de-France"}
+{"city": "Limoges", "country": "France", "customer_id": "C43039", "gender": "F", "source_id": 43039, "state": "Nouvelle-Aquitaine"}
+{"city": "Draveil", "country": "France", "customer_id": "C37084", "gender": "F", "source_id": 37084, "state": "\u00cele-de-France"}
+{"city": "Belleville-en-Beaujolais", "country": "France", "customer_id": "C10956", "gender": "F", "source_id": 10956, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Brignoles", "country": "France", "customer_id": "C58943", "gender": "F", "source_id": 58943, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Courtenay", "country": "France", "customer_id": "C17597", "gender": "F", "source_id": 17597, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Cr\u00e9teil", "country": "France", "customer_id": "C74406", "gender": "F", "source_id": 74406, "state": "\u00cele-de-France"}
+{"city": "Saint-Just-Saint-Rambert", "country": "France", "customer_id": "C38861", "gender": "F", "source_id": 38861, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C29046", "gender": "F", "source_id": 29046, "state": "\u00cele-de-France"}
+{"city": "Paris", "country": "France", "customer_id": "C26723", "gender": "F", "source_id": 26723, "state": "\u00cele-de-France"}
+{"city": "Bruay-la-Buissi\u00e8re", "country": "France", "customer_id": "C49136", "gender": "F", "source_id": 49136, "state": "Hauts-de-France"}
+{"city": "Gaillard", "country": "France", "customer_id": "C93987", "gender": "F", "source_id": 93987, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Laines-aux-Bois", "country": "France", "customer_id": "C22570", "gender": "F", "source_id": 22570, "state": "Grand Est"}
+{"city": "Lyon", "country": "France", "customer_id": "C50233", "gender": "F", "source_id": 50233, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Ach\u00e8res", "country": "France", "customer_id": "C17735", "gender": "F", "source_id": 17735, "state": "\u00cele-de-France"}
+{"city": "Ch\u00e2tenay-Malabry", "country": "France", "customer_id": "C18955", "gender": "F", "source_id": 18955, "state": "\u00cele-de-France"}
+{"city": "Saint-\u00c9tienne", "country": "France", "customer_id": "C37620", "gender": "F", "source_id": 37620, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Lign\u00e9", "country": "France", "customer_id": "C82068", "gender": "F", "source_id": 82068, "state": "Pays de la Loire"}
+{"city": "Strasbourg", "country": "France", "customer_id": "C47560", "gender": "F", "source_id": 47560, "state": "Grand Est"}
+{"city": "Salleb\u0153uf", "country": "France", "customer_id": "C60700", "gender": "F", "source_id": 60700, "state": "Nouvelle-Aquitaine"}
+{"city": "Vaison-la-Romaine", "country": "France", "customer_id": "C39896", "gender": "F", "source_id": 39896, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Toulouse", "country": "France", "customer_id": "C02300", "gender": "F", "source_id": 2300, "state": "Occitanie"}
+{"city": "Aubervilliers", "country": "France", "customer_id": "C44478", "gender": "F", "source_id": 44478, "state": "\u00cele-de-France"}
+{"city": "Champigny-sur-Marne", "country": "France", "customer_id": "C42650", "gender": "F", "source_id": 42650, "state": "\u00cele-de-France"}
+{"city": "Arcueil", "country": "France", "customer_id": "C66345", "gender": "F", "source_id": 66345, "state": "\u00cele-de-France"}
+{"city": "Le Sappey-en-Chartreuse", "country": "France", "customer_id": "C62784", "gender": "F", "source_id": 62784, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Courbevoie", "country": "France", "customer_id": "C45394", "gender": "F", "source_id": 45394, "state": "\u00cele-de-France"}
+{"city": "Verdun", "country": "France", "customer_id": "C42238", "gender": "F", "source_id": 42238, "state": "Grand Est"}
+{"city": "Wailly", "country": "France", "customer_id": "C76786", "gender": "F", "source_id": 76786, "state": "Hauts-de-France"}
+{"city": "B\u00e8gles", "country": "France", "customer_id": "C14964", "gender": "F", "source_id": 14964, "state": "Nouvelle-Aquitaine"}
+{"city": "Val d'Oingt", "country": "France", "customer_id": "C43840", "gender": "F", "source_id": 43840, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Laurent-d'Aigouze", "country": "France", "customer_id": "C67863", "gender": "F", "source_id": 67863, "state": "Occitanie"}
+{"city": "Thiais", "country": "France", "customer_id": "C96880", "gender": "F", "source_id": 96880, "state": "\u00cele-de-France"}
+{"city": "Mulhouse", "country": "France", "customer_id": "C40624", "gender": "F", "source_id": 40624, "state": "Grand Est"}
+{"city": "Aubervilliers", "country": "France", "customer_id": "C44187", "gender": "F", "source_id": 44187, "state": "\u00cele-de-France"}
+{"city": "Noisy-le-Grand", "country": "France", "customer_id": "C83620", "gender": "F", "source_id": 83620, "state": "\u00cele-de-France"}
+{"city": "Mercurol-Veaunes", "country": "France", "customer_id": "C26219", "gender": "F", "source_id": 26219, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Nice", "country": "France", "customer_id": "C18588", "gender": "F", "source_id": 18588, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Paris", "country": "France", "customer_id": "C64728", "gender": "F", "source_id": 64728, "state": "\u00cele-de-France"}
+{"city": "Ingr\u00e9", "country": "France", "customer_id": "C26425", "gender": "F", "source_id": 26425, "state": "Centre-Val de Loire"}
+{"city": "Angers", "country": "France", "customer_id": "C63082", "gender": "F", "source_id": 63082, "state": "Pays de la Loire"}
+{"city": "Grand-Champ", "country": "France", "customer_id": "C62141", "gender": "F", "source_id": 62141, "state": "Bretagne"}
+{"city": "Saint-Vigor-d'Ymonville", "country": "France", "customer_id": "C95859", "gender": "F", "source_id": 95859, "state": "Normandie"}
+{"city": "Toulouse", "country": "France", "customer_id": "C82381", "gender": "F", "source_id": 82381, "state": "Occitanie"}
+{"city": "Rodez", "country": "France", "customer_id": "C53772", "gender": "F", "source_id": 53772, "state": "Occitanie"}
+{"city": "N\u00eemes", "country": "France", "customer_id": "C98875", "gender": "F", "source_id": 98875, "state": "Occitanie"}
+{"city": "Angers", "country": "France", "customer_id": "C05759", "gender": "F", "source_id": 5759, "state": "Pays de la Loire"}
+{"city": "Ardon", "country": "France", "customer_id": "C46315", "gender": "F", "source_id": 46315, "state": "Centre-Val de Loire"}
+{"city": "Ch\u00e2teauneuf-sur-Loire", "country": "France", "customer_id": "C80505", "gender": "F", "source_id": 80505, "state": "Centre-Val de Loire"}
+{"city": "H\u00e9rouville-Saint-Clair", "country": "France", "customer_id": "C05996", "gender": "F", "source_id": 5996, "state": "Normandie"}
+{"city": "V\u00e9mars", "country": "France", "customer_id": "C59971", "gender": "F", "source_id": 59971, "state": "\u00cele-de-France"}
+{"city": "Toulouse", "country": "France", "customer_id": "C26381", "gender": "F", "source_id": 26381, "state": "Occitanie"}
+{"city": "\u00c9chirolles", "country": "France", "customer_id": "C23518", "gender": "F", "source_id": 23518, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Carvin", "country": "France", "customer_id": "C62563", "gender": "F", "source_id": 62563, "state": "Hauts-de-France"}
+{"city": "Ath\u00e9e-sur-Cher", "country": "France", "customer_id": "C25719", "gender": "F", "source_id": 25719, "state": "Centre-Val de Loire"}
+{"city": "Paris", "country": "France", "customer_id": "C86123", "gender": "F", "source_id": 86123, "state": "\u00cele-de-France"}
+{"city": "Saint-Cloud", "country": "France", "customer_id": "C96183", "gender": "F", "source_id": 96183, "state": "\u00cele-de-France"}
+{"city": "Ch\u00e2teau-Gontier-sur-Mayenne", "country": "France", "customer_id": "C29109", "gender": "F", "source_id": 29109, "state": "Pays de la Loire"}
+{"city": "Le Mans", "country": "France", "customer_id": "C41676", "gender": "F", "source_id": 41676, "state": "Pays de la Loire"}
+{"city": "Longues-sur-Mer", "country": "France", "customer_id": "C86063", "gender": "F", "source_id": 86063, "state": "Normandie"}
+{"city": "Vitr\u00e9", "country": "France", "customer_id": "C09349", "gender": "F", "source_id": 9349, "state": "Bretagne"}
+{"city": "Eyzin-Pinet", "country": "France", "customer_id": "C11810", "gender": "F", "source_id": 11810, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Tignieu-Jameyzieu", "country": "France", "customer_id": "C01050", "gender": "F", "source_id": 1050, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Saint-Di\u00e9-des-Vosges", "country": "France", "customer_id": "C90488", "gender": "F", "source_id": 90488, "state": "Grand Est"}
+{"city": "Paris", "country": "France", "customer_id": "C57090", "gender": "F", "source_id": 57090, "state": "\u00cele-de-France"}
+{"city": "Montaigu-Vend\u00e9e", "country": "France", "customer_id": "C79650", "gender": "F", "source_id": 79650, "state": "Pays de la Loire"}
+{"city": "Dijon", "country": "France", "customer_id": "C35717", "gender": "F", "source_id": 35717, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Niort", "country": "France", "customer_id": "C23218", "gender": "F", "source_id": 23218, "state": "Nouvelle-Aquitaine"}
+{"city": "Trois-Rivi\u00e8res", "country": "France", "customer_id": "C42311", "gender": "F", "source_id": 42311, "state": "Hauts-de-France"}
+{"city": "Revel", "country": "France", "customer_id": "C50958", "gender": "F", "source_id": 50958, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Guipavas", "country": "France", "customer_id": "C76348", "gender": "F", "source_id": 76348, "state": "Bretagne"}
+{"city": "Sorgues", "country": "France", "customer_id": "C01850", "gender": "F", "source_id": 1850, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Suresnes", "country": "France", "customer_id": "C34224", "gender": "F", "source_id": 34224, "state": "\u00cele-de-France"}
+{"city": "Vannes", "country": "France", "customer_id": "C23499", "gender": "F", "source_id": 23499, "state": "Bretagne"}
+{"city": "Toulon", "country": "France", "customer_id": "C77859", "gender": "F", "source_id": 77859, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Poissy", "country": "France", "customer_id": "C58614", "gender": "F", "source_id": 58614, "state": "\u00cele-de-France"}
+{"city": "Saint-Jean-de-Luz", "country": "France", "customer_id": "C63276", "gender": "F", "source_id": 63276, "state": "Nouvelle-Aquitaine"}
+{"city": "Saint-Mand\u00e9", "country": "France", "customer_id": "C44631", "gender": "F", "source_id": 44631, "state": "\u00cele-de-France"}
+{"city": "Orange", "country": "France", "customer_id": "C68092", "gender": "F", "source_id": 68092, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Aubervilliers", "country": "France", "customer_id": "C10507", "gender": "F", "source_id": 10507, "state": "\u00cele-de-France"}
+{"city": "Nantes", "country": "France", "customer_id": "C04464", "gender": "F", "source_id": 4464, "state": "Pays de la Loire"}
+{"city": "Lille", "country": "France", "customer_id": "C86807", "gender": "F", "source_id": 86807, "state": "Hauts-de-France"}
+{"city": "Pommerit-le-Vicomte", "country": "France", "customer_id": "C54759", "gender": "F", "source_id": 54759, "state": "Bretagne"}
+{"city": "Nice", "country": "France", "customer_id": "C03032", "gender": "F", "source_id": 3032, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Besan\u00e7on", "country": "France", "customer_id": "C95599", "gender": "F", "source_id": 95599, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Arpajon-sur-C\u00e8re", "country": "France", "customer_id": "C86210", "gender": "F", "source_id": 86210, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Sierville", "country": "France", "customer_id": "C74673", "gender": "F", "source_id": 74673, "state": "Normandie"}
+{"city": "Le Havre", "country": "France", "customer_id": "C61754", "gender": "F", "source_id": 61754, "state": "Normandie"}
+{"city": "Habsheim", "country": "France", "customer_id": "C02480", "gender": "F", "source_id": 2480, "state": "Grand Est"}
+{"city": "Antibes", "country": "France", "customer_id": "C50083", "gender": "F", "source_id": 50083, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Eaubonne", "country": "France", "customer_id": "C06861", "gender": "F", "source_id": 6861, "state": "\u00cele-de-France"}
+{"city": "Sarcelles", "country": "France", "customer_id": "C82270", "gender": "F", "source_id": 82270, "state": "\u00cele-de-France"}
+{"city": "Brie-Comte-Robert", "country": "France", "customer_id": "C89749", "gender": "F", "source_id": 89749, "state": "\u00cele-de-France"}
+{"city": "Montpellier", "country": "France", "customer_id": "C58964", "gender": "F", "source_id": 58964, "state": "Occitanie"}
+{"city": "Paris", "country": "France", "customer_id": "C44782", "gender": "F", "source_id": 44782, "state": "\u00cele-de-France"}
+{"city": "Grenoble", "country": "France", "customer_id": "C83880", "gender": "F", "source_id": 83880, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Le Mans", "country": "France", "customer_id": "C24090", "gender": "F", "source_id": 24090, "state": "Pays de la Loire"}
+{"city": "Strasbourg", "country": "France", "customer_id": "C41713", "gender": "F", "source_id": 41713, "state": "Grand Est"}
+{"city": "Villeurbanne", "country": "France", "customer_id": "C56733", "gender": "F", "source_id": 56733, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Paris", "country": "France", "customer_id": "C23635", "gender": "F", "source_id": 23635, "state": "\u00cele-de-France"}
+{"city": "Saint-Cloud", "country": "France", "customer_id": "C15760", "gender": "F", "source_id": 15760, "state": "\u00cele-de-France"}
+{"city": "\u00c9toile-sur-Rh\u00f4ne", "country": "France", "customer_id": "C22009", "gender": "F", "source_id": 22009, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Benon", "country": "France", "customer_id": "C33444", "gender": "F", "source_id": 33444, "state": "Nouvelle-Aquitaine"}
+{"city": "Lyon", "country": "France", "customer_id": "C59085", "gender": "F", "source_id": 59085, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Corbeil-Essonnes", "country": "France", "customer_id": "C06883", "gender": "F", "source_id": 6883, "state": "\u00cele-de-France"}
+{"city": "Suc\u00e9-sur-Erdre", "country": "France", "customer_id": "C26628", "gender": "F", "source_id": 26628, "state": "Pays de la Loire"}
+{"city": "Marseille", "country": "France", "customer_id": "C20142", "gender": "F", "source_id": 20142, "state": "Provence-Alpes-C\u00f4te d'Azur"}
+{"city": "Clichy", "country": "France", "customer_id": "C92114", "gender": "F", "source_id": 92114, "state": "\u00cele-de-France"}
+{"city": "Arnas", "country": "France", "customer_id": "C37062", "gender": "F", "source_id": 37062, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Romans-sur-Is\u00e8re", "country": "France", "customer_id": "C44066", "gender": "F", "source_id": 44066, "state": "Auvergne-Rh\u00f4ne-Alpes"}
+{"city": "Athis-Mons", "country": "France", "customer_id": "C67700", "gender": "F", "source_id": 67700, "state": "\u00cele-de-France"}
+{"city": "Dijon", "country": "France", "customer_id": "C99420", "gender": "F", "source_id": 99420, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Belfort", "country": "France", "customer_id": "C21365", "gender": "F", "source_id": 21365, "state": "Bourgogne-Franche-Comt\u00e9"}
+{"city": "Puteaux", "country": "France", "customer_id": "C27403", "gender": "F", "source_id": 27403, "state": "\u00cele-de-France"}
+{"city": "Avant-l\u00e8s-Marcilly", "country": "France", "customer_id": "C07185", "gender": "F", "source_id": 7185, "state": "Grand Est"}
+{"city": "Tourcoing", "country": "France", "customer_id": "C97447", "gender": "F", "source_id": 97447, "state": "Hauts-de-France"}
+{"city": "V\u00e9nissieux", "country": "France", "customer_id": "C78033", "gender": "F", "source_id": 78033, "state": "Auvergne-Rh\u00f4ne-Alpes"}

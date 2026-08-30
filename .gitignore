@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+web/node_modules/
+web/dist/
+seed/*.tmp

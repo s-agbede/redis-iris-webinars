@@ -1,0 +1,12 @@
+services:
+  redis:
+    image: redis:8
+    container_name: northwind-redis
+    ports:
+      # Override REDIS_PORT if 6379 is already taken on your machine.
+      - "${REDIS_PORT:-6379}:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 2s
+      timeout: 3s
+      retries: 15

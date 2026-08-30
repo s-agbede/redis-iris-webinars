@@ -1,0 +1,29 @@
+# Store policy documents, chunked by section.
+#
+# FLAT rather than HNSW on purpose: ~120 chunks is small enough that exact
+# search costs nothing and removes approximation from the recall numbers.
+version: '0.1.0'
+
+index:
+  name: policies
+  prefix: policy
+  storage_type: json
+
+fields:
+  - name: policy_id
+    type: tag
+  - name: topic
+    type: tag
+  - name: title
+    type: text
+  - name: chunk_index
+    type: numeric
+  - name: body
+    type: text
+  - name: embedding
+    type: vector
+    attrs:
+      algorithm: flat
+      dims: 1536
+      distance_metric: cosine
+      datatype: float32
