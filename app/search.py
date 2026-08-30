@@ -24,6 +24,7 @@ from redisvl.query.filter import FilterExpression, Num, Tag
 from redisvl.utils.vectorize import OpenAITextVectorizer
 
 from app.models import SearchFilters, SearchHit, SearchMode, SearchResult, Timings
+from app.settings import Settings
 
 # HybridQuery is flagged experimental in redisvl 0.26; the warnings are noisy on
 # a shared screen. Suppressed here rather than globally so it stays greppable.
@@ -98,6 +99,7 @@ class Searcher:
 
     index: SearchIndex
     vectorizer: OpenAITextVectorizer
+    settings: Settings
 
     def search(
         self,
@@ -107,6 +109,7 @@ class Searcher:
         num_results: int = 12,
     ) -> SearchResult:
         filters = filters or SearchFilters()
+        settings = self.settings
         timings = Timings()
 
         started = time.perf_counter()
@@ -128,8 +131,13 @@ class Searcher:
                 yield_text_score_as=TEXT_SCORE,
                 yield_vsim_score_as=VEC_SCORE,
                 yield_combined_score_as=COMBINED_SCORE,
-                combination_method="LINEAR",
-                linear_alpha=0.3,
+                # RRF, not LINEAR. BM25 scores are unbounded (0-12+ on this
+                # corpus) while cosine similarity is capped at 1.0, so a linear
+                # combination of raw scores lets text swamp the vector entirely
+                # and returns confident nonsense. RRF fuses ranks, not scores,
+                # so it is immune to the scale mismatch.
+                combination_method=settings.fusion_method,
+                linear_alpha=settings.linear_alpha,
                 num_results=num_results,
                 return_fields=RETURN_FIELDS,
             )

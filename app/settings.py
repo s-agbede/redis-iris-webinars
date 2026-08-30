@@ -33,6 +33,12 @@ class Settings(BaseSettings):
 
     default_num_results: int = 12
 
+    # Hybrid fusion. RRF combines ranks and is scale-free; LINEAR combines raw
+    # scores and lets unbounded BM25 swamp bounded cosine similarity. LINEAR is
+    # kept configurable because demonstrating that failure is instructive.
+    fusion_method: str = "RRF"
+    linear_alpha: float = 0.3
+
 
 @lru_cache
 def get_settings() -> Settings:
