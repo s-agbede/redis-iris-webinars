@@ -5,7 +5,7 @@ episode adds one capability on top of the last; each has its own git tag.
 
 | Episode | Capability | Tag | Runs locally? |
 |---|---|---|---|
-| 1 | Search — vector, filters, hybrid | `ep1-done` | yes |
+| 1 | Search — full-text, vector, hybrid | `ep1-done` | yes |
 | 2 | Agent Memory | `ep2-done` | needs Redis Cloud |
 | 3 | Context Retriever | `ep3-done` | needs Redis Cloud |
 | 4 | LangCache — semantic caching | `ep4-done` | needs Redis Cloud |
@@ -31,6 +31,47 @@ If port 6379 is already in use, set `REDIS_PORT` in `.env`.
 | `make dev` | Frontend dev server with hot reload |
 | `make eval` | Retrieval quality — `CONFIG=vector\|filtered\|hybrid\|all` |
 | `make down` | Stop and remove containers |
+
+## Retrieval quality
+
+`make eval` runs 15 labelled queries against the live index in all three modes
+and prints a pass count per mode. Cases live in `eval/cases.yaml`.
+
+The three modes are **signals**, not stages: `text` (BM25), `vector` (cosine
+similarity), `hybrid` (both, fused with RRF). Filters are a separate axis and
+apply identically to all three — price, stock and category constraints are
+orthogonal to how you score relevance, and any mode honours any facet.
+
+|  | text | vector | hybrid |
+|---|---|---|---|
+| passed | 7/15 | 9/15 | 9/15 |
+| MRR | 0.52 | 0.72 | 0.66 |
+
+A case passes only when an acceptable answer is ranked **first** and nothing
+filtered-out appears anywhere in the results. Every case records what each mode
+actually did, so `make eval` exits nonzero when a change moves a verdict in
+either direction. Use `--record` to rewrite those baselines after a deliberate
+change.
+
+Read that table carefully, because it does not say what a vector-search pitch
+would like it to say:
+
+- **Hybrid's MRR is lower than vector's.** On the four shopper-voice queries
+  (`shopper-*`), plain vector search beats hybrid on every one. Fusing in a BM25
+  ranking that returned socks drags a good vector ranking down — RRF weights the
+  text signal equally whether or not it deserves it. Combining signals is what
+  production does; deciding *how much* to trust each one is the part that
+  actually takes work, and it is where ranking and re-ranking come in.
+- **Text does well on the catalogue-vocabulary cases and collapses on the
+  shopper-voice ones**, where the answer does not appear in the top 12 at all.
+  That, not "missing rare tokens", is the real failure of lexical search: it
+  needs the shopper to already know the words the catalogue chose.
+- **Two cases stay red on purpose.** `stock-discipline`, where hybrid is worse
+  than vector, and `warmth-is-not-weatherproofing`, which every mode fails.
+  Same root cause: BM25 scores a decoy on the words *"stitched rather than
+  taped"* and *"not built for sustained rain"* precisely because that sentence
+  denies having them. Full-text scoring has no notion of negation and no amount
+  of fusion tuning fixes it.
 
 ## About the data
 

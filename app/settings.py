@@ -33,6 +33,12 @@ class Settings(BaseSettings):
 
     default_num_results: int = 12
 
+    # Full-text scoring for TEXT mode and the text half of HYBRID. Configurable
+    # for the same reason as `fusion_method` below: watching the ranking move
+    # when you switch scorer is more convincing than being told it would.
+    # One of TFIDF, BM25STD, BM25, TFIDF.DOCNORM, DISMAX, DOCSCORE.
+    text_scorer: str = "BM25STD"
+
     # Hybrid fusion. RRF combines ranks and is scale-free; LINEAR combines raw
     # scores and lets unbounded BM25 swamp bounded cosine similarity. LINEAR is
     # kept configurable because demonstrating that failure is instructive.

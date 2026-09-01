@@ -1,0 +1,309 @@
+# Labelled retrieval cases — the executable version of the episode 1 argument.
+#
+# WHY THIS FILE EXISTS: search does not break loudly. Regenerate the
+# descriptions, edit `build_search_text`, switch the embedding model, flip
+# `fusion_method` to LINEAR to demonstrate the failure — every one of those
+# changes the ranking, and none of them raises an error. You find out on the
+# call, with the wrong product on screen. This file is the ten seconds
+# beforehand.
+#
+# Each case targets a hero product's `demo_role` in seed/heroes.yaml. If you
+# change a hero's role, change its case here too — that pairing is the only
+# thing keeping the seed data and the story it tells in sync.
+#
+# `expect` is RECORDED FROM AN OBSERVED RUN, not aspirational. It is a
+# two-sided guard: hybrid quietly getting worse breaks the demo, and vector
+# quietly getting better breaks the point the demo makes. Either one should
+# make `make eval` go red so you can decide which it was.
+#
+# A case passes when an acceptable answer is ranked #1 and nothing forbidden
+# appears anywhere in the results.
+#
+# BASELINE, 1,585 products, text-embedding-3-small, RRF fusion:
+#     vector 3/11   filtered 8/11   hybrid 9/11
+#
+# Two results in here are uncomfortable and are kept deliberately, because an
+# eval that only confirms the pitch is worthless:
+#   * `stock-discipline` — hybrid is WORSE than filtered.
+#   * `warmth-is-not-weatherproofing` — every mode fails.
+# Both have the same root cause and it is worth saying out loud on the call:
+# BM25 has no notion of negation. A decoy whose copy says it is "stitched
+# rather than taped" and "not built for sustained rain" scores on `taped`,
+# `seams` and `sustained rain` precisely because it denies having them. Neither
+# scoring nor filtering fixes that. Query rewriting and re-ranking do, which is
+# where the later episodes go.
+#
+# Also worth knowing when reading ranks: RRF compresses scores hard. The top
+# four hits on `stock-discipline` sit within 0.002 of each other, so ranks in a
+# tight cluster are close to arbitrary. Treat a one-place move as noise and a
+# verdict flip as the signal.
+
+- case_id: flagship-waterproof
+  query: waterproof jacket under 150 euros that's actually in stock
+  why: >-
+    The episode's headline query, and the arc the README claims: vector puts the
+    plausible-but-wrong H00003 first with the answer at #2 and the out-of-stock
+    parka at #3; the filters clear the unavailable and over-budget items but
+    leave the decoy on top; only term matching demotes it. This is the one case
+    that must never go red.
+  filters:
+    max_price: 150
+    in_stock_only: true
+  answers: [H00001, H00007]
+  forbidden: [H00002, H00004, H00005, H00011]
+  expect:
+    text: fail
+    vector: fail
+    hybrid: pass
+- case_id: budget-boundary
+  query: three-layer waterproof shell with fully taped seams
+  why: >-
+    H00002 outranks the answer on both similarity and exact terms and is twice
+    the budget, so the price filter is the only thing that can remove it.
+    Targets H00002's demo_role. Note vector's failure here is purely the price
+    leak — it already ranks a correct shell #1, it just also offers you the
+    290-euro one.
+  filters:
+    max_price: 150
+    in_stock_only: true
+  answers: [H00001, H00007]
+  forbidden: [H00002]
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+- case_id: stock-discipline
+  query: waterproof shell jacket with taped seams for sustained rain
+  why: >-
+    KEPT BECAUSE IT EMBARRASSES HYBRID. No price ceiling, so any genuinely
+    waterproof taped shell is correct, and the case nominally only needs the
+    stock filter to remove H00004. Filtered passes. Hybrid then drops the
+    answer to #3, because H00003's copy contains "taped", "seams" and
+    "sustained rain" inside the sentence explaining it has none of them, and
+    BM25 cannot read a negation. Do not "fix" this by rewording the query —
+    the failure is the lesson, and pretending scoring is monotonic
+    improvement is how demos mislead people.
+  filters:
+    in_stock_only: true
+  answers: [H00001, H00002, H00007]
+  forbidden: [H00004]
+  expect:
+    text: fail
+    vector: pass
+    hybrid: fail
+- case_id: exact-spec-term
+  query: 10,000mm hydrostatic head jacket
+  why: >-
+    A rare punctuated figure is exactly what an embedding blurs. Vector puts
+    the rain trousers first and leaks the hat; the category and stock facets
+    alone are enough to recover it here, and hybrid holds the result. Worth
+    noting on the call that filters, not BM25, did the work on this one —
+    the `spec_terms` variants in seed/load.py matter more for recall than for
+    winning this particular ranking.
+  filters:
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00007]
+  forbidden: [H00009, H00010]
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+- case_id: category-discipline
+  query: waterproof 10,000mm kit with taped seams
+  why: >-
+    H00010 (rain hat) and H00009 (rain trousers) share the answer's exact terms
+    and its fabric, so strong text matching actively pulls them up — vector
+    ranks the trousers #1. The category facet is the only thing that keeps the
+    garment right. Targets H00009 and H00010's demo_roles.
+  filters:
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00002, H00007]
+  forbidden: [H00009, H00010]
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+- case_id: windproof-is-not-waterproof
+  query: fully waterproof jacket for heavy rain
+  why: >-
+    H00006 is a windbreaker at 74.99 and in stock, so it survives every filter,
+    and H00003 takes #1 under filtered. Nothing but term matching separates
+    them. Targets H00006's demo_role — the confusion real shoppers make
+    constantly. Alongside `flagship-waterproof`, this is the second of only two
+    cases where hybrid uniquely beats filtered; that is the honest size of the
+    win on this corpus.
+  filters:
+    max_price: 150
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00007]
+  forbidden: []
+  expect:
+    text: pass
+    vector: fail
+    hybrid: pass
+- case_id: warmth-is-not-weatherproofing
+  query: rain jacket that keeps water out, not just a warm layer
+  why: >-
+    KEPT AS A KNOWN OPEN FAILURE — no mode passes, and hybrid is the worst of
+    the three at #10. The query contains a natural-language negation ("not just
+    a warm layer") and so does the decoy's copy, and neither embeddings nor
+    BM25 model negation at all. This case is the hook for the later episodes:
+    it is not fixable by tuning retrieval, only by rewriting the query or
+    re-ranking the results. If it ever starts passing, find out what changed
+    before celebrating.
+  filters:
+    max_price: 150
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00007]
+  forbidden: []
+  expect:
+    text: fail
+    vector: fail
+    hybrid: fail
+- case_id: waxed-cotton-double-miss
+  query: waterproof coat, waxed or technical, under 150
+  why: >-
+    H00005 is fifteen euros over budget AND not actually waterproof, and vector
+    ranks it #1 — two independent constraints have to both be applied. Targets
+    H00005's demo_role.
+  filters:
+    max_price: 150
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00007]
+  forbidden: [H00002, H00005, H00011]
+  expect:
+    text: fail
+    vector: pass
+    hybrid: pass
+- case_id: right-garment-not-the-jacket
+  query: waterproof overtrousers with taped seams for hiking
+  why: >-
+    A deliberate control. If H00001 has become a universal attractor — because
+    the index is degenerate, or because every case in this file happens to
+    point at it — this case catches that. The answer is the trousers, and all
+    three modes get it right, which is the point.
+  filters:
+    in_stock_only: true
+  answers: [H00009]
+  forbidden: []
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+- case_id: known-item-by-name
+  query: Columbia Argon Ice Parka
+  why: >-
+    Known-item search against the real thelook catalogue. This case was written
+    expecting vector to fail and BM25 to rescue it; it does not — the embedding
+    already puts the exact product first, so all three modes pass. Recorded as
+    observed rather than reworded, because "vector-only is fine for this whole
+    class of query" is true and the episode is stronger for admitting it. Its
+    job now is to catch hybrid REGRESSING known-item search, which is a real
+    risk when tuning fusion. Filters are empty, so FILTERED is identical to
+    VECTOR here by construction.
+  filters: {}
+  answers: [P08662]
+  forbidden: []
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+- case_id: brand-exact
+  query: Aldermoor Fell shell
+  why: >-
+    A brand token that exists nowhere in the real catalogue. Any of the three
+    Fell shells is correct — the case is about finding the house brand at all,
+    not picking between its variants. Like `known-item-by-name`, it passes
+    everywhere: brand names are in the embedding input, so similarity handles
+    them. Kept as a regression guard, not as evidence for hybrid.
+  filters:
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00002, H00007]
+  forbidden: []
+  expect:
+    text: pass
+    vector: pass
+    hybrid: pass
+
+# ---------------------------------------------------------------------------
+# DRAFT — raw material for step 1 of the arc, written to be curated or binned.
+#
+# Every case above this line was written in the catalogue's own vocabulary
+# ("taped seams", "hydrostatic head", "10,000mm"), which is BM25's best case
+# and the reason TEXT scores as well as it does. That flatters full-text search
+# and understates the argument for vectors.
+#
+# These four are in shopper voice instead: no word in the query appears in the
+# answer's description. That is the actual failure mode of lexical search — not
+# that it misses rare tokens, but that it needs the shopper to already know the
+# words the catalogue chose. Note `answers` deliberately spreads across three
+# different products so the set stops pointing at H00001 every time.
+# ---------------------------------------------------------------------------
+
+- case_id: shopper-dry-walking-dog
+  query: something to keep me dry walking the dog
+  why: >-
+    DRAFT. Unfiltered, this query returns leggings and three pairs of socks
+    under TEXT — BM25 latching onto "walking" and "dry" as incidental words.
+    Nothing in the query overlaps the answer's copy. The most direct
+    demonstration of the vocabulary problem in the set.
+  filters:
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00002, H00007]
+  forbidden: []
+  expect:
+    text: fail
+    vector: fail
+    hybrid: fail
+
+- case_id: shopper-cycling-downpour
+  query: jacket for cycling to work when it's chucking it down
+  why: >-
+    DRAFT. Idiomatic and regional ("chucking it down"), which no catalogue copy
+    would ever contain. Tests whether the embedding recovers intent from
+    colloquial phrasing.
+  filters:
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00002, H00007]
+  forbidden: []
+  expect:
+    text: fail
+    vector: fail
+    hybrid: fail
+
+- case_id: shopper-legs-soaked-hike
+  query: bottoms to stop my legs getting soaked on a hike
+  why: >-
+    DRAFT. Answer is the rain trousers, not a jacket — deliberately pulls the
+    set away from H00001 being the answer to nearly everything. Also no
+    category facet, so the garment has to be inferred from the query alone.
+  filters:
+    in_stock_only: true
+  answers: [H00009]
+  forbidden: []
+  expect:
+    text: fail
+    vector: pass
+    hybrid: fail
+
+- case_id: shopper-rains-all-day
+  query: what should i wear if it rains all day
+  why: >-
+    DRAFT. A question rather than a noun phrase, which is how people actually
+    talk to an assistant. Shares only the word "rain" with any product copy.
+  filters:
+    in_stock_only: true
+    categories: [Outerwear & Coats]
+  answers: [H00001, H00002, H00007]
+  forbidden: []
+  expect:
+    text: fail
+    vector: fail
+    hybrid: fail

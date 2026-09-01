@@ -8,15 +8,25 @@ from pydantic import BaseModel, Field
 
 
 class SearchMode(StrEnum):
-    """The three retrieval strategies episode 1 walks through, in order.
+    """The three retrieval signals, in the order episode 1 introduces them.
 
-    VECTOR    — similarity only. Ignores price and stock entirely.
-    FILTERED  — similarity plus numeric/tag filters. Constraints respected.
-    HYBRID    — full-text scoring combined with similarity. Exact terms land.
+    TEXT    — BM25 over `search_text`. Where most production search already is.
+              Matches the words the shopper typed, which collapses the moment
+              they do not happen to know the vocabulary the catalogue uses.
+    VECTOR  — cosine similarity over embeddings. Matches meaning, so intent
+              expressed in the shopper's own words still lands.
+    HYBRID  — both signals fused with RRF. What real systems do, and the first
+              taste of a general pattern: fuse several signals, then rank, then
+              re-rank.
+
+    Filters are deliberately NOT a mode. Price, stock, category and colour
+    constraints are orthogonal to the signal and apply identically to all three
+    — that is the point worth teaching, and making "filtered" a stage in a
+    progression implies the opposite.
     """
 
+    TEXT = "text"
     VECTOR = "vector"
-    FILTERED = "filtered"
     HYBRID = "hybrid"
 
 

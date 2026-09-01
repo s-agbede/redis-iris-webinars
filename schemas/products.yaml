@@ -34,6 +34,11 @@ fields:
     type: tag
   - name: in_stock
     type: tag
+  # Written by seed/load.py since the first commit but never declared here, so
+  # it was stored and unfilterable. Indexed now so the API can browse the twelve
+  # hand-written demo products apart from the 1,573 catalogue ones.
+  - name: is_hero
+    type: tag
   - name: material
     type: tag
   - name: fit
