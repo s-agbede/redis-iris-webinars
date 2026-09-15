@@ -55,7 +55,7 @@ def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
         )
     ]
     print(f"{len(catalog.products):,} products; {len(passages):,} source passages", flush=True)
-    schema = yaml.safe_load((ROOT / "schemas/products.yaml").read_text())
+    schema = yaml.safe_load((ROOT / "schemas/passages.yaml").read_text())
     schema["index"].update(name=settings.products_index, prefix=settings.passage_prefix)
     schema["fields"][-1]["attrs"]["algorithm"] = settings.index_algorithm.lower()
     client = Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=30)
