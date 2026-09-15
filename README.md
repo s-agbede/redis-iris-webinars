@@ -8,30 +8,144 @@ passage from each method, verified hybrid contributions, and original source fie
 
 ## Run locally
 
-Prerequisites: Docker with Compose, Python 3.12+, [uv](https://docs.astral.sh/uv/),
-and Node.js 22.18+ with npm. No model API key is required.
+### Prerequisites
+
+Use Bash or Zsh for the commands below. The fresh-checkout setup has been verified
+on macOS with Python 3.12; other operating systems have not yet been validated.
+No GPU or model API key is required. The product dataset is already bundled.
+
+| Install | Requirement |
+|---|---|
+| [Git](https://git-scm.com/install/) | Clone the repository |
+| Make | On macOS, install [Apple's command line tools](https://developer.apple.com/xcode/resources/); on Linux, use your distribution's package manager, such as Ubuntu's [make package](https://packages.ubuntu.com/noble/make) |
+| [Docker](https://docs.docker.com/get-started/get-docker/) | A running Docker engine and Compose v2; start Docker Desktop if you use it |
+| [uv](https://docs.astral.sh/uv/getting-started/installation/) | Install Python dependencies and run the backend |
+| [Python](https://docs.astral.sh/uv/guides/install-python/) | 3.12+; uv can install Python 3.12 with `uv python install 3.12` |
+| [Node.js and npm](https://nodejs.org/en/download) | Node.js 22.18+ with npm |
+
+Check your tools before starting. `docker info` must reach the running engine:
 
 ```bash
-cp .env.example .env  # only for a new checkout; preserve any existing .env
+git --version
+make --version
+docker compose version
+docker info
+uv --version
+node --version
+npm --version
+```
+
+### Clone and start
+
+While this repository is private, your GitHub account needs access. Accept the
+repository invitation and authenticate Git with that account before cloning.
+
+```bash
+git clone --branch search https://github.com/s-agbede/redis-iris-webinars.git
+cd redis-iris-webinars
+cp .env.example .env
 make up
 ```
 
-Open [the lab](http://127.0.0.1:8000). Use `make up PORT=8001` if 8000 is occupied.
-If Redis port 6379 is occupied, set **both** `REDIS_PORT=6381` and
-`REDIS_URL=redis://localhost:6381` in `.env`.
+Copy `.env.example` only for a new checkout; preserve an existing `.env`. Run all
+subsequent commands from the repository root. If the default ports are already
+occupied, use the [port settings below](#ports) before running `make up`.
 
 The first run installs dependencies, starts Redis, downloads the pinned MiniLM
-ONNX model (about 90 MB), builds the frontend and indexes the bundled data. Allow
-a few minutes for initial CPU embedding. Later runs verify the cached model and
-reuse the index when its data, model and passage configuration match. `make up`
-keeps an existing Compose service container; it does not automatically upgrade
-an older Redis container. The loader checks that Redis supports native hybrid
-search (8.4+); the Compose image is pinned to the tested Redis 8.6.2 digest.
+ONNX model (about 90 MB), builds the frontend and indexes 8,472 passages from
+2,317 products. Internet access is needed for the initial downloads. Allow several
+minutes for CPU embedding; progress appears as `Indexed 128/8,472 passages` and
+continues until the index is complete. Wait for `Application startup complete`,
+then open [the lab](http://127.0.0.1:8000). Keep this terminal running.
+
+### Verify readiness and try a search
+
+In a second terminal, check [readiness](http://127.0.0.1:8000/api/health) in your
+browser or run this command if you have curl:
+
+```bash
+curl --fail --silent --show-error http://127.0.0.1:8000/api/health
+```
+
+With the bundled data and default passage settings, the expected response is:
+
+```json
+{"status":"ready","products":2317,"passages":8472}
+```
+
+Search for **`sony zv e10`** in the lab. You should see full-text, vector and
+hybrid result columns. Select a product to compare its ranks and source passages.
+Then try **`a compact camera for filming myself`** to compare how the methods
+handle a described need. The interactive [API docs](http://127.0.0.1:8000/docs)
+also let you try `POST /api/compare` with `{"query":"sony zv e10"}`.
+
+An HTTP 503 response means setup is incomplete or Redis is unavailable. Read its
+error message and follow [troubleshooting](#troubleshooting) below.
+
+### Ports
+
+If app port 8000 is occupied, run `make up PORT=8001` and use port 8001 in the
+browser, readiness and API URLs above. For an already prepared app, use
+`make serve PORT=8001`.
+
+If Redis port 6379 is occupied, set **both** values in `.env` before the first
+startup:
+
+```dotenv
+REDIS_PORT=6381
+REDIS_URL=redis://localhost:6381
+```
+
+`REDIS_PORT` controls Docker's host port; `REDIS_URL` tells the Python app where
+to connect. Keep them aligned. To change the port of an existing project container,
+stop the app, update `.env`, and run `docker compose up -d --wait redis` to apply
+the change, then `make serve`. The named Redis data volume is preserved.
+
+### Stop and restart
+
+Press **Ctrl+C** in the server terminal to stop the app. Redis keeps running;
+`make down` stops it while preserving the data volume. To restart after setup:
+
+```bash
+make redis
+make serve
+```
 
 After preparation, `make serve` runs entirely locally. Serving and seeding do not
-download a model. For a fully offline restart, use `make redis` and `make serve`
-with the image, Python dependencies, model and frontend build already present.
-`make up` also runs npm installation, which may need network access.
+download a model. An offline restart requires the Docker image, Python dependencies,
+model files, indexed data and frontend build to be present. Later `make up` runs
+verify the cached model and reuse a matching index, but also run npm installation,
+which may need network access.
+
+`make up` keeps an existing Compose service container; it does not automatically
+upgrade an older Redis container. The loader requires Redis 8.4+ for native hybrid
+search. Compose pins the tested Redis 8.6.2 image digest.
+
+### Edit the app
+
+Complete `make up` once, then stop its server with Ctrl+C. Keep Redis running.
+Use two terminals, both in the repository root.
+
+**Terminal 1: backend with automatic reload**
+
+```bash
+uv run uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
+```
+
+**Terminal 2: frontend with hot reload**
+
+```bash
+make dev
+```
+
+Open the URL printed by Vite, normally [http://localhost:5173](http://localhost:5173).
+The frontend forwards `/api` and `/photos` to backend port **8000**, as configured
+in [web/vite.config.ts](web/vite.config.ts). If you choose another backend port,
+update both proxy targets and restart `make dev`; `PORT=8001` does not change them.
+The backend reads `.env`; restart it after changing settings. After editing the
+frontend, run `make build` before returning to the single-server `make serve` flow.
+
+### Commands
 
 | Command | Purpose |
 |---|---|
@@ -50,6 +164,19 @@ manifest at startup and holds the source catalogue in memory. A missing model,
 mismatched index or unavailable Redis produces an actionable error, never
 substitute results. If setup was incomplete at startup, complete it and restart
 the server. `/api/health` reports readiness.
+
+### Troubleshooting
+
+| Symptom | What to do |
+|---|---|
+| Clone says `Repository not found` or authentication fails | Check the repository URL, accept your GitHub invitation, and authenticate Git as an account with access. |
+| `make`, `uv`, `node`, `npm` or `docker` is not found | Install the missing prerequisite above, open a new terminal and repeat its version check. |
+| Docker cannot connect, or the container is not healthy | Start Docker Desktop or your Docker engine, check `docker info`, then inspect `docker compose ps` and `docker compose logs redis`. Retry `make redis` after resolving the error. |
+| `Address already in use`, or Redis connection refused | Follow [Ports](#ports). Check that `REDIS_PORT` and the port in `REDIS_URL` agree and that Redis is running. |
+| Model download fails, or the local model is missing | Check network/proxy access to Hugging Face and rerun `make model`. If you set `MODEL_PATH`, it must contain the exact pinned files; unset it to use the standard download/cache flow. Restart the app after preparation. |
+| `/api/health` returns 503, or the index is missing/incomplete/mismatched | Read the response body. Stop the app, ensure Redis is running, run `make model` and `make seed`, then restart with `make serve`. Reseeding replaces this namespace's passage index. |
+| Redis reports that native hybrid search is unsupported | Stop the app and run `docker compose up -d --wait redis` to apply the pinned image, then `make seed` and `make serve`. The named data volume is preserved. |
+| The root URL opens API docs, or the frontend is out of date | Stop the server, run `make build`, then restart `make serve`. In development, open Vite's URL and check its backend proxy port. |
 
 ## Understand the code
 
