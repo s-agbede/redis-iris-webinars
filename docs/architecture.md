@@ -22,6 +22,20 @@ Query ────────────────────────�
   index and candidate limit apply to each method. Model/mount text in a query is
   a relevance signal, not a hard compatibility constraint.
 
+The search box accepts plain-language queries. Before constructing either lexical
+query, the app replaces ASCII punctuation (except underscores) with spaces, then
+lets RedisVL remove stopwords and escape the resulting terms. Thus `Sony ZV-E10`
+and `sony zv e10` both search `@search_text:(sony | zv | e10)`. Escaping the original
+hyphen would request a single `zv-e10` token, while the existing TEXT index stores
+`zv` and `e10` separately. See [Redis tokenization rules](https://redis.io/docs/latest/develop/ai/search-and-query/advanced-concepts/escaping/).
+This query-side change needs no reindexing. Quotes and operators entered in the
+search box do not enable advanced Redis query syntax. Full-text highlights use
+the same normalized terms. If no terms remain after punctuation and stopword
+removal, Full-text and Hybrid report an explicit error; Vector can still run.
+Basic's literal title lookup, the embedding input and source-judgement lookup
+retain the original query. Consequently, equivalent lexical queries can still
+have different vector rankings and different hybrid rankings.
+
 Full-text and vector each retrieve up to 100 **passage** candidates. Hybrid fuses
 the union of its top 100 lexical and top 100 vector passages, returning up to 200
 rows so the explanation can see every contributing candidate. Each method keeps
@@ -34,10 +48,13 @@ BM25, cosine and RRF scores use different scales; compare ranks and evidence
 across columns rather than numeric scores.
 
 The shared evidence panel uses each method's actual winning passage. Its expanded
-indexed text includes bounded title, brand and color context. Literal query-word overlap is
-highlighted only in the full-text evidence and explicitly labelled: the tested
-Redis JSON index rejects native `HIGHLIGHT`, and these annotations do not show
-stemming or explain BM25 scoring. See the [Redis indexing limitations](https://redis.io/docs/latest/develop/ai/search-and-query/indexing/).
+indexed text includes bounded title, brand and color context. Literal query-word
+overlap is highlighted directly in full-text result titles and excerpts, as well
+as in the full-text evidence panel. Excerpts start near the first literal match;
+each displayed field has its own Unicode code-point offsets. These annotations
+are explicitly labelled as literal overlap: the tested Redis JSON index rejects
+native `HIGHLIGHT`, and the annotations do not show stemming or explain BM25
+scoring. See the [Redis indexing limitations](https://redis.io/docs/latest/develop/ai/search-and-query/indexing/).
 
 Hybrid returns native branch-score aliases in the **same execution**. The app
 reconstructs possible ordinal passage ranks, resolves ties against the native RRF
@@ -80,3 +97,21 @@ small FLAT corpus establishes retrieval behavior. An HNSW scale experiment shoul
 measure recall against FLAT as well as latency and memory. Change
 `INDEX_ALGORITHM` and rebuild deliberately; do not extrapolate the interactive
 numbers into production capacity claims.
+
+## Autocomplete
+
+`GET /api/suggestions?prefix=so` uses Redis `FT.SUGGET` to return up to six
+prefix suggestions. Startup populates a separate, source-versioned dictionary
+with `FT.SUGADD`, using product titles and brands weighted by distinct product
+coverage. Suggestions longer than 200 characters are omitted. No embeddings or
+search index rebuild are needed. Historical dictionary versions can remain
+until explicitly removed; they are not queried by a newer catalogue.
+
+The UI waits 180 ms after typing at least two characters, cancels obsolete
+requests, and supports arrow keys, Enter and Escape. Choosing a suggestion fills
+the query; submitting the search runs retrieval. Suggestions cover all brands and are not
+filtered by the brand control. This is prefix completion, not semantic search,
+substring matching, spelling correction or a relevance assessment.
+
+Redis command references: [FT.SUGADD](https://redis.io/docs/latest/commands/ft.sugadd/)
+and [FT.SUGGET](https://redis.io/docs/latest/commands/ft.sugget/).

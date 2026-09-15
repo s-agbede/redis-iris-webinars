@@ -1,9 +1,10 @@
-import { useState } from "react";
-import type { Comparison, Hit, Mode, SourceLabel } from "./api";
-import { rankForProduct, visibleProductUnion, type ProductRank, type VisibleCount } from "./learning";
+import type { Catalog, Comparison, Hit, Mode, SourceLabel } from "./api";
+import type { ProductRank, VisibleCount } from "./learning";
+import { HighlightedText } from "./HighlightedText";
 import { ProductPhotoView } from "./ProductPhoto";
 
 export const methods: { mode: Mode; name: string; hint: string; explanation: string }[] = [
+  { mode: "basic", name: "Basic", hint: "Literal title match", explanation: "Case-insensitive title substring matching, in alphabetical order. No stemming, relevance ranking, or semantic matching." },
   { mode: "text", name: "Full-text", hint: "Words in the indexed text", explanation: "Rank passages by matching query terms with BM25. Model names and exact wording can help; a word in the query is not a hard brand filter." },
   { mode: "vector", name: "Vector", hint: "Nearby meaning", explanation: "Rank passages by embedding similarity. Read the retrieved passage to decide whether it answers the need; similarity does not prove a product meets every requirement." },
   { mode: "hybrid", name: "Hybrid", hint: "Combine passage rankings", explanation: "Redis combines the full-text and vector passage rankings with reciprocal rank fusion (RRF). Each method then keeps the best passage per product." },
@@ -26,85 +27,70 @@ export function RankLabel({ rank, visibleCount, compact = false }: { rank: Produ
   return <span className={rank.outsideVisible ? "rank-outside-visible" : ""}>#{rank.rank}{rank.outsideVisible && (compact ? "*" : <small>Beyond visible top {visibleCount}</small>)}</span>;
 }
 
-export function MethodIcon({ mode }: { mode: Mode }) {
-  return <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
-    {mode === "text" ? <path d="M4 5h16M12 5v15M8 20h8M4 5v4M20 5v4" /> : mode === "vector" ? <><circle cx="6" cy="7" r="2" /><circle cx="18" cy="6" r="2" /><circle cx="14" cy="18" r="2" /><path d="m8 7 8-1M7 9l6 7M17 8l-2 8" /></> : <path d="M4 5h3c5 0 5 14 10 14h3M4 19h3C12 19 12 5 17 5h3M17 2l3 3-3 3M17 16l3 3-3 3" />}
-  </svg>;
-}
-
 export function SourceJudgement({ label }: { label: SourceLabel | null }) {
   return <span className={`judgement ${label ? `judgement-${label.toLowerCase()}` : ""}`} title={label ? `Original ESCI judgement: ${sourceLabels[label]}` : "No original ESCI judgement for this query and product"}>
     <span aria-hidden="true">{label ?? "–"}</span>{label ? sourceLabels[label] : "Unjudged"}
   </span>;
 }
 
-function ProductCard({ hit, rank, selected, highlighted, onSelect, onHover }: {
-  hit: Hit; rank: number; selected: boolean; highlighted: boolean;
-  onSelect: (id: string) => void; onHover: (id: string | null) => void;
+function ProductRow({ hit, mode, rank, selected, onSelect }: {
+  hit: Hit; mode: Mode; rank: number; selected: boolean; onSelect: (id: string) => void;
 }) {
-  return <article className={`product-card ${selected ? "is-selected" : ""} ${highlighted ? "is-highlighted" : ""}`} onMouseEnter={() => onHover(hit.product_id)} onMouseLeave={() => onHover(null)}>
-    <button type="button" className="product-select" aria-pressed={selected} aria-controls="product-evidence" aria-label={`Inspect rank ${rank}: ${hit.title} across all three methods`} onClick={() => onSelect(hit.product_id)}>
-      <span className="product-topline"><span className="rank">{String(rank).padStart(2, "0")}</span><span className="product-brand">{hit.brand || "Brand not supplied"}</span><span className="select-mark" aria-hidden="true">{selected ? "✓" : "↗"}</span></span>
-      <h3 title={hit.title}>{hit.title}</h3>
-      <span className="passage-preview">{hit.passage.text}</span>
-      <span className="inspect-cue">Compare this product’s evidence <span aria-hidden="true">↗</span></span>
+  return <li className="product-row">
+    <button type="button" className="product-select" aria-pressed={selected} aria-haspopup="dialog" aria-controls="product-evidence" onClick={() => onSelect(hit.product_id)}>
+      <span className="result-rank" aria-label={`Rank ${rank}`}>{String(rank).padStart(2, "0")}</span>
+      <span className="result-copy">
+        {hit.brand && <span className="product-brand">{hit.brand}</span>}
+        <span className="product-title"><HighlightedText text={hit.title} ranges={mode === "text" ? hit.title_matches : []} /></span>
+        {hit.passage.field !== "product_title" && <span className="passage-preview"><HighlightedText text={hit.passage.text} ranges={mode === "text" ? hit.passage_matches : []} preview={mode === "text"} /></span>}
+      </span>
+      <span className="result-arrow" aria-hidden="true">↗</span>
     </button>
-    <ProductPhotoView photo={hit.photo} compact />
-    {hit.source_label && <div className="product-footer"><SourceJudgement label={hit.source_label} /><span>Original ESCI judgement</span></div>}
-  </article>;
+    {hit.photo && <ProductPhotoView photo={hit.photo} compact />}
+  </li>;
 }
 
-function RankMatrix({ comparison, visibleCount, selectedId, onSelect }: { comparison: Comparison; visibleCount: VisibleCount; selectedId: string | null; onSelect: (id: string) => void }) {
-  const products = visibleProductUnion(comparison, visibleCount);
-  if (!products.length) return null;
-  return <div className="rank-matrix">
-    <table>
-      <caption>Follow the same product across all three methods</caption>
-      <thead><tr><th scope="col">Product</th>{methods.map((method) => <th key={method.mode} scope="col" className={`method-${method.mode}`}>{method.name}</th>)}</tr></thead>
-      <tbody>{products.map((hit) => <tr key={hit.product_id} className={selectedId === hit.product_id ? "selected-row" : ""}>
-        <th scope="row"><button type="button" aria-pressed={selectedId === hit.product_id} aria-controls="product-evidence" onClick={() => onSelect(hit.product_id)} title={hit.title}>{hit.title}</button></th>
-        {methods.map((method) => <td key={method.mode} className={`method-${method.mode}`}><RankLabel rank={rankForProduct(comparison, method.mode, hit.product_id, visibleCount)} visibleCount={visibleCount} compact /></td>)}
-      </tr>)}</tbody>
-    </table>
-    <p className="matrix-key">&gt;5: outside fetched top 5 · N/A: method unavailable{visibleCount === 3 && " · *: fetched, beyond visible top 3"}</p>
-  </div>;
-}
-
-export function ResultColumns({ comparison, busy, selectedId, hoveredId, visibleCount, onSelect, onHover }: {
-  comparison: Comparison | null; busy: boolean; selectedId: string | null; hoveredId: string | null; visibleCount: VisibleCount;
-  onSelect: (id: string) => void; onHover: (id: string | null) => void;
+export function SearchResults({ comparison, busy, selectedId, onSelect, brand, brands, onBrandChange, onRetry, selectedModes }: {
+  comparison: Comparison | null; busy: boolean; selectedId: string | null;
+  onSelect: (id: string) => void; brand: string; brands: Catalog["brands"];
+  onBrandChange: (brand: string) => void; onRetry: () => void; selectedModes: Mode[];
 }) {
-  const [activeMode, setActiveMode] = useState<Mode>("text");
-  return <>
-    {comparison && <RankMatrix comparison={comparison} visibleCount={visibleCount} selectedId={selectedId} onSelect={onSelect} />}
-    <div className="method-tabs" role="tablist" aria-label="Method results">
-      {methods.map((method, index) => <button type="button" key={method.mode} id={`${method.mode}-tab`} role="tab" className={`method-${method.mode}`} aria-selected={activeMode === method.mode} aria-controls={`${method.mode}-panel`} tabIndex={activeMode === method.mode ? 0 : -1} onClick={() => setActiveMode(method.mode)} onKeyDown={(event) => {
-        let next = index;
-        if (event.key === "ArrowRight") next = (index + 1) % methods.length;
-        else if (event.key === "ArrowLeft") next = (index + methods.length - 1) % methods.length;
-        else if (event.key === "Home") next = 0;
-        else if (event.key === "End") next = methods.length - 1;
-        else return;
-        event.preventDefault();
-        setActiveMode(methods[next].mode);
-        document.getElementById(`${methods[next].mode}-tab`)?.focus();
-      }}>{method.name}</button>)}
+  const hints: Record<Mode, string> = {
+    basic: "Literal title match · alphabetical order.",
+    text: "Highlights show literal matches to your search words.",
+    vector: "Explores the meaning behind your search.",
+    hybrid: "A mix of wording and meaning.",
+  };
+  const visibleMethods = methods.filter((method) => selectedModes.includes(method.mode));
+  const multiple = visibleMethods.length > 1;
+
+  return <section className="results-section" aria-label="Search results" aria-busy={busy}>
+    <div className="results-toolbar">
+      <p className="results-overview">{multiple ? `${visibleMethods.length} methods · same query` : "Search results"}</p>
+      <label className="brand-filter"><span className="sr-only">Filter by brand</span><select value={brand} onChange={(event) => onBrandChange(event.target.value)}><option value="">All brands</option>{brands.map((item) => <option key={item.value} value={item.value}>{item.value}</option>)}</select></label>
     </div>
-    <div className={`comparison-grid ${comparison ? "has-results" : ""}`}>
-      {methods.map((method, methodIndex) => {
-        const result = comparison?.results.find((item) => item.mode === method.mode);
-        return <section id={`${method.mode}-panel`} role="tabpanel" className={`method-column method-${method.mode} ${activeMode === method.mode ? "active-method" : ""}`} key={method.mode} aria-labelledby={`${method.mode}-heading`}>
-          <div className="method-heading">
-            <div className="method-title"><span className="method-icon"><MethodIcon mode={method.mode} /></span><div><h2 id={`${method.mode}-heading`}>{method.name}</h2><p>{method.hint}</p></div><span className="method-index">0{methodIndex + 1}</span></div>
-            <div className="method-metrics"><span>{result && !result.error ? `${Math.min(visibleCount, result.hits.length)} of ${result.hits.length} fetched` : `Top ${visibleCount} products`}</span><span>{busy ? "Running…" : result && !result.error ? `${formatTime(result.query_ms)} · Redis` : "One shared query"}</span></div>
-          </div>
-          {busy ? <div className="column-state loading-state"><span className="loader" aria-hidden="true" /><h3>Comparing search methods</h3><p>The query is embedded once for vector and hybrid.</p></div>
-          : (result?.error || (comparison && !result)) ? <div className="column-state column-error" role="alert"><h3>{method.name} is unavailable</h3><p>{result?.error || "This method did not return a response."}</p><p>Retry the comparison after resolving the service error.</p></div>
-          : result && result.hits.length > 0 ? result.hits.slice(0, visibleCount).map((hit, index) => <ProductCard key={hit.product_id} hit={hit} rank={index + 1} selected={selectedId === hit.product_id} highlighted={hoveredId === hit.product_id} onSelect={onSelect} onHover={onHover} />)
-          : <div className="column-state"><span className="state-symbol" aria-hidden="true"><MethodIcon mode={method.mode} /></span><h3>{result ? "No products returned" : method.hint}</h3><p>{result ? "Try broader wording or remove the brand filter, then compare again." : method.explanation}</p>{!result && <span className="awaiting-label">Ready for your query</span>}</div>}
-          <details className="method-details"><summary>How {method.name.toLowerCase()} works <span aria-hidden="true">+</span></summary><p>{method.explanation}</p></details>
-        </section>;
-      })}
+    {multiple && <p className="comparison-scroll-hint">Swipe across to compare methods.</p>}
+    <div className={`comparison-scroll ${multiple ? "multiple-methods" : ""}`} tabIndex={multiple ? 0 : undefined} aria-label={multiple ? "Scroll to compare search methods" : undefined}>
+      <div className={`method-results-grid columns-${visibleMethods.length}`}>
+        {visibleMethods.map((method) => {
+          const result = comparison?.results.find((item) => item.mode === method.mode);
+          return <section key={method.mode} className={`method-result method-${method.mode}`} aria-labelledby={`${method.mode}-heading`}>
+            <div className="method-result-heading">
+              <h2 id={`${method.mode}-heading`}>{method.name}</h2>
+              {!busy && result && !result.error && <span className="method-metrics">
+                <span>{result.hits.length} results</span>
+                <span aria-hidden="true"> · </span>
+                <span className="method-latency" title={method.mode === "basic" ? "Time for the in-memory title scan." : "Redis search round trip. Excludes shared query embedding and evidence processing; see About this search for those timings."} aria-label={`${method.name} search time: ${formatTime(result.query_ms)}`}>{formatTime(result.query_ms)}</span>
+              </span>}
+            </div>
+            <p className="method-hint">{hints[method.mode]}</p>
+            {busy ? <div className="search-state" role="status"><span className="loader" aria-hidden="true" /><p>Finding a few possibilities…</p></div>
+            : !result || result.error ? <div className="error-box" role="alert"><strong>{method.name} is unavailable</strong><p>{result?.error || "This method did not return a response."}</p><button type="button" onClick={onRetry}>Try again</button></div>
+            : result.hits.length ? <ol className="product-list">{result.hits.map((hit, index) => <ProductRow key={hit.product_id} hit={hit} mode={method.mode} rank={index + 1} selected={selectedId === hit.product_id} onSelect={onSelect} />)}</ol>
+            : <div className="search-state"><h3>No results this time.</h3><p>{method.mode === "basic" ? "The complete phrase must appear in the title. Try a shorter phrase or compare with Full-text." : `Try a broader description${brand ? " or choose All brands" : ""}.`}</p></div>}
+          </section>;
+        })}
+      </div>
     </div>
-  </>;
+  </section>;
 }

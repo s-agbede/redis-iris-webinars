@@ -11,3 +11,8 @@ seed/*.tmp
 seed/failed_ids.txt
 eval/latest.json
 :memory:.ses
+
+.local/agent-notes/
+
+docs/superpowers/
+.playwright-mcp/

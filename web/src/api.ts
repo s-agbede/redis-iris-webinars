@@ -1,4 +1,4 @@
-export type Mode = "text" | "vector" | "hybrid";
+export type Mode = "basic" | "text" | "vector" | "hybrid";
 export type SourceLabel = "E" | "S" | "C" | "I";
 export type Passage = {
   passage_id: string;
@@ -39,6 +39,9 @@ export type Hit = {
   indexed_text: string;
   /** Literal query-word overlap, not engine-reported matches. Offsets count Unicode code points. */
   lexical_matches: { start: number; end: number }[];
+  /** Literal matches in the displayed title and source passage, respectively. */
+  title_matches: { start: number; end: number }[];
+  passage_matches: { start: number; end: number }[];
   passage_rank: number;
   fusion: FusionEvidence | null;
 };

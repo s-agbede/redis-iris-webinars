@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
+import * as learning from "./learning.ts";
 import {
   highlightSegments,
   rankForProduct,
@@ -62,5 +63,25 @@ test("highlight spans use supplied offsets, merge overlap, and preserve unmarked
 test("highlight offsets handle Unicode code points and ignore invalid spans", () => {
   assert.deepEqual(highlightSegments("📷 Sony", [{ start: -1, end: 3 }, { start: 2, end: 6 }, { start: 7, end: 9 }, { start: 4, end: 4 }]), [
     { text: "📷 ", matched: false }, { text: "Sony", matched: true },
+  ]);
+});
+
+test("result excerpts bring a late match into view and preserve Unicode offsets", () => {
+  const prefix = "📷 Accessories and technical specifications. ".repeat(12);
+  const text = `${prefix}SONY lens for portraits. ${"More source details. ".repeat(12)}`;
+  const start = Array.from(prefix).length;
+  const segments = learning.highlightPreviewSegments?.(text, [{ start, end: start + 4 }]) ?? [];
+  assert.deepEqual(segments.filter((segment) => segment.matched).map((segment) => segment.text), ["SONY"]);
+  const excerpt = segments.map((segment) => segment.text).join("");
+  assert.ok(excerpt.startsWith("…"));
+  assert.ok(excerpt.endsWith("…"));
+  assert.ok(excerpt.indexOf("SONY") <= 30);
+  assert.ok(Array.from(excerpt).length <= 182);
+});
+
+test("result excerpts keep literal markup as text and ignore invalid match ranges", () => {
+  const text = "<img src=x onerror=alert(1)> Sony lens";
+  assert.deepEqual(learning.highlightPreviewSegments?.(text, [{ start: -1, end: 5 }]) ?? [], [
+    { text, matched: false },
   ]);
 });

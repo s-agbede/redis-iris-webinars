@@ -72,3 +72,35 @@ def test_photo_mapping_is_identical_in_rankings_and_product_detail() -> None:
             assert [hit["product_id"] for hit in mode["hits"]] == ["a", "b"]
             assert mode["hits"][0]["photo"] == detail["photo"]
             assert mode["hits"][1]["photo"] is None
+
+
+def test_autocomplete_validates_input_and_returns_redis_suggestions() -> None:
+    from tests.test_search import Index
+
+    class SuggestionIndex(Index):
+        def execute_command(self, *args: object) -> list[bytes]:
+            assert args == ("FT.SUGGET", "camera:suggestions:v1:fingerprint", "so", "MAX", 6)
+            return [b"Sony", b"Sony Alpha"]
+
+    searcher, _, _ = service(SuggestionIndex())
+    with TestClient(create_app(lambda: searcher)) as client:
+        assert client.get("/api/suggestions", params={"prefix": " so "}).json() == [
+            "Sony",
+            "Sony Alpha",
+        ]
+        assert client.get("/api/suggestions", params={"prefix": "s"}).json() == []
+        assert client.get("/api/suggestions", params={"prefix": "x" * 201}).status_code == 422
+
+
+def test_autocomplete_reports_redis_failure() -> None:
+    from redis.exceptions import ConnectionError
+
+    from tests.test_search import Index
+
+    class FailedIndex(Index):
+        def execute_command(self, *args: object) -> list[bytes]:
+            raise ConnectionError("offline")
+
+    searcher, _, _ = service(FailedIndex())
+    with TestClient(create_app(lambda: searcher)) as client:
+        assert client.get("/api/suggestions", params={"prefix": "so"}).status_code == 503

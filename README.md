@@ -1,10 +1,22 @@
 # Camera Search Lab
 
-Compare full-text, vector and hybrid retrieval over the same camera-related
-catalogue, with RedisVL and a local embedding model. One query produces three
-ranked lists, with three results visible initially and five available without
-rerunning. Select a product to open one shared panel with its rank and winning
-passage from each method, verified hybrid contributions, and original source fields.
+Search the camera-related catalogue with a calm, single-list view, powered by
+RedisVL and a local embedding model. Open **Compare methods** to show any
+combination of Basic, Full-text, Vector, and Hybrid side by side. Basic is
+selected by default; each method shows up to five products. On mobile, swipe
+across the comparison area to see additional methods.
+
+**Basic** is a case-insensitive literal substring match on original product
+titles, sorted alphabetically by title then product ID. It scans the loaded
+catalogue, without relevance ranking or a Redis search command. All methods
+respect the same exact brand filter. The UI fetches all four result sets once;
+changing the checkboxes changes the view without rerunning the search. The API
+keeps its three-method default unless `include_basic: true` is requested.
+
+**Autocomplete** has its own toggle, enabled by default. It suggests query text;
+it is not a result-ranking method. Disabling it stops suggestion requests.
+Select a product to open its evidence in a side panel, including method positions,
+source text, verified hybrid contributions, and original source fields.
 
 ## Run locally
 
@@ -73,8 +85,10 @@ With the bundled data and default passage settings, the expected response is:
 {"status":"ready","products":2317,"passages":8472}
 ```
 
-Search for **`sony zv e10`** in the lab. You should see full-text, vector and
-hybrid result columns. Select a product to compare its ranks and source passages.
+Search for **`sony zv e10`** in the lab. Open **Compare methods** and select Full-text, Vector, and Hybrid to see
+them alongside the default Basic list.
+Try **`Sony`** with Basic enabled to compare literal title matching. Select a
+product to compare its positions and source passages.
 Then try **`a compact camera for filming myself`** to compare how the methods
 handle a described need. The interactive [API docs](http://127.0.0.1:8000/docs)
 also let you try `POST /api/compare` with `{"query":"sony zv e10"}`.
@@ -202,6 +216,7 @@ source subset. `eval/` contains reviewed cases and recorded observations.
 
 - [Dataset, limitations, photo attribution, and reproduction](docs/dataset.md)
 - [Retrieval architecture, score interpretation, and timing](docs/architecture.md)
+- [Sample passages from two real catalogue products](docs/sample-passages.md)
 - [Tests and verification](docs/verification.md)
 - [15-minute webinar walkthrough and future episodes](docs/webinar.md)
 - [Recorded learning audit](docs/search-learning-audit.md)

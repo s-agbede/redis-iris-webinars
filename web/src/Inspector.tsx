@@ -43,6 +43,7 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
   selectedId: string; comparison: Comparison; visibleCount: VisibleCount; onClose: () => void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);
+  const dialog = useRef<HTMLDialogElement>(null);
   const gate = useRef(createRequestGate());
   const [sourceOpen, setSourceOpen] = useState(false);
   const [product, setProduct] = useState<ProductDetail | null>(null);
@@ -52,8 +53,16 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
   const selectedProduct = selection.find((item) => item.hit)?.hit;
 
   useEffect(() => {
+    const element = dialog.current;
+    if (!element) return;
+    const previousOverflow = document.body.style.overflow;
+    element.showModal();
+    document.body.style.overflow = "hidden";
     heading.current?.focus({ preventScroll: true });
-    heading.current?.scrollIntoView({ block: "start", behavior: "instant" });
+    return () => {
+      element.close();
+      document.body.style.overflow = previousOverflow;
+    };
   }, [selectedId]);
 
   useEffect(() => {
@@ -66,25 +75,34 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
     return () => gate.current.cancel();
   }, [selectedId, sourceOpen, attempt, product]);
 
+  function dismiss() {
+    dialog.current?.close();
+    onClose();
+  }
+
   if (!selectedProduct) return null;
-  return <section id="product-evidence" className="evidence-panel" aria-labelledby="evidence-heading" onKeyDown={(event) => { if (event.key === "Escape") onClose(); }}>
-    <div className="evidence-toolbar"><span className="eyebrow">02 / Follow one product</span><button type="button" className="close-button" onClick={onClose} aria-label="Close evidence and return to results">×</button></div>
+  return <dialog ref={dialog} id="product-evidence" className="evidence-panel" aria-labelledby="evidence-heading" onCancel={(event) => { event.preventDefault(); dismiss(); }} onClick={(event) => {
+    if (event.target !== event.currentTarget) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dismiss();
+  }}>
+    <div className="evidence-toolbar"><span className="eyebrow">A closer look</span><button type="button" className="close-button" onClick={dismiss} aria-label="Close evidence and return to results">×</button></div>
     <h2 id="evidence-heading" ref={heading} tabIndex={-1}>{selectedProduct.title}</h2>
-    <p className="evidence-intro">Same product, three retrieval decisions. Each method can choose a different winning passage.</p>
+    <p className="evidence-intro">See where this product appears, and what each search method found.</p>
+    {selectedProduct.photo && <ProductPhotoView photo={selectedProduct.photo} compact />}
     <div className="evidence-ranks">{selection.map((item) => <div className={`method-${item.mode}`} key={item.mode}><span>{methods.find((method) => method.mode === item.mode)!.name}</span><strong><RankLabel rank={item.rank} visibleCount={visibleCount} /></strong></div>)}</div>
-    <div className="evidence-grid">{selection.map(({ mode, hit, rank, result }) => <section className={`evidence-method method-${mode}`} key={mode} aria-labelledby={`evidence-${mode}`}>
-      <div className="section-heading"><h3 id={`evidence-${mode}`}>{methods.find((method) => method.mode === mode)!.name} evidence</h3></div>
+    <div className="evidence-grid">{selection.map(({ mode, hit, rank, result }) => <details className={`evidence-method method-${mode}`} key={mode}>
+      <summary>{methods.find((method) => method.mode === mode)!.name} evidence</summary>
       {!hit ? <div className="evidence-missing"><strong><RankLabel rank={rank} visibleCount={visibleCount} /></strong><p>{rank.status === "unavailable" ? result?.error || "This method did not return a response." : "This product has no winning passage in this method’s fetched results. That does not establish that it cannot match."}</p></div> : <>
-        <p className="evidence-label">{fieldName(hit.passage.field)} · winning passage #{hit.passage_rank}</p>
-        <p className="evidence-explanation">{mode === "text" ? "Literal query-word overlap: highlights show literal word overlap, not engine-reported matches. Redis may also match stemmed forms." : mode === "vector" ? "This passage was retrieved by embedding similarity. Use its words to assess the fit; the vector score does not explain the model’s reasoning." : "This passage wins after combining the two passage rankings."}</p>
+        <p className="evidence-label">{fieldName(hit.passage.field)}{mode === "basic" ? " · literal match" : ` · winning passage #${hit.passage_rank}`}</p>
+        <p className="evidence-explanation">{mode === "basic" ? "The complete query appears in this title, ignoring case. Results are in alphabetical order, not relevance order. This baseline scans the loaded catalogue without a Redis search command." : mode === "text" ? "Literal query-word overlap: highlights show literal word overlap, not engine-reported matches. Redis may also match stemmed forms." : mode === "vector" ? "This passage was retrieved by embedding similarity. Use its words to assess the fit; the vector score does not explain the model’s reasoning." : "This passage wins after combining the two passage rankings."}</p>
         <blockquote className="evidence-excerpt">{mode === "text" ? <IndexedText hit={hit} /> : hit.passage.text}</blockquote>
         {mode === "text" && hit.lexical_matches.length === 0 && <p className="fine-print">No literal query-word overlap is highlighted in this indexed passage.</p>}
-        <details className="indexed-details"><summary>Read full indexed text</summary><p className="fine-print">The indexed text includes bounded context from title, brand, and color plus the source passage.</p><blockquote><IndexedText hit={hit} /></blockquote><p className="fine-print">Source: {fieldName(hit.passage.field)}, characters {hit.passage.start}–{hit.passage.end}. Passage ranks are before product deduplication.</p><code>{hit.passage.passage_id}</code></details>
-        {mode === "hybrid" && <FusionCalculation fusion={hit.fusion} score={hit.score} />}
-        <details className="score-details"><summary>Score & source judgement</summary><p><strong>{result?.score_kind}: {hit.score.toFixed(8)}</strong></p><p>{mode === "vector" ? "Cosine similarity (1 − cosine distance), not a percentage of relevance." : mode === "text" ? "BM25 score within this full-text ranking." : "Native Redis RRF score is authoritative; the arithmetic above is a checked reconstruction."} Score scales differ between methods.</p><SourceJudgement label={hit.source_label} /><p>Judgements belong to original ESCI query/product pairs. They are not new assessments of your query.</p></details>
+        {mode !== "basic" && <details className="indexed-details"><summary>Read full indexed text</summary><p className="fine-print">The indexed text includes bounded context from title, brand, and color plus the source passage.</p><blockquote><IndexedText hit={hit} /></blockquote><p className="fine-print">Source: {fieldName(hit.passage.field)}, characters {hit.passage.start}–{hit.passage.end}. Passage ranks are before product deduplication.</p><code>{hit.passage.passage_id}</code></details>}
+        {mode === "hybrid" && <details className="score-details"><summary>How the hybrid score is calculated</summary><FusionCalculation fusion={hit.fusion} score={hit.score} /><p className="fine-print">RRF uses passage ranks before product deduplication. The product ranks above do not enter the formula. A missing branch contributes zero only when verified outside its RRF window.</p></details>}
+        {mode !== "basic" && <details className="score-details"><summary>Score & source judgement</summary><p><strong>{result?.score_kind}: {hit.score.toFixed(8)}</strong></p><p>{mode === "vector" ? "Cosine similarity (1 − cosine distance), not a percentage of relevance." : mode === "text" ? "BM25 score within this full-text ranking." : "Native Redis RRF score is authoritative; the arithmetic above is a checked reconstruction."} Score scales differ between methods.</p><SourceJudgement label={hit.source_label} /><p>Judgements belong to original ESCI query/product pairs. They are not new assessments of your query.</p></details>}
       </>}
-    </section>)}</div>
-    <p className="evidence-footnote"><strong>RRF uses passage ranks before product deduplication.</strong> The product ranks at the top of this panel do not enter the formula. A missing branch contributes zero only when verified outside its RRF window.</p>
+    </details>)}</div>
     <details className="original-source" onToggle={(event) => setSourceOpen(event.currentTarget.open)}>
       <summary>Original source record <span>ESCI · US</span></summary>
       <div className="source-section" aria-busy={!product && !error}>
@@ -99,7 +117,7 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
         </>}
       </div>
     </details>
-    <details className="commands-details"><summary>Redis commands for this comparison</summary><p>Query traces use the same query and brand filter. Failed methods include an attempted command when available.</p>{methods.map((method) => { const result = comparison.results.find((item) => item.mode === method.mode); return <div key={method.mode}><h4>{method.name}</h4>{result?.redis_query ? <><p>{result.error ? "Attempted command; this method returned an error." : "Executed command"}</p><pre>{result.redis_query}</pre></> : <p>Command not run. {result?.error || "No query trace is available."}</p>}</div>; })}</details>
-    <button type="button" className="back-to-results" onClick={onClose}>Back to results ↑</button>
-  </section>;
+    <details className="commands-details"><summary>Redis commands for this comparison</summary><p>Query traces use the same query and brand filter. Failed methods include an attempted command when available.</p>{methods.map((method) => { const result = comparison.results.find((item) => item.mode === method.mode); return <div key={method.mode}><h4>{method.name}</h4>{method.mode === "basic" ? <p>Literal title matching over the loaded catalogue; alphabetical ordering. No Redis command is used.</p> : result?.redis_query ? <><p>{result.error ? "Attempted command; this method returned an error." : "Executed command"}</p><pre>{result.redis_query}</pre></> : <p>Command not run. {result?.error || "No query trace is available."}</p>}</div>; })}</details>
+    <button type="button" className="back-to-results" onClick={dismiss}>Back to results</button>
+  </dialog>;
 }

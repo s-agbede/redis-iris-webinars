@@ -6,7 +6,7 @@ export type ProductRank =
   | { status: "outside" }
   | { status: "unavailable" };
 
-export const modeOrder: Mode[] = ["text", "vector", "hybrid"];
+export const modeOrder: Mode[] = ["basic", "text", "vector", "hybrid"];
 
 export function rankForProduct(comparison: Comparison, mode: Mode, productId: string, visibleCount: VisibleCount): ProductRank {
   const result = comparison.results.find((item) => item.mode === mode);
@@ -30,7 +30,7 @@ export function visibleProductUnion(comparison: Comparison, visibleCount: Visibl
 }
 
 export function selectionAcrossModes(comparison: Comparison, productId: string, visibleCount: VisibleCount): { mode: Mode; result: ModeResult | null; hit: Hit | null; rank: ProductRank }[] {
-  return modeOrder.map((mode) => {
+  return modeOrder.filter((mode) => mode !== "basic" || comparison.results.some((result) => result.mode === "basic")).map((mode) => {
     const result = comparison.results.find((item) => item.mode === mode) ?? null;
     return {
       mode,
@@ -62,4 +62,25 @@ export function highlightSegments(text: string, ranges: { start: number; end: nu
   }
   if (cursor < characters.length || segments.length === 0) segments.push({ text: characters.slice(cursor).join(""), matched: false });
   return segments;
+}
+
+export function highlightPreviewSegments(text: string, ranges: { start: number; end: number }[]): { text: string; matched: boolean }[] {
+  const segments = highlightSegments(text, ranges);
+  const firstMatch = segments.findIndex((segment) => segment.matched);
+  const matchOffset = segments.slice(0, Math.max(0, firstMatch))
+    .reduce((length, segment) => length + Array.from(segment.text).length, 0);
+  const start = Math.max(0, matchOffset - 24);
+  const end = Math.min(Array.from(text).length, start + 180);
+  const preview: { text: string; matched: boolean }[] = [];
+  if (start > 0) preview.push({ text: "…", matched: false });
+  let offset = 0;
+  for (const segment of segments) {
+    const characters = Array.from(segment.text);
+    const from = Math.max(0, start - offset);
+    const to = Math.min(characters.length, end - offset);
+    if (from < to) preview.push({ text: characters.slice(from, to).join(""), matched: segment.matched });
+    offset += characters.length;
+  }
+  if (end < offset) preview.push({ text: "…", matched: false });
+  return preview;
 }

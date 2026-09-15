@@ -10,6 +10,7 @@ SourceField = Literal["product_title", "product_description", "product_bullet_po
 
 
 class SearchMode(StrEnum):
+    BASIC = "basic"
     TEXT = "text"
     VECTOR = "vector"
     HYBRID = "hybrid"
@@ -56,6 +57,7 @@ class CompareRequest(BaseModel):
     query: str = Field(min_length=1, max_length=1000)
     brands: list[str] = Field(default_factory=list, max_length=20)
     num_results: int = Field(default=5, ge=1, le=20)
+    include_basic: bool = False
 
     @field_validator("query")
     @classmethod
@@ -118,6 +120,14 @@ class SearchHit(BaseModel):
             "Literal query-word overlap in indexed_text, using Unicode code-point offsets. "
             "Application annotations, not Redis-reported match offsets or BM25 attribution."
         ),
+    )
+    title_matches: list[TextSpan] = Field(
+        default_factory=list,
+        description="Literal query-word overlap in title, using Unicode code-point offsets.",
+    )
+    passage_matches: list[TextSpan] = Field(
+        default_factory=list,
+        description="Literal query-word overlap in passage.text, using Unicode code-point offsets.",
     )
     passage_rank: int = 1
     fusion: FusionEvidence | None = None

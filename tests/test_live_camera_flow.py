@@ -75,3 +75,26 @@ def test_live_comparison_filters_and_source_evidence() -> None:
             and hit["fusion"]["text_contribution"] == 0
             for hit in hybrid["hits"]
         )
+
+
+def test_live_model_number_punctuation_and_highlights() -> None:
+    settings = Settings(_env_file=None, redis_url=os.environ["TEST_REDIS_URL"])
+    with TestClient(create_app(lambda: build_searcher(settings))) as client:
+        for query in ("Sony ZV-E10", "sony zv e10"):
+            response = client.post("/api/compare", json={"query": query})
+            assert response.status_code == 200
+            comparison = response.json()
+            assert comparison["query"] == query
+            text, vector, hybrid = comparison["results"]
+            assert all(mode["error"] is None for mode in (text, vector, hybrid))
+            for mode in (text, hybrid):
+                assert [hit["product_id"] for hit in mode["hits"][:2]] == [
+                    "B09BBKVMCD",  # Sony Alpha ZV-E10 body
+                    "B09BBMQKSR",  # Sony Alpha ZV-E10 lens kit
+                ]
+                assert "@search_text:(sony | zv | e10)" in mode["redis_query"]
+            hit = text["hits"][0]
+            assert {
+                hit["title"][span["start"] : span["end"]].casefold()
+                for span in hit["title_matches"]
+            } == {"sony", "zv", "e10"}

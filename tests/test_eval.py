@@ -51,3 +51,33 @@ def test_empty_ranking_has_no_exact_rank_or_invented_judgements() -> None:
     assert result.source_judged == result.source_unjudged == 0
     assert result.first_source_exact_rank is None
     assert result.reviewed_top_label == "no_results"
+
+
+def test_target_rank_and_review_coverage_are_reported_separately() -> None:
+    case = ReviewedCase(case_id="sony", query="sony zv e10", notes="Camera, not accessory",
+                        judgements={"camera": "relevant", "strap": "irrelevant"}, required_top_k=3)
+    result = assess([hit("strap"), hit("unknown"), hit("camera")], case)
+    assert result.first_reviewed_relevant_rank == 3
+    assert result.reciprocal_rank == 1 / 3
+    assert result.reviewed_relevant == 1
+    assert result.reviewed_irrelevant == 1
+    assert result.reviewed_unjudged == 1
+    assert result.expectation_passed is True
+
+
+def test_missing_target_fails_explicit_expectation_without_labelling_unknown_irrelevant() -> None:
+    case = ReviewedCase(case_id="sony", query="sony", notes="Known target",
+                        judgements={"camera": "relevant"}, required_top_k=1)
+    result = assess([hit("unknown"), hit("camera")], case)
+    assert result.expectation_passed is False
+    assert result.reviewed_irrelevant == 0
+    assert result.reviewed_unjudged == 1
+    empty = assess([], case)
+    assert empty.expectation_passed is False
+    assert empty.reciprocal_rank == 0
+
+
+def test_no_reviewed_targets_means_no_quality_claim() -> None:
+    result = assess([hit("unknown")])
+    assert result.expectation_passed is None
+    assert result.reciprocal_rank is None

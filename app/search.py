@@ -1,6 +1,7 @@
 """Three RedisVL retrieval methods over the same source passages and filters."""
 
 import json
+import string
 import time
 from collections import Counter
 from dataclasses import dataclass, field
@@ -35,6 +36,7 @@ from app.models import (
 )
 from app.photos import load_photos
 from app.settings import ROOT, Settings, get_settings
+from app.suggestions import prepare_suggestions
 
 PASSAGE_FIELDS = ["passage_id", "field", "text", "start", "end"]
 RETURN_FIELDS = ["product_id", *PASSAGE_FIELDS, "search_text"]
@@ -43,6 +45,18 @@ SCORE_KINDS = {
     SearchMode.VECTOR: "Cosine similarity",
     SearchMode.HYBRID: "RRF",
 }
+TEXT_SEPARATORS = str.maketrans({char: " " for char in string.punctuation if char != "_"})
+NO_LEXICAL_TERMS = "No searchable terms remain after removing punctuation and stopwords."
+
+
+def normalize_lexical_query(text: str) -> str:
+    """Split ASCII punctuation before RedisVL escapes the plain-language query.
+
+    Redis indexes unescaped ZV-E10 as two TEXT tokens. Passing it directly to
+    RedisVL would instead escape the hyphen and search for one literal token.
+    Keep underscores and non-ASCII characters intact; this is not a query parser.
+    """
+    return " ".join(text.translate(TEXT_SEPARATORS).split())
 
 
 def describe_query(query: TextQuery | VectorQuery | HybridQuery, index_name: str) -> str:
@@ -129,6 +143,16 @@ class Searcher:
                     photo=self.photos.get(pid),
                     indexed_text=indexed_text,
                     lexical_matches=matches,
+                    title_matches=(
+                        literal_query_matches(product.product_title, query_text, stopwords)
+                        if mode is SearchMode.TEXT
+                        else []
+                    ),
+                    passage_matches=(
+                        literal_query_matches(str(row["text"]), query_text, stopwords)
+                        if mode is SearchMode.TEXT
+                        else []
+                    ),
                     passage_rank=passage_rank,
                     fusion=fusion.get(str(row["passage_id"])),
                     passage=PassageEvidence.model_validate({k: row[k] for k in PASSAGE_FIELDS}),
@@ -161,10 +185,53 @@ class Searcher:
             raise ValueError("Redis did not return the complete hybrid candidate union.")
         return rows
 
+    def _basic_result(self, request: CompareRequest) -> ModeResult:
+        """Literal title baseline, sorted alphabetically rather than by relevance."""
+        started = time.perf_counter()
+        needle = request.query.casefold()
+        products = sorted(
+            (
+                product
+                for product in self.catalog.products.values()
+                if needle in product.product_title.casefold()
+                and (not request.brands or product.product_brand in request.brands)
+            ),
+            key=lambda product: (product.product_title.casefold(), product.product_id),
+        )[: request.num_results]
+        labels = self.catalog.labels(request.query)
+        hits = [
+            SearchHit(
+                product_id=product.product_id,
+                title=product.product_title,
+                brand=product.product_brand,
+                color=product.product_color,
+                score=1.0,
+                source_label=labels.get(product.product_id),
+                photo=self.photos.get(product.product_id),
+                indexed_text=product.product_title,
+                passage=PassageEvidence(
+                    passage_id=f"{product.product_id}:basic-title",
+                    field="product_title",
+                    text=product.product_title,
+                    start=0,
+                    end=len(product.product_title),
+                ),
+            )
+            for product in products
+        ]
+        return ModeResult(
+            mode=SearchMode.BASIC,
+            query_ms=round((time.perf_counter() - started) * 1000, 2),
+            score_kind="Literal title match (alphabetical)",
+            redis_query="",
+            hits=hits,
+        )
+
     def compare(self, request: CompareRequest) -> Comparison:
         started = time.perf_counter()
         labels = self.catalog.labels(request.query)
         expression = Tag("brand") == request.brands if request.brands else None
+        lexical_text = normalize_lexical_query(request.query)
         vector: list[float] | None = None
         embedding_error: str | None = None
         embed_started = time.perf_counter()
@@ -176,7 +243,7 @@ class Searcher:
         explanation_ms = 0.0
         results: list[ModeResult] = []
         lexical: TextQuery | None = None
-        for mode in SearchMode:
+        for mode in (SearchMode.TEXT, SearchMode.VECTOR, SearchMode.HYBRID):
             result = ModeResult(mode=mode, query_ms=0, score_kind=SCORE_KINDS[mode], redis_query="")
             if mode is not SearchMode.TEXT and vector is None:
                 result.error = embedding_error or "Local embedding failed."
@@ -186,13 +253,15 @@ class Searcher:
                 query: TextQuery | VectorQuery | HybridQuery
                 if mode is SearchMode.TEXT:
                     query = TextQuery(
-                        text=request.query,
+                        text=lexical_text,
                         text_field_name="search_text",
                         text_scorer="BM25STD",
                         filter_expression=expression,
                         num_results=self.settings.candidate_limit,
                         return_fields=RETURN_FIELDS,
                     )
+                    if not set(lexical_text.lower().split()) - query.stopwords:
+                        raise ValueError(NO_LEXICAL_TERMS)
                     lexical = query
                 elif mode is SearchMode.VECTOR:
                     assert vector is not None
@@ -205,8 +274,10 @@ class Searcher:
                     )
                 else:
                     assert vector is not None
+                    if lexical is None:
+                        raise ValueError(NO_LEXICAL_TERMS)
                     query = HybridQuery(
-                        text=request.query,
+                        text=lexical_text,
                         text_field_name="search_text",
                         vector=vector,
                         vector_field_name="embedding",
@@ -221,8 +292,6 @@ class Searcher:
                         num_results=self.settings.candidate_limit,
                         return_fields=RETURN_FIELDS,
                     )
-                    if lexical is None:
-                        raise ValueError("No searchable terms remain after removing stopwords.")
                     # RedisVL 0.26 makes its hybrid text expression optional (~).
                     # Use the exact mandatory lexical expression shown in column one,
                     # so unmatched passages cannot receive an extra RRF contribution.
@@ -264,7 +333,7 @@ class Searcher:
                         labels,
                         request.num_results,
                         fusion,
-                        request.query,
+                        lexical_text,
                         lexical.stopwords if lexical else set(),
                     )
                 finally:
@@ -272,6 +341,8 @@ class Searcher:
             except (RedisError, RedisSearchError, ValueError) as exc:
                 result.error = str(exc)
             results.append(result)
+        if request.include_basic:
+            results.insert(0, self._basic_result(request))
         return Comparison(
             query=request.query,
             brands=request.brands,
@@ -334,6 +405,7 @@ def build_searcher(settings: Settings | None = None) -> Searcher:
             for pid, product in catalog.products.items()
         }
         photos = load_photos(ROOT / "seed/photos", set(catalog.products))
+        prepare_suggestions(client, settings, catalog)
         return Searcher(index, encoder, catalog, settings, count, passages, photos)
     except Exception:
         client.close()
