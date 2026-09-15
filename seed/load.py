@@ -36,6 +36,16 @@ def current_manifest(client: Any, settings: Settings, catalog: Catalog) -> dict[
     return manifest
 
 
+def configure_schema(schema: dict[str, Any], settings: Settings) -> None:
+    """Apply instance settings without depending on the order of YAML fields."""
+    schema["index"].update(name=settings.products_index, prefix=settings.passage_prefix)
+    for field in schema["fields"]:
+        if field["name"] == "embedding" and field["type"] == "vector":
+            field["attrs"]["algorithm"] = settings.index_algorithm.lower()
+            return
+    raise ValueError("Passage schema must define an embedding vector field.")
+
+
 def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
     catalog = Catalog.load(settings.data_dir)
     if if_needed:
@@ -56,8 +66,7 @@ def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
     ]
     print(f"{len(catalog.products):,} products; {len(passages):,} source passages", flush=True)
     schema = yaml.safe_load((ROOT / "schemas/passages.yaml").read_text())
-    schema["index"].update(name=settings.products_index, prefix=settings.passage_prefix)
-    schema["fields"][-1]["attrs"]["algorithm"] = settings.index_algorithm.lower()
+    configure_schema(schema, settings)
     client = Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=30)
     try:
         server_info = cast(dict[str, Any], client.info("server"))
@@ -65,7 +74,7 @@ def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
         if version < (8, 4):
             raise RuntimeError("Native hybrid search requires Redis 8.4 or newer.")
         index = SearchIndex.from_dict(schema, redis_client=client, validate_on_load=True)
-        # Only camera passage keys are replaced. Source apparel indexes are separate.
+        # Rebuild this namespace's passage index; other indexes are untouched.
         client.delete(settings.manifest_key)
         index.create(overwrite=True, drop=True)
         pipeline = client.pipeline(transaction=False)

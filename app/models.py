@@ -5,6 +5,8 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
+from app.constants import RRF_CONSTANT
+
 Label = Literal["E", "S", "C", "I"]
 SourceField = Literal["product_title", "product_description", "product_bullet_point"]
 
@@ -41,6 +43,35 @@ class Passage(PassageEvidence):
     brand: str
     color: str
     search_text: str
+
+
+class RedisPassage(PassageEvidence):
+    """Validated Redis row; optional scores depend on the retrieval method."""
+
+    product_id: str
+    search_text: str
+    score: float | None = None
+    vector_distance: float | None = None
+    combined_score: float | None = None
+
+    def relevance_score(self, mode: SearchMode) -> float:
+        """Return the method's own score, with larger values always better."""
+        if mode is SearchMode.TEXT and self.score is not None:
+            return self.score
+        if mode is SearchMode.VECTOR and self.vector_distance is not None:
+            return 1.0 - self.vector_distance
+        if mode is SearchMode.HYBRID and self.combined_score is not None:
+            return self.combined_score
+        raise ValueError(f"Redis passage {self.passage_id!r} is missing the {mode} score.")
+
+    def passage(self) -> PassageEvidence:
+        return PassageEvidence(
+            passage_id=self.passage_id,
+            field=self.field,
+            text=self.text,
+            start=self.start,
+            end=self.end,
+        )
 
 
 class Judgement(BaseModel):
@@ -93,7 +124,7 @@ class TextSpan(BaseModel):
 
 
 class FusionEvidence(BaseModel):
-    constant: int = 60
+    constant: int = RRF_CONSTANT
     window: int
     text_rank: int | None = None
     vector_rank: int | None = None

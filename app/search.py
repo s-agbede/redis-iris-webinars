@@ -14,7 +14,6 @@ from redisvl.exceptions import RedisSearchError
 from redisvl.index import SearchIndex
 from redisvl.query import HybridQuery, TextQuery, VectorQuery
 from redisvl.query.filter import Tag
-from redisvl.query.hybrid import build_base_query
 from redisvl.redis.utils import convert_bytes
 
 from app.catalog import Catalog, make_passages
@@ -31,22 +30,26 @@ from app.models import (
     ModeResult,
     PassageEvidence,
     ProductPhoto,
+    RedisPassage,
     SearchHit,
     SearchMode,
 )
 from app.photos import load_photos
+from app.queries import (
+    NO_LEXICAL_TERMS,
+    build_hybrid_query,
+    build_text_query,
+    build_vector_query,
+)
 from app.settings import ROOT, Settings, get_settings
 from app.suggestions import prepare_suggestions
 
-PASSAGE_FIELDS = ["passage_id", "field", "text", "start", "end"]
-RETURN_FIELDS = ["product_id", *PASSAGE_FIELDS, "search_text"]
 SCORE_KINDS = {
     SearchMode.TEXT: "BM25",
     SearchMode.VECTOR: "Cosine similarity",
     SearchMode.HYBRID: "RRF",
 }
 TEXT_SEPARATORS = str.maketrans({char: " " for char in string.punctuation if char != "_"})
-NO_LEXICAL_TERMS = "No searchable terms remain after removing punctuation and stopwords."
 
 
 def normalize_lexical_query(text: str) -> str:
@@ -104,7 +107,7 @@ class Searcher:
 
     def _hits(
         self,
-        rows: list[dict[str, Any]],
+        rows: list[RedisPassage],
         mode: SearchMode,
         labels: dict[str, Label],
         limit: int,
@@ -115,18 +118,12 @@ class Searcher:
         hits: list[SearchHit] = []
         seen: set[str] = set()
         for passage_rank, row in enumerate(rows, start=1):
-            pid = str(row["product_id"])
+            pid = row.product_id
             if pid in seen:
                 continue
             product = self.catalog.products[pid]
-            score = (
-                float(row["score"])
-                if mode is SearchMode.TEXT
-                else 1.0 - float(row["vector_distance"])
-                if mode is SearchMode.VECTOR
-                else float(row["combined_score"])
-            )
-            indexed_text = str(row["search_text"])
+            score = row.relevance_score(mode)
+            indexed_text = row.search_text
             matches = (
                 literal_query_matches(indexed_text, query_text, stopwords)
                 if mode is SearchMode.TEXT
@@ -149,13 +146,13 @@ class Searcher:
                         else []
                     ),
                     passage_matches=(
-                        literal_query_matches(str(row["text"]), query_text, stopwords)
+                        literal_query_matches(row.text, query_text, stopwords)
                         if mode is SearchMode.TEXT
                         else []
                     ),
                     passage_rank=passage_rank,
-                    fusion=fusion.get(str(row["passage_id"])),
-                    passage=PassageEvidence.model_validate({k: row[k] for k in PASSAGE_FIELDS}),
+                    fusion=fusion.get(row.passage_id),
+                    passage=row.passage(),
                 )
             )
             seen.add(pid)
@@ -252,64 +249,28 @@ class Searcher:
             try:
                 query: TextQuery | VectorQuery | HybridQuery
                 if mode is SearchMode.TEXT:
-                    query = TextQuery(
-                        text=lexical_text,
-                        text_field_name="search_text",
-                        text_scorer="BM25STD",
-                        filter_expression=expression,
-                        num_results=self.settings.candidate_limit,
-                        return_fields=RETURN_FIELDS,
+                    lexical = build_text_query(
+                        lexical_text,
+                        filters=expression,
+                        candidate_limit=self.settings.candidate_limit,
                     )
-                    if not set(lexical_text.lower().split()) - query.stopwords:
-                        raise ValueError(NO_LEXICAL_TERMS)
-                    lexical = query
+                    query = lexical
                 elif mode is SearchMode.VECTOR:
                     assert vector is not None
-                    query = VectorQuery(
-                        vector=vector,
-                        vector_field_name="embedding",
-                        filter_expression=expression,
-                        num_results=self.settings.candidate_limit,
-                        return_fields=RETURN_FIELDS,
+                    query = build_vector_query(
+                        vector, filters=expression, candidate_limit=self.settings.candidate_limit
                     )
                 else:
                     assert vector is not None
                     if lexical is None:
                         raise ValueError(NO_LEXICAL_TERMS)
-                    query = HybridQuery(
-                        text=lexical_text,
-                        text_field_name="search_text",
-                        vector=vector,
-                        vector_field_name="embedding",
-                        text_scorer="BM25STD",
-                        filter_expression=expression,
-                        combination_method="RRF",
-                        vector_search_method="KNN",
-                        knn_ef_runtime=0,
-                        rrf_window=self.settings.candidate_limit,
-                        rrf_constant=60,
-                        yield_combined_score_as="combined_score",
-                        num_results=self.settings.candidate_limit,
-                        return_fields=RETURN_FIELDS,
+                    query = build_hybrid_query(
+                        lexical_text,
+                        vector,
+                        lexical=lexical,
+                        filters=expression,
+                        candidate_limit=self.settings.candidate_limit,
                     )
-                    # RedisVL 0.26 makes its hybrid text expression optional (~).
-                    # Use the exact mandatory lexical expression shown in column one,
-                    # so unmatched passages cannot receive an extra RRF contribution.
-                    query.query = build_base_query(
-                        text_query=lexical.query_string(),
-                        vector_param_name="vector",
-                        vector_field_name="embedding",
-                        text_scorer="BM25STD",
-                        vector_search_method="KNN",
-                        num_results=self.settings.candidate_limit,
-                        knn_ef_runtime=0,
-                        filter_expression=expression,
-                        yield_text_score_as="text_score",
-                        yield_vsim_score_as="vsim_score",
-                    )
-                    # Return the full union for evidence, without widening either
-                    # branch's RRF window or changing Redis's native ordering.
-                    query.postprocessing_config.limit(0, 2 * self.settings.candidate_limit)
                 result.redis_query = describe_query(query, self.settings.products_index)
                 query_started = time.perf_counter()
                 try:
@@ -327,8 +288,9 @@ class Searcher:
                         if mode is SearchMode.HYBRID
                         else {}
                     )
+                    passages = [RedisPassage.model_validate(row) for row in rows]
                     result.hits = self._hits(
-                        rows,
+                        passages,
                         mode,
                         labels,
                         request.num_results,
@@ -377,6 +339,7 @@ class Searcher:
 
 
 def build_searcher(settings: Settings | None = None) -> Searcher:
+    """Verify the seeded index, load local evidence, and prepare Redis autocomplete."""
     settings = settings or get_settings()
     catalog = Catalog.load(settings.data_dir)
     client = Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=15)

@@ -169,7 +169,7 @@ frontend, run `make build` before returning to the single-server `make serve` fl
 | `make serve PORT=8001` | Serve the prepared API and built frontend |
 | `make build` | Install locked frontend dependencies and build strict TypeScript |
 | `make dev` | Vite frontend with hot reload; API proxy targets port 8000 |
-| `make eval` | Run the three reviewed demo queries against real retrieval |
+| `make eval` | Run 10 product-focused queries across four methods, checking full-text/hybrid target ranks |
 | `make lint` / `make test` | Python static checks / test suite |
 | `make down` | Stop Compose services while preserving their data |
 
@@ -199,7 +199,8 @@ Start with the request path, then follow how its data is prepared:
 | Read | Responsibility |
 |---|---|
 | [app/main.py](app/main.py) | FastAPI endpoints, readiness, and static frontend |
-| [app/search.py](app/search.py) | Shared constraints, three retrieval methods, product ranking |
+| [app/queries.py](app/queries.py) | Full-text, vector, and hybrid RedisVL query builders for the live demo |
+| [app/search.py](app/search.py) | Embedding, shared filters, query execution, and product ranking |
 | [app/evidence.py](app/evidence.py) | Literal text matches and verified hybrid contributions |
 | [app/catalog.py](app/catalog.py) | Original records, text cleaning, bounded passages |
 | [app/embeddings.py](app/embeddings.py) | Pinned local model and embedding generation |
@@ -210,7 +211,7 @@ Start with the request path, then follow how its data is prepared:
 `tests/` covers the backend, and `web/src/*.test.mjs` covers frontend logic.
 `seed/cameras/` holds the canonical source bundle and provenance; `seed/photos/`
 holds attributed reference photos. `scripts/prepare_cameras.py` reproduces the
-source subset. `eval/` contains reviewed cases and recorded observations.
+source subset. `eval/` contains assistant-reviewed cases and recorded observations. See [evaluation guide](eval/README.md) for targets, checks, and limitations.
 
 ## Guides
 

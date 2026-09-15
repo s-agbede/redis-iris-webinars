@@ -3,9 +3,11 @@
 import gzip
 import hashlib
 import re
+from collections.abc import Iterator
 from dataclasses import dataclass
 from html.parser import HTMLParser
 from pathlib import Path
+from typing import Final
 
 from pydantic import BaseModel
 from tokenizers import Tokenizer
@@ -40,41 +42,85 @@ def clean_text(value: str | None) -> str:
     return re.sub(r"\s+", " ", "".join(parser.parts)).strip()
 
 
-def make_passages(
-    product: CameraProduct, tokenizer: Tokenizer, max_tokens: int = 240, overlap: int = 32
-) -> list[Passage]:
-    """Offsets refer to cleaned source fields. Every searchable source token is retained."""
+MAX_CONTEXT_TOKENS: Final = 48
+# Leave room for joining punctuation; re-tokenize each chunk to enforce the exact limit.
+TOKEN_JOIN_RESERVE: Final = 4
+SOURCE_FIELDS: tuple[SourceField, ...] = (
+    "product_title",
+    "product_description",
+    "product_bullet_point",
+)
+
+
+@dataclass(frozen=True)
+class _TextChunk:
+    text: str
+    start: int
+    end: int
+    search_text: str
+
+
+def _product_context(
+    product: CameraProduct, tokenizer: Tokenizer, max_tokens: int
+) -> tuple[str, int]:
+    """Reserve at most a third of each passage for title, brand, and color context."""
     title = clean_text(product.product_title)
-    prefix_text = " ".join(filter(None, [title, product.product_brand, product.product_color]))
-    prefix_encoding = tokenizer.encode(prefix_text, add_special_tokens=False)
-    prefix_count = min(48, max_tokens // 3, len(prefix_encoding.ids))
-    prefix = prefix_text[: prefix_encoding.offsets[prefix_count - 1][1]] if prefix_count else ""
-    budget = max_tokens - prefix_count - 4
-    if budget <= overlap or overlap < 0:
-        raise ValueError("Passage budget must exceed overlap after adding title context.")
-    passages: list[Passage] = []
-    fields: tuple[SourceField, ...] = (
-        "product_title",
-        "product_description",
-        "product_bullet_point",
-    )
-    for field in fields:
-        body = clean_text(getattr(product, field))
-        encoding = tokenizer.encode(body, add_special_tokens=False)
-        offset = 0
-        while offset < len(encoding.ids):
-            stop = min(offset + budget, len(encoding.ids))
-            start = encoding.offsets[offset][0]
+    text = " ".join(filter(None, [title, product.product_brand, product.product_color]))
+    encoding = tokenizer.encode(text, add_special_tokens=False)
+    count = min(MAX_CONTEXT_TOKENS, max_tokens // 3, len(encoding.ids))
+    prefix = text[: encoding.offsets[count - 1][1]] if count else ""
+    return prefix, count
+
+
+def _text_chunks(
+    body: str,
+    tokenizer: Tokenizer,
+    *,
+    prefix: str,
+    budget: int,
+    max_tokens: int,
+    overlap: int,
+) -> Iterator[_TextChunk]:
+    """Yield overlapping source slices with offsets into the cleaned field text."""
+    encoding = tokenizer.encode(body, add_special_tokens=False)
+    offset = 0
+    while offset < len(encoding.ids):
+        stop = min(offset + budget, len(encoding.ids))
+        start = encoding.offsets[offset][0]
+        while True:
             end = encoding.offsets[stop - 1][1]
             text = body[start:end]
             search_text = f"{prefix}. {text}" if prefix else text
-            while len(tokenizer.encode(search_text, add_special_tokens=False).ids) > max_tokens:
-                stop -= 1
-                if stop <= offset:
-                    raise ValueError("Cannot fit a source token inside the passage budget.")
-                end = encoding.offsets[stop - 1][1]
-                text = body[start:end]
-                search_text = f"{prefix}. {text}" if prefix else text
+            if len(tokenizer.encode(search_text, add_special_tokens=False).ids) <= max_tokens:
+                break
+            stop -= 1
+            if stop <= offset:
+                raise ValueError("Cannot fit a source token inside the passage budget.")
+        yield _TextChunk(text=text, start=start, end=end, search_text=search_text)
+        if stop == len(encoding.ids):
+            break
+        offset = max(offset + 1, stop - overlap)
+
+
+def make_passages(
+    product: CameraProduct, tokenizer: Tokenizer, max_tokens: int = 240, overlap: int = 32
+) -> list[Passage]:
+    """Attach product identity to bounded chunks, retaining every source token."""
+    prefix, context_tokens = _product_context(product, tokenizer, max_tokens)
+    budget = max_tokens - context_tokens - TOKEN_JOIN_RESERVE
+    if budget <= overlap or overlap < 0:
+        raise ValueError("Passage budget must exceed overlap after adding title context.")
+    passages: list[Passage] = []
+    for field in SOURCE_FIELDS:
+        chunks = _text_chunks(
+            clean_text(getattr(product, field)),
+            tokenizer,
+            prefix=prefix,
+            budget=budget,
+            max_tokens=max_tokens,
+            overlap=overlap,
+        )
+        for chunk in chunks:
             passages.append(
                 Passage(
                     passage_id=f"us:{product.product_id}:{len(passages)}",
@@ -83,15 +129,12 @@ def make_passages(
                     brand=product.product_brand or "",
                     color=product.product_color or "",
                     field=field,
-                    text=text,
-                    start=start,
-                    end=end,
-                    search_text=search_text,
+                    text=chunk.text,
+                    start=chunk.start,
+                    end=chunk.end,
+                    search_text=chunk.search_text,
                 )
             )
-            if stop == len(encoding.ids):
-                break
-            offset = max(offset + 1, stop - overlap)
     return passages
 
 

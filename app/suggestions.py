@@ -2,7 +2,8 @@
 
 from collections import Counter
 from collections.abc import Iterable
-from typing import Any
+
+from redis import Redis
 
 from app.catalog import Catalog
 from app.models import CameraProduct
@@ -25,20 +26,20 @@ def suggestion_key(settings: Settings, catalog: Catalog) -> str:
     return f"{settings.namespace}:suggestions:v1:{catalog.fingerprint}"
 
 
-def prepare_suggestions(client: Any, settings: Settings, catalog: Catalog) -> None:
+def prepare_suggestions(client: Redis, settings: Settings, catalog: Catalog) -> None:
     """Populate a source-versioned dictionary atomically; never change search data."""
     key = suggestion_key(settings, catalog)
     if client.exists(key):
         return
     with client.pipeline(transaction=True) as pipeline:
         for text, count in suggestion_entries(catalog.products.values()).items():
-            pipeline.execute_command("FT.SUGADD", key, text, count)
+            pipeline.execute_command("FT.SUGADD", key, text, count)  # type: ignore[no-untyped-call]
         pipeline.execute()
 
 
-def get_suggestions(client: Any, key: str, prefix: str) -> list[str]:
+def get_suggestions(client: Redis, key: str, prefix: str) -> list[str]:
     prefix = prefix.strip()
     if len(prefix) < 2:
         return []
-    rows = client.execute_command("FT.SUGGET", key, prefix, "MAX", 6) or []
+    rows = client.execute_command("FT.SUGGET", key, prefix, "MAX", 6) or []  # type: ignore[no-untyped-call]
     return [row.decode("utf-8") if isinstance(row, bytes) else str(row) for row in rows]

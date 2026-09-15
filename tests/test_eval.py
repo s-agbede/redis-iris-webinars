@@ -54,8 +54,13 @@ def test_empty_ranking_has_no_exact_rank_or_invented_judgements() -> None:
 
 
 def test_target_rank_and_review_coverage_are_reported_separately() -> None:
-    case = ReviewedCase(case_id="sony", query="sony zv e10", notes="Camera, not accessory",
-                        judgements={"camera": "relevant", "strap": "irrelevant"}, required_top_k=3)
+    case = ReviewedCase(
+        case_id="sony",
+        query="sony zv e10",
+        notes="Camera, not accessory",
+        judgements={"camera": "relevant", "strap": "irrelevant"},
+        required_top_k=3,
+    )
     result = assess([hit("strap"), hit("unknown"), hit("camera")], case)
     assert result.first_reviewed_relevant_rank == 3
     assert result.reciprocal_rank == 1 / 3
@@ -66,8 +71,13 @@ def test_target_rank_and_review_coverage_are_reported_separately() -> None:
 
 
 def test_missing_target_fails_explicit_expectation_without_labelling_unknown_irrelevant() -> None:
-    case = ReviewedCase(case_id="sony", query="sony", notes="Known target",
-                        judgements={"camera": "relevant"}, required_top_k=1)
+    case = ReviewedCase(
+        case_id="sony",
+        query="sony",
+        notes="Known target",
+        judgements={"camera": "relevant"},
+        required_top_k=1,
+    )
     result = assess([hit("unknown"), hit("camera")], case)
     assert result.expectation_passed is False
     assert result.reviewed_irrelevant == 0

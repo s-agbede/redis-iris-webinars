@@ -1,0 +1,1773 @@
+{
+  "scope": "Quick controlled comparison: combine only five target listings; all other product documents and vectors copied unchanged. Combined evidence uses a synthetic description field only in this disposable experiment. Not a whole-catalogue chunking evaluation or latency benchmark.",
+  "original_documents": 8472,
+  "combined_documents": 8467,
+  "targets": [
+    {
+      "product_id": "B00FOTF8M2",
+      "combined_tokens": 100
+    },
+    {
+      "product_id": "B014I11JV0",
+      "combined_tokens": 152
+    },
+    {
+      "product_id": "B07RB7SHD7",
+      "combined_tokens": 82
+    },
+    {
+      "product_id": "B09BBKVMCD",
+      "combined_tokens": 104
+    },
+    {
+      "product_id": "B09BBMQKSR",
+      "combined_tokens": 105
+    }
+  ],
+  "reports": [
+    {
+      "case_id": "sony-model",
+      "query": "Sony ZV-E10",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 0.48,
+          "top_ids": [
+            "B07RJLLR45"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.18,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 5,
+            "reciprocal_rank": 0.2,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 3.83,
+          "top_ids": [
+            "B08NC83S2M",
+            "B08GP5LS12",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B09BBKVMCD"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 4.76,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B08NC83S2M",
+            "B07RJLLR45",
+            "B08R959WNC"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 0.49,
+          "top_ids": [
+            "B07RJLLR45"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 4,
+            "reciprocal_rank": 0.25,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 2.38,
+          "top_ids": [
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F",
+            "B09BBKVMCD",
+            "B09BBMQKSR"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 5,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.55,
+          "top_ids": [
+            "B08NC83S2M",
+            "B08GP5LS12",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B08R959WNC"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 3.82,
+          "top_ids": [
+            "B08NC83S2M",
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B08R959WNC",
+            "B07RJLLR45"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "sony-spaces",
+      "query": "sony zv e10",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.58,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.66,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 5,
+            "reciprocal_rank": 0.2,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.41,
+          "top_ids": [
+            "B08GP5LS12",
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B09BBKVMCD"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.59,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B08NC83S2M",
+            "B08R959WNC",
+            "B07RJLLR45"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.52,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 4,
+            "reciprocal_rank": 0.25,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 2.41,
+          "top_ids": [
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F",
+            "B09BBKVMCD",
+            "B09BBMQKSR"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 5,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.48,
+          "top_ids": [
+            "B08GP5LS12",
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B08R959WNC"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 3.9,
+          "top_ids": [
+            "B08NC83S2M",
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B08R959WNC",
+            "B07RJLLR45"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "sony-intent",
+      "query": "Sony ZV-E10 vlog camera",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.5,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.18,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 5,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.81,
+          "top_ids": [
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B08GP5LS12",
+            "B07RTXRWV8"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 4.44,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B0898MPYM7",
+            "B08GP5LS12",
+            "B09BBMQKSR",
+            "B089KRV4FF"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.48,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.92,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B07RJLLR45",
+            "B071DZNCY5",
+            "B06XG9T25F"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 5,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.39,
+          "top_ids": [
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B0898MPYM7",
+            "B08GP5LS12",
+            "B07RTXRWV8"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 3,
+            "reciprocal_rank": 0.3333333333333333,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 4.24,
+          "top_ids": [
+            "B0898MPYM7",
+            "B08GP5LS12",
+            "B09BBMQKSR",
+            "B089KRV4FF",
+            "B09BBKVMCD"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "sony-filter",
+      "query": "ZV-E10",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.43,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 1.38,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B089KRV4FF",
+            "B08R959WNC",
+            "B08P6Y8464"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.12,
+          "top_ids": [
+            "B08NC83S2M",
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B0898MPYM7",
+            "B08GP5LS12"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.32,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B08R959WNC"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.48,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 1.18,
+          "top_ids": [
+            "B09BBKVMCD",
+            "B09BBMQKSR",
+            "B089KRV4FF",
+            "B08R959WNC",
+            "B08P6Y8464"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 5,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.07,
+          "top_ids": [
+            "B08NC83S2M",
+            "B0898MPYM7",
+            "B08GP5LS12",
+            "B089KRV4FF",
+            "B08R959WNC"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 4,
+            "reciprocal_rank": 0.25,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.34,
+          "top_ids": [
+            "B08NC83S2M",
+            "B089KRV4FF",
+            "B08R959WNC",
+            "B09BBKVMCD",
+            "B08GP5LS12"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "nikon-model",
+      "query": "Nikon D610",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.47,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.19,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B00795A63A",
+            "B07YST2F7Q",
+            "B06VTYWCRH"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.39,
+          "top_ids": [
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B075ZSL3M7",
+            "B08R45H8DV",
+            "B087V2QQSN"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.9,
+          "top_ids": [
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B06VTYWCRH",
+            "B017L3689K",
+            "B0099XGZXA"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.43,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 4,
+            "reviewed_unjudged": 1,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 2.07,
+          "top_ids": [
+            "B00795A63A",
+            "B07YST2F7Q",
+            "B06VTYWCRH",
+            "B008XW7T8I",
+            "B07RDGBV9M"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.26,
+          "top_ids": [
+            "B075ZSL3M7",
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B08R45H8DV",
+            "B087V2QQSN"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 2,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.53,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B06VTYWCRH",
+            "B017L3689K",
+            "B0099XGZXA"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "nikon-intent",
+      "query": "camera nikon d610",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.47,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 2,
+            "reviewed_unjudged": 1,
+            "expectation_passed": true,
+            "source_judged": 4,
+            "source_unjudged": 1,
+            "first_source_exact_rank": 1,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.61,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B017L3689K",
+            "B07YST2F7Q",
+            "B00795A63A"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 2,
+            "source_unjudged": 3,
+            "first_source_exact_rank": 1,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.2,
+          "top_ids": [
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B087V2QQSN",
+            "B08R45H8DV",
+            "B075ZSL3M7"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 2,
+            "reviewed_unjudged": 1,
+            "expectation_passed": true,
+            "source_judged": 4,
+            "source_unjudged": 1,
+            "first_source_exact_rank": 1,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.87,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B017L3689K",
+            "B06VTYWCRH",
+            "B00795A63A"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.45,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 3,
+            "reviewed_unjudged": 2,
+            "expectation_passed": false,
+            "source_judged": 3,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.77,
+          "top_ids": [
+            "B017L3689K",
+            "B07YST2F7Q",
+            "B00795A63A",
+            "B06VTYWCRH",
+            "B07MS1LV74"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 2,
+            "source_unjudged": 3,
+            "first_source_exact_rank": 1,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.22,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B087V2QQSN",
+            "B08R45H8DV",
+            "B075ZSL3M7"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 2,
+            "reviewed_unjudged": 1,
+            "expectation_passed": true,
+            "source_judged": 4,
+            "source_unjudged": 1,
+            "first_source_exact_rank": 1,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 4.21,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0",
+            "B06VTYWCRH",
+            "B017L3689K",
+            "B00795A63A"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "nikon-filter",
+      "query": "D610",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.52,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.67,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 1.99,
+          "top_ids": [
+            "B014I11JV0",
+            "B075ZSL3M7",
+            "B00FOTF8M2",
+            "B07VW3KC9X",
+            "B078WPSJ9R"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.12,
+          "top_ids": [
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B075ZSL3M7",
+            "B07VW3KC9X",
+            "B078WPSJ9R"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.51,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 2,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.66,
+          "top_ids": [
+            "B00FOTF8M2",
+            "B014I11JV0"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.08,
+          "top_ids": [
+            "B014I11JV0",
+            "B075ZSL3M7",
+            "B00FOTF8M2",
+            "B07VW3KC9X",
+            "B078WPSJ9R"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 2,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.02,
+          "top_ids": [
+            "B014I11JV0",
+            "B00FOTF8M2",
+            "B075ZSL3M7",
+            "B07VW3KC9X",
+            "B078WPSJ9R"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "canon-model",
+      "query": "Canon RF 85mm F1.2 L USM",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.42,
+          "top_ids": [
+            "B07RB7SHD7"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.63,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B07CBG8PC3",
+            "B07WFQYJYP",
+            "B07WQ54BL8",
+            "B07Z5M9M7M"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.12,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B07WFQYJYP",
+            "B00007GQLU",
+            "B08M8QPS1V",
+            "B08C6Y8KS3"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.29,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B07WFQYJYP",
+            "B07Z5M9M7M",
+            "B07WQ54BL8",
+            "B074VQ6SGM"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.44,
+          "top_ids": [
+            "B07RB7SHD7"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.4,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B07CBG8PC3",
+            "B07WFQYJYP",
+            "B07WQ54BL8",
+            "B07Z5M9M7M"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.02,
+          "top_ids": [
+            "B07WFQYJYP",
+            "B07RB7SHD7",
+            "B00007GQLU",
+            "B08M8QPS1V",
+            "B08C6Y8KS3"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 4,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.42,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B07WFQYJYP",
+            "B07Z5M9M7M",
+            "B07WQ54BL8",
+            "B074VQ6SGM"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "canon-aperture",
+      "query": "Canon RF 85mm f/1.2 lens",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.44,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.45,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B074VQ6SGM",
+            "B00007GQLU",
+            "B07H4SFG4G"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.22,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B074VQ6SGM",
+            "B00007GQLU",
+            "B08C6Y8KS3",
+            "B07Z5M9M7M"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.67,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B074VQ6SGM",
+            "B08C6Y8KS3",
+            "B00007GQLU",
+            "B07Z5M9M7M"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": null,
+            "reciprocal_rank": 0.0,
+            "reviewed_relevant": 0,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": false,
+            "source_judged": 0,
+            "source_unjudged": 0,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "no_results"
+          },
+          "query_ms": 0.44,
+          "top_ids": []
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.89,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B074VQ6SGM",
+            "B00007GQLU",
+            "B07H4SFG4G"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "unreviewed"
+          },
+          "query_ms": 2.25,
+          "top_ids": [
+            "B074VQ6SGM",
+            "B07RB7SHD7",
+            "B00007GQLU",
+            "B08C6Y8KS3",
+            "B07Z5M9M7M"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 4.22,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B074VQ6SGM",
+            "B00007GQLU",
+            "B08C6Y8KS3",
+            "B07Z5M9M7M"
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "canon-filter",
+      "query": "RF 85mm F1.2",
+      "original": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.43,
+          "top_ids": [
+            "B07RB7SHD7"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.67,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B08MFVH7SV",
+            "B074VQ6SGM",
+            "B00007GQLU"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 2.74,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B08MFVH7SV",
+            "B09FFTB9V6",
+            "B07Z5M9M7M"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.41,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B08MFVH7SV",
+            "B07Z5M9M7M",
+            "B074VQ6SGM"
+          ]
+        }
+      },
+      "combined": {
+        "basic": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 0,
+            "reviewed_unjudged": 0,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 1,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 0.42,
+          "top_ids": [
+            "B07RB7SHD7"
+          ]
+        },
+        "text": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 1.99,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B08MFVH7SV",
+            "B074VQ6SGM",
+            "B00007GQLU"
+          ]
+        },
+        "vector": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 2,
+            "reciprocal_rank": 0.5,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "irrelevant"
+          },
+          "query_ms": 2.2,
+          "top_ids": [
+            "B08C6Y8KS3",
+            "B07RB7SHD7",
+            "B08MFVH7SV",
+            "B09FFTB9V6",
+            "B07Z5M9M7M"
+          ]
+        },
+        "hybrid": {
+          "assessment": {
+            "first_reviewed_relevant_rank": 1,
+            "reciprocal_rank": 1.0,
+            "reviewed_relevant": 1,
+            "reviewed_irrelevant": 1,
+            "reviewed_unjudged": 3,
+            "expectation_passed": true,
+            "source_judged": 0,
+            "source_unjudged": 5,
+            "first_source_exact_rank": null,
+            "reviewed_top_label": "relevant"
+          },
+          "query_ms": 3.15,
+          "top_ids": [
+            "B07RB7SHD7",
+            "B08C6Y8KS3",
+            "B08MFVH7SV",
+            "B07Z5M9M7M",
+            "B07WFQYJYP"
+          ]
+        }
+      }
+    }
+  ]
+}

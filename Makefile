@@ -24,7 +24,7 @@ dev: ## Frontend dev server; backend uses port 8000
 	npm --prefix web run dev
 
 eval:
-	uv run python -m eval.run
+	uv run python -m eval.run --check
 
 fmt:
 	uv run ruff format app seed/load.py eval tests scripts/prepare_cameras.py

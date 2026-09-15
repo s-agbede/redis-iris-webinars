@@ -1,51 +1,71 @@
-# Assistant-reviewed pool from the first observed run. This is separate from ESCI labels.
-# New products outside the reviewed pool remain unreviewed.
-- case_id: rf-lenses
-  query: canon rf lenses
+# Assistant-reviewed against bundled catalogue titles and bullet points, not human labels.
+# Cases and top-three expectations authored before this focused evaluation run.
+# Unknown products remain unreviewed; original ESCI labels are preserved separately.
+- &sony
+  case_id: sony-model
+  target_product: Sony ZV-E10
+  query: Sony ZV-E10
+  required_top_k: 3
+  required_modes: [text, hybrid]
   notes: >-
-    Relevant listings explicitly identify a Canon RF lens. Camera-body bundles and
-    FD/EF lens kits do not satisfy that requirement. B07JQGHHC5 has conflicting source
-    text (T7i title, EOS R description), so it remains unreviewed.
+    Seek the ZV-E10 camera. Body and kit listings are acceptable; no colour or
+    condition restriction is requested. Straps mentioning compatibility are irrelevant.
   judgements:
-    B082P49YK9: relevant
-    B0101SX48U: irrelevant
-    B00TQ6P5A4: irrelevant
-    B07RLPZDZ3: irrelevant
-    B07RB7SHD7: relevant
-    B07H4F64XL: relevant
-    B08MFVH7SV: relevant
-    B07Z5M9M7M: relevant
-    B07H489XDQ: relevant
-    B07WQ54BL8: relevant
-- case_id: camera-laptop-bag
-  query: A bag to carry my camera and laptop
+    B09BBKVMCD: relevant
+    B09BBMQKSR: relevant
+    B06XG9T25F: irrelevant
+    B071DZNCY5: irrelevant
+    B07RJLLR45: irrelevant
+- <<: *sony
+  case_id: sony-spaces
+  query: sony zv e10
+- <<: *sony
+  case_id: sony-intent
+  query: Sony ZV-E10 vlog camera
+- <<: *sony
+  case_id: sony-filter
+  query: ZV-E10
+  brands: [Sony]
+- &nikon
+  case_id: nikon-model
+  target_product: Nikon D610
+  query: Nikon D610
+  required_top_k: 3
+  required_modes: [text, hybrid]
   notes: >-
-    Relevant listings explicitly mention camera and laptop storage. No laptop size
-    is specified. Other bags remain unreviewed where the supplied evidence does not
-    establish both requirements. These are authored judgements, not ESCI labels.
-  judgements:
-    B072V7D1X6: relevant
-    B005J09OXU: relevant
-    B07B89FWVH: relevant
-    B07WQFYP8F: relevant
-    B07WDVWL72: relevant
-    B00CF5OGP8: relevant
-    B07WS9F4CH: relevant
-    B07V866B7S: relevant
-- case_id: d610-body
-  query: camera nikon d610
-  notes: >-
-    For this reviewed check the sought item is a D610 camera body; renewed bodies
-    are acceptable because the query does not exclude them. Other camera models,
-    straps, eyecups, flashes and cheat sheets fail that specific interpretation.
-    ESCI complementary/substitute labels remain unchanged.
+    Seek a D610 camera body. Renewed bodies are acceptable because no condition
+    is specified. Cheat sheets, remote controls, flashes and eyecups are irrelevant.
   judgements:
     B00FOTF8M2: relevant
     B014I11JV0: relevant
-    B017L3689K: irrelevant
-    B07YST2F7Q: irrelevant
     B00795A63A: irrelevant
-    B087V2QQSN: irrelevant
-    B08R45H8DV: irrelevant
-    B075ZSL3M7: irrelevant
+    B008XW7T8I: irrelevant
     B06VTYWCRH: irrelevant
+    B07X868P1H: irrelevant
+    B07YST2F7Q: irrelevant
+- <<: *nikon
+  case_id: nikon-intent
+  query: camera nikon d610
+- <<: *nikon
+  case_id: nikon-filter
+  query: D610
+  brands: [Nikon]
+- &canon
+  case_id: canon-model
+  target_product: Canon RF 85mm F1.2 L USM
+  query: Canon RF 85mm F1.2 L USM
+  required_top_k: 3
+  required_modes: [text, hybrid]
+  notes: >-
+    Seek the RF 85mm F1.2 L USM lens. The RF 85mm F2 Macro is a different lens
+    and does not satisfy this exact-model request. Other listings remain unreviewed.
+  judgements:
+    B07RB7SHD7: relevant
+    B08C6Y8KS3: irrelevant
+- <<: *canon
+  case_id: canon-aperture
+  query: Canon RF 85mm f/1.2 lens
+- <<: *canon
+  case_id: canon-filter
+  query: RF 85mm F1.2
+  brands: [Canon]
