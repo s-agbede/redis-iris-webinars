@@ -1,0 +1,1141 @@
+{
+  "recorded_on": "2026-09-14",
+  "environment": "Redis 8.6.2; local pinned all-MiniLM-L6-v2; 2,317 products; 8,472 passages",
+  "purpose": "Learning workflow audit, not a held-out relevance or performance benchmark",
+  "baseline_check": "All seven cases preserved the previous top-five product IDs and scores (absolute tolerance 1e-12).",
+  "cases": [
+    {
+      "query": "sony zv e10",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 25.266747768509894,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 25.148989599614563,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B07RJLLR45",
+              "title": "JJC Deluxe Mirrorless Camera Hand Grip Strap for Sony ZV-E10 A1 A7C A7III A7II A7 A7RIV A7RIII A7RII A7R A7SIII A7SII A9II A9 A6600 A6500 A6400 A6300 A6100 A6000 Panasonic G7 G9 G85 S5 S1 S1R & More",
+              "score": 22.828742608540406,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B071DZNCY5",
+              "title": "4ft Soft Neoprene Camera Shoulder Neck Strap for Sony A7IV A7 IV III II ZV-E10 A7C A6600 A6500 A6400 A6300 A6100 A6000 Nikon Z fc Z50 Canon M50 M6 Mark II Fuji X100V X-S10 X-T4 X-E4 Panasonic G7 G95",
+              "score": 22.382695653770917,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B06XG9T25F",
+              "title": "JJC Mirrorless Camera Hand Strap Grip for Sony A7C A7SIII A7RIV A7RIII A7III A7RII A7SII A7II A7S A7R IV III II A1 A9 II ZV-E10 A6600 A6500 A6400 A6300 A6100 A6000 RX1 RX1R RX1RII RX10 IV III II A99II",
+              "score": 21.08421248111457,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B08GP5LS12",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Double Battery Bundle with Deco Gear Case + 64GB Card + External Charger and Accessories",
+              "score": 0.678993105888,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B08NC83S2M",
+              "title": "Sony ZV-1 Camera for Content Creators and Vloggers (White) with Sony ACCVC1 Vlogger Accessory Kit and KOAH Pro Rugged Memory Storage Carrying Case Bundle (3 Items)",
+              "score": 0.6751408576969999,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B089KRV4FF",
+              "title": "Sony ZV-1 Digital Camera with Vlogger Accessory Kit (4 Items)",
+              "score": 0.670854926109,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B0898MPYM7",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Bundle with Deco Gear Case + Software Kit + 64GB Card + Compact Tripod/Handheld Grip and Accessories",
+              "score": 0.663950204849,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.642044663429,
+              "passage_rank": 9
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.0308861962461,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": 9,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.014492753623188406,
+                "reconstructed_score": 0.030886196246139225,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 0.030017921147,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 2,
+                "vector_rank": 12,
+                "text_contribution": 0.016129032258064516,
+                "vector_contribution": 0.013888888888888888,
+                "reconstructed_score": 0.030017921146953404,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B08NC83S2M",
+              "title": "Sony ZV-1 Camera for Content Creators and Vloggers (White) with Sony ACCVC1 Vlogger Accessory Kit and KOAH Pro Rugged Memory Storage Carrying Case Bundle (3 Items)",
+              "score": 0.0292869269949,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 16,
+                "vector_rank": 2,
+                "text_contribution": 0.013157894736842105,
+                "vector_contribution": 0.016129032258064516,
+                "reconstructed_score": 0.02928692699490662,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B08R959WNC",
+              "title": "Sony ZV-1 Camera for Content Creators and Vloggers, White, Compact (DCZV1/W) (Renewed)",
+              "score": 0.0272121436505,
+              "passage_rank": 5,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 14,
+                "vector_rank": 13,
+                "text_contribution": 0.013513513513513514,
+                "vector_contribution": 0.0136986301369863,
+                "reconstructed_score": 0.027212143650499815,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07RJLLR45",
+              "title": "JJC Deluxe Mirrorless Camera Hand Grip Strap for Sony ZV-E10 A1 A7C A7III A7II A7 A7RIV A7RIII A7RII A7R A7SIII A7SII A9II A9 A6600 A6500 A6400 A6300 A6100 A6000 Panasonic G7 G9 G85 S5 S1 S1R & More",
+              "score": 0.0260770975057,
+              "passage_rank": 8,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 3,
+                "vector_rank": 38,
+                "text_contribution": 0.015873015873015872,
+                "vector_contribution": 0.01020408163265306,
+                "reconstructed_score": 0.02607709750566893,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "a compact camera for filming myself",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B006TZE0UQ",
+              "title": "Manfrotto Video Head with Flat Base and Fixed Lever, Video Head for Compact Video Cameras and DSLR Cameras, for Filming, Videography, Content Creation, Vlogging, Live Streaming",
+              "score": 22.90015448363709,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B01I9L0CJ0",
+              "title": "Neewer Shoulder Rig Kit for DSLR Cameras and Camcorders, Movie Video Film Making System with Matte Box, Follow Focus, C-Shaped Bracket, 15mm Rods, Handgrip, 1/4\u201d & 3/8\u201d Threads (Blue + Black)",
+              "score": 18.80146611562325,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B00LKK99QA",
+              "title": "Zeadio Video Action Stabilizing Handle Grip Handheld Stabilizer with Hot-Shoe Mount for Canon Nikon Sony Panasonic Pentax Olympus DSLR Camera Camcorder",
+              "score": 18.150954804444375,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B079P9L4LJ",
+              "title": "Brinno TLC130 Time Lapse and Step Video HD Camera - Compact and Portable, Long-Lasting Battery - BLE and Wi-Fi Connection - Mounts and Quick-Release Adapter Included - Premium Quality, Water-Resistant",
+              "score": 17.40721731309591,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B07RYKG2BF",
+              "title": "Phone Tripod, Flexible iPhone Tripod and Portable Adjustable Tripod with Wireless Remote, Mini Travel Tabletop Tripod Camera Stand Compatible for iPhone Android Sumsung DSLR Camera",
+              "score": 16.040076471546342,
+              "passage_rank": 5
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B07YXNGXXM",
+              "title": "Video Camera Camcorder Vmotal Digital Camcorder FHD 1080P 12.0MP 2.8 Inch LCD 270 Degrees Rotatable Screen 8X Digital Zoom Camera Recorder Vlogging Camera with Rechargable Battery (Black)",
+              "score": 0.614592552185,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B08BG4G72J",
+              "title": "Hidden Spy Camera, 1080P Mini Pen Camera with Picture Taking orLoop Recording, Body Wearable Recorder, Rechargeable HD Portable Pocket Recording Cam for Security Surveillance Business Meetings.",
+              "score": 0.601910591125,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B087GDZ6C5",
+              "title": "Video Camera Camcorder for YouTube, FHD 1080P 30FPS 24MP Digital Vlogging Camera 16X Digital Zoom 3.0 Inch 270\u00b0 Rotation Screen Video Recorder with Lens Hood, Microphone, Remote Control, 2 Batteries",
+              "score": 0.601711392403,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B087RBNZNH",
+              "title": "Digital Camera Vlogging Camera with YouTube 30MP Full HD 2.7K Vlog Camera with Flip Screen 180\u00b0 Rotation with 32GB Memory Card and 2 Batteries \uff08Focus Fixed\uff09",
+              "score": 0.6006128787989999,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B083JB3V4S",
+              "title": "Digital Camera,2.7 Inch HD Camera for Backpacking Rechargeable Mini Camera Students Cameras Pocket Cameras Digital with Zoom Compact Cameras for Photography",
+              "score": 0.595817625523,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B07VHNC6F1",
+              "title": "AbergBest 21 Mega Pixels 2.7\" LCD Rechargeable HD Digital Camera Video Camera Digital Students Cameras,Indoor Outdoor for Adult/Seniors/Kid (Rose Gold)",
+              "score": 0.0286240032713,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 13,
+                "vector_rank": 7,
+                "text_contribution": 0.0136986301369863,
+                "vector_contribution": 0.014925373134328358,
+                "reconstructed_score": 0.02862400327131466,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B088NY4688",
+              "title": "Photo Frame Camera, ZDMYING HD 960P Picture Frame Video Camera Nanny Cam for Home, Office Security, Long Battery Life (No WiFi Needed)",
+              "score": 0.0181570948648,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 73,
+                "vector_rank": 34,
+                "text_contribution": 0.007518796992481203,
+                "vector_contribution": 0.010638297872340425,
+                "reconstructed_score": 0.01815709486482163,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07WGLZP12",
+              "title": "Video Camera Camcorder Digital YouTube Vlogging Camera Recorder FHD 1080P 24.0MP 3.0 Inch 270 Degree Rotation Screen 16X Digital Zoom Camcorder with Microphone,Remote Control and 2 Batteries",
+              "score": 0.0179365079365,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 66,
+                "vector_rank": 40,
+                "text_contribution": 0.007936507936507936,
+                "vector_contribution": 0.01,
+                "reconstructed_score": 0.017936507936507938,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B006TZE0UQ",
+              "title": "Manfrotto Video Head with Flat Base and Fixed Lever, Video Head for Compact Video Cameras and DSLR Cameras, for Filming, Videography, Content Creation, Vlogging, Live Streaming",
+              "score": 0.016393442623,
+              "passage_rank": 4,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": null,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.0,
+                "reconstructed_score": 0.01639344262295082,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07YXNGXXM",
+              "title": "Video Camera Camcorder Vmotal Digital Camcorder FHD 1080P 12.0MP 2.8 Inch LCD 270 Degrees Rotatable Screen 8X Digital Zoom Camera Recorder Vlogging Camera with Rechargable Battery (Black)",
+              "score": 0.016393442623,
+              "passage_rank": 5,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 1,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.01639344262295082,
+                "reconstructed_score": 0.01639344262295082,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "sony camera for vlogging with interchangeable lenses",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 33.294638244173875,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 33.13669653707546,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B086TTTZR5",
+              "title": "Canon EOS RP Full-frame Mirrorless Interchangeable Lens Camera + RF24-105mm Lens F4-7.1 IS STM Lens Kit-- Compact and Lightweight for Traveling and Vlogging, Black (3380C132)",
+              "score": 27.640591992340788,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B07MV3P74D",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 18-135mm Lens - E Mount Compatible Cameras - ILCE-6400M/B",
+              "score": 27.124711147327822,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B07MV3P7M8",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 16-50mm Lens - E Mount Compatible Cameras - ILCE-6400L/B",
+              "score": 27.124711147327822,
+              "passage_rank": 5
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B082TLSWTB",
+              "title": "Video Camera Camcorder with Microphone FHD 1080P 30FPS 42MP IR Night Vision Digital Camera for YouTube Vlogging 3 Inch IPS Touch Screen Camcorder Recorder with 64GB SD Card,Remote Control, Lens Hood",
+              "score": 0.62441432476,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B07MV3P7M8",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 16-50mm Lens - E Mount Compatible Cameras - ILCE-6400L/B",
+              "score": 0.5977274179459999,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 0.594608008862,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.5882058143619999,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B087RBNZNH",
+              "title": "Digital Camera Vlogging Camera with YouTube 30MP Full HD 2.7K Vlog Camera with Flip Screen 180\u00b0 Rotation with 32GB Memory Card and 2 Batteries \uff08Focus Fixed\uff09",
+              "score": 0.5849909186360001,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.0317780580076,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": 5,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.015384615384615385,
+                "reconstructed_score": 0.03177805800756621,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 0.0294623655914,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 2,
+                "vector_rank": 15,
+                "text_contribution": 0.016129032258064516,
+                "vector_contribution": 0.013333333333333334,
+                "reconstructed_score": 0.02946236559139785,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B087RBNZNH",
+              "title": "Digital Camera Vlogging Camera with YouTube 30MP Full HD 2.7K Vlog Camera with Flip Screen 180\u00b0 Rotation with 32GB Memory Card and 2 Batteries \uff08Focus Fixed\uff09",
+              "score": 0.0257898130239,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 34,
+                "vector_rank": 6,
+                "text_contribution": 0.010638297872340425,
+                "vector_contribution": 0.015151515151515152,
+                "reconstructed_score": 0.02578981302385558,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07MV3P7M8",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 16-50mm Lens - E Mount Compatible Cameras - ILCE-6400L/B",
+              "score": 0.025774005972,
+              "passage_rank": 4,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 41,
+                "vector_rank": 3,
+                "text_contribution": 0.009900990099009901,
+                "vector_contribution": 0.015873015873015872,
+                "reconstructed_score": 0.025774005972025775,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07MV3P74D",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 18-135mm Lens - E Mount Compatible Cameras - ILCE-6400M/B",
+              "score": 0.0242456896552,
+              "passage_rank": 7,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 4,
+                "vector_rank": 56,
+                "text_contribution": 0.015625,
+                "vector_contribution": 0.008620689655172414,
+                "reconstructed_score": 0.024245689655172414,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "sony camera for vlogging with interchangeable lenses",
+      "brands": [
+        "Sony"
+      ],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 38.64748694019123,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 38.42800710906849,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B07VGHW91J",
+              "title": "Sony \u03b17R IV Full-frame Mirrorless Interchangeable Lens Camera (ILCE7RM4/B)",
+              "score": 32.197368085169984,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B00PX8CHO6",
+              "title": "Sony Alpha 7 II E-mount interchangeable lens mirrorless camera with full frame sensor",
+              "score": 31.822231354050377,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B07MV3P74D",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 18-135mm Lens - E Mount Compatible Cameras - ILCE-6400M/B",
+              "score": 31.5651995874261,
+              "passage_rank": 5
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B07MV3P7M8",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 16-50mm Lens - E Mount Compatible Cameras - ILCE-6400L/B",
+              "score": 0.5977274179459999,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 0.594608008862,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.5882058143619999,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B089KRV4FF",
+              "title": "Sony ZV-1 Digital Camera with Vlogger Accessory Kit (4 Items)",
+              "score": 0.571592569351,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B07MV3P74D",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 18-135mm Lens - E Mount Compatible Cameras - ILCE-6400M/B",
+              "score": 0.568688869476,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B09BBKVMCD",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera - White",
+              "score": 0.032266458496,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": 3,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.015873015873015872,
+                "reconstructed_score": 0.032266458495966696,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B09BBMQKSR",
+              "title": "Sony Alpha ZV-E10 - APS-C Interchangeable Lens Mirrorless Vlog Camera Kit - White",
+              "score": 0.0310544053924,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 2,
+                "vector_rank": 7,
+                "text_contribution": 0.016129032258064516,
+                "vector_contribution": 0.014925373134328358,
+                "reconstructed_score": 0.031054405392392875,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07MV3P74D",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 18-135mm Lens - E Mount Compatible Cameras - ILCE-6400M/B",
+              "score": 0.0282186948854,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 3,
+                "vector_rank": 21,
+                "text_contribution": 0.015873015873015872,
+                "vector_contribution": 0.012345679012345678,
+                "reconstructed_score": 0.02821869488536155,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07MV3P7M8",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video, Flip Screen & 16-50mm Lens - E Mount Compatible Cameras - ILCE-6400L/B",
+              "score": 0.0281581485053,
+              "passage_rank": 4,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 25,
+                "vector_rank": 1,
+                "text_contribution": 0.011764705882352941,
+                "vector_contribution": 0.01639344262295082,
+                "reconstructed_score": 0.02815814850530376,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07MTWVN3M",
+              "title": "Sony Alpha a6400 Mirrorless Camera: Compact APS-C Interchangeable Lens Digital Camera with Real-Time Eye Auto Focus, 4K Video & Flip Up Touchscreen - E Mount Compatible Cameras - ILCE-6400/B Body",
+              "score": 0.026254180602,
+              "passage_rank": 9,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 5,
+                "vector_rank": 32,
+                "text_contribution": 0.015384615384615385,
+                "vector_contribution": 0.010869565217391304,
+                "reconstructed_score": 0.02625418060200669,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "camera nikon d610",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B00FOTF8M2",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+              "score": 14.79857604978528,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B014I11JV0",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+              "score": 14.729250273604977,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B017L3689K",
+              "title": "Camera Wrist Strap - Rapid Fire Secure Camera Sling Strap by Altura Photo, Camera Straps for Photographers Compatible W/DSLR & Mirrorless - Camera Hand Strap W/Quick Release Camera Strap Dual System",
+              "score": 14.540436896124685,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B07YST2F7Q",
+              "title": "ULBTER Eyepiece Eyecup Eye Cup DK-23 for Nikon D7100 D7200 D7000 D750 D610 D600 D300 D300S Camera Viewfinder Eyepiece Cover & Hot Shoe Cover -(2+2 Pack)",
+              "score": 13.943478900920407,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B00795A63A",
+              "title": "Whitecap Cheat Sheets for Nikon DSLR D3500 D5600 D7500 D3400 D3300 D5500 D5300 D7200 Z7 Z6 D850 D810 D610 D750 D500 Df D5 Tip Cards Camera Quick Guide",
+              "score": 13.905846623550573,
+              "passage_rank": 5
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B014I11JV0",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+              "score": 0.708816170692,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B00FOTF8M2",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+              "score": 0.7032622098920001,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B087V2QQSN",
+              "title": "Nikon D5600 DSLR Camera with 18-55mm VR Lens + 32GB Card, Tripod, Case, and More (18pc Bundle)",
+              "score": 0.678433537483,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B08R45H8DV",
+              "title": "Nikon D5600 DSLR Camera with 18-55mm VR and 70-300mm Lenses + 128GB Card, Tripod,Back-Pack,Filters, 2X Telephoto Lens, HD Wide Angle Lens, Hood, Lens Pouch, and More (28pcs)",
+              "score": 0.677749454975,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B075ZSL3M7",
+              "title": "Nikon D5600 Digital SLR Camera & 18-55mm VR DX AF-P Lens - (Renewed)",
+              "score": 0.663360655308,
+              "passage_rank": 7
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B00FOTF8M2",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+              "score": 0.032522474881,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": 2,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.016129032258064516,
+                "reconstructed_score": 0.03252247488101534,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B014I11JV0",
+              "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+              "score": 0.032522474881,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 2,
+                "vector_rank": 1,
+                "text_contribution": 0.016129032258064516,
+                "vector_contribution": 0.01639344262295082,
+                "reconstructed_score": 0.03252247488101534,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B017L3689K",
+              "title": "Camera Wrist Strap - Rapid Fire Secure Camera Sling Strap by Altura Photo, Camera Straps for Photographers Compatible W/DSLR & Mirrorless - Camera Hand Strap W/Quick Release Camera Strap Dual System",
+              "score": 0.0242763772176,
+              "passage_rank": 5,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 3,
+                "vector_rank": 59,
+                "text_contribution": 0.015873015873015872,
+                "vector_contribution": 0.008403361344537815,
+                "reconstructed_score": 0.024276377217553685,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B06VTYWCRH",
+              "title": "Godox TT350N TTL Flash Speedlite 2.4G Wireless GN36 1/8000s HSS for Nikon D800 D700 D7100 D7000 D5200 D5100 D810 D750 D610 DSLR Camera",
+              "score": 0.0239898989899,
+              "passage_rank": 6,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 12,
+                "vector_rank": 39,
+                "text_contribution": 0.013888888888888888,
+                "vector_contribution": 0.010101010101010102,
+                "reconstructed_score": 0.02398989898989899,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B00795A63A",
+              "title": "Whitecap Cheat Sheets for Nikon DSLR D3500 D5600 D7500 D3400 D3300 D5500 D5300 D7200 Z7 Z6 D850 D810 D610 D750 D500 Df D5 Tip Cards Camera Quick Guide",
+              "score": 0.0216729147142,
+              "passage_rank": 7,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 28,
+                "vector_rank": 37,
+                "text_contribution": 0.011363636363636364,
+                "vector_contribution": 0.010309278350515464,
+                "reconstructed_score": 0.02167291471415183,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "canon rf lenses",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": [
+            {
+              "product_id": "B082P49YK9",
+              "title": "CANON Lens RF24-240mm F4-6.3 is USM (Renewed)",
+              "score": 19.554708497065665,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B07JQGHHC5",
+              "title": "Canon EOS Rebel T7i DSLR Camera 18-55mm Lens + Carrying Case",
+              "score": 16.880626772162707,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B0101SX48U",
+              "title": "Canon Advanced Two Lens Kit with 50mm f/1.4 and 17-40mm f/4L Lenses",
+              "score": 15.583464667899896,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B00TQ6P5A4",
+              "title": "Canon FT B FTb QL 35mm Camera with 50mm 1.8 lens",
+              "score": 15.133319242956407,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B07RLPZDZ3",
+              "title": "Canon EOS Rebel T7 DSLR Camera with 18-55mm & 75-300mm Lenses Kit + 500mm Preset Wildlife Lens - Deluxe Professional Photo & Video Creative Bundle",
+              "score": 15.033524432205375,
+              "passage_rank": 5
+            }
+          ]
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B07RB7SHD7",
+              "title": "Canon RF 85mm F1.2 L USM Lens, Black",
+              "score": 0.6823348402980001,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B07H4F64XL",
+              "title": "Canon RF 28-70mm f/2L USM Lens, Black - 2965C002",
+              "score": 0.626900076866,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B08MFVH7SV",
+              "title": "Canon RF50mm F1.8 STM for Canon Full Frame Mirrorless RF Mount Cameras [EOS R, EOS RP, EOS R5, EOS R6](4515C002)",
+              "score": 0.621122121811,
+              "passage_rank": 4
+            },
+            {
+              "product_id": "B07Z5M9M7M",
+              "title": "Canon RF 70-200mm F2.8 L IS USM Lens, Telephoto Zoom Lens, 3792C002",
+              "score": 0.6073994040490001,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B07H489XDQ",
+              "title": "Canon RF 24-105mm f/4L IS USM Lens, Black - 2963C002",
+              "score": 0.6054735183719999,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B07RB7SHD7",
+              "title": "Canon RF 85mm F1.2 L USM Lens, Black",
+              "score": 0.0306217858813,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 9,
+                "vector_rank": 2,
+                "text_contribution": 0.014492753623188406,
+                "vector_contribution": 0.016129032258064516,
+                "reconstructed_score": 0.030621785881252923,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07H4F64XL",
+              "title": "Canon RF 28-70mm f/2L USM Lens, Black - 2965C002",
+              "score": 0.0280832678712,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 16,
+                "vector_rank": 7,
+                "text_contribution": 0.013157894736842105,
+                "vector_contribution": 0.014925373134328358,
+                "reconstructed_score": 0.028083267871170464,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07Z5M9M7M",
+              "title": "Canon RF 70-200mm F2.8 L IS USM Lens, Telephoto Zoom Lens, 3792C002",
+              "score": 0.0275980205558,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 14,
+                "vector_rank": 11,
+                "text_contribution": 0.013513513513513514,
+                "vector_contribution": 0.014084507042253521,
+                "reconstructed_score": 0.027598020555767037,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B07WQ54BL8",
+              "title": "Canon RF 24-70mm F2.8 L IS USM Lens, Black",
+              "score": 0.0270319634703,
+              "passage_rank": 4,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 13,
+                "vector_rank": 15,
+                "text_contribution": 0.0136986301369863,
+                "vector_contribution": 0.013333333333333334,
+                "reconstructed_score": 0.027031963470319637,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B082P49YK9",
+              "title": "CANON Lens RF24-240mm F4-6.3 is USM (Renewed)",
+              "score": 0.0270317404953,
+              "passage_rank": 5,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": 1,
+                "vector_rank": 34,
+                "text_contribution": 0.01639344262295082,
+                "vector_contribution": 0.010638297872340425,
+                "reconstructed_score": 0.027031740495291244,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "query": "zzqxabsenttoken931",
+      "brands": [],
+      "results": [
+        {
+          "mode": "text",
+          "hits": []
+        },
+        {
+          "mode": "vector",
+          "hits": [
+            {
+              "product_id": "B08GP5LS12",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Double Battery Bundle with Deco Gear Case + 64GB Card + External Charger and Accessories",
+              "score": 0.36331707239199995,
+              "passage_rank": 1
+            },
+            {
+              "product_id": "B0898MPYM7",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Bundle with Deco Gear Case + Software Kit + 64GB Card + Compact Tripod/Handheld Grip and Accessories",
+              "score": 0.35356259345999996,
+              "passage_rank": 2
+            },
+            {
+              "product_id": "B09883TR5L",
+              "title": "Z fc DX-Format Mirrorless Camera Body w/NIKKOR Z DX 16-50mm f/3.5-6.3 VR - Silver",
+              "score": 0.34601843357100004,
+              "passage_rank": 3
+            },
+            {
+              "product_id": "B00RWO0DZ4",
+              "title": "ZOSI 2.0MP HD 1080p 1920TVL Security Camera Outdoor Indoor (Hybrid 4-in-1 HD-CVI/TVI/AHD/960H Analog CVBS),36PCS LEDs,120ft IR Night Vision,105\u00b0 View Angle Weatherproof Surveillance CCTV Bullet Camera",
+              "score": 0.343951106071,
+              "passage_rank": 5
+            },
+            {
+              "product_id": "B08R959WNC",
+              "title": "Sony ZV-1 Camera for Content Creators and Vloggers, White, Compact (DCZV1/W) (Renewed)",
+              "score": 0.33739501237900005,
+              "passage_rank": 6
+            }
+          ]
+        },
+        {
+          "mode": "hybrid",
+          "hits": [
+            {
+              "product_id": "B08GP5LS12",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Double Battery Bundle with Deco Gear Case + 64GB Card + External Charger and Accessories",
+              "score": 0.016393442623,
+              "passage_rank": 1,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 1,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.01639344262295082,
+                "reconstructed_score": 0.01639344262295082,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B0898MPYM7",
+              "title": "Sony ZV-1 Compact Digital Vlogging 4K HDR Video Camera for Content Creators & Vloggers DCZV1/B Bundle with Deco Gear Case + Software Kit + 64GB Card + Compact Tripod/Handheld Grip and Accessories",
+              "score": 0.0161290322581,
+              "passage_rank": 2,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 2,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.016129032258064516,
+                "reconstructed_score": 0.016129032258064516,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B09883TR5L",
+              "title": "Z fc DX-Format Mirrorless Camera Body w/NIKKOR Z DX 16-50mm f/3.5-6.3 VR - Silver",
+              "score": 0.015873015873,
+              "passage_rank": 3,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 3,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.015873015873015872,
+                "reconstructed_score": 0.015873015873015872,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B00RWO0DZ4",
+              "title": "ZOSI 2.0MP HD 1080p 1920TVL Security Camera Outdoor Indoor (Hybrid 4-in-1 HD-CVI/TVI/AHD/960H Analog CVBS),36PCS LEDs,120ft IR Night Vision,105\u00b0 View Angle Weatherproof Surveillance CCTV Bullet Camera",
+              "score": 0.0153846153846,
+              "passage_rank": 5,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 5,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.015384615384615385,
+                "reconstructed_score": 0.015384615384615385,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            },
+            {
+              "product_id": "B08R959WNC",
+              "title": "Sony ZV-1 Camera for Content Creators and Vloggers, White, Compact (DCZV1/W) (Renewed)",
+              "score": 0.0151515151515,
+              "passage_rank": 6,
+              "fusion": {
+                "constant": 60,
+                "window": 100,
+                "text_rank": null,
+                "vector_rank": 6,
+                "text_contribution": 0.0,
+                "vector_contribution": 0.015151515151515152,
+                "reconstructed_score": 0.015151515151515152,
+                "status": "verified",
+                "note": "Reconstructed from native branch scores and checked against Redis's RRF score. Ranks refer to passages before product deduplication."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

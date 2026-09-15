@@ -1,12 +1,16 @@
 services:
   redis:
-    image: redis:8
-    container_name: northwind-redis
+    # Tested Redis 8.6.2; immutable official image digest (supports FT.HYBRID).
+    image: redis@sha256:1f073813b641755b70b0200da64131bbeeb4ec5b633ca67772229b49820caafa
     ports:
-      # Override REDIS_PORT if 6379 is already taken on your machine.
-      - "${REDIS_PORT:-6379}:6379"
+      - "127.0.0.1:${REDIS_PORT:-6379}:6379"
+    volumes:
+      - camera-redis-data:/data
+    command: ["redis-server", "--appendonly", "yes"]
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
       interval: 2s
       timeout: 3s
       retries: 15
+volumes:
+  camera-redis-data:

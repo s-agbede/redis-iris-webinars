@@ -9,3 +9,5 @@ web/node_modules/
 web/dist/
 seed/*.tmp
 seed/failed_ids.txt
+eval/latest.json
+:memory:.ses

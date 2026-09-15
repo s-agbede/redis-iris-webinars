@@ -1,68 +1,33 @@
-# Product catalogue index.
-#
-# Two things to notice, because they are the whole lesson of episode 1:
-#   * `price` and `in_stock` are numeric/tag fields, NOT part of the embedding.
-#     Constraints belong in filters. Meaning belongs in vectors.
-#   * `search_text` is a purpose-built blob for full-text (BM25) scoring, which
-#     is what makes exact terms — brand names, "10,000mm" — findable at all.
+# Camera passages. All three methods search the same bounded search_text.
 version: '0.1.0'
-
 index:
-  name: products
-  prefix: product
+  name: camera_passages
+  prefix: camera:passage
   storage_type: json
-
 fields:
-  # --- display fields, returned to the UI.
-  # Indexed as plain text because Redis rejects non-sortable non-indexable
-  # fields. That costs us nothing: every query below targets `search_text`
-  # explicitly, so these never influence BM25 scoring. They are also here if we
-  # later want a weighted multi-field TextQuery.
-  - name: name
-    type: text
-  - name: description
-    type: text
-
-  # --- filterable / searchable
   - name: product_id
+    type: tag
+  - name: passage_id
     type: tag
   - name: brand
     type: tag
-  - name: category
-    type: tag
-  - name: department
-    type: tag
-  - name: in_stock
-    type: tag
-  # Written by seed/load.py since the first commit but never declared here, so
-  # it was stored and unfilterable. Indexed now so the API can browse the twelve
-  # hand-written demo products apart from the 1,573 catalogue ones.
-  - name: is_hero
-    type: tag
-  - name: material
-    type: tag
-  - name: fit
-    type: tag
-  - name: sizes
-    type: tag
-    path: $.sizes[*]
-  - name: colours
-    type: tag
-    path: $.colours[*]
-  - name: price
-    type: numeric
     attrs:
-      sortable: true
-  - name: waterproof_mm
+      case_sensitive: true
+      separator: "\u001f"
+  - name: field
+    type: tag
+  - name: text
+    type: text
+  - name: start
     type: numeric
-    attrs:
-      sortable: true
+  - name: end
+    type: numeric
   - name: search_text
     type: text
   - name: embedding
     type: vector
     attrs:
-      algorithm: hnsw
-      dims: 1536
+      algorithm: flat
+      dims: 384
       distance_metric: cosine
       datatype: float32

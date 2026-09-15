@@ -1,0 +1,17 @@
+{
+  "source": "https://github.com/amazon-science/esci-data",
+  "source_revision": "7916cdf6ab75a462e77f20ab40428a10923998d5",
+  "selection": "Reviewed English/US photography queries; all their judged candidates retained, including non-photographic distractors. Query selection is editorial; original product fields and labels are unchanged.",
+  "product_count": 2317,
+  "query_count": 183,
+  "judgement_count": 3147,
+  "missing_description": 969,
+  "missing_bullets": 146,
+  "checksums": {
+    "LICENSE.txt": "09e8a9bcec8067104652c168685ab0931e7868f9c8284b66f5ae6edae5f1130b",
+    "NOTICE.txt": "d4290ed64c2edd0fce1d84e3f9dfb2881240fe534def76b8cd29ed6af683e287",
+    "judgements.jsonl.gz": "37ed23b110dcebac9e03e7b552b716a120d9fda3c4a70a2637daa51195fd1dd2",
+    "products.jsonl.gz": "b7bf0002d9217a35ec0dc665cb2a0ad8e78f008581a0efc8773f03b648fbdb68",
+    "query-selection.json": "fc9fa509c3ab0073254ddf9dfac0ff18023191dbf954f27aeec648aea8af5306"
+  }
+}

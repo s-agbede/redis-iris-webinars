@@ -1,206 +1,118 @@
-"""Build the Redis indexes from committed seed artifacts.
+"""Load the bundled camera source data using the pinned local model."""
 
-Nothing is generated here — descriptions and attributes already exist in
-`products.enriched.jsonl` and `heroes.yaml`. This step assembles documents,
-embeds them, and loads two indexes. Safe to re-run; it recreates both.
-
-    uv run python -m seed.load
-"""
-
-from __future__ import annotations
-
+import argparse
 import json
-import re
 import time
-from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
+from redis import Redis
+from redis.exceptions import ResponseError
 from redisvl.index import SearchIndex
-from redisvl.schema import IndexSchema
 
+from app.catalog import Catalog, make_passages
 from app.embeddings import build_vectorizer
-from app.models import Product
-from app.settings import get_settings
-
-ENRICHED = Path("seed/products.enriched.jsonl")
-HEROES = Path("seed/heroes.yaml")
-POLICY_DIR = Path("seed/policies")
-EMBED_BATCH = 100
+from app.search import index_identity
+from app.settings import ROOT, Settings, get_settings
 
 
-def spec_terms(product: Product) -> str:
-    """Search-friendly variants of a waterproof rating.
+def current_manifest(client: Any, settings: Settings, catalog: Catalog) -> dict[str, Any] | None:
+    """An interrupted, outdated or missing index must be rebuilt before serving."""
+    raw = client.get(settings.manifest_key)
+    if not raw:
+        return None
+    manifest: dict[str, Any] = json.loads(raw)
+    if any(manifest.get(k) != v for k, v in index_identity(settings, catalog).items()):
+        return None
+    try:
+        raw_info = client.execute_command("FT.INFO", settings.products_index)
+    except ResponseError as exc:
+        if "unknown index" in str(exc).lower() or "no such index" in str(exc).lower():
+            return None
+        raise
+    info = dict(zip(raw_info[::2], raw_info[1::2], strict=True))
+    if int(info[b"num_docs"]) != manifest.get("passage_count") or int(info[b"indexing"]):
+        return None
+    return manifest
 
-    Redis tokenises on punctuation, so the "10,000mm" in a description becomes
-    "10" and "000mm" — which would make the exact-term query in episode 1 fail
-    for the wrong reason. Emitting unpunctuated variants keeps the hybrid demo
-    honest rather than dependent on how a copywriter wrote a number.
-    """
-    if product.waterproof_mm <= 0:
-        return ""
-    mm = product.waterproof_mm
-    return f"waterproof {mm}mm {mm} mm hydrostatic head rated {mm} taped seams"
 
-
-def build_search_text(product: Product) -> str:
-    """The single field BM25 scores against."""
-    parts = [
-        product.name,
-        product.brand,
-        product.category,
-        product.description,
-        product.material,
-        f"{product.fit} fit",
-        " ".join(product.colours),
-        spec_terms(product),
+def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
+    catalog = Catalog.load(settings.data_dir)
+    if if_needed:
+        with Redis.from_url(
+            settings.redis_url, socket_connect_timeout=3, socket_timeout=15
+        ) as client:
+            existing = current_manifest(client, settings, catalog)
+        if existing is not None:
+            print(f"Reusing {existing['passage_count']:,} indexed camera passages.", flush=True)
+            return existing
+    encoder = build_vectorizer(settings)
+    passages = [
+        passage
+        for product in catalog.products.values()
+        for passage in make_passages(
+            product, encoder.tokenizer, settings.passage_tokens, settings.passage_overlap
+        )
     ]
-    return re.sub(r"\s+", " ", " ".join(p for p in parts if p)).strip()
-
-
-def to_document(product: Product, embedding: list[float]) -> dict[str, Any]:
-    """Redis JSON document. Booleans become tag strings, which is what tags are."""
-    return {
-        "product_id": product.product_id,
-        "name": product.name,
-        "brand": product.brand,
-        "category": product.category,
-        "department": product.department,
-        "in_stock": "true" if product.in_stock else "false",
-        "material": product.material,
-        "fit": product.fit,
-        "sizes": product.sizes,
-        "colours": product.colours,
-        "price": product.price,
-        "waterproof_mm": product.waterproof_mm,
-        "description": product.description,
-        "search_text": product.search_text,
-        "embedding": embedding,
-        "is_hero": "true" if product.is_hero else "false",
-    }
-
-
-def read_products() -> list[Product]:
-    products: list[Product] = []
-
-    for line in ENRICHED.read_text().splitlines():
-        if not line.strip():
-            continue
-        raw = json.loads(line)
-        products.append(
-            Product(
-                product_id=raw["product_id"],
-                name=raw["name"],
-                brand=raw["brand"],
-                category=raw["category"],
-                department=raw["department"],
-                price=raw["price_eur"],
-                cost=raw.get("cost_eur"),
-                in_stock=raw["in_stock"],
-                description=raw["description"],
-                material=raw["material"],
-                fit=raw["fit"],
-                sizes=raw["sizes"],
-                colours=raw["colours"],
-                waterproof_mm=raw.get("waterproof_mm", 0),
+    print(f"{len(catalog.products):,} products; {len(passages):,} source passages", flush=True)
+    schema = yaml.safe_load((ROOT / "schemas/products.yaml").read_text())
+    schema["index"].update(name=settings.products_index, prefix=settings.passage_prefix)
+    schema["fields"][-1]["attrs"]["algorithm"] = settings.index_algorithm.lower()
+    client = Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=30)
+    try:
+        server_info = cast(dict[str, Any], client.info("server"))
+        version = tuple(int(part) for part in server_info["redis_version"].split(".")[:2])
+        if version < (8, 4):
+            raise RuntimeError("Native hybrid search requires Redis 8.4 or newer.")
+        index = SearchIndex.from_dict(schema, redis_client=client, validate_on_load=True)
+        # Only camera passage keys are replaced. Source apparel indexes are separate.
+        client.delete(settings.manifest_key)
+        index.create(overwrite=True, drop=True)
+        pipeline = client.pipeline(transaction=False)
+        for product in catalog.products.values():
+            pipeline.json().set(
+                f"{settings.product_prefix}:us:{product.product_id}", "$", product.model_dump()
             )
-        )
-
-    for entry in yaml.safe_load(HEROES.read_text()):
-        if "product_id" not in entry:  # documentation-only entries
-            continue
-        products.append(
-            Product(
-                product_id=entry["product_id"],
-                name=entry["name"],
-                brand=entry["brand"],
-                category=entry["category"],
-                department="Women",
-                price=entry["price_eur"],
-                cost=entry.get("cost_eur"),
-                in_stock=entry["in_stock"],
-                is_hero=True,
-                description=" ".join(entry["description"].split()),
-                material=entry["material"],
-                fit=entry["fit"],
-                sizes=entry["sizes"],
-                colours=entry["colours"],
-                waterproof_mm=entry.get("waterproof_mm", 0),
+        pipeline.execute()
+        started = time.perf_counter()
+        for offset in range(0, len(passages), 128):
+            batch = passages[offset : offset + 128]
+            vectors = encoder.embed_many([p.search_text for p in batch])
+            index.load(
+                [
+                    {**p.model_dump(), "embedding": vector}
+                    for p, vector in zip(batch, vectors, strict=True)
+                ],
+                id_field="passage_id",
             )
-        )
-
-    for product in products:
-        product.search_text = build_search_text(product)
-    return products
-
-
-def read_policy_chunks() -> list[dict[str, Any]]:
-    """Split each policy document on its `## ` section headings."""
-    chunks: list[dict[str, Any]] = []
-    for path in sorted(POLICY_DIR.glob("*.md")):
-        text = path.read_text()
-        _, frontmatter, body = text.split("---", 2)
-        meta = yaml.safe_load(frontmatter)
-        sections = re.split(r"^## ", body, flags=re.M)[1:]
-        for i, section in enumerate(sections):
-            heading, _, content = section.partition("\n")
-            chunks.append(
-                {
-                    "policy_id": meta["policy_id"],
-                    "title": f"{meta['title']} — {heading.strip()}",
-                    "topic": meta["topic"],
-                    "chunk_index": i,
-                    "body": " ".join(content.split()),
-                }
+            print(
+                f"Indexed {min(offset + 128, len(passages)):,}/{len(passages):,} passages",
+                flush=True,
             )
-    return chunks
-
-
-def main() -> None:
-    settings = get_settings()
-    vectorizer = build_vectorizer(settings)
-
-    products = read_products()
-    heroes = sum(1 for p in products if p.is_hero)
-    print(f"products: {len(products)} ({heroes} hero, {len(products) - heroes} catalogue)")
-
-    started = time.perf_counter()
-    vectors = vectorizer.embed_many(
-        [p.to_embedding_input() for p in products], batch_size=EMBED_BATCH
-    )
-    print(f"  embedded in {time.perf_counter() - started:.1f}s")
-
-    index = SearchIndex(IndexSchema.from_yaml("schemas/products.yaml"), redis_url=settings.redis_url)
-    index.create(overwrite=True, drop=True)
-    index.load(
-        [to_document(p, v) for p, v in zip(products, vectors, strict=True)],
-        id_field="product_id",
-    )
-    print(f"  loaded into '{index.name}'")
-
-    chunks = read_policy_chunks()
-    print(f"\npolicy chunks: {len(chunks)} from {len(list(POLICY_DIR.glob('*.md')))} documents")
-
-    started = time.perf_counter()
-    chunk_vectors = vectorizer.embed_many(
-        [f"{c['title']}. {c['body']}" for c in chunks], batch_size=EMBED_BATCH
-    )
-    print(f"  embedded in {time.perf_counter() - started:.1f}s")
-
-    policy_index = SearchIndex(
-        IndexSchema.from_yaml("schemas/policies.yaml"), redis_url=settings.redis_url
-    )
-    policy_index.create(overwrite=True, drop=True)
-    policy_index.load(
-        [
-            {**chunk, "embedding": vector, "id": f"{chunk['policy_id']}-{chunk['chunk_index']}"}
-            for chunk, vector in zip(chunks, chunk_vectors, strict=True)
-        ],
-        id_field="id",
-    )
-    print(f"  loaded into '{policy_index.name}'")
-    print("\ndone")
+        deadline = time.monotonic() + 30
+        while True:
+            info = index.info()
+            if int(info.get("num_docs", 0)) == len(passages) and not int(info.get("indexing", 0)):
+                break
+            if time.monotonic() > deadline:
+                raise RuntimeError(
+                    "Camera indexing did not finish; inspect FT.INFO and rerun make seed."
+                )
+            time.sleep(0.1)
+        manifest = {
+            **index_identity(settings, catalog),
+            "product_count": len(catalog.products),
+            "passage_count": len(passages),
+            "seed_seconds": round(time.perf_counter() - started, 2),
+        }
+        client.set(settings.manifest_key, json.dumps(manifest))
+        print(json.dumps(manifest, indent=2), flush=True)
+        return manifest
+    finally:
+        client.close()
 
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--if-needed", action="store_true", help="Reuse a matching complete index")
+    load(get_settings(), if_needed=parser.parse_args().if_needed)

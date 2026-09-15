@@ -1,0 +1,90 @@
+# Destination index — episode 1's searchable corpus.
+#
+# Two things to notice, because they are the whole lesson of episode 1:
+#   * Every constraint (temperature, flight time, crowd level, car) is a
+#     numeric or tag field, NOT part of the embedding. The summary is what gets
+#     embedded; the facts are what get filtered.
+#   * `temp_<month>_c` is twelve separate numeric fields rather than one. The
+#     month selector in the UI decides WHICH field the filter targets, which is
+#     the modelling decision that makes "somewhere warm in February" answerable
+#     at all. One document per destination-month would be 60,000 documents to
+#     express the same thing.
+version: '0.1.0'
+
+index:
+  name: destinations
+  prefix: destination
+  storage_type: json
+
+fields:
+  # --- display
+  - name: name
+    type: text
+  - name: summary
+    type: text
+
+  # --- identity / filterable
+  - name: destination_id
+    type: tag
+  - name: country
+    type: tag
+  - name: region_name
+    type: tag
+  - name: macro_region
+    type: tag
+  - name: crowd_level          # quiet | busy | overrun
+    type: tag
+
+  # The app is a Dublin-based tour operator, so the origin is fixed and
+  # reachability collapses to one question: in which months does a direct
+  # flight run? Seasonal — sun routes get winter capacity, Greek islands
+  # summer capacity — which is what makes Agadir a decoy in February.
+  # (If a second origin is ever added, the (origin, month) pair must become
+  # a composite tag: independent origin and month sets admit false positives.)
+  - name: direct_months          # ["oct","nov",...,"apr"]; empty = no direct
+    type: tag
+    path: $.direct_months[*]
+  - name: car_needed
+    type: tag
+  - name: walkable
+    type: tag
+  - name: coastal
+    type: tag
+  - name: family_suitable
+    type: tag
+  - name: is_hero
+    type: tag
+
+  # --- numeric facets
+  - name: flight_minutes         # from Dublin, like everything else here
+    type: numeric
+    attrs:
+      sortable: true
+  - name: typical_week_eur
+    type: numeric
+    attrs:
+      sortable: true
+
+  # Real climate data. This is the primary near-miss axis, so it must not be
+  # invented — a wrong figure here misleads a viewer about an actual place.
+  - name: temp_jan_c
+    type: numeric
+    attrs: { sortable: true }
+  - name: temp_feb_c
+    type: numeric
+    attrs: { sortable: true }
+  - name: temp_mar_c
+    type: numeric
+    attrs: { sortable: true }
+  # ... apr through dec, same shape
+
+  # --- scoring
+  - name: search_text
+    type: text
+  - name: embedding
+    type: vector
+    attrs:
+      algorithm: hnsw
+      dims: 1536
+      distance_metric: cosine
+      datatype: float32

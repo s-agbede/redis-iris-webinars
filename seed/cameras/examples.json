@@ -1,0 +1,5 @@
+[
+  {"query":"canon rf lenses","title":"Model & mount","kind":"exact","origin":"esci"},
+  {"query":"A bag to carry my camera and laptop","title":"Describe a need","kind":"intent","origin":"authored"},
+  {"query":"camera nikon d610","title":"Camera or accessory?","kind":"constraint","origin":"esci"}
+]

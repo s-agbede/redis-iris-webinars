@@ -1,0 +1,14 @@
+[
+  {
+    "a": "Show the logs from the previous instance of my container",
+    "b": "How do I read the logs from my container before it restarted?",
+    "expected": "eligible only with same source revision and request context",
+    "cosine": 0.7523858547210693
+  },
+  {
+    "a": "Show the logs from the previous instance of my container",
+    "b": "Show the logs from the current instance of my container",
+    "expected": "must miss: previous versus current container",
+    "cosine": 0.9490674734115601
+  }
+]

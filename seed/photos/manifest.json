@@ -1,0 +1,160 @@
+{
+  "photos": [
+    {
+      "product_ids": [
+        "B00FOTF8M2",
+        "B014I11JV0"
+      ],
+      "sha256": "9fac1bf919312ec5b6a050d011762cfefeb5a66c675d9eda9d039460cdb6cbba",
+      "photo": {
+        "url": "/photos/nikon-d610.jpg",
+        "alt": "Nikon D610 camera body",
+        "caption": "Model reference: D610 body; listing condition may differ.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nikon_D610_Body.jpg",
+        "author": "Johntorcasio",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B00ZDWGFR2"
+      ],
+      "sha256": "9324e5b2c796e3a4550a5e4b142e43fbb94f72e32fcc45890a77aeb3a3547bd7",
+      "photo": {
+        "url": "/photos/sony-a7r-ii.jpg",
+        "alt": "Sony A7R II camera body",
+        "caption": "Model reference: Sony A7R II body.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sony_A7RMII.jpg",
+        "author": "Denis Barthel",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B07RB7SHD7"
+      ],
+      "sha256": "93c56806b57a7f2542aee33e745c0d78de0031dc22dfe65d2c0e30ddd208b418",
+      "photo": {
+        "url": "/photos/canon-rf85-f12.jpg",
+        "alt": "Canon RF85mm F1.2L USM lens mounted on an EOS R6",
+        "caption": "Model reference: RF85mm lens mounted on a camera; camera not included.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Canon_R6_und_RF_85_1,2-8068.jpg",
+        "author": "GodeNehler",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B00007GQLU"
+      ],
+      "sha256": "44c0b01143c54837459dc5cad4e33f973ef27adb7fd93e2d8a0dc90e30035cd4",
+      "photo": {
+        "url": "/photos/canon-ef85-f18.jpg",
+        "alt": "Canon EF85mm f/1.8 USM lens",
+        "caption": "Model reference: Canon EF85mm f/1.8 USM lens.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Canon_EF85mm_1_8.jpg",
+        "author": "Armin Kübelbeck",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B071ZMDBKL"
+      ],
+      "sha256": "0d5425ba8d82df16b12d3dd20b754dbaa6e8f94c36dc6f27818d3f76b785a75a",
+      "photo": {
+        "url": "/photos/nikon-w300.jpg",
+        "alt": "Black Nikon Coolpix W300 underwater camera",
+        "caption": "Model reference: black W300 shown; this listing is orange.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nikon_Coolpix_W300_-_1.jpg",
+        "author": "KKPCW",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B075ZSL3M7",
+        "B07F2MY52V",
+        "B07VW3KC9X",
+        "B087V2QQSN",
+        "B08N7ZRW9C",
+        "B08R45H8DV"
+      ],
+      "sha256": "548137bcb74dd093d3b6186a4487265444c79729d2ac28d78b35e981139ebd83",
+      "photo": {
+        "url": "/photos/nikon-d5600.jpg",
+        "alt": "Nikon D5600 camera body with body cap",
+        "caption": "Model reference: D5600 body only; kit lenses and accessories not pictured.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nikon_D5600_Front.jpg",
+        "author": "Michael Kramer",
+        "license": "CC BY-SA 3.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/3.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B07H489XDQ"
+      ],
+      "sha256": "76216a4b129f3dd024f4f7dd9bf812958be968562b3157dfd9ad4707fd54ac67",
+      "photo": {
+        "url": "/photos/canon-rf24-105-f4.jpg",
+        "alt": "Canon RF24-105mm F4L IS USM lens with hood",
+        "caption": "Model reference: Canon RF24–105mm F4L IS USM lens.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Canon_RF24-105mm_F4_L_IS_USM_07_sep_2018.jpg",
+        "author": "昼落ち",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B08MFVH7SV"
+      ],
+      "sha256": "d7416d385bce390b8d9c99253c9d0b2375430350aaf779c3ea7022cbaf4d779e",
+      "photo": {
+        "url": "/photos/canon-rf50-f18.jpg",
+        "alt": "Canon RF50mm F1.8 STM lens mounted on an EOS R50",
+        "caption": "Model reference: RF50mm lens mounted on a camera; camera not included.",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Canon_R50_with_RF-50_mm_lens.jpg",
+        "author": "Gannu03",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "product_ids": [
+        "B09BBKVMCD"
+      ],
+      "sha256": "fddb0b4fd1c7b10bc806c00ddec76a655d27f7d8770bdbbd748c0d6db67e5b55",
+      "photo": {
+        "url": "/photos/sony-zv-e10-white.jpg",
+        "alt": "White Sony ZV-E10 camera with a silver E PZ 16–50mm lens and microphone windscreen",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sony_ZV-E10_SEL1650_sample_at_Taipei_101_Store,_Sony_Taiwan_20250810.jpg",
+        "author": "Solomon203",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "caption": "Model reference: white ZV-E10 body with a 16–50mm lens shown for reference."
+      }
+    },
+    {
+      "product_ids": [
+        "B09BBMQKSR"
+      ],
+      "sha256": "fddb0b4fd1c7b10bc806c00ddec76a655d27f7d8770bdbbd748c0d6db67e5b55",
+      "photo": {
+        "url": "/photos/sony-zv-e10-white.jpg",
+        "alt": "White Sony ZV-E10 camera with a silver E PZ 16–50mm lens and microphone windscreen",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sony_ZV-E10_SEL1650_sample_at_Taipei_101_Store,_Sony_Taiwan_20250810.jpg",
+        "author": "Solomon203",
+        "license": "CC BY-SA 4.0",
+        "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "caption": "Model reference: white ZV-E10 with 16–50mm lens; exact kit contents not verified."
+      }
+    }
+  ]
+}

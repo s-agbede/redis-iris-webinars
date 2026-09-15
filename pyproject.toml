@@ -1,21 +1,23 @@
 [project]
-name = "northwind-context-engine"
+name = "camera-search-lab"
 version = "0.1.0"
-description = "Northwind Outfitters — a context-aware shopping agent built on Redis, one capability per episode."
+description = "Compare full-text, vector and hybrid camera search with RedisVL and local embeddings."
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.141.1",
     "uvicorn[standard]>=0.34",
     "pydantic>=2.10",
     "pydantic-settings>=2.15",
-    "redisvl>=0.26.0",
-    "openai>=2.0",
-    "openai-agents>=0.22.0",
+    "redisvl==0.26.0",
+    "onnxruntime>=1.23,<2",
+    "tokenizers>=0.22,<1",
+    "huggingface-hub>=0.34,<2",
+    "numpy>=2,<3",
     "httpx>=0.28",
 ]
 
 [project.optional-dependencies]
-seed = ["anthropic>=0.40"]
+prepare = ["pyarrow>=20", "fsspec[http]>=2025.1"]
 
 [dependency-groups]
 dev = ["pytest>=8", "pytest-asyncio>=0.25", "ruff>=0.9", "mypy>=1.14"]

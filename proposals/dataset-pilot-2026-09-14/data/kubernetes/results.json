@@ -1,0 +1,2198 @@
+[
+  {
+    "id": "identifier-crash",
+    "query": "CrashLoopBackOff",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 8.05929072700198,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 5.7842159242338615,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 5.489590841954098,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.4271942377090454,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.265620619058609,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.2360953688621521,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-condition.md",
+        "title": "Pod Conditions",
+        "score": 0.2324768751859665,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/workload-api/disruption-and-priority.md",
+        "title": "Pod Group Disruption and Priority",
+        "score": 0.23135049641132355,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.2287146896123886,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-qos.md",
+        "title": "Pod Quality of Service Classes",
+        "score": 0.2051818072795868,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.20403990149497986,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 0.20148681104183197,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/assign-memory-resource.md",
+        "title": "Assign Memory Resources to Containers and Pods",
+        "score": 0.20063970983028412,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.03278688524590164,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.029957522915269395,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 0.02946236559139785,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.016129032258064516,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.015873015873015872,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-condition.md",
+        "title": "Pod Conditions",
+        "score": 0.015625,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/workload-api/disruption-and-priority.md",
+        "title": "Pod Group Disruption and Priority",
+        "score": 0.015384615384615385,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.015151515151515152,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-qos.md",
+        "title": "Pod Quality of Service Classes",
+        "score": 0.014925373134328358,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.014705882352941176,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "identifier-image",
+    "query": "ImagePullBackOff",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 8.079837428686027,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 6.334544406685931,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 6.160961232998236,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/windows.md",
+        "title": "Windows debugging tips",
+        "score": 5.8408518349250995,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.2840830385684967,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 0.25840699672698975,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-pods.md",
+        "title": "Debug Pods",
+        "score": 0.25738146901130676,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.24116656184196472,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 0.23934605717658997,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.22865796089172363,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/windows.md",
+        "title": "Windows debugging tips",
+        "score": 0.22849535942077637,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.228183314204216,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/horizontal-pod-autoscale.md",
+        "title": "Horizontal Pod Autoscaling",
+        "score": 0.22585615515708923,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/crictl.md",
+        "title": "Debugging Kubernetes nodes with crictl",
+        "score": 0.22270652651786804,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.03252247488101534,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 0.03177805800756621,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/windows.md",
+        "title": "Windows debugging tips",
+        "score": 0.03055037313432836,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.02792120864410021,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 0.016129032258064516,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-pods.md",
+        "title": "Debug Pods",
+        "score": 0.015873015873015872,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.015625,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.015151515151515152,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.014705882352941176,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/horizontal-pod-autoscale.md",
+        "title": "Horizontal Pod Autoscaling",
+        "score": 0.014492753623188406,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "identifier-disruption",
+    "query": "PodDisruptionBudget",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 7.274372076826373,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 7.178237982560623,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 6.846359799597368,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 6.291120757649886,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 5.104414112289424,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/vertical-pod-autoscale.md",
+        "title": "Vertical Pod Autoscaling",
+        "score": 5.016390691569972,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 4.931351658258516,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.6497381925582886,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.5675948858261108,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-volume-storage.md",
+        "title": "Configure a Pod to Use a Volume for Storage",
+        "score": 0.5484039783477783,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-initialization.md",
+        "title": "Configure Pod Initialization",
+        "score": 0.5456274151802063,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 0.5447131991386414,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.5433908104896545,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 0.5433751940727234,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/downward-api.md",
+        "title": "Downward API",
+        "score": 0.5419981479644775,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-condition.md",
+        "title": "Pod Conditions",
+        "score": 0.5385881662368774,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-projected-volume-storage.md",
+        "title": "Configure a Pod to Use a Projected Volume for Storage",
+        "score": 0.5353769063949585,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.031544957774465976,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.0315136476426799,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.03131881575727918,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 0.03055037313432836,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.02946236559139785,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/vertical-pod-autoscale.md",
+        "title": "Vertical Pod Autoscaling",
+        "score": 0.02749719416386083,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.026984126984126985,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-volume-storage.md",
+        "title": "Configure a Pod to Use a Volume for Storage",
+        "score": 0.015873015873015872,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-initialization.md",
+        "title": "Configure Pod Initialization",
+        "score": 0.015625,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 0.015384615384615385,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "identifier-logs",
+    "query": "kubectl logs --previous",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 12.582143680255877,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 11.03364508112685,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/manifest-admission-control.md",
+        "title": "Manifest-Based Admission Control",
+        "score": 9.2768460772396,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 8.194881678080238,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/audit.md",
+        "title": "Auditing",
+        "score": 7.77151803582659,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 7.40684369013844,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 7.218965998457456,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 6.522626794707428,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 6.371822845655617,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/monitor-node-health.md",
+        "title": "Monitor Node Health",
+        "score": 6.217114323646877,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 0.7321138381958008,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/logging/_index.md",
+        "title": "Logging in Kubernetes",
+        "score": 0.6406106352806091,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/audit.md",
+        "title": "Auditing",
+        "score": 0.6354628801345825,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.6253840327262878,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/_index.md",
+        "title": "Monitoring, Logging, and Debugging",
+        "score": 0.6120372414588928,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.6035186052322388,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/crictl.md",
+        "title": "Debugging Kubernetes nodes with crictl",
+        "score": 0.58701491355896,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-service.md",
+        "title": "Debug Services",
+        "score": 0.5748614072799683,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 0.573805570602417,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.5596872568130493,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 0.03252247488101534,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/audit.md",
+        "title": "Auditing",
+        "score": 0.03125763125763126,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.030776515151515152,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.030679156908665108,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/logging/_index.md",
+        "title": "Logging in Kubernetes",
+        "score": 0.02946236559139785,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.028438886647841874,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/monitor-node-health.md",
+        "title": "Monitor Node Health",
+        "score": 0.028370221327967807,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 0.028283227848101264,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 0.027650648360030512,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/troubleshoot-kubectl.md",
+        "title": "Troubleshooting kubectl",
+        "score": 0.0273972602739726,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "intent-logs",
+    "query": "How do I see what my program printed before it died?",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 8.031287406681537,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 7.710382839935562,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 7.614061621152173,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 7.484972614816586,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 7.041318274542487,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/linux-kernel-security-constraints.md",
+        "title": "Linux kernel security constraints for Pods and containers",
+        "score": 6.78587417913333,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/access-application-cluster/communicate-containers-same-pod-shared-volume.md",
+        "title": "Communicate Between Containers in the Same Pod Using a Shared Volume",
+        "score": 6.319001141219152,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 6.261942085259999,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 6.140049650881226,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/local-debugging.md",
+        "title": "Developing and debugging services locally using telepresence",
+        "score": 6.130715412214347,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 0.27353769540786743,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 0.2620869278907776,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/audit.md",
+        "title": "Auditing",
+        "score": 0.2268277108669281,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-statefulset.md",
+        "title": "Debug a StatefulSet",
+        "score": 0.2260037660598755,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.20916280150413513,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.19838295876979828,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.1896371990442276,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/monitor-node-health.md",
+        "title": "Monitor Node Health",
+        "score": 0.18704107403755188,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.18250951170921326,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-service.md",
+        "title": "Debug Services",
+        "score": 0.16814960539340973,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.03131881575727918,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 0.031099324975891997,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.02904040404040404,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.02878726010616578,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.026736111111111113,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-service.md",
+        "title": "Debug Services",
+        "score": 0.026333907056798625,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.02580128205128205,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 0.025503573749187783,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 0.025396825396825397,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 0.025188536953242836,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "intent-ready",
+    "query": "Stop sending customers to my application until it has finished starting",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 17.875800308967182,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 17.729922937375928,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 16.08949540702882,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/cron-jobs.md",
+        "title": "CronJob",
+        "score": 11.490686938817706,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 10.704462312112557,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/ttlafterfinished.md",
+        "title": "Automatic Cleanup for Finished Jobs",
+        "score": 10.05677365375438,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/attach-handler-lifecycle-event.md",
+        "title": "Attach Handlers to Container Lifecycle Events",
+        "score": 10.03566281753315,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 9.948176076061168,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 9.300477634359213,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 8.958934134876397,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "concepts/workloads/controllers/ttlafterfinished.md",
+        "title": "Automatic Cleanup for Finished Jobs",
+        "score": 0.3200790584087372,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.30731767416000366,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.291207492351532,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/extensible-admission-controllers.md",
+        "title": "Dynamic Admission Control",
+        "score": 0.29099446535110474,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 0.2859962582588196,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.2801758348941803,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.27895069122314453,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/cron-jobs.md",
+        "title": "CronJob",
+        "score": 0.26721906661987305,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/_index.md",
+        "title": "Workload Management",
+        "score": 0.2652667462825775,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.2537594437599182,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/controllers/ttlafterfinished.md",
+        "title": "Automatic Cleanup for Finished Jobs",
+        "score": 0.031544957774465976,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.03128054740957967,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.03125763125763126,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.030834914611005692,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.03047794966520434,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/cron-jobs.md",
+        "title": "CronJob",
+        "score": 0.030330882352941176,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.029418126757516764,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/attach-handler-lifecycle-event.md",
+        "title": "Attach Handlers to Container Lifecycle Events",
+        "score": 0.028814262023217248,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 0.027108970929195647,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.027071520029266508,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "intent-disruption",
+    "query": "Keep two copies of my app available while machines are being serviced",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 13.010445941809945,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/assign-memory-resource.md",
+        "title": "Assign Memory Resources to Containers and Pods",
+        "score": 11.57187562770398,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/workload-api/workloadbuilder.md",
+        "title": "Scheduling Building Block APIs and the workloadbuilder Library",
+        "score": 11.55404048421168,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/assign-cpu-resource.md",
+        "title": "Assign CPU Resources to Containers and Pods",
+        "score": 11.526801607936143,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/multi-tenancy.md",
+        "title": "Multi-tenancy",
+        "score": 11.022439637920954,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 9.758109911485853,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/services-networking/service.md",
+        "title": "Service",
+        "score": 9.716655938861223,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 9.233693814596037,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/local-debugging.md",
+        "title": "Developing and debugging services locally using telepresence",
+        "score": 8.530371288752448,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 8.513221232156239,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.45426511764526367,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicationcontroller.md",
+        "title": "ReplicationController",
+        "score": 0.4269348978996277,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.4010252356529236,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.3888879418373108,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 0.38639217615127563,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.3851621747016907,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.37835097312927246,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.37458106875419617,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/multi-tenancy.md",
+        "title": "Multi-tenancy",
+        "score": 0.3727576732635498,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/access-application-cluster/create-external-load-balancer.md",
+        "title": "Create an External Load Balancer",
+        "score": 0.36677616834640503,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.030158730158730156,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/multi-tenancy.md",
+        "title": "Multi-tenancy",
+        "score": 0.029877369007803793,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicationcontroller.md",
+        "title": "ReplicationController",
+        "score": 0.029827662395050816,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.029138513513513514,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 0.02871794871794872,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 0.028484848484848488,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/create-hostprocess-pod.md",
+        "title": "Create a Windows HostProcess Pod",
+        "score": 0.027777777777777776,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.027242401779095628,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/services-networking/service.md",
+        "title": "Service",
+        "score": 0.026973565905412694,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.026830135039090264,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "intent-secret",
+    "query": "Let an app read a password without storing it in its image",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/configuration/_index.md",
+        "title": "Configuration",
+        "score": 12.753631846525565,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 11.756033210262252,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/access-application-cluster/configure-access-multiple-clusters.md",
+        "title": "Configure Access to Multiple Clusters",
+        "score": 11.31563840481737,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 11.118460644421978,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-service.md",
+        "title": "Debug Services",
+        "score": 11.029074152653264,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 10.799819149757704,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 10.32965343052614,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/secrets-good-practices.md",
+        "title": "Good practices for Kubernetes Secrets",
+        "score": 10.031345327671303,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/configmap.md",
+        "title": "ConfigMaps",
+        "score": 9.934372786289712,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 9.165603132643572,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.4836997389793396,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 0.41948559880256653,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.3633907735347748,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/secrets-good-practices.md",
+        "title": "Good practices for Kubernetes Secrets",
+        "score": 0.3365347385406494,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/configmap.md",
+        "title": "ConfigMaps",
+        "score": 0.31119847297668457,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-service-account.md",
+        "title": "Configure Service Accounts for Pods",
+        "score": 0.3106868267059326,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/application-security-checklist.md",
+        "title": "Application Security Checklist",
+        "score": 0.30581533908843994,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.3037109971046448,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/service-accounts.md",
+        "title": "Service Accounts",
+        "score": 0.29964718222618103,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 0.2996193766593933,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.03252247488101534,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 0.031054405392392875,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/secrets-good-practices.md",
+        "title": "Good practices for Kubernetes Secrets",
+        "score": 0.030330882352941176,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/access-application-cluster/configure-access-multiple-clusters.md",
+        "title": "Configure Access to Multiple Clusters",
+        "score": 0.029957522915269395,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/configmap.md",
+        "title": "ConfigMaps",
+        "score": 0.029877369007803793,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.029857397504456328,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/_index.md",
+        "title": "Configuration",
+        "score": 0.029051670471052088,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 0.02817460317460317,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.028068137824235385,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/service-accounts.md",
+        "title": "Service Accounts",
+        "score": 0.028006267136701922,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "mixed-ready",
+    "query": "readinessProbe stop traffic while the application warms up",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 12.526831380360331,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 11.121829287909899,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 10.888409309533678,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 9.741056250003002,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 9.581004816499103,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 9.298624256234701,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 9.252589877202134,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/services-networking/service.md",
+        "title": "Service",
+        "score": 8.892604446245937,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/local-debugging.md",
+        "title": "Developing and debugging services locally using telepresence",
+        "score": 8.356606351852129,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/pod-security-standards.md",
+        "title": "Pod Security Standards",
+        "score": 8.208356182721657,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.49950870871543884,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.49486833810806274,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.44600069522857666,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.42520952224731445,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.415838360786438,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/management.md",
+        "title": "Managing Workloads",
+        "score": 0.40110236406326294,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/manifest-admission-control.md",
+        "title": "Manifest-Based Admission Control",
+        "score": 0.3998093605041504,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 0.39583101868629456,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.38760924339294434,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-condition.md",
+        "title": "Pod Conditions",
+        "score": 0.3803454339504242,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "tasks/configure-pod-container/configure-liveness-readiness-startup-probes.md",
+        "title": "Configure Liveness, Readiness and Startup Probes",
+        "score": 0.03252247488101534,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.032266458495966696,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.03200204813108039,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/init-containers.md",
+        "title": "Init Containers",
+        "score": 0.030776515151515152,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/sidecar-containers.md",
+        "title": "Sidecar Containers",
+        "score": 0.029631255487269532,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.02871794871794872,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.027402402402402402,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.02728937728937729,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/pod-security-standards.md",
+        "title": "Pod Security Standards",
+        "score": 0.027272727272727275,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.027119252873563218,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "mixed-logs",
+    "query": "kubectl logs output from the previous crashed container",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 19.494525679739965,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 12.07901264147049,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 11.776841545849228,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-pod-configmap.md",
+        "title": "Configure a Pod to Use a ConfigMap",
+        "score": 10.94229082458773,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 10.593013360491856,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 10.399628155294348,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 9.294753727321579,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/manifest-admission-control.md",
+        "title": "Manifest-Based Admission Control",
+        "score": 9.2768460772396,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/configmap.md",
+        "title": "ConfigMaps",
+        "score": 8.748337023440408,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/troubleshoot-kubectl.md",
+        "title": "Troubleshooting kubectl",
+        "score": 8.379270610370703,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.6961804628372192,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 0.6918897032737732,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 0.6804706454277039,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.6674895286560059,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 0.6642709970474243,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 0.6579223871231079,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.6477106809616089,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/crictl.md",
+        "title": "Debugging Kubernetes nodes with crictl",
+        "score": 0.6326860785484314,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/static-pod.md",
+        "title": "Create static Pods",
+        "score": 0.6290285587310791,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-statefulset.md",
+        "title": "Debug a StatefulSet",
+        "score": 0.626956045627594,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "tasks/debug/debug-application/debug-running-pod.md",
+        "title": "Debug Running Pods",
+        "score": 0.03278688524590164,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/kubectl/generated/kubectl_logs/_index.md",
+        "title": "kubectl logs",
+        "score": 0.03200204813108039,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.031754032258064516,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 0.030309988518943745,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/crictl.md",
+        "title": "Debugging Kubernetes nodes with crictl",
+        "score": 0.028594771241830064,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/kubectl-node-debug.md",
+        "title": "Debugging Kubernetes Nodes With Kubectl",
+        "score": 0.028258706467661692,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/job.md",
+        "title": "Jobs",
+        "score": 0.02813852813852814,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-init-containers.md",
+        "title": "Debug Init Containers",
+        "score": 0.02736726874657909,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.027149321266968326,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-cluster/_index.md",
+        "title": "Troubleshooting Clusters",
+        "score": 0.027056277056277056,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "mixed-disruption",
+    "query": "PodDisruptionBudget keep replicas available during node maintenance",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 15.414783315821012,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 15.363400697846382,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 14.12819818041663,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/horizontal-pod-autoscale.md",
+        "title": "Horizontal Pod Autoscaling",
+        "score": 13.834855411081216,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 13.296917870242975,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicationcontroller.md",
+        "title": "ReplicationController",
+        "score": 11.227112439829945,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 10.870980592614199,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 10.114526153586203,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/assign-memory-resource.md",
+        "title": "Assign Memory Resources to Containers and Pods",
+        "score": 9.801931218879945,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/assign-cpu-resource.md",
+        "title": "Assign CPU Resources to Containers and Pods",
+        "score": 9.764233286290539,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.7043059468269348,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.6926720142364502,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 0.6858198642730713,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.6738314628601074,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.6687964200973511,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-condition.md",
+        "title": "Pod Conditions",
+        "score": 0.6504497528076172,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/_index.md",
+        "title": "Workloads",
+        "score": 0.6482411623001099,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.6449933052062988,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/daemonset.md",
+        "title": "DaemonSet",
+        "score": 0.6440279483795166,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/debug-pods.md",
+        "title": "Debug Pods",
+        "score": 0.6348628997802734,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "concepts/workloads/controllers/replicaset.md",
+        "title": "ReplicaSet",
+        "score": 0.032266458495966696,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/statefulset.md",
+        "title": "StatefulSets",
+        "score": 0.03200204813108039,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/disruptions.md",
+        "title": "Disruptions",
+        "score": 0.031754032258064516,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/deployment.md",
+        "title": "Deployments",
+        "score": 0.03076923076923077,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/replicationcontroller.md",
+        "title": "ReplicationController",
+        "score": 0.029236022193768675,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/pod-lifecycle.md",
+        "title": "Pod Lifecycle",
+        "score": 0.02889344262295082,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/probes.md",
+        "title": "Liveness, Readiness, and Startup Probes",
+        "score": 0.028594771241830064,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/autoscaling/horizontal-pod-autoscale.md",
+        "title": "Horizontal Pod Autoscaling",
+        "score": 0.02844551282051282,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/pods/_index.md",
+        "title": "Pods",
+        "score": 0.028438886647841874,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/workloads/controllers/daemonset.md",
+        "title": "DaemonSet",
+        "score": 0.02819138376017471,
+        "esci_label": "unjudged"
+      }
+    ]
+  },
+  {
+    "id": "mixed-pull",
+    "query": "ImagePullBackOff private registry credentials",
+    "origin": "authored before retrieval",
+    "text": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 19.72998153708943,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/service-accounts.md",
+        "title": "Service Accounts",
+        "score": 13.83580168010987,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/authentication.md",
+        "title": "Authenticating",
+        "score": 10.617797463837086,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 9.92753100834429,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-gmsa.md",
+        "title": "Configure GMSA for Windows Pods and containers",
+        "score": 8.687218704152805,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/access-application-cluster/web-ui-dashboard.md",
+        "title": "Deploy and Access the Kubernetes Dashboard",
+        "score": 8.382357962242548,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/debug/debug-application/determine-reason-pod-failure.md",
+        "title": "Determine the Reason for Pod Failure",
+        "score": 8.079837428686027,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 7.651959709439275,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/cloud-native-security.md",
+        "title": "Cloud Native Security and Kubernetes",
+        "score": 6.803321170575576,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/node.md",
+        "title": "Using Node Authorization",
+        "score": 6.447475733826258,
+        "esci_label": "unjudged"
+      }
+    ],
+    "vector": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.5206711292266846,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 0.41943851113319397,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 0.4053271412849426,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/security-checklist.md",
+        "title": "Security Checklist",
+        "score": 0.4044414162635803,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/service-accounts-admin.md",
+        "title": "Managing Service Accounts",
+        "score": 0.37888604402542114,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-service-account.md",
+        "title": "Configure Service Accounts for Pods",
+        "score": 0.35133519768714905,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/service-accounts.md",
+        "title": "Service Accounts",
+        "score": 0.347107470035553,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/pod-security-standards.md",
+        "title": "Pod Security Standards",
+        "score": 0.33370697498321533,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-gmsa.md",
+        "title": "Configure GMSA for Windows Pods and containers",
+        "score": 0.3277166187763214,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/windows-security.md",
+        "title": "Security For Windows Nodes",
+        "score": 0.3215393126010895,
+        "esci_label": "unjudged"
+      }
+    ],
+    "hybrid": [
+      {
+        "id": "tasks/configure-pod-container/pull-image-private-registry.md",
+        "title": "Pull an Image from a Private Registry",
+        "score": 0.03278688524590164,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/configuration/secret.md",
+        "title": "Secrets",
+        "score": 0.031754032258064516,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/service-accounts.md",
+        "title": "Service Accounts",
+        "score": 0.031054405392392875,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/admission-controllers.md",
+        "title": "Admission Control in Kubernetes",
+        "score": 0.03057889822595705,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-gmsa.md",
+        "title": "Configure GMSA for Windows Pods and containers",
+        "score": 0.029877369007803793,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/service-accounts-admin.md",
+        "title": "Managing Service Accounts",
+        "score": 0.0288981288981289,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/authentication.md",
+        "title": "Authenticating",
+        "score": 0.02886002886002886,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "tasks/configure-pod-container/configure-service-account.md",
+        "title": "Configure Service Accounts for Pods",
+        "score": 0.028309409888357256,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "reference/access-authn-authz/node.md",
+        "title": "Using Node Authorization",
+        "score": 0.027443609022556388,
+        "esci_label": "unjudged"
+      },
+      {
+        "id": "concepts/security/hardening-guide/authentication-mechanisms.md",
+        "title": "Hardening Guide - Authentication Mechanisms",
+        "score": 0.027222222222222224,
+        "esci_label": "unjudged"
+      }
+    ]
+  }
+]

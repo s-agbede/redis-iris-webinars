@@ -1,0 +1,911 @@
+{
+  "scope": "Exploratory. Source labels are sparse and imperfect; reviewed judgements are a limited pool. Unjudged is not irrelevant. No held-out quality or performance claim.",
+  "reports": [
+    {
+      "case": {
+        "case_id": "rf-lenses",
+        "query": "canon rf lenses",
+        "notes": "Relevant listings explicitly identify a Canon RF lens. Camera-body bundles and FD/EF lens kits do not satisfy that requirement. B07JQGHHC5 has conflicting source text (T7i title, EOS R description), so it remains unreviewed.",
+        "brands": [],
+        "judgements": {
+          "B082P49YK9": "relevant",
+          "B0101SX48U": "irrelevant",
+          "B00TQ6P5A4": "irrelevant",
+          "B07RLPZDZ3": "irrelevant",
+          "B07RB7SHD7": "relevant",
+          "B07H4F64XL": "relevant",
+          "B08MFVH7SV": "relevant",
+          "B07Z5M9M7M": "relevant",
+          "B07H489XDQ": "relevant",
+          "B07WQ54BL8": "relevant"
+        }
+      },
+      "comparison": {
+        "query": "canon rf lenses",
+        "brands": [],
+        "embedding_ms": 3.1,
+        "total_ms": 24.43,
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "source_revision": "7916cdf6ab75a462e77f20ab40428a10923998d5",
+        "candidate_limit": 100,
+        "results": [
+          {
+            "mode": "text",
+            "query_ms": 7.18,
+            "score_kind": "BM25",
+            "redis_query": "FT.SEARCH camera_passages @search_text:(canon | rf | lenses) SCORER BM25STD WITHSCORES RETURN 6 product_id passage_id field text start end DIALECT 2 LIMIT 0 100",
+            "hits": [
+              {
+                "product_id": "B082P49YK9",
+                "title": "CANON Lens RF24-240mm F4-6.3 is USM (Renewed)",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 19.554708497065665,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B082P49YK9:1",
+                  "field": "product_description",
+                  "text": "The RF 24-240mm F4-6. 3 IS USM lens is the perfect walk-around lens for EOS R series camera owners. This compact and lightweight 10x zoom lens is Ideal for travel, and everyday photography. With a 24-240mm range, the RF 24-240mm F4-6. 3 IS USM can cover a variety of subjects at impressive ranges from 1. 64 ft. wide-angle to 2. 56 ft. telephoto. Canon?s Nano USM provides accurate and fast AF for still images and is noticeably silent during movie shooting as it smoothly tracks a moving subject. With these features and more, including a control that lets you easily change settings, the RF 24-240mm F4-6. 3 IS USM lens gives you the extensive range you need so you can spend less time changing lenses and more time capturing amazing photos and videos ? even on your travels.",
+                  "start": 0,
+                  "end": 777
+                }
+              },
+              {
+                "product_id": "B07JQGHHC5",
+                "title": "Canon EOS Rebel T7i DSLR Camera 18-55mm Lens + Carrying Case",
+                "brand": "Canon",
+                "color": "Body With Lens",
+                "score": 16.880626772162707,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07JQGHHC5:1",
+                  "field": "product_description",
+                  "text": "Canon EOS Rebel T7i DSLR Camera with 18-55mm Lens Overview : The first step in Canon's mirrorless evolution, the EOS R pairs a redeveloped lens mount and updated full-frame image sensor for a unique and sophisticated multimedia camera system. Revolving around the new RF lens mount, the EOS R is poised to be the means from which to make the most of a new series of lenses and optical technologies. Beyond the performance attributes, this camera has been designed from the ground up and features a high-resolution 3.69m-dot OLED electronic viewfinder for clear and bright eye-level viewing. Conversely, a rear 3.15\" 2.1m-dot LCD touchscreen is also featured, and has a swivel design to suit working from high and low angles. Also catering to the tactile cravings is a Multi-Function bar, which is customizable for intuitively adjusting shooting settings. And as a camera built to withstand the toughest environments, the magnesium alloy body is dust and moisture-",
+                  "start": 0,
+                  "end": 963
+                }
+              },
+              {
+                "product_id": "B0101SX48U",
+                "title": "Canon Advanced Two Lens Kit with 50mm f/1.4 and 17-40mm f/4L Lenses",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 15.583464667899896,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B0101SX48U:0",
+                  "field": "product_title",
+                  "text": "Canon Advanced Two Lens Kit with 50mm f/1.4 and 17-40mm f/4L Lenses",
+                  "start": 0,
+                  "end": 67
+                }
+              },
+              {
+                "product_id": "B00TQ6P5A4",
+                "title": "Canon FT B FTb QL 35mm Camera with 50mm 1.8 lens",
+                "brand": null,
+                "color": null,
+                "score": 15.133319242956407,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B00TQ6P5A4:2",
+                  "field": "product_bullet_point",
+                  "text": "Compatible with all Canon FD mount lenses Maximum aperture TTL metering Match-needle exposure adjustment Supports stop down TTL metering for FL lenses",
+                  "start": 0,
+                  "end": 150
+                }
+              },
+              {
+                "product_id": "B07RLPZDZ3",
+                "title": "Canon EOS Rebel T7 DSLR Camera with 18-55mm & 75-300mm Lenses Kit + 500mm Preset Wildlife Lens - Deluxe Professional Photo & Video Creative Bundle",
+                "brand": "Canon",
+                "color": null,
+                "score": 15.033524432205375,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07RLPZDZ3:0",
+                  "field": "product_title",
+                  "text": "Canon EOS Rebel T7 DSLR Camera with 18-55mm & 75-300mm Lenses Kit + 500mm Preset Wildlife Lens - Deluxe Professional Photo & Video Creative Bundle",
+                  "start": 0,
+                  "end": 146
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "vector",
+            "query_ms": 5.07,
+            "score_kind": "Cosine similarity",
+            "redis_query": "FT.SEARCH camera_passages *=>[KNN 100 @embedding $vector AS vector_distance] RETURN 7 product_id passage_id field text start end vector_distance SORTBY vector_distance ASC DIALECT 2 LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B07RB7SHD7",
+                "title": "Canon RF 85mm F1.2 L USM Lens, Black",
+                "brand": "Canon",
+                "color": null,
+                "score": 0.6823348402980001,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07RB7SHD7:1",
+                  "field": "product_bullet_point",
+                  "text": "High image quality and bright f/1.2 aperture L lens for EOS R System cameras. Blue spectrum refractive optics (br) Reduces chromatic aberration. Minimum focusing distance of 2.79 ft. /0.85M. A control ring for direct setting changes. One Aspheric element and one UD lens.",
+                  "start": 0,
+                  "end": 271
+                }
+              },
+              {
+                "product_id": "B07H4F64XL",
+                "title": "Canon RF 28-70mm f/2L USM Lens, Black - 2965C002",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 0.626900076866,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07H4F64XL:1",
+                  "field": "product_bullet_point",
+                  "text": "Bright, constant f/2 USM zoom Lens L series Lens with high image quality Control ring for direct setting changes Dust and water resistant with fluorine coating 12 pin Communication system.Maximum magnification (x):0.18",
+                  "start": 0,
+                  "end": 218
+                }
+              },
+              {
+                "product_id": "B08MFVH7SV",
+                "title": "Canon RF50mm F1.8 STM for Canon Full Frame Mirrorless RF Mount Cameras [EOS R, EOS RP, EOS R5, EOS R6](4515C002)",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 0.621122121811,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B08MFVH7SV:1",
+                  "field": "product_bullet_point",
+                  "text": "Compact, Lightweight Fixed 50 millimeter Focal Length Lens. Large F, 1.8 Aperture for Low-Light Photography and Creative Background Blur A Stepping Motor (Gear-Type STM) Provides Smooth and Quiet Continuous AF During Video Recording, As Well As When Shooting Photos Control Ring for Direct Setting Changes Optimized Lens Placement and Coatings Help Deliver Outstanding Color Balance, While Minimizing Ghosting and Flare",
+                  "start": 0,
+                  "end": 419
+                }
+              },
+              {
+                "product_id": "B07Z5M9M7M",
+                "title": "Canon RF 70-200mm F2.8 L IS USM Lens, Telephoto Zoom Lens, 3792C002",
+                "brand": "Canon",
+                "color": null,
+                "score": 0.6073994040490001,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07Z5M9M7M:1",
+                  "field": "product_bullet_point",
+                  "text": "High image quality and bright f/2.8 aperture telephoto zoom RF L lens. Compact and lightweight. Optical image stabilization with up to 5 Stops of shake correction High speed, smooth and quiet autofocus with dual Nano USM. Minimum focusing distance of 2.3 ft. by 0.7 M.",
+                  "start": 0,
+                  "end": 268
+                }
+              },
+              {
+                "product_id": "B07H489XDQ",
+                "title": "Canon RF 24-105mm f/4L IS USM Lens, Black - 2963C002",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 0.6054735183719999,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07H489XDQ:1",
+                  "field": "product_bullet_point",
+                  "text": "Compact, high-quality Lens with broad zoom range for the EOS R system Bright, constant f/4.0 zoom Lens First L-Series Lens with Nano USM. Lens construction (elements/groups)- 18/14 Control ring for direct setting changes Optical image stabilization at up to 5 Stops* of shake Correction",
+                  "start": 0,
+                  "end": 286
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "hybrid",
+            "query_ms": 5.22,
+            "score_kind": "RRF",
+            "redis_query": "FT.HYBRID camera_passages SEARCH @search_text:(canon | rf | lenses) SCORER BM25STD VSIM @embedding $vector KNN 2 K 100 COMBINE RRF 6 WINDOW 100 CONSTANT 60 YIELD_SCORE_AS combined_score LOAD 6 @product_id @passage_id @field @text @start @end LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B07RB7SHD7",
+                "title": "Canon RF 85mm F1.2 L USM Lens, Black",
+                "brand": "Canon",
+                "color": null,
+                "score": 0.0306217858813,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07RB7SHD7:0",
+                  "field": "product_title",
+                  "text": "Canon RF 85mm F1.2 L USM Lens, Black",
+                  "start": 0,
+                  "end": 36
+                }
+              },
+              {
+                "product_id": "B07H4F64XL",
+                "title": "Canon RF 28-70mm f/2L USM Lens, Black - 2965C002",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 0.0280832678712,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07H4F64XL:0",
+                  "field": "product_title",
+                  "text": "Canon RF 28-70mm f/2L USM Lens, Black - 2965C002",
+                  "start": 0,
+                  "end": 48
+                }
+              },
+              {
+                "product_id": "B07Z5M9M7M",
+                "title": "Canon RF 70-200mm F2.8 L IS USM Lens, Telephoto Zoom Lens, 3792C002",
+                "brand": "Canon",
+                "color": null,
+                "score": 0.0275980205558,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07Z5M9M7M:0",
+                  "field": "product_title",
+                  "text": "Canon RF 70-200mm F2.8 L IS USM Lens, Telephoto Zoom Lens, 3792C002",
+                  "start": 0,
+                  "end": 67
+                }
+              },
+              {
+                "product_id": "B07WQ54BL8",
+                "title": "Canon RF 24-70mm F2.8 L IS USM Lens, Black",
+                "brand": "Canon",
+                "color": null,
+                "score": 0.0270319634703,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B07WQ54BL8:0",
+                  "field": "product_title",
+                  "text": "Canon RF 24-70mm F2.8 L IS USM Lens, Black",
+                  "start": 0,
+                  "end": 42
+                }
+              },
+              {
+                "product_id": "B082P49YK9",
+                "title": "CANON Lens RF24-240mm F4-6.3 is USM (Renewed)",
+                "brand": "Canon",
+                "color": "Black",
+                "score": 0.0270317404953,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B082P49YK9:1",
+                  "field": "product_description",
+                  "text": "The RF 24-240mm F4-6. 3 IS USM lens is the perfect walk-around lens for EOS R series camera owners. This compact and lightweight 10x zoom lens is Ideal for travel, and everyday photography. With a 24-240mm range, the RF 24-240mm F4-6. 3 IS USM can cover a variety of subjects at impressive ranges from 1. 64 ft. wide-angle to 2. 56 ft. telephoto. Canon?s Nano USM provides accurate and fast AF for still images and is noticeably silent during movie shooting as it smoothly tracks a moving subject. With these features and more, including a control that lets you easily change settings, the RF 24-240mm F4-6. 3 IS USM lens gives you the extensive range you need so you can spend less time changing lenses and more time capturing amazing photos and videos ? even on your travels.",
+                  "start": 0,
+                  "end": 777
+                }
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "assessment": {
+        "text": {
+          "source_judged": 0,
+          "source_unjudged": 5,
+          "first_source_exact_rank": null,
+          "reviewed_top_label": "relevant"
+        },
+        "vector": {
+          "source_judged": 5,
+          "source_unjudged": 0,
+          "first_source_exact_rank": 1,
+          "reviewed_top_label": "relevant"
+        },
+        "hybrid": {
+          "source_judged": 4,
+          "source_unjudged": 1,
+          "first_source_exact_rank": 1,
+          "reviewed_top_label": "relevant"
+        }
+      }
+    },
+    {
+      "case": {
+        "case_id": "camera-laptop-bag",
+        "query": "A bag to carry my camera and laptop",
+        "notes": "Relevant listings explicitly mention camera and laptop storage. No laptop size is specified. Other bags remain unreviewed where the supplied evidence does not establish both requirements. These are authored judgements, not ESCI labels.",
+        "brands": [],
+        "judgements": {
+          "B072V7D1X6": "relevant",
+          "B005J09OXU": "relevant",
+          "B07B89FWVH": "relevant",
+          "B07WQFYP8F": "relevant",
+          "B07WDVWL72": "relevant",
+          "B00CF5OGP8": "relevant",
+          "B07WS9F4CH": "relevant",
+          "B07V866B7S": "relevant"
+        }
+      },
+      "comparison": {
+        "query": "A bag to carry my camera and laptop",
+        "brands": [],
+        "embedding_ms": 1.26,
+        "total_ms": 10.5,
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "source_revision": "7916cdf6ab75a462e77f20ab40428a10923998d5",
+        "candidate_limit": 100,
+        "results": [
+          {
+            "mode": "text",
+            "query_ms": 3.4,
+            "score_kind": "BM25",
+            "redis_query": "FT.SEARCH camera_passages @search_text:(bag | carry | camera | laptop) SCORER BM25STD WITHSCORES RETURN 6 product_id passage_id field text start end DIALECT 2 LIMIT 0 100",
+            "hits": [
+              {
+                "product_id": "B072V7D1X6",
+                "title": "S-ZONE Canvas SLR DSLR Camera Shoulder Messenger Bag with Bottom Tripod Compatible with Cannon",
+                "brand": "S-ZONE",
+                "color": "Gray",
+                "score": 24.561963479072972,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B072V7D1X6:1",
+                  "field": "product_description",
+                  "text": "Large Canvas SLR DSLR Camera Shoulder Messenger Bag for Digital Cameras, Laptops, Tripod Material: High Density Cotton Canvas Water Wash Approx Weight: 2.0 lb. Approx Dimensions: 14.2*9.8*5.9inch (W x H x D) Color Variety: Gray/Khaki Features The secure bag straps wrap around to offer an easy to use and access tripod carrying option. Front pockets designed for memory cards, changer, 9.7inch iPad, business cards, CDs and other accessories; 2*side pockets and one zipper pocket; mail pocket can fit up to 14 inch laptop About S-ZONE S-ZONE is a brand that specialized in simple but utility, classical but fashionable bags' ZONE since 2012. High-quality materials, elaborate craftsmanship and multipurpose design, this is the most important pursuit of S-ZONE. Every bag you received has been through hundreds of procedures to ensure its excellent quality.",
+                  "start": 0,
+                  "end": 856
+                }
+              },
+              {
+                "product_id": "B071R3LWHR",
+                "title": "Sechunk Vintage Military Leather Canvas Laptop Bag Messenger Bags Medium \uff08Army Green\uff09",
+                "brand": "Sechunk",
+                "color": "Army Green",
+                "score": 20.394938507897837,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B071R3LWHR:0",
+                  "field": "product_title",
+                  "text": "Sechunk Vintage Military Leather Canvas Laptop Bag Messenger Bags Medium \uff08Army Green\uff09",
+                  "start": 0,
+                  "end": 85
+                }
+              },
+              {
+                "product_id": "B005J09OXU",
+                "title": "USA GEAR DSLR Camera Backpack Case - 15.6 inch Laptop Compartment, Padded Custom Dividers, Tripod Holder, Rain Cover, Long-Lasting Durability and Storage Pockets - Compatible with Many DSLRs (Black)",
+                "brand": "USA Gear",
+                "color": "Black",
+                "score": 19.548470051787074,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B005J09OXU:2",
+                  "field": "product_description",
+                  "text": "You can also wear across your chest as a sling. Stow away unnecessary straps into the luggage handle slot. Waist strap included for weight management and comfort. Additional Features -Padded compartment (16.5\"L x 10.5\"W) for up to 15.6\" laptops -Large upper padded compartment for carrying bigger gear and accessories -5 net accessory pockets for memory cards, cables, chargers, lights and much more! -Tripod holding system with strap and foot holder -Custom fit rain cover for unexpected storms and splashes -Luggage handle slot for easy transportation on top of rolling bags and cases. Works With: Nikon / Canon / Panasonic / Sony / Olympus / Pentax / Fujifilm and more...",
+                  "start": 788,
+                  "end": 1462
+                }
+              },
+              {
+                "product_id": "B07B89FWVH",
+                "title": "USA GEAR DSLR Camera Backpack Case (Orange) - 15.6 inch Laptop Compartment, Padded Custom Dividers, Tripod Holder, Rain Cover, Long-Lasting Durability and Storage Pockets - Compatible with Many DSLRs",
+                "brand": "USA Gear",
+                "color": "Black and Orange",
+                "score": 19.548470051787074,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07B89FWVH:2",
+                  "field": "product_description",
+                  "text": "You can also wear across your chest as a sling. Stow away unnecessary straps into the luggage handle slot. Waist strap included for weight management and comfort. Additional Features -Padded compartment (16.5\"L x 10.5\"W) for up to 15.6\" laptops -Large upper padded compartment for carrying bigger gear and accessories -5 net accessory pockets for memory cards, cables, chargers, lights and much more! -Tripod holding system with strap and foot holder -Custom fit rain cover for unexpected storms and splashes -Luggage handle slot for easy transportation on top of rolling bags and cases. Works With: Nikon / Canon / Panasonic / Sony / Olympus / Pentax / Fujifilm and more...",
+                  "start": 788,
+                  "end": 1462
+                }
+              },
+              {
+                "product_id": "B076ZRBQDP",
+                "title": "MegaGear Genuine Leather Camera Messenger Bag for Mirrorless, Instant and DSLR, Brown (MG1329)",
+                "brand": "MegaGear",
+                "color": "Brown",
+                "score": 18.967374275925064,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B076ZRBQDP:1",
+                  "field": "product_bullet_point",
+                  "text": "Exquisite leather craftsmanship\u2013 These handsome unisex camera messenger bags are made with premium all-natural high quality Italian leather for a rich classic feel Multifunctional with removable insert\u2013 Megagear camera messenger bags are made for mirrorless instant and DSLR cameras along with 1-2 lenses or camera accessories Pockets at the front and sides allows you to carry notebooks cards and small electronic devices along with your photography setup Advanced shockproof lining \u2013 these fashionable compact camera bags are lined with heavy duty shock resistant material to better protect your cameras from the occasional drop bump or accident Comfortable CROSSBODY style \u2013 ideal for traveling outdoor photo sessions and the occasional impulsive shoot this camera tote boasts a 53 1 inch removable and adjustable shoulder strap for all day comfort Stylish DESIGN \u2013 Whether you are a beginner or a seasoned professional photographer you will want these all-purpose vintage Camera bags at your side They come in Black Brown Blue Maroon Olive or Mink to accommodate your choice of style",
+                  "start": 0,
+                  "end": 1087
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "vector",
+            "query_ms": 2.35,
+            "score_kind": "Cosine similarity",
+            "redis_query": "FT.SEARCH camera_passages *=>[KNN 100 @embedding $vector AS vector_distance] RETURN 7 product_id passage_id field text start end vector_distance SORTBY vector_distance ASC DIALECT 2 LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B07WQFYP8F",
+                "title": "Camera Backpack, BAGSMAR DSLR Camera Bag Backpack, Anti-Theft and Waterproof Camera Backpack for Photographers, Fit up to 15\" Laptop with Rain Cover, Olive Green",
+                "brand": "BAGSMART",
+                "color": "02-olive Green",
+                "score": 0.76132440567,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07WQFYP8F:2",
+                  "field": "product_bullet_point",
+                  "text": "Large Capacity Camera Backpack- Dimensions: 11.8\"L x 7.5\"W x 15.7\"H. The upper storage space for storing clothing or other personal stuffs. The lower camera zone for 1 DSLR camera with 70-200mm lens attached, 3-5 standard lenses and other camera accessories. Thick-padded laptop compartment fits up to 15 inch laptop. Customizable Space- Removable customize padded dividers can adjust the space according to the camera size and type of camera accessories you are carrying to protect camera and accessories better. Removing dividers can easily be transformed into a daily laptop backpack. Quick Access- Side access design makes you take camera out quickly. Full-zip access on the front makes it easier to pick and place equipment. 2 large side pockets can hold water bottles and tripods. Keep Camera Safe- Waterproof: Made of durable and waterproof canvas, includes a rain cover. Anti-theft: Lockable zippers and",
+                  "start": 0,
+                  "end": 911
+                }
+              },
+              {
+                "product_id": "B07WDVWL72",
+                "title": "Camera Backpack, BAGSMAR DSLR Camera Bag Backpack, Anti-Theft and Waterproof Camera Backpack for Photographers, Fit up to 15\" Laptop with Rain Cover, Black",
+                "brand": "BAGSMART",
+                "color": "01-black",
+                "score": 0.755545437336,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07WDVWL72:2",
+                  "field": "product_bullet_point",
+                  "text": "Large Capacity Camera Backpack- Dimensions: 11.8\"L x 7.5\"W x 15.7\"H. The upper storage space for storing clothing or other personal stuffs. The lower camera zone for 1 DSLR camera with 70-200mm lens attached, 3-5 standard lenses and other camera accessories. Thick-padded laptop compartment fits up to 15 inch laptop. Customizable Space- Removable customize padded dividers can adjust the space according to the camera size and type of camera accessories you are carrying to protect camera and accessories better. Removing dividers can easily be transformed into a daily laptop backpack. Quick Access- Side access design makes you take camera out quickly. Full-zip access on the front makes it easier to pick and place equipment. 2 large side pockets can hold water bottles and tripods. Keep Camera Safe- Waterproof: Made of durable and waterproof canvas, includes a rain cover. Anti-theft: Lockable zippers and a high",
+                  "start": 0,
+                  "end": 918
+                }
+              },
+              {
+                "product_id": "B00CF5OGP8",
+                "title": "Amazon Basics DSLR Camera and Laptop Backpack Bag - 13 x 9 x 18 Inches, Black And Orange",
+                "brand": "Amazon Basics",
+                "color": "Black (Orange Interior)",
+                "score": 0.728747606277,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B00CF5OGP8:1",
+                  "field": "product_bullet_point",
+                  "text": "Backpack holds and protects 2 SLR camera bodies, 3-4 lenses, 17 inch laptop and additional smaller accessories Customizable padded interior. Movable dividers allow for optimal storage. Side straps secure tripods or other bulky accessories 70% polyester, 15% trim material (EVA, PE foam, Non-woven fabric), 10% zipper (Nylon) and zipper head and zipper puller (zinc alloy), and 5% Plastic buckles and D-ring (ABS). Internal Dimensions: 12.6\" x 7.8\" x 16.5\" (LxWxH) External Dimensions: 13.4\" x 8.8\" x 17.7\" (LxWxH)",
+                  "start": 0,
+                  "end": 513
+                }
+              },
+              {
+                "product_id": "B07WS9F4CH",
+                "title": "TARION Camera Backpack Waterproof Camera Bag Large Capacity Camera Case with 15 Inch Laptop Compartment Rain Cover for Women Men Photographer Lens Tripod",
+                "brand": "TARION",
+                "color": "Black",
+                "score": 0.703938663006,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07WS9F4CH:2",
+                  "field": "product_bullet_point",
+                  "text": "\u3010Professional Camera Backpack with 15inch Laptop Compartment\u3011 8 pieces padded removable dividers can be reorganized and offer certain protection for your own camera equipments. Camera tripod can be attached to the bottom of the camera bag. Dedicated 15inch laptop/tablet pocket. \u3010Large Capacity\u3011 This professional camera bag can hold 1 camera 6 lens 1 flash trigger. Inside there is a zippered mesh pocket for accessories, iPad and other tablets etc. High-elasticity mesh sides pockets can used for bottle and umbrella etc. \u3010Ultra-lightweight and Compact\u3011 Dimensions:11.8x6x17inches(30x15x43cm),only 1.87lb(0.85kg). Light as a feather, a perfect weight to be carried for the day's city adventure. You can really make the most use of your carry-on allowance on those strict internal airline carriers. \u3010All Weather Protection, Sturdy and Durable\u3011 Comes with a waterproof rain cover for entirely weatherproof. The vent",
+                  "start": 0,
+                  "end": 915
+                }
+              },
+              {
+                "product_id": "B005J09OXU",
+                "title": "USA GEAR DSLR Camera Backpack Case - 15.6 inch Laptop Compartment, Padded Custom Dividers, Tripod Holder, Rain Cover, Long-Lasting Durability and Storage Pockets - Compatible with Many DSLRs (Black)",
+                "brand": "USA Gear",
+                "color": "Black",
+                "score": 0.702149629593,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B005J09OXU:3",
+                  "field": "product_bullet_point",
+                  "text": "BEST VALUE CAMERA BACKPACK with features normally found only on more expensive camera packs. Tons of customizable storage space, top compartment to fit your phone, charger and many other accessories THE PERFECT AMOUNT OF SPACE FOR YOUR CAMERA GEAR \u2013 Ditch the boxy, bulky packs. The S17 offers plenty of room for the serious photographer as well as the enthusiast without an oversized form factor COMPLETELY CUSTOMIZABLE INTERIOR \u2013 Padded dividers can be added/removed/organized based on your needs. Zippered side door provides quick access to your camera. Internal Dimensions of 11\" x 10.5\" x 6\" PADDED LAPTOP COMPARTMENT \u2013 We know you love your laptop as much as your camera equipment, so the S17\u2019s laptop compartment features protective padding and fits up to a 15.6\" laptop METAL ZIPPERS AND SOFT RUBBER PULLERS \u2013 Reinforced zippers with non-slip soft rubber pullers, quickly access your gear without fearing zipper break",
+                  "start": 0,
+                  "end": 925
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "hybrid",
+            "query_ms": 3.2,
+            "score_kind": "RRF",
+            "redis_query": "FT.HYBRID camera_passages SEARCH @search_text:(bag | carry | camera | laptop) SCORER BM25STD VSIM @embedding $vector KNN 2 K 100 COMBINE RRF 6 WINDOW 100 CONSTANT 60 YIELD_SCORE_AS combined_score LOAD 6 @product_id @passage_id @field @text @start @end LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B005J09OXU",
+                "title": "USA GEAR DSLR Camera Backpack Case - 15.6 inch Laptop Compartment, Padded Custom Dividers, Tripod Holder, Rain Cover, Long-Lasting Durability and Storage Pockets - Compatible with Many DSLRs (Black)",
+                "brand": "USA Gear",
+                "color": "Black",
+                "score": 0.0301587301587,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B005J09OXU:2",
+                  "field": "product_description",
+                  "text": "You can also wear across your chest as a sling. Stow away unnecessary straps into the luggage handle slot. Waist strap included for weight management and comfort. Additional Features -Padded compartment (16.5\"L x 10.5\"W) for up to 15.6\" laptops -Large upper padded compartment for carrying bigger gear and accessories -5 net accessory pockets for memory cards, cables, chargers, lights and much more! -Tripod holding system with strap and foot holder -Custom fit rain cover for unexpected storms and splashes -Luggage handle slot for easy transportation on top of rolling bags and cases. Works With: Nikon / Canon / Panasonic / Sony / Olympus / Pentax / Fujifilm and more...",
+                  "start": 788,
+                  "end": 1462
+                }
+              },
+              {
+                "product_id": "B07B89FWVH",
+                "title": "USA GEAR DSLR Camera Backpack Case (Orange) - 15.6 inch Laptop Compartment, Padded Custom Dividers, Tripod Holder, Rain Cover, Long-Lasting Durability and Storage Pockets - Compatible with Many DSLRs",
+                "brand": "USA Gear",
+                "color": "Black and Orange",
+                "score": 0.0297095070423,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07B89FWVH:2",
+                  "field": "product_description",
+                  "text": "You can also wear across your chest as a sling. Stow away unnecessary straps into the luggage handle slot. Waist strap included for weight management and comfort. Additional Features -Padded compartment (16.5\"L x 10.5\"W) for up to 15.6\" laptops -Large upper padded compartment for carrying bigger gear and accessories -5 net accessory pockets for memory cards, cables, chargers, lights and much more! -Tripod holding system with strap and foot holder -Custom fit rain cover for unexpected storms and splashes -Luggage handle slot for easy transportation on top of rolling bags and cases. Works With: Nikon / Canon / Panasonic / Sony / Olympus / Pentax / Fujifilm and more...",
+                  "start": 788,
+                  "end": 1462
+                }
+              },
+              {
+                "product_id": "B07WS9F4CH",
+                "title": "TARION Camera Backpack Waterproof Camera Bag Large Capacity Camera Case with 15 Inch Laptop Compartment Rain Cover for Women Men Photographer Lens Tripod",
+                "brand": "TARION",
+                "color": "Black",
+                "score": 0.0284045124899,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07WS9F4CH:2",
+                  "field": "product_bullet_point",
+                  "text": "\u3010Professional Camera Backpack with 15inch Laptop Compartment\u3011 8 pieces padded removable dividers can be reorganized and offer certain protection for your own camera equipments. Camera tripod can be attached to the bottom of the camera bag. Dedicated 15inch laptop/tablet pocket. \u3010Large Capacity\u3011 This professional camera bag can hold 1 camera 6 lens 1 flash trigger. Inside there is a zippered mesh pocket for accessories, iPad and other tablets etc. High-elasticity mesh sides pockets can used for bottle and umbrella etc. \u3010Ultra-lightweight and Compact\u3011 Dimensions:11.8x6x17inches(30x15x43cm),only 1.87lb(0.85kg). Light as a feather, a perfect weight to be carried for the day's city adventure. You can really make the most use of your carry-on allowance on those strict internal airline carriers. \u3010All Weather Protection, Sturdy and Durable\u3011 Comes with a waterproof rain cover for entirely weatherproof. The vent",
+                  "start": 0,
+                  "end": 915
+                }
+              },
+              {
+                "product_id": "B01LWIS76G",
+                "title": "Medium Camera Bag by Altura Photo Mirrorless & DSLR Camera Bag for Nikon, Canon, Sony, Fuji, Compact Camera Shoulder Bag, Portable Camera Bags for Photographers - DSLR Bag / Digital Camera Case",
+                "brand": "Altura Photo",
+                "color": "Black",
+                "score": 0.0259418374091,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B01LWIS76G:5",
+                  "field": "product_bullet_point",
+                  "text": "D750 SONY Alpha A7 A7ii A7iii A7Rii A7Riii A7Riv A6000 A6100 A6300 A6400 A6500 A6600 A5100). Perfect Mirrorless Camera Bag for all new gear Canon M50, Sony A6400, Nikon Z50, etc. CUTE CAMERA BAG FOR WOMEN AND MENS WITH MULTIPLE CARRYING OPTIONS: Padded carry handle and removable, adjustable shoulder strap offer multiple ways to carry, as well the adjustable compartments, just hook and loop fastened padded insert separates your camera and lens, or small accessory into separate compartments, organize extra batteries, memory cards, cables, lens caps, or other small accessories. SATISFACTION GUARANTEED: Backed with Digital Goja 90-Day 100% Satisfaction Guarantee.",
+                  "start": 440,
+                  "end": 1107
+                }
+              },
+              {
+                "product_id": "B07V866B7S",
+                "title": "CADeN DSLR SLR Camera Bag Backpack with 14\" Laptop Compartment Water-Repellent for Women Men Photographers, Camera Case Backpack Compatible with Nikon Sony Canon Mirrorless Cameras Tripod Accessories",
+                "brand": "CADeN",
+                "color": "Gray",
+                "score": 0.0257936507937,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B07V866B7S:3",
+                  "field": "product_description",
+                  "text": "is very roomy yet not bulky to carry around, comfortable to travel. C) Internal Material: Soft padding,surrounding thick cushions for protecting your camera gears and protect from damage. D) Extra strong Velcro dividers: with extra strong viscosity of velcro, do not worry your",
+                  "start": 1486,
+                  "end": 1763
+                }
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "assessment": {
+        "text": {
+          "source_judged": 0,
+          "source_unjudged": 5,
+          "first_source_exact_rank": null,
+          "reviewed_top_label": "relevant"
+        },
+        "vector": {
+          "source_judged": 0,
+          "source_unjudged": 5,
+          "first_source_exact_rank": null,
+          "reviewed_top_label": "relevant"
+        },
+        "hybrid": {
+          "source_judged": 0,
+          "source_unjudged": 5,
+          "first_source_exact_rank": null,
+          "reviewed_top_label": "relevant"
+        }
+      }
+    },
+    {
+      "case": {
+        "case_id": "d610-body",
+        "query": "camera nikon d610",
+        "notes": "For this reviewed check the sought item is a D610 camera body; renewed bodies are acceptable because the query does not exclude them. Other camera models, straps, eyecups, flashes and cheat sheets fail that specific interpretation. ESCI complementary/substitute labels remain unchanged.",
+        "brands": [],
+        "judgements": {
+          "B00FOTF8M2": "relevant",
+          "B014I11JV0": "relevant",
+          "B017L3689K": "irrelevant",
+          "B07YST2F7Q": "irrelevant",
+          "B00795A63A": "irrelevant",
+          "B087V2QQSN": "irrelevant",
+          "B08R45H8DV": "irrelevant",
+          "B075ZSL3M7": "irrelevant",
+          "B06VTYWCRH": "irrelevant"
+        }
+      },
+      "comparison": {
+        "query": "camera nikon d610",
+        "brands": [],
+        "embedding_ms": 1.29,
+        "total_ms": 9.61,
+        "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+        "source_revision": "7916cdf6ab75a462e77f20ab40428a10923998d5",
+        "candidate_limit": 100,
+        "results": [
+          {
+            "mode": "text",
+            "query_ms": 2.57,
+            "score_kind": "BM25",
+            "redis_query": "FT.SEARCH camera_passages @search_text:(camera | nikon | d610) SCORER BM25STD WITHSCORES RETURN 6 product_id passage_id field text start end DIALECT 2 LIMIT 0 100",
+            "hits": [
+              {
+                "product_id": "B00FOTF8M2",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 14.79857604978528,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B00FOTF8M2:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                  "start": 0,
+                  "end": 64
+                }
+              },
+              {
+                "product_id": "B014I11JV0",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 14.729250273604977,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B014I11JV0:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                  "start": 0,
+                  "end": 73
+                }
+              },
+              {
+                "product_id": "B017L3689K",
+                "title": "Camera Wrist Strap - Rapid Fire Secure Camera Sling Strap by Altura Photo, Camera Straps for Photographers Compatible W/DSLR & Mirrorless - Camera Hand Strap W/Quick Release Camera Strap Dual System",
+                "brand": "Altura Photo",
+                "color": null,
+                "score": 14.540436896124685,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B017L3689K:5",
+                  "field": "product_bullet_point",
+                  "text": "7100 D750 D780 D850 D810 D610 D500 D60 D5 Z6 Z7. This camera hand strap is not compatible with Nikon cameras with eyelet openings smaller than 5mm. SATISFACTION GUARANTEED: Backed with Digital Goja 90-Day 100% Satisfaction Guarantee.",
+                  "start": 1005,
+                  "end": 1238
+                }
+              },
+              {
+                "product_id": "B07YST2F7Q",
+                "title": "ULBTER Eyepiece Eyecup Eye Cup DK-23 for Nikon D7100 D7200 D7000 D750 D610 D600 D300 D300S Camera Viewfinder Eyepiece Cover & Hot Shoe Cover -(2+2 Pack)",
+                "brand": "ULBTER",
+                "color": "DK-23",
+                "score": 13.943478900920407,
+                "source_label": "C",
+                "passage": {
+                  "passage_id": "us:B07YST2F7Q:3",
+                  "field": "product_bullet_point",
+                  "text": "\u272a Eyecup and hot shoe cover: Compatible with Nikon D7100 D7200 D7000 D750 D610 D600 D300 D300S digital cameras ,NOT fit for Nikon D5500 D5200 D5100 D5000 D3400 D3100 D3000. \u272aEffectively shields light that may enter the viewfinder and cause flare. \u272aProtects unwanted light, dust and moisture from entering your viewfinder, protects viewfinder from impact and scratches; \u272a Protect as a Cushion: Work as a cushion around camera's eyepiece,which provide a protection for camera eyepiece \u272a Hot shoe cover:Innovative circular design takes up less space than blocky 2- or 3-axis levels and help protect your camera hot shoe, prevent scratches, hits, moisture, dust and keep clean.",
+                  "start": 0,
+                  "end": 673
+                }
+              },
+              {
+                "product_id": "B00795A63A",
+                "title": "Whitecap Cheat Sheets for Nikon DSLR D3500 D5600 D7500 D3400 D3300 D5500 D5300 D7200 Z7 Z6 D850 D810 D610 D750 D500 Df D5 Tip Cards Camera Quick Guide",
+                "brand": "Whitecap Studios",
+                "color": "Metal Clip Colors Vary",
+                "score": 13.905846623550573,
+                "source_label": "C",
+                "passage": {
+                  "passage_id": "us:B00795A63A:3",
+                  "field": "product_description",
+                  "text": "D3400 D3300, D3200, D3100, D3000 Nikon D5600, D5500, D5300, Nikon D5200, D5100, D5000 Nikon D7200, D7100, D7000 Nikon D810, D800, D800f, D610, D600 D700, D4, D3S, D3X, D90, D80, D60, D40, D300S, D300, D200, Nikon 1, Nikon 1 v3, v2 and any other modern Nikon DSLR camera!",
+                  "start": 1553,
+                  "end": 1823
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "vector",
+            "query_ms": 2.44,
+            "score_kind": "Cosine similarity",
+            "redis_query": "FT.SEARCH camera_passages *=>[KNN 100 @embedding $vector AS vector_distance] RETURN 7 product_id passage_id field text start end vector_distance SORTBY vector_distance ASC DIALECT 2 LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B014I11JV0",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 0.708816170692,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B014I11JV0:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                  "start": 0,
+                  "end": 73
+                }
+              },
+              {
+                "product_id": "B00FOTF8M2",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 0.7032622098920001,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B00FOTF8M2:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                  "start": 0,
+                  "end": 64
+                }
+              },
+              {
+                "product_id": "B087V2QQSN",
+                "title": "Nikon D5600 DSLR Camera with 18-55mm VR Lens + 32GB Card, Tripod, Case, and More (18pc Bundle)",
+                "brand": "Nikon intl",
+                "color": null,
+                "score": 0.678433537483,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B087V2QQSN:1",
+                  "field": "product_description",
+                  "text": "Compact, capable, and connected, the Nikon D5600 is a sleek DSLR that blends multimedia imaging capabilities with versatile wireless technology. Centered around a 24.2MP DX-format CMOS sensor and EXPEED 4 image processor, the camera offers a sensitivity range from ISO 100-25600 to benefit working in an array of lighting conditions, and the sensor and processor combination also supports continuous shooting up to 5 fps for working with moving subjects. Full HD 1080p video recording is also supports up to 60 fps, and time-lapse movies can be created in-camera, too. 24.2MP DX-Format Sensor and EXPEED 4 Processor SnapBridge Bluetooth and Wi-Fi Multi-CAM 4800DX Autofocus Sensor Manufacturer Included Items Nikon D5600 DSLR Camera Nikon AF-P DX NIKKOR 18-55mm f/3.5-5.6G VR Nikon EN-EL14a Rec",
+                  "start": 0,
+                  "end": 794
+                }
+              },
+              {
+                "product_id": "B08R45H8DV",
+                "title": "Nikon D5600 DSLR Camera with 18-55mm VR and 70-300mm Lenses + 128GB Card, Tripod,Back-Pack,Filters, 2X Telephoto Lens, HD Wide Angle Lens, Hood, Lens Pouch, and More (28pcs)",
+                "brand": "Al's Variety-Nikon intl",
+                "color": null,
+                "score": 0.677749454975,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B08R45H8DV:1",
+                  "field": "product_description",
+                  "text": "Compact, capable, and connected, the Nikon D5600 is a sleek DSLR that blends multimedia imaging capabilities with versatile wireless technology. Centered around a 24.2MP DX-format CMOS sensor and EXPEED 4 image processor, the camera offers a sensitivity range from ISO 100-25600 to benefit working in an array of lighting conditions, and the sensor and processor combination also supports continuous shooting up to 5 fps for working with moving subjects. Full HD 1080p video recording is also supports up to 60 fps, and time-lapse movies can be created in-camera, too. 24.2MP DX-Format Sensor and EXPEED 4 Processor SnapBridge Bluetooth and Wi-Fi Multi-CAM 4800DX Autofocus Sensor Manufacturer Included Items Nikon D5600 DSLR Camera Nikon AF-P DX NIKKOR 18-55mm f/3.5-5",
+                  "start": 0,
+                  "end": 769
+                }
+              },
+              {
+                "product_id": "B075ZSL3M7",
+                "title": "Nikon D5600 Digital SLR Camera & 18-55mm VR DX AF-P Lens - (Renewed)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 0.663360655308,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B075ZSL3M7:1",
+                  "field": "product_bullet_point",
+                  "text": "24.2MP DX-Format CMOS Sensor & EXPEED 4 Image Processor Full HD 1080p Video Recording at 60 fps 3.2\" 1.037m-Dot Vari-Angle Touchscreen SnapBridge Bluetooth and Wi-Fi with NFC",
+                  "start": 0,
+                  "end": 174
+                }
+              }
+            ],
+            "error": null
+          },
+          {
+            "mode": "hybrid",
+            "query_ms": 2.99,
+            "score_kind": "RRF",
+            "redis_query": "FT.HYBRID camera_passages SEARCH @search_text:(camera | nikon | d610) SCORER BM25STD VSIM @embedding $vector KNN 2 K 100 COMBINE RRF 6 WINDOW 100 CONSTANT 60 YIELD_SCORE_AS combined_score LOAD 6 @product_id @passage_id @field @text @start @end LIMIT 0 100 PARAMS 2 vector <384 float32 values>",
+            "hits": [
+              {
+                "product_id": "B00FOTF8M2",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 0.032522474881,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B00FOTF8M2:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)",
+                  "start": 0,
+                  "end": 64
+                }
+              },
+              {
+                "product_id": "B014I11JV0",
+                "title": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                "brand": "Nikon",
+                "color": "Black",
+                "score": 0.032522474881,
+                "source_label": "E",
+                "passage": {
+                  "passage_id": "us:B014I11JV0:0",
+                  "field": "product_title",
+                  "text": "Nikon D610 24.3 MP CMOS FX-Format Digital SLR Camera (Body Only)(Renewed)",
+                  "start": 0,
+                  "end": 73
+                }
+              },
+              {
+                "product_id": "B017L3689K",
+                "title": "Camera Wrist Strap - Rapid Fire Secure Camera Sling Strap by Altura Photo, Camera Straps for Photographers Compatible W/DSLR & Mirrorless - Camera Hand Strap W/Quick Release Camera Strap Dual System",
+                "brand": "Altura Photo",
+                "color": null,
+                "score": 0.0242763772176,
+                "source_label": null,
+                "passage": {
+                  "passage_id": "us:B017L3689K:5",
+                  "field": "product_bullet_point",
+                  "text": "7100 D750 D780 D850 D810 D610 D500 D60 D5 Z6 Z7. This camera hand strap is not compatible with Nikon cameras with eyelet openings smaller than 5mm. SATISFACTION GUARANTEED: Backed with Digital Goja 90-Day 100% Satisfaction Guarantee.",
+                  "start": 1005,
+                  "end": 1238
+                }
+              },
+              {
+                "product_id": "B06VTYWCRH",
+                "title": "Godox TT350N TTL Flash Speedlite 2.4G Wireless GN36 1/8000s HSS for Nikon D800 D700 D7100 D7000 D5200 D5100 D810 D750 D610 DSLR Camera",
+                "brand": "GODOX",
+                "color": null,
+                "score": 0.0239898989899,
+                "source_label": "C",
+                "passage": {
+                  "passage_id": "us:B06VTYWCRH:0",
+                  "field": "product_title",
+                  "text": "Godox TT350N TTL Flash Speedlite 2.4G Wireless GN36 1/8000s HSS for Nikon D800 D700 D7100 D7000 D5200 D5100 D810 D750 D610 DSLR Camera",
+                  "start": 0,
+                  "end": 134
+                }
+              },
+              {
+                "product_id": "B00795A63A",
+                "title": "Whitecap Cheat Sheets for Nikon DSLR D3500 D5600 D7500 D3400 D3300 D5500 D5300 D7200 Z7 Z6 D850 D810 D610 D750 D500 Df D5 Tip Cards Camera Quick Guide",
+                "brand": "Whitecap Studios",
+                "color": "Metal Clip Colors Vary",
+                "score": 0.0216729147142,
+                "source_label": "C",
+                "passage": {
+                  "passage_id": "us:B00795A63A:2",
+                  "field": "product_description",
+                  "text": "then fixing common problems with photos - such as blurry or overexposed images. Use the included metal clip to attach to your camera bag or anything else with a loop for easy access. Specific color and size of clips and cards may vary. Each shooting situation is on its own card for easy reference and includes recommended camera settings, equipment, tips and more. Some of the environments and settings covered are sports, sunny days, night, low light, sunrise and sunset, portraits, macro, interior, HDR (High Dynamic Range), and special situations such as fireworks and lightning photography. All the information is presented in helpful, easy to read text! Thousands of happy photographers have already benefited from this product. Designed to work with all modern Nikon DSLR cameras: Nikon D3400 D3300, D3200, D3100, D3000 Nikon D5600, D5500, D5300,",
+                  "start": 759,
+                  "end": 1612
+                }
+              }
+            ],
+            "error": null
+          }
+        ]
+      },
+      "assessment": {
+        "text": {
+          "source_judged": 4,
+          "source_unjudged": 1,
+          "first_source_exact_rank": 1,
+          "reviewed_top_label": "relevant"
+        },
+        "vector": {
+          "source_judged": 2,
+          "source_unjudged": 3,
+          "first_source_exact_rank": 1,
+          "reviewed_top_label": "relevant"
+        },
+        "hybrid": {
+          "source_judged": 4,
+          "source_unjudged": 1,
+          "first_source_exact_rank": 1,
+          "reviewed_top_label": "relevant"
+        }
+      }
+    }
+  ]
+}

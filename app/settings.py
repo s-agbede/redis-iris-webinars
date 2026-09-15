@@ -1,51 +1,48 @@
-"""Application configuration, read once from the environment."""
-
-from __future__ import annotations
+"""Configuration for the local camera lab; serving never downloads model files."""
 
 from functools import lru_cache
+from pathlib import Path
+from typing import Final, Literal
 
 from pydantic import Field
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
+ROOT = Path(__file__).resolve().parents[1]
+MODEL: Final = "sentence-transformers/all-MiniLM-L6-v2"
+MODEL_REVISION: Final = "c9745ed1d9f207416be6d2e6f8de32d1f16199bf"
+
 
 class Settings(BaseSettings):
-    """Runtime configuration.
-
-    The embedding model is a config value rather than a constant because
-    RedisVL abstracts the vectorizer — but note that changing it changes the
-    vector dimensions, so the index must be rebuilt (`make seed`).
-    """
-
-    model_config = SettingsConfigDict(env_file=".env", extra="ignore")
-
-    openai_api_key: str = Field(..., description="Powers both the agent and embeddings")
+    model_config = SettingsConfigDict(env_file=ROOT / ".env", extra="ignore")
     redis_url: str = "redis://localhost:6379"
+    namespace: str = "camera"
+    data_dir: Path = ROOT / "seed/cameras"
+    model_path: Path | None = None
+    embedding_model: Literal["sentence-transformers/all-MiniLM-L6-v2"] = MODEL
+    embedding_revision: Literal["c9745ed1d9f207416be6d2e6f8de32d1f16199bf"] = MODEL_REVISION
+    embedding_dims: Literal[384] = 384
+    index_algorithm: Literal["FLAT", "HNSW"] = "FLAT"
+    passage_tokens: int = Field(default=240, ge=96, le=254)
+    passage_overlap: int = Field(default=32, ge=0, le=64)
+    candidate_limit: int = Field(default=100, ge=20, le=1000)
 
-    embedding_model: str = "text-embedding-3-small"
-    embedding_dims: int = 1536
-    agent_model: str = "gpt-4.1-mini"
+    @property
+    def products_index(self) -> str:
+        return f"{self.namespace}_passages"
 
-    # Caches query embeddings in Redis so a repeated search skips the API call.
-    embedding_cache_enabled: bool = True
+    @property
+    def passage_prefix(self) -> str:
+        return f"{self.namespace}:passage"
 
-    products_index: str = "products"
-    policies_index: str = "policies"
+    @property
+    def product_prefix(self) -> str:
+        return f"{self.namespace}:product"
 
-    default_num_results: int = 12
-
-    # Full-text scoring for TEXT mode and the text half of HYBRID. Configurable
-    # for the same reason as `fusion_method` below: watching the ranking move
-    # when you switch scorer is more convincing than being told it would.
-    # One of TFIDF, BM25STD, BM25, TFIDF.DOCNORM, DISMAX, DOCSCORE.
-    text_scorer: str = "BM25STD"
-
-    # Hybrid fusion. RRF combines ranks and is scale-free; LINEAR combines raw
-    # scores and lets unbounded BM25 swamp bounded cosine similarity. LINEAR is
-    # kept configurable because demonstrating that failure is instructive.
-    fusion_method: str = "RRF"
-    linear_alpha: float = 0.3
+    @property
+    def manifest_key(self) -> str:
+        return f"{self.namespace}:manifest"
 
 
 @lru_cache
 def get_settings() -> Settings:
-    return Settings()  # type: ignore[call-arg]
+    return Settings()
