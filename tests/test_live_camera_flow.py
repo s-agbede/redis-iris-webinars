@@ -98,3 +98,35 @@ def test_live_model_number_punctuation_and_highlights() -> None:
                 hit["title"][span["start"] : span["end"]].casefold()
                 for span in hit["title_matches"]
             } == {"sony", "zv", "e10"}
+
+
+def test_live_brand_and_color_filters_constrain_every_mode() -> None:
+    settings = Settings(_env_file=None, redis_url=os.environ["TEST_REDIS_URL"])
+    with TestClient(create_app(lambda: build_searcher(settings))) as client:
+        response = client.post(
+            "/api/compare",
+            json={
+                "query": "camera",
+                "brands": ["Sony"],
+                "colors": [" WHITE "],
+                "include_basic": True,
+            },
+        )
+        assert response.status_code == 200
+        filtered = response.json()
+        assert filtered["colors"] == ["white"]
+        for mode in filtered["results"]:
+            assert mode["error"] is None
+            assert mode["hits"]
+            assert all(
+                hit["brand"] == "Sony" and hit["color"].strip().casefold() == "white"
+                for hit in mode["hits"]
+            )
+            assert len({hit["product_id"] for hit in mode["hits"]}) == len(mode["hits"])
+        # A value absent from the source must never be silently ignored or inferred.
+        empty = client.post(
+            "/api/compare",
+            json={"query": "camera", "colors": ["no-such-color-931"], "include_basic": True},
+        )
+        assert empty.status_code == 200
+        assert all(not mode["hits"] and not mode["error"] for mode in empty.json()["results"])

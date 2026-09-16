@@ -1,4 +1,4 @@
-import type { Catalog, Comparison, Hit, Mode, SourceLabel } from "./api";
+import type { Comparison, Hit, Mode, SourceLabel } from "./api";
 import type { ProductRank, VisibleCount } from "./learning";
 import { HighlightedText } from "./HighlightedText";
 import { ProductPhotoView } from "./ProductPhoto";
@@ -40,8 +40,9 @@ function ProductRow({ hit, mode, rank, selected, onSelect }: {
     <button type="button" className="product-select" aria-pressed={selected} aria-haspopup="dialog" aria-controls="product-evidence" onClick={() => onSelect(hit.product_id)}>
       <span className="result-rank" aria-label={`Rank ${rank}`}>{String(rank).padStart(2, "0")}</span>
       <span className="result-copy">
-        {hit.brand && <span className="product-brand">{hit.brand}</span>}
+        {(hit.brand || hit.color) && <span className="product-brand">{[hit.brand, hit.color].filter(Boolean).join(" · ")}</span>}
         <span className="product-title"><HighlightedText text={hit.title} ranges={mode === "text" ? hit.title_matches : []} /></span>
+        {hit.available === false && <span className="passage-preview">Deleted from catalogue · stale indexed record</span>}
         {hit.passage.field !== "product_title" && <span className="passage-preview"><HighlightedText text={hit.passage.text} ranges={mode === "text" ? hit.passage_matches : []} preview={mode === "text"} /></span>}
       </span>
       <span className="result-arrow" aria-hidden="true">↗</span>
@@ -50,10 +51,10 @@ function ProductRow({ hit, mode, rank, selected, onSelect }: {
   </li>;
 }
 
-export function SearchResults({ comparison, busy, selectedId, onSelect, brand, brands, onBrandChange, onRetry, selectedModes }: {
+export function SearchResults({ comparison, busy, selectedId, onSelect, filtered, onRetry, selectedModes }: {
   comparison: Comparison | null; busy: boolean; selectedId: string | null;
-  onSelect: (id: string) => void; brand: string; brands: Catalog["brands"];
-  onBrandChange: (brand: string) => void; onRetry: () => void; selectedModes: Mode[];
+  onSelect: (id: string) => void; filtered: boolean;
+  onRetry: () => void; selectedModes: Mode[];
 }) {
   const hints: Record<Mode, string> = {
     basic: "Literal title match · alphabetical order.",
@@ -66,8 +67,7 @@ export function SearchResults({ comparison, busy, selectedId, onSelect, brand, b
 
   return <section className="results-section" aria-label="Search results" aria-busy={busy}>
     <div className="results-toolbar">
-      <p className="results-overview">{multiple ? `${visibleMethods.length} methods · same query` : "Search results"}</p>
-      <label className="brand-filter"><span className="sr-only">Filter by brand</span><select value={brand} onChange={(event) => onBrandChange(event.target.value)}><option value="">All brands</option>{brands.map((item) => <option key={item.value} value={item.value}>{item.value}</option>)}</select></label>
+      <p className="results-overview">{multiple ? `${visibleMethods.length} methods · same query and filters` : "Search results"}</p>
     </div>
     {multiple && <p className="comparison-scroll-hint">Swipe across to compare methods.</p>}
     <div className={`comparison-scroll ${multiple ? "multiple-methods" : ""}`} tabIndex={multiple ? 0 : undefined} aria-label={multiple ? "Scroll to compare search methods" : undefined}>
@@ -80,14 +80,14 @@ export function SearchResults({ comparison, busy, selectedId, onSelect, brand, b
               {!busy && result && !result.error && <span className="method-metrics">
                 <span>{result.hits.length} results</span>
                 <span aria-hidden="true"> · </span>
-                <span className="method-latency" title={method.mode === "basic" ? "Time for the in-memory title scan." : "Redis search round trip. Excludes shared query embedding and evidence processing; see About this search for those timings."} aria-label={`${method.name} search time: ${formatTime(result.query_ms)}`}>{formatTime(result.query_ms)}</span>
+                <span className="method-latency" title={method.mode === "basic" ? "Time to read the live catalogue from Redis and scan its titles." : "Redis search round trip. Excludes shared query embedding and evidence processing; see About this search for those timings."} aria-label={`${method.name} search time: ${formatTime(result.query_ms)}`}>{formatTime(result.query_ms)}</span>
               </span>}
             </div>
             <p className="method-hint">{hints[method.mode]}</p>
             {busy ? <div className="search-state" role="status"><span className="loader" aria-hidden="true" /><p>Finding a few possibilities…</p></div>
             : !result || result.error ? <div className="error-box" role="alert"><strong>{method.name} is unavailable</strong><p>{result?.error || "This method did not return a response."}</p><button type="button" onClick={onRetry}>Try again</button></div>
             : result.hits.length ? <ol className="product-list">{result.hits.map((hit, index) => <ProductRow key={hit.product_id} hit={hit} mode={method.mode} rank={index + 1} selected={selectedId === hit.product_id} onSelect={onSelect} />)}</ol>
-            : <div className="search-state"><h3>No results this time.</h3><p>{method.mode === "basic" ? "The complete phrase must appear in the title. Try a shorter phrase or compare with Full-text." : `Try a broader description${brand ? " or choose All brands" : ""}.`}</p></div>}
+            : <div className="search-state"><h3>No results this time.</h3><p>{method.mode === "basic" ? "The complete phrase must appear in the title. Try a shorter phrase or compare with Full-text." : "Try a broader description."}{filtered && " You can also clear the filters to search all products."}</p></div>}
           </section>;
         })}
       </div>

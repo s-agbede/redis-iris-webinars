@@ -23,6 +23,8 @@ class Encoder:
 
 
 class Index:
+    name = "fixture"
+
     def __init__(self, fail_hybrid: bool = False, hybrid_warning: str | None = None) -> None:
         self.queries: list[Any] = []
         self.fail_hybrid = fail_hybrid
@@ -270,3 +272,55 @@ def test_no_searchable_terms_is_a_lexical_error_without_erasing_vector(query: st
         assert mode.hits == []
     assert vector.hits and vector.error is None
     assert len(index.queries) == 1
+
+
+def test_single_hybrid_executes_one_retrieval() -> None:
+    searcher, encoder, index = service()
+    result = searcher.compare(CompareRequest(query="camera"), modes=(SearchMode.HYBRID,))
+    assert [r.mode for r in result.results] == [SearchMode.HYBRID]
+    assert len(index.queries) == 1
+    assert encoder.calls == 1
+
+
+def test_live_product_lookup_skips_orphans_and_indexed_view_exposes_them() -> None:
+    searcher, _, _ = service()
+
+    class LiveProducts:
+        def targets(self):
+            return [{"name": "fixture"}]
+
+        def get_many(self, ids):
+            return {"b": searcher.catalog.products["b"]}
+
+    searcher.store = LiveProducts()
+    live = searcher.compare(CompareRequest(query="lens"))
+    assert all([h.product_id for h in r.hits] == ["b"] for r in live.results)
+    indexed = searcher.compare(CompareRequest(query="lens", indexed_view=True))
+    assert indexed.results[0].hits[0].product_id == "a"
+    assert indexed.results[0].hits[0].available is False
+
+
+def test_embedding_reuse_preserves_ranking_and_still_queries_redis() -> None:
+    searcher, encoder, index = service()
+    request = CompareRequest(query="canon lens", cache_embedding=True)
+    first = searcher.compare(request, modes=(SearchMode.HYBRID,))
+    second = searcher.compare(request, modes=(SearchMode.HYBRID,))
+    assert encoder.calls == 1
+    assert len(index.queries) == 2
+    assert first.results[0].hits == second.results[0].hits
+
+
+def test_inferred_brand_applies_to_all_methods_and_can_be_overridden() -> None:
+    searcher, _, _ = service()
+    request = CompareRequest(query="Canon camera", interpret_brand=True, include_basic=True)
+    result = searcher.compare(request)
+    assert result.query == "Canon camera"
+    assert result.brands == result.inferred_brands == ["Canon"]
+    for method in result.results:
+        if method.mode is not SearchMode.BASIC:
+            assert "@brand:" in method.redis_query
+    explicit = searcher.compare(request.model_copy(update={"brands": ["Nikon"]}))
+    assert explicit.brands == ["Nikon"]
+    assert explicit.inferred_brands == []
+    disabled = searcher.compare(request.model_copy(update={"interpret_brand": False}))
+    assert disabled.brands == disabled.inferred_brands == []

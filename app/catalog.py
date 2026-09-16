@@ -12,7 +12,7 @@ from typing import Final
 from pydantic import BaseModel
 from tokenizers import Tokenizer
 
-from app.models import CameraProduct, Judgement, Label, Passage, SourceField
+from app.models import CameraProduct, Judgement, Label, Passage, SourceField, normalize_color
 
 
 class _TextExtractor(HTMLParser):
@@ -127,7 +127,7 @@ def make_passages(
                     product_id=product.product_id,
                     title=product.product_title,
                     brand=product.product_brand or "",
-                    color=product.product_color or "",
+                    color=normalize_color(product.product_color),
                     field=field,
                     text=chunk.text,
                     start=chunk.start,

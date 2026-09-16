@@ -10,30 +10,35 @@ from redis import Redis
 from redis.exceptions import ResponseError
 from redisvl.index import SearchIndex
 
-from app.catalog import Catalog, make_passages
+from app.catalog import Catalog
 from app.embeddings import build_vectorizer
-from app.search import index_identity
+from app.indexing import prepare_product_passages
+from app.search import index_identity, serving_target
 from app.settings import ROOT, Settings, get_settings
 
 
 def current_manifest(client: Any, settings: Settings, catalog: Catalog) -> dict[str, Any] | None:
     """An interrupted, outdated or missing index must be rebuilt before serving."""
-    raw = client.get(settings.manifest_key)
-    if not raw:
-        return None
-    manifest: dict[str, Any] = json.loads(raw)
-    if any(manifest.get(k) != v for k, v in index_identity(settings, catalog).items()):
-        return None
-    try:
-        raw_info = client.execute_command("FT.INFO", settings.products_index)
-    except ResponseError as exc:
-        if "unknown index" in str(exc).lower() or "no such index" in str(exc).lower():
+    with client.lock(f"{settings.namespace}:sync-lock", timeout=60, blocking_timeout=30):
+        raw = client.get(settings.manifest_key)
+        if not raw:
             return None
-        raise
-    info = dict(zip(raw_info[::2], raw_info[1::2], strict=True))
-    if int(info[b"num_docs"]) != manifest.get("passage_count") or int(info[b"indexing"]):
-        return None
-    return manifest
+        manifest: dict[str, Any] = json.loads(raw)
+        if any(manifest.get(k) != v for k, v in index_identity(settings, catalog).items()):
+            return None
+        target = serving_target(client, settings)
+        try:
+            raw_info = client.execute_command("FT.INFO", target["name"])
+        except ResponseError as exc:
+            if "unknown index" in str(exc).lower() or "no such index" in str(exc).lower():
+                return None
+            raise
+        info = dict(zip(raw_info[::2], raw_info[1::2], strict=True))
+        expected = client.get(target["count_key"])
+        count = int(expected) if expected is not None else manifest.get("passage_count")
+        if int(info[b"num_docs"]) != count or int(info[b"indexing"]):
+            return None
+        return manifest
 
 
 def configure_schema(schema: dict[str, Any], settings: Settings) -> None:
@@ -48,23 +53,20 @@ def configure_schema(schema: dict[str, Any], settings: Settings) -> None:
 
 def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
     catalog = Catalog.load(settings.data_dir)
-    if if_needed:
-        with Redis.from_url(
-            settings.redis_url, socket_connect_timeout=3, socket_timeout=15
-        ) as client:
+    with Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=15) as client:
+        if if_needed:
             existing = current_manifest(client, settings, catalog)
-        if existing is not None:
-            print(f"Reusing {existing['passage_count']:,} indexed camera passages.", flush=True)
-            return existing
+            if existing is not None:
+                print("Reusing the current camera passage index.", flush=True)
+                return existing
+        if client.exists(f"{settings.namespace}:deploy", f"{settings.namespace}:changes"):
+            raise RuntimeError(
+                "Bootstrap will not overwrite an existing live catalogue. "
+                "Use Manage shop > Safe deployment to rebuild its index, or set a fresh "
+                "NAMESPACE to bootstrap a separate catalogue. If startup validation failed, "
+                "restore the managed catalogue/index before starting the app."
+            )
     encoder = build_vectorizer(settings)
-    passages = [
-        passage
-        for product in catalog.products.values()
-        for passage in make_passages(
-            product, encoder.tokenizer, settings.passage_tokens, settings.passage_overlap
-        )
-    ]
-    print(f"{len(catalog.products):,} products; {len(passages):,} source passages", flush=True)
     schema = yaml.safe_load((ROOT / "schemas/passages.yaml").read_text())
     configure_schema(schema, settings)
     client = Redis.from_url(settings.redis_url, socket_connect_timeout=3, socket_timeout=30)
@@ -84,24 +86,17 @@ def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
             )
         pipeline.execute()
         started = time.perf_counter()
-        for offset in range(0, len(passages), 128):
-            batch = passages[offset : offset + 128]
-            vectors = encoder.embed_many([p.search_text for p in batch])
-            index.load(
-                [
-                    {**p.model_dump(), "embedding": vector}
-                    for p, vector in zip(batch, vectors, strict=True)
-                ],
-                id_field="passage_id",
-            )
-            print(
-                f"Indexed {min(offset + 128, len(passages)):,}/{len(passages):,} passages",
-                flush=True,
-            )
+        passage_count = 0
+        for product in catalog.products.values():
+            records = prepare_product_passages(product, encoder, settings)
+            if records:
+                index.load([record.model_dump() for record in records], id_field="passage_id")
+            passage_count += len(records)
+        print(f"Indexed {passage_count:,} passages", flush=True)
         deadline = time.monotonic() + 30
         while True:
             info = index.info()
-            if int(info.get("num_docs", 0)) == len(passages) and not int(info.get("indexing", 0)):
+            if int(info.get("num_docs", 0)) == passage_count and not int(info.get("indexing", 0)):
                 break
             if time.monotonic() > deadline:
                 raise RuntimeError(
@@ -111,10 +106,13 @@ def load(settings: Settings, *, if_needed: bool = False) -> dict[str, Any]:
         manifest = {
             **index_identity(settings, catalog),
             "product_count": len(catalog.products),
-            "passage_count": len(passages),
+            "passage_count": passage_count,
             "seed_seconds": round(time.perf_counter() - started, 2),
         }
-        client.set(settings.manifest_key, json.dumps(manifest))
+        with client.pipeline(transaction=True) as pipeline:
+            pipeline.set(f"{settings.namespace}:expected-passages", passage_count)
+            pipeline.set(settings.manifest_key, json.dumps(manifest))
+            pipeline.execute()
         print(json.dumps(manifest, indent=2), flush=True)
         return manifest
     finally:

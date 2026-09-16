@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import create_app
-from app.models import ProductPhoto
+from app.models import CameraProduct, ProductPhoto
 from tests.test_search import service
 
 
@@ -38,6 +38,24 @@ def test_product_detail_keeps_original_source_fields_and_returns_404_for_missing
         assert response.status_code == 200
         assert response.json()["product_title"] == "a lens"
         assert response.json()["product_description"] is None
+        assert response.json()["source_origin"] == "esci"
+        assert response.json()["source_revision"] == "test"
+
+
+def test_demo_product_detail_does_not_claim_esci_provenance() -> None:
+    searcher, _, _ = service()
+    product = CameraProduct(
+        product_id="demo-123456789abc",
+        product_title="Aurora ZV Demo Camera",
+        product_brand="Demo",
+    )
+    searcher.catalog.products[product.product_id] = product
+    with TestClient(create_app(lambda: searcher)) as client:
+        response = client.get(f"/api/products/{product.product_id}")
+        assert response.status_code == 200
+        assert response.json()["source_revision"] is None
+        assert response.json()["source_origin"] == "demo"
+        assert response.json()["product_title"] == product.product_title
 
 
 def test_unmapped_products_have_no_photo_and_local_images_are_served() -> None:

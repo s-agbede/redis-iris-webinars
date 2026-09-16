@@ -2,7 +2,7 @@
 
 up: redis model build ## Prepare once, then open the comparison app
 	uv run python -m seed.load --if-needed
-	uv run uvicorn app.main:app --host 127.0.0.1 --port $(or $(PORT),8000)
+	uv run python -m app.runtime --port $(or $(PORT),8000)
 
 redis: ## Preserve an existing service container and its data
 	docker compose up -d --no-recreate --wait
@@ -10,11 +10,11 @@ redis: ## Preserve an existing service container and its data
 model: ## Download the pinned local model once; verify cached files afterwards
 	uv run python -m app.embeddings
 
-seed: ## Rebuild only the camera passage index using bundled source records
+seed: ## Bootstrap bundled source records; refuse to overwrite managed live catalogues
 	uv run python -m seed.load
 
 serve: ## Start the prepared backend and built frontend
-	uv run uvicorn app.main:app --host 127.0.0.1 --port $(or $(PORT),8000)
+	uv run python -m app.runtime --port $(or $(PORT),8000)
 
 build:
 	npm --prefix web ci
@@ -27,12 +27,12 @@ eval:
 	uv run python -m eval.run --check
 
 fmt:
-	uv run ruff format app seed/load.py eval tests scripts/prepare_cameras.py
-	uv run ruff check --fix app seed/load.py eval tests scripts/prepare_cameras.py
+	uv run ruff format app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
+	uv run ruff check --fix app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
 
 lint:
-	uv run ruff check app seed/load.py eval tests scripts/prepare_cameras.py
-	uv run mypy app seed/load.py eval scripts/prepare_cameras.py
+	uv run ruff check app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
+	uv run mypy app seed/load.py eval scripts/prepare_cameras.py scripts/search_load.py
 
 test:
 	uv run pytest -q

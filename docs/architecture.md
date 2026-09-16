@@ -18,9 +18,29 @@ Query ────────────────────────�
   with window 100 and constant 60. Its lexical expression is explicitly aligned
   with the full-text query; RedisVL 0.26's optional-text default would otherwise
   give unmatched passages lexical rank contributions.
-- **Shared constraints:** the same exact, case-sensitive source-brand filter,
-  index and candidate limit apply to each method. Model/mount text in a query is
+- **Shared constraints:** the same source-brand and normalized-color filters,
+  index and candidate limit apply to each Redis method. Model/mount text in a query is
   a relevance signal, not a hard compatibility constraint.
+
+Brand and color are `TAG` fields on every passage. Brand matching remains
+case-sensitive; color keys use Python `casefold()` and collapsed whitespace at
+ingestion and on requests. The source product and displayed color are unchanged.
+Filters combine with AND across fields and OR within each API list, for example
+`(brand = Sony OR Canon) AND (color = white OR black)`. Redis applies them to the
+eligible candidates in Full-text, Vector and both Hybrid branches. Basic first loads
+the live catalogue from Redis with SCAN and JSON.GET, then applies the same checks
+before sorting and limiting its in-memory title matches; its timing includes those
+Redis reads as well as the scan. These
+are metadata constraints, not a filter over already fetched top-five results.
+After retrieving passage candidates, normal search also rechecks the same constraints
+against current Redis product records before deduplication and the product limit.
+This hides products whose live brand or color changed while indexing was paused;
+the explicit indexed-data view continues to show the stored passage metadata.
+Missing metadata cannot satisfy an active filter. The catalogue endpoint supplies
+product counts per value across the whole dataset, not query-dependent facets.
+Pipeline identity `camera-passages-v2` prevents reuse of an older index without
+the normalized color field. Bootstrap upgrades can run `make seed` or `make up`;
+an already managed catalogue requires a compatible live rebuild or a fresh namespace.
 
 The search box accepts plain-language queries. Before constructing either lexical
 query, the app replaces ASCII punctuation (except underscores) with spaces, then
@@ -82,6 +102,14 @@ vector and hybrid requests. There is no hosted model call or query cache.
 Camera keys use `camera:product:us:<id>`, `camera:passage:<passage-id>` and
 `camera:manifest`; the index is `camera_passages`. `NAMESPACE` allows another
 independent camera instance. Historical apparel assets are preserved in Git; see [repository history](history.md).
+
+Bootstrap publishes its manifest and expected passage count together. Startup and
+`seed.load --if-needed` validate the active deployment target against its maintained
+count, rather than comparing a live catalogue with the original seed count. Healthy
+reuse preserves saved products, pending events and deployment state. Once a namespace
+has a change stream or deployment registry, bootstrap refuses to rebuild it from
+bundled records. Use the live replacement workflow, restore damaged managed state,
+or select an unused `NAMESPACE` for an independent demo.
 
 ### Timing and architecture
 

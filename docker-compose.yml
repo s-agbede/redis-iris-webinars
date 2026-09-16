@@ -1,5 +1,6 @@
 services:
   redis:
+    restart: unless-stopped
     # Tested Redis 8.6.2; immutable official image digest (supports FT.HYBRID).
     image: redis@sha256:1f073813b641755b70b0200da64131bbeeb4ec5b633ca67772229b49820caafa
     ports:

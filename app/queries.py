@@ -11,7 +11,7 @@ from redisvl.query.hybrid import build_base_query
 from app.constants import RRF_CONSTANT
 
 PASSAGE_FIELDS = ["passage_id", "field", "text", "start", "end"]
-RETURN_FIELDS = ["product_id", *PASSAGE_FIELDS, "search_text"]
+RETURN_FIELDS = ["title", "brand", "color", "product_id", *PASSAGE_FIELDS, "search_text"]
 NO_LEXICAL_TERMS = "No searchable terms remain after removing punctuation and stopwords."
 
 

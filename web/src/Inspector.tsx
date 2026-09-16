@@ -66,7 +66,7 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
   }, [selectedId]);
 
   useEffect(() => {
-    if (!sourceOpen || product) return;
+    if (product) return;
     const request = gate.current.begin();
     setError("");
     requestJSON<ProductDetail>(`/products/${encodeURIComponent(selectedId)}`, { signal: request.signal })
@@ -87,6 +87,7 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
     if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) dismiss();
   }}>
     <div className="evidence-toolbar"><span className="eyebrow">A closer look</span><button type="button" className="close-button" onClick={dismiss} aria-label="Close evidence and return to results">×</button></div>
+    {error && <p role="alert" className="error-box">Live catalogue check: {error}</p>}
     <h2 id="evidence-heading" ref={heading} tabIndex={-1}>{selectedProduct.title}</h2>
     <p className="evidence-intro">See where this product appears, and what each search method found.</p>
     {selectedProduct.photo && <ProductPhotoView photo={selectedProduct.photo} compact />}
@@ -104,7 +105,7 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
       </>}
     </details>)}</div>
     <details className="original-source" onToggle={(event) => setSourceOpen(event.currentTarget.open)}>
-      <summary>Original source record <span>ESCI · US</span></summary>
+      <summary>Original source record {product && <span>{product.source_origin === "demo" ? "Demo catalogue" : "ESCI · US"}</span>}</summary>
       <div className="source-section" aria-busy={!product && !error}>
         {!product && !error && <p className="inline-loading" role="status"><span className="loader" aria-hidden="true" />Loading source record…</p>}
         {error && <div className="error-box" role="alert"><p>{error}</p><button type="button" onClick={() => setAttempt((value) => value + 1)}>Retry source record</button></div>}
@@ -113,11 +114,11 @@ export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
           <SourceField label="Title" value={product.product_title} />
           <dl className="source-metadata"><div><dt>Brand</dt><dd>{product.product_brand || "Not supplied"}</dd></div><div><dt>Color</dt><dd>{product.product_color || "Not supplied"}</dd></div><div><dt>Locale</dt><dd>{product.product_locale}</dd></div></dl>
           <SourceField label="Description" value={product.product_description} /><SourceField label="Bullet points" value={product.product_bullet_point} />
-          <details className="raw-fields"><summary>Verbatim source fields & provenance</summary><p>HTML is displayed as text.</p><pre>{JSON.stringify({ product_id: product.product_id, product_title: product.product_title, product_description: product.product_description, product_bullet_point: product.product_bullet_point, product_brand: product.product_brand, product_color: product.product_color, product_locale: product.product_locale, source_revision: product.source_revision }, null, 2)}</pre></details>
+          <details className="raw-fields"><summary>Verbatim source fields & provenance</summary><p>HTML is displayed as text.</p><pre>{JSON.stringify({ product_id: product.product_id, product_title: product.product_title, product_description: product.product_description, product_bullet_point: product.product_bullet_point, product_brand: product.product_brand, product_color: product.product_color, product_locale: product.product_locale, source_origin: product.source_origin, source_revision: product.source_revision }, null, 2)}</pre></details>
         </>}
       </div>
     </details>
-    <details className="commands-details"><summary>Redis commands for this comparison</summary><p>Query traces use the same query and brand filter. Failed methods include an attempted command when available.</p>{methods.map((method) => { const result = comparison.results.find((item) => item.mode === method.mode); return <div key={method.mode}><h4>{method.name}</h4>{method.mode === "basic" ? <p>Literal title matching over the loaded catalogue; alphabetical ordering. No Redis command is used.</p> : result?.redis_query ? <><p>{result.error ? "Attempted command; this method returned an error." : "Executed command"}</p><pre>{result.redis_query}</pre></> : <p>Command not run. {result?.error || "No query trace is available."}</p>}</div>; })}</details>
+    <details className="commands-details"><summary>Redis commands for this comparison</summary><p>Query traces use the same query, brand and color filters. Filters restrict eligible products before ranking. Failed methods include an attempted command when available.</p>{methods.map((method) => { const result = comparison.results.find((item) => item.mode === method.mode); return <div key={method.mode}><h4>{method.name}</h4>{method.mode === "basic" ? <p>Reads the live catalogue from Redis, then matches titles in memory and sorts alphabetically. No Redis search index is used.</p> : result?.redis_query ? <><p>{result.error ? "Attempted command; this method returned an error." : "Executed command"}</p><pre>{result.redis_query}</pre></> : <p>Command not run. {result?.error || "No query trace is available."}</p>}</div>; })}</details>
     <button type="button" className="back-to-results" onClick={dismiss}>Back to results</button>
   </dialog>;
 }

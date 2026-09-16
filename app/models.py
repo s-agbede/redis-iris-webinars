@@ -11,6 +11,11 @@ Label = Literal["E", "S", "C", "I"]
 SourceField = Literal["product_title", "product_description", "product_bullet_point"]
 
 
+def normalize_color(value: str | None) -> str:
+    """Merge case and whitespace variants without inferring a different color."""
+    return " ".join((value or "").split()).casefold()
+
+
 class SearchMode(StrEnum):
     BASIC = "basic"
     TEXT = "text"
@@ -50,6 +55,9 @@ class RedisPassage(PassageEvidence):
 
     product_id: str
     search_text: str
+    title: str = ""
+    brand: str = ""
+    color: str = ""
     score: float | None = None
     vector_distance: float | None = None
     combined_score: float | None = None
@@ -87,8 +95,12 @@ class CompareRequest(BaseModel):
     model_config = ConfigDict(extra="forbid")
     query: str = Field(min_length=1, max_length=1000)
     brands: list[str] = Field(default_factory=list, max_length=20)
+    colors: list[str] = Field(default_factory=list, max_length=20)
     num_results: int = Field(default=5, ge=1, le=20)
     include_basic: bool = False
+    indexed_view: bool = False
+    cache_embedding: bool = False
+    interpret_brand: bool = False
 
     @field_validator("query")
     @classmethod
@@ -103,6 +115,15 @@ class CompareRequest(BaseModel):
         if any(not value.strip() or len(value) > 300 for value in values):
             raise ValueError("Brand filters must contain nonempty source values.")
         return list(dict.fromkeys(values))
+
+    @field_validator("colors")
+    @classmethod
+    def valid_colors(cls, values: list[str]) -> list[str]:
+        if any(not value.strip() or len(value) > 300 for value in values):
+            raise ValueError(
+                "Color filters must contain nonempty values of at most 300 characters."
+            )
+        return list(dict.fromkeys(normalize_color(value) for value in values))
 
 
 class ProductPhoto(BaseModel):
@@ -136,6 +157,7 @@ class FusionEvidence(BaseModel):
 
 
 class SearchHit(BaseModel):
+    available: bool = True
     product_id: str
     title: str
     brand: str | None
@@ -167,6 +189,7 @@ class SearchHit(BaseModel):
 class ModeResult(BaseModel):
     mode: SearchMode
     query_ms: float
+    product_processing_ms: float = 0
     score_kind: str
     redis_query: str
     hits: list[SearchHit] = Field(default_factory=list)
@@ -174,8 +197,10 @@ class ModeResult(BaseModel):
 
 
 class Comparison(BaseModel):
+    inferred_brands: list[str] = Field(default_factory=list)
     query: str
     brands: list[str]
+    colors: list[str] = Field(default_factory=list)
     embedding_ms: float
     total_ms: float
     explanation_ms: float = 0
@@ -186,7 +211,8 @@ class Comparison(BaseModel):
 
 
 class ProductDetail(CameraProduct):
-    source_revision: str
+    source_origin: Literal["esci", "demo"]
+    source_revision: str | None
     passages: list[PassageEvidence]
     photo: ProductPhoto | None = None
 
@@ -213,4 +239,5 @@ class CatalogInfo(BaseModel):
     vector_dimensions: int
     index_algorithm: str
     brands: list[FacetValue]
+    colors: list[FacetValue]
     examples: list[ExampleQuery]

@@ -28,6 +28,7 @@ export type FusionEvidence = {
   note: string;
 };
 export type Hit = {
+  available?: boolean;
   product_id: string;
   title: string;
   brand: string | null;
@@ -54,8 +55,10 @@ export type ModeResult = {
   hits: Hit[];
 };
 export type Comparison = {
+  inferred_brands: string[];
   query: string;
   brands: string[];
+  colors: string[];
   embedding_ms: number;
   explanation_ms: number;
   total_ms: number;
@@ -74,6 +77,7 @@ export type Catalog = {
   vector_dimensions: number;
   index_algorithm: string;
   brands: { value: string; count: number }[];
+  colors: { value: string; count: number }[];
   examples: {
     query: string;
     title: string;
@@ -89,7 +93,8 @@ export type ProductDetail = {
   product_brand: string | null;
   product_color: string | null;
   product_locale: "us";
-  source_revision: string;
+  source_origin: "esci" | "demo";
+  source_revision: string | null;
   passages: Passage[];
   photo: ProductPhoto | null;
 };
