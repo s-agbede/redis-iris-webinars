@@ -2,6 +2,8 @@
 __pycache__/
 *.py[cod]
 .env
+*.shop-playbook-setup.json
+.shop-playbook-setup-*
 .mypy_cache/
 .ruff_cache/
 .pytest_cache/

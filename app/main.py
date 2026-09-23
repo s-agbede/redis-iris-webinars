@@ -2,6 +2,7 @@
 
 from collections.abc import AsyncIterator, Callable
 from contextlib import asynccontextmanager
+from threading import Lock
 from typing import Annotated, cast
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
@@ -12,8 +13,8 @@ from redisvl.exceptions import RedisVLError
 
 from app.deployment import DeploymentManager
 from app.deployment import router as deployment_router
+from app.freshness_routes import router as lab_router
 from app.indexing import PassageEncoder
-from app.lab import router as lab_router
 from app.models import (
     CatalogInfo,
     CompareRequest,
@@ -24,6 +25,10 @@ from app.models import (
 )
 from app.search import Searcher, build_searcher
 from app.settings import ROOT
+from app.shop.memory import MemoryError
+from app.shop.routes import build_shop, close_shop, shop_error_handler
+from app.shop.routes import router as shop_router
+from app.shop.service import ShopError, ShopService
 from app.suggestions import get_suggestions, suggestion_key
 from app.sync import SyncWorker
 from app.traffic import router as traffic_router
@@ -40,10 +45,18 @@ def get_searcher(request: Request) -> Searcher:
 SearcherDep = Annotated[Searcher, Depends(get_searcher)]
 
 
-def create_app(builder: Callable[[], Searcher] = build_searcher) -> FastAPI:
+def create_app(
+    builder: Callable[[], Searcher] = build_searcher,
+    *,
+    shop_builder: Callable[[Searcher], ShopService] = build_shop,
+) -> FastAPI:
     @asynccontextmanager
     async def lifespan(application: FastAPI) -> AsyncIterator[None]:
         application.state.searcher = None
+        application.state.shop = None
+        application.state.shop_builder = shop_builder
+        application.state.shop_init_lock = Lock()
+        application.state.shop_turn_lock = Lock()
         application.state.sync_worker = None
         application.state.deployment = None
         application.state.startup_error = "Camera lab is starting."
@@ -69,6 +82,7 @@ def create_app(builder: Callable[[], Searcher] = build_searcher) -> FastAPI:
         try:
             yield
         finally:
+            close_shop(application.state.shop)
             stop_traffic()
             if application.state.deployment is not None:
                 application.state.deployment.close()
@@ -82,6 +96,10 @@ def create_app(builder: Callable[[], Searcher] = build_searcher) -> FastAPI:
     application.include_router(lab_router)
     application.include_router(deployment_router)
     application.include_router(traffic_router)
+    application.include_router(shop_router)
+    application.add_exception_handler(ShopError, shop_error_handler)
+    application.add_exception_handler(MemoryError, shop_error_handler)
+    application.add_exception_handler(RedisError, shop_error_handler)
 
     @application.get("/api/health")
     def health(searcher: SearcherDep) -> dict[str, str | int]:

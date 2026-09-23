@@ -118,6 +118,15 @@ export function createRequestGate() {
   };
 }
 
+export class APIError extends Error {
+  readonly status: number;
+  constructor(status: number, message: string) {
+    super(message);
+    this.name = "APIError";
+    this.status = status;
+  }
+}
+
 export async function requestJSON<T>(
   path: string,
   init: RequestInit = {},
@@ -132,7 +141,7 @@ export async function requestJSON<T>(
     const body: unknown = await response.json().catch(() => null);
     const detail =
       body && typeof body === "object" && "detail" in body ? body.detail : null;
-    throw new Error(typeof detail === "string" ? detail : fallback);
+    throw new APIError(response.status, typeof detail === "string" ? detail : fallback);
   }
   return response.json() as Promise<T>;
 }

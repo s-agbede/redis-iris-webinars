@@ -16,8 +16,8 @@ Showing three or five uses the existing response. Keyboard selection moves focus
 to the panel; closing it returns to the selecting control.
 
 The seven learning scenarios and actual rankings are recorded in
-[learning observations](../eval/learning-observations.json), with the developer
-experience checks in [the learning audit](search-learning-audit.md).
+[learning observations](../../eval/learning-observations.json), with the developer
+experience checks in [the learning audit](../archive/search-learning-audit.md).
 These queries are authored demonstrations, not newly judged relevance labels.
 The older reviewed evaluation examples remain in `eval/demo-observations.json`.
 The demo does not force a different winner for each mode.
@@ -37,7 +37,7 @@ uv run python -m eval.run --all-source --output /tmp/all-camera-queries.json
 ## Extend the same scenario
 
 
-The current app implements search comparison. Later episodes can reuse stable
+This runbook covers the search comparison demo. Later episodes reuse stable
 product IDs, source revisions and evidence passages:
 
 - **Context retrieval:** assemble cited evidence for a camera-kit comparison;
@@ -49,9 +49,10 @@ product IDs, source revisions and evidence passages:
   scope reuse to user constraints, model and source version, with invalidation
   when that context changes.
 
-Those capabilities are extension points, not implemented features in this version.
+The [agent-memory demo](agent-memory.md) now implements the simulated shopper flow.
+The dedicated context-retriever session and semantic caching remain future extensions.
 
 ## Presentation materials
 
-- [Presentation design brief](claude-design-search-webinar-prompt.md)
-- [Series constraints](webinar-series-constraints.md)
+- [Presentation design brief](../presentations/search.md)
+- [Series constraints](../presentations/series-constraints.md)

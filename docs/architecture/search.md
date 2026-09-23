@@ -101,7 +101,7 @@ vector and hybrid requests. There is no hosted model call or query cache.
 
 Camera keys use `camera:product:us:<id>`, `camera:passage:<passage-id>` and
 `camera:manifest`; the index is `camera_passages`. `NAMESPACE` allows another
-independent camera instance. Historical apparel assets are preserved in Git; see [repository history](history.md).
+independent camera instance. Historical apparel assets are preserved in Git; see [repository history](../archive/history.md).
 
 Bootstrap publishes its manifest and expected passage count together. Startup and
 `seed.load --if-needed` validate the active deployment target against its maintained
@@ -146,15 +146,15 @@ and [FT.SUGGET](https://redis.io/docs/latest/commands/ft.sugget/).
 
 ## Code walkthrough for the demo
 
-1. Open [`schemas/passages.yaml`](../schemas/passages.yaml) to show text, vector,
+1. Open [`schemas/passages.yaml`](../../schemas/passages.yaml) to show text, vector,
    and brand fields.
-2. Open [`app/queries.py`](../app/queries.py): `build_text_query`,
+2. Open [`app/queries.py`](../../app/queries.py): `build_text_query`,
    `build_vector_query`, then `build_hybrid_query`. These are the actual builders
    the application uses, not separate demonstration examples.
 3. Show `align_hybrid_lexical_branch` below the hybrid builder when explaining
    the RedisVL 0.26 adjustment. The builder also fetches the full candidate union
    for evidence; neither change is hidden in a demo-only implementation.
-4. Follow `Searcher.compare` in [`app/search.py`](../app/search.py) for the shared
+4. Follow `Searcher.compare` in [`app/search.py`](../../app/search.py) for the shared
    embedding, filters, Redis execution, and result processing.
 
 Builders receive the normalized lexical text or a precomputed vector, the same
