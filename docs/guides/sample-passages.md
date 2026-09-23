@@ -1,7 +1,7 @@
 # Sample camera catalogue passages
 
 Actual records generated from the bundled catalogue by
-[`make_passages`](../app/catalog.py), using the pinned MiniLM tokenizer and the
+[`make_passages`](../../app/catalog.py), using the pinned MiniLM tokenizer and the
 default 240-token indexed-text budget / 32-token overlap. Generated 2026-09-15.
 This is a documentation snapshot, not an input to the seed loader.
 
@@ -182,7 +182,7 @@ and C) Transmission range: < 30m Channel: 16(1-16) Auto Focus Assit Beam Effecti
 
 Retrieval ranks these passages; the app groups them by `product_id` and keeps
 the best-ranked passage for each returned product. See the
-[index schema](../schemas/passages.yaml) and [retrieval architecture](architecture.md).
+[index schema](../../schemas/passages.yaml) and [retrieval architecture](../architecture/search.md).
 
 Source: bundled Amazon ESCI records, revision `7916cdf6ab75a462e77f20ab40428a10923998d5`.
 See [dataset provenance and licences](dataset.md).

@@ -8,6 +8,8 @@ import { SearchInput } from "./SearchInput";
 import { ManageShop } from "./ManageShop";
 import { SiteHeader } from "./SiteHeader";
 import { SearchFilters } from "./SearchFilters";
+import { Shop } from "./Shop";
+import { ProductPage } from "./ProductPage";
 
 const initialParams = new URLSearchParams(window.location.search);
 
@@ -190,4 +192,5 @@ function App() {
   </div>;
 }
 
-createRoot(document.getElementById("root")!).render(<React.StrictMode>{initialParams.get("view") === "manage" ? <ManageShop /> : <App />}</React.StrictMode>);
+const view = initialParams.get("view");
+createRoot(document.getElementById("root")!).render(<React.StrictMode>{view === "manage" ? <ManageShop /> : view === "compare" || initialParams.has("q") ? <App /> : view === "product" ? <ProductPage id={initialParams.get("id") || ""} /> : <Shop />}</React.StrictMode>);

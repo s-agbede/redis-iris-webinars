@@ -1,4 +1,6 @@
-.PHONY: up redis model seed serve build dev eval fmt lint test down
+.PHONY: up redis model seed serve build dev eval memory-eval fmt lint test down
+
+SHOP_SCRIPTS = scripts/setup_shop_playbook.py scripts/evaluate_shop_memory.py
 
 up: redis model build ## Prepare once, then open the comparison app
 	uv run python -m seed.load --if-needed
@@ -26,13 +28,16 @@ dev: ## Frontend dev server; backend uses port 8000
 eval:
 	uv run python -m eval.run --check
 
+memory-eval: ## Write isolated fictional fixtures and measure real RAM extraction
+	uv run python -m scripts.evaluate_shop_memory --timeout 420
+
 fmt:
-	uv run ruff format app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
-	uv run ruff check --fix app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
+	uv run ruff format app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py $(SHOP_SCRIPTS)
+	uv run ruff check --fix app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py $(SHOP_SCRIPTS)
 
 lint:
-	uv run ruff check app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py
-	uv run mypy app seed/load.py eval scripts/prepare_cameras.py scripts/search_load.py
+	uv run ruff check app seed/load.py eval tests scripts/prepare_cameras.py scripts/search_load.py $(SHOP_SCRIPTS)
+	uv run mypy app seed/load.py eval scripts/prepare_cameras.py scripts/search_load.py $(SHOP_SCRIPTS)
 
 test:
 	uv run pytest -q

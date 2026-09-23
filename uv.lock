@@ -246,6 +246,7 @@ dependencies = [
     { name = "onnxruntime" },
     { name = "pydantic" },
     { name = "pydantic-settings" },
+    { name = "redis-agent-memory" },
     { name = "redisvl" },
     { name = "tokenizers" },
     { name = "uvicorn", extra = ["standard"] },
@@ -276,6 +277,7 @@ requires-dist = [
     { name = "pyarrow", marker = "extra == 'prepare'", specifier = ">=20" },
     { name = "pydantic", specifier = ">=2.10" },
     { name = "pydantic-settings", specifier = ">=2.15" },
+    { name = "redis-agent-memory", specifier = ">=0.4.1" },
     { name = "redisvl", specifier = "==0.26.0" },
     { name = "tokenizers", specifier = ">=0.22,<1" },
     { name = "uvicorn", extras = ["standard"], specifier = ">=0.34" },
@@ -1430,6 +1432,20 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/51/93/05e7d4a65285066a74f48697f9b9cde5cfce71398033d69ed83c3d98f5c9/redis-7.4.1.tar.gz", hash = "sha256:1a1df5067062cf7cbe677994e391f8ee0840f499d370f1a71266e0dd3aa9308e", size = 4945742, upload-time = "2026-06-05T09:10:06.703Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/4a/2e/2677f3f93dae0497e7e33b6637302e7f3744efc553f34231183e32584885/redis-7.4.1-py3-none-any.whl", hash = "sha256:1fa4647af1c5e93a2c685aa248ee44cce092691146d41390518dabe9a99839b0", size = 410171, upload-time = "2026-06-05T09:10:05.128Z" },
+]
+
+[[package]]
+name = "redis-agent-memory"
+version = "0.4.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpcore" },
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/e1/f6/c25f0e7de4e05378f427b9930d59bcf613ec0d3b4903b5f61fc846b7e042/redis_agent_memory-0.4.1.tar.gz", hash = "sha256:b379be6f64b7ca403036b6ce61018ab09216a4a33c5b9f3338bdc8c0db722a20", size = 74498, upload-time = "2026-09-16T07:34:10.814Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0f/63/ac28db26af34226d0252fd8d3af2281b58494ee704887ddf1ef8851ce7f5/redis_agent_memory-0.4.1-py3-none-any.whl", hash = "sha256:898ed9f256ff50504e77ba664016c2306f183b01e690fb750e99143a39360c11", size = 145506, upload-time = "2026-09-16T07:34:09.571Z" },
 ]
 
 [[package]]

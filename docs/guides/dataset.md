@@ -32,8 +32,8 @@ lenses. Result cards and the inspector show the photographer, source and licence
 captions identify body-only views, mounted lenses and the W300 colour difference.
 Other products show a placeholder. The photos are bundled for offline demos and
 do not alter the source records, embeddings or rankings. See
-[photo credits](../seed/photos/CREDITS.md) and the explicit product-ID mappings in
-[the photo manifest](../seed/photos/manifest.json). Photos retain their individual
+[photo credits](../../seed/photos/CREDITS.md) and the explicit product-ID mappings in
+[the photo manifest](../../seed/photos/manifest.json). Photos retain their individual
 CC BY-SA 3.0/4.0 licences. Startup verifies asset checksums and mapped product IDs.
 To extend coverage, add a verified JPEG and attributed entry to that manifest,
 then restart the app; no Redis reindex is required.

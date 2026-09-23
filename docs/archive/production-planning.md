@@ -176,7 +176,7 @@ These document operational patterns, not a ranking of incident frequency.
 
 ## Implementation delivered — 16 September 2026
 
-The three demos are implemented. See [the presenter runbook](production-demo-runbook.md)
+The three demos are implemented. See [the presenter runbook](../demos/production.md)
 for exact steps, measured results, reset instructions and current limits.
 Queries pin the registry-resolved index once per comparison; the serving alias and
 registry switch together. Retained versions share one atomic write/acknowledgment
