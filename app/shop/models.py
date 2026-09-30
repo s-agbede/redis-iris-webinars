@@ -46,6 +46,7 @@ class Guidance(BaseModel):
 class TurnContext(BaseModel):
     message: str
     mode: MemoryMode
+    shopper_id: ShopperID | None = None
     session: MemorySession = Field(default_factory=MemorySession)
     memories: list[MemoryRecord] = Field(default_factory=list)
     previous_products: list[ProductCard] = Field(default_factory=list)
@@ -55,19 +56,26 @@ class TurnContext(BaseModel):
     search_query: str | None = None
 
 
+class ToolDefinition(BaseModel):
+    """Provider function definition; MCP schemas are forwarded without rewriting."""
+
+    type: Literal["function"] = "function"
+    name: str = Field(pattern=r"^[a-zA-Z0-9_-]{1,64}$")
+    description: str
+    parameters: dict[str, JsonValue]
+    strict: bool = False
+
+
 class ShoppingTools(Protocol):
-    def search_catalogue(self, query: str) -> list[ProductCard]: ...
-    def get_purchase_history(self) -> list[Purchase]: ...
-
-
-ToolName = Literal["search_catalogue", "get_purchase_history"]
+    def definitions(self) -> list[ToolDefinition]: ...
+    def call(self, name: str, arguments: dict[str, JsonValue]) -> JsonValue: ...
 
 
 class ToolExecution(BaseModel):
     call_id: str
-    name: ToolName
+    name: str
     arguments: dict[str, JsonValue]
-    output: dict[str, JsonValue]
+    output: JsonValue
     elapsed_ms: float
 
 

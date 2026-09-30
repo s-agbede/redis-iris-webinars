@@ -66,3 +66,8 @@ test("an explicit cancellation signal reaches the fetch boundary", async (contex
   controller.abort();
   assert.equal(receivedSignal.aborted, true);
 });
+
+test("retry guidance is trusted only when the API explicitly confirms it", async (context) => {
+  context.mock.method(globalThis, "fetch", async () => Response.json({detail: "Retrieval failed", retry_safe: true}, {status: 503}));
+  await assert.rejects(requestJSON("/shop/chat"), error => error.retrySafe === true);
+});

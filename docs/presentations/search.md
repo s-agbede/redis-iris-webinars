@@ -226,7 +226,11 @@ Close with one short line about extending this same shop and source corpus in fu
 - Agent memory: retain useful preferences across explicitly simulated customer sessions.
 - Semantic caching: reuse suitable answers to equivalent requests within defined context and freshness rules.
 
-These are future sessions, not current capabilities. The static dataset does not contain customer histories, and new illustrative interaction data must be labelled.
+These extend the search lesson into separate sessions. The current adviser
+implements [agent memory](../demos/agent-memory.md) and
+[scoped purchase retrieval](../demos/context-retriever.md); semantic caching
+remains future work. The static dataset does not contain customer histories:
+the added shopper interactions and purchase records are explicitly fictional.
 
 Keep this slide displayed during any remaining questions.
 

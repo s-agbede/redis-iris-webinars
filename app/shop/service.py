@@ -5,8 +5,11 @@ from typing import Protocol
 from urllib.parse import urlencode
 from uuid import uuid4
 
+from pydantic import BaseModel, ConfigDict, Field, JsonValue, ValidationError
+
 from app.models import CameraProduct, CompareRequest, SearchMode
 from app.search import Searcher
+from app.shop.context_retriever import UNAVAILABLE, ContextRetrieverError
 from app.shop.memory import MemoryGateway, MemoryRecord, MemorySession
 from app.shop.models import (
     ChatTurn,
@@ -15,10 +18,10 @@ from app.shop.models import (
     ModelAnswer,
     Onboarding,
     ProductCard,
-    Purchase,
     ShopperID,
     ShoppingTools,
     ShopSession,
+    ToolDefinition,
     TurnContext,
     TurnInspector,
 )
@@ -28,7 +31,10 @@ Help the shopper fulfil their videography dreams. Learn useful details naturally
 over several turns, asking at most one gentle question about one missing detail
 per reply. Answer the shopper's immediate request first whenever possible.
 Before asking, check the current message, session history and summary, and retrieved
-memories. Do not ask again for information already supplied or declined.
+memories. Check purchase history when previously bought equipment would improve the
+advice, before asking the shopper to repeat details the shop can look up. Use relevant
+history to tailor recommendations, while confirming the intended setup when uncertain.
+Do not ask again for information already supplied or declined.
 
 Choose the next question by what would most improve the current advice. These are
 opportunities, not a checklist or a fixed interview order:
@@ -61,6 +67,14 @@ Recommend only supplied catalogue products. Give concise reasons supported by
 their descriptions. Never invent price, stock, specifications, links or verified
 compatibility. Our catalogue has no prices or stock. Be clear when information is
 missing. A past purchase is historical evidence, not proof of current ownership.
+For product specifications, use only the supplied product titles and descriptions.
+Do not fill missing camera ports, mounts, cables, adapters or compatibility from
+general knowledge. Recalled memories and earlier assistant messages are not product
+specification evidence, even when they repeat a confident technical claim.
+For example, a Sony ZV-E10 order whose listing omits audio ports does not establish
+a 3.5mm input. A microphone listing for 'Sony cameras' does not verify that exact
+model or which cable is included. Say these details are unverified and describe
+what must be checked; never present an assumption as confirmed by the catalogue.
 Shopping for someone else does not change who owns the shopper's camera.
 Never echo email addresses, phone numbers or other sensitive identifiers in your
 reply. The demo orders are fictional. Do not expose internal IDs in reply prose.
@@ -86,11 +100,93 @@ class GuidanceSource(Protocol):
     def discover(self, query: str) -> list[Guidance]: ...
 
 
+class ContextRetriever(Protocol):
+    def list_tools(self, shopper_id: ShopperID) -> list[ToolDefinition]: ...
+    def call_tool(
+        self, shopper_id: ShopperID, tool: ToolDefinition, arguments: dict[str, JsonValue]
+    ) -> JsonValue: ...
+
+
+class SearchCatalogueArguments(BaseModel):
+    model_config = ConfigDict(extra="forbid", strict=True, str_strip_whitespace=True)
+    query: str = Field(min_length=1, max_length=1000, description="The catalogue search query.")
+
+
+CATALOGUE_TOOL = ToolDefinition(
+    name="search_catalogue",
+    description=(
+        "Search the full local camera catalogue using hybrid keyword and semantic retrieval. "
+        "Returns up to five products with IDs, descriptions and links; no prices or live stock. "
+        "Use for finding, recommending or comparing gear; include needs and relevant equipment."
+    ),
+    parameters=SearchCatalogueArguments.model_json_schema(),
+    strict=True,
+)
+
+
 class ShopRetrieval:
     """Read-only tools bound to the validated shopper and this turn's evidence."""
 
     def __init__(self, shop: "ShopService", shopper_id: ShopperID, context: TurnContext) -> None:
         self.shop, self.shopper_id, self.context = shop, shopper_id, context
+        self._generated: dict[str, ToolDefinition] | None = None
+
+    def definitions(self) -> list[ToolDefinition]:
+        if self._generated is None:
+            generated = self.shop.context_retriever.list_tools(self.shopper_id)
+            self._generated = {tool.name: tool for tool in generated}
+            if CATALOGUE_TOOL.name in self._generated:
+                raise ContextRetrieverError(
+                    "Context Retriever tool conflicts with local catalogue search."
+                )
+        return [CATALOGUE_TOOL, *self._generated.values()]
+
+    def call(self, name: str, arguments: dict[str, JsonValue]) -> JsonValue:
+        if name == CATALOGUE_TOOL.name:
+            try:
+                parsed = SearchCatalogueArguments.model_validate(arguments)
+            except ValidationError:
+                raise ShopError("The adviser returned invalid tool arguments. Try again.") from None
+            return {
+                "products": [p.model_dump(mode="json") for p in self.search_catalogue(parsed.query)]
+            }
+        self.definitions()
+        tool = (self._generated or {}).get(name)
+        if tool is None:
+            raise ShopError("The adviser returned an unknown tool call. Try again.")
+        result = self.shop.context_retriever.call_tool(self.shopper_id, tool, arguments)
+        self._collect_products(result)
+        return result
+
+    def _collect_products(self, result: JsonValue) -> None:
+        # Product cards are derived only from records already returned by a tool.
+        # This does not fetch linked entities or decide the agent's next tool call.
+        if isinstance(result, dict):
+            if "product_title" in result:
+                # Explicit demo references identify orders but have no catalogue page.
+                if result.get("product_locale") == "demo":
+                    return
+                try:
+                    product = CameraProduct.model_validate(
+                        {
+                            key: value
+                            for key, value in result.items()
+                            if key in CameraProduct.model_fields
+                        },
+                        strict=True,
+                    )
+                except ValidationError:
+                    raise ContextRetrieverError(UNAVAILABLE) from None
+                if not product.product_id.strip() or not product.product_title.strip():
+                    raise ContextRetrieverError(UNAVAILABLE)
+                supplied = {p.product_id: p for p in self.context.products}
+                supplied[product.product_id] = self.shop.card(product)
+                self.context.products = list(supplied.values())
+            for value in result.values():
+                self._collect_products(value)
+        elif isinstance(result, list):
+            for item in result:
+                self._collect_products(item)
 
     def search_catalogue(self, query: str) -> list[ProductCard]:
         self.context.search_query = query
@@ -111,10 +207,6 @@ class ShopRetrieval:
         self.context.products = list(supplied.values())
         return products
 
-    def get_purchase_history(self) -> list[Purchase]:
-        self.context.purchases = self.shop.purchases(self.shopper_id)
-        return self.context.purchases
-
 
 class ShopService:
     def __init__(
@@ -125,10 +217,12 @@ class ShopService:
         model: ShoppingModel,
         *,
         owner_prefix: str,
+        context_retriever: ContextRetriever,
         guidance: GuidanceSource | None = None,
     ) -> None:
         self.searcher, self.memory, self.store, self.model = searcher, memory, store, model
         self.owner_prefix, self.guidance = owner_prefix, guidance
+        self.context_retriever = context_retriever
 
     def owner(self, shopper_id: ShopperID) -> str:
         if shopper_id not in ("alex", "jordan"):
@@ -189,27 +283,6 @@ class ShopService:
             else self.searcher.catalog.products.get(product_id)
         )
 
-    def purchases(self, shopper_id: ShopperID) -> list[Purchase]:
-        self.owner(shopper_id)
-        # Explicitly fictional transactions, attached to actual bundled source IDs.
-        rows = {
-            "alex": [("SAM-DEMO-1001", "2026-04-18", "B09BBKVMCD")],
-            "jordan": [("SAM-DEMO-2001", "2026-06-03", "B06XG9T25F")],
-        }
-        result: list[Purchase] = []
-        for order_id, date, product_id in rows[shopper_id]:
-            product = self.product(product_id)
-            if product is not None:
-                result.append(
-                    Purchase(
-                        order_id=order_id,
-                        shopper_id=shopper_id,
-                        purchased_at=date,
-                        product=self.card(product),
-                    )
-                )
-        return result
-
     def turn(
         self, shopper_id: ShopperID, session_id: str, message: str, mode: MemoryMode
     ) -> ChatTurn:
@@ -219,7 +292,7 @@ class ShopService:
         if mode not in ("none", "session", "both"):
             raise ShopError("Choose a valid memory mode.")
         session = self.session(shopper_id, session_id)
-        context = TurnContext(message=message.strip(), mode=mode)
+        context = TurnContext(message=message.strip(), mode=mode, shopper_id=shopper_id)
         memory_start = perf_counter()
         if mode != "none":
             context.session = self.memory.session(session_id)

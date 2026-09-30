@@ -15,10 +15,15 @@ dependencies = [
     "numpy>=2,<3",
     "httpx>=0.28",
     "redis-agent-memory>=0.4.1",
+    "jsonschema>=4.26,<5",
+    "referencing>=0.37,<1",
 ]
 
 [project.optional-dependencies]
 prepare = ["pyarrow>=20", "fsspec[http]>=2025.1"]
+context-retriever = [
+    "redis-context-retriever==0.0.6",
+]
 
 [dependency-groups]
 dev = ["pytest>=8", "pytest-asyncio>=0.25", "ruff>=0.9", "mypy>=1.14"]

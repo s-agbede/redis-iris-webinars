@@ -2,8 +2,9 @@
 
 ## Start here
 
-New to agent memory? Follow the [beginner quickstart](guides/agent-memory-quickstart.md):
-minimum setup, one conversation and a check at each step. You do not need Playbook
+New to the adviser? Follow the [beginner quickstart](guides/agent-memory-quickstart.md):
+connect RAM, Context Retriever and the model, then try a conversation with a check
+at each step. You do not need Playbook
 or custom memory types.
 
 - [Local development reference](guides/local-development.md): prerequisites, ports,
@@ -16,6 +17,14 @@ or custom memory types.
 - [Search architecture](architecture/search.md): retrieval, indexing and result evidence.
 - [Shopping assistant and memory design](architecture/agent-memory.md): conversation flow and external services.
 - [Memory follow-ups](architecture/agent-memory-follow-ups.md): known limitations and remaining work.
+- [Context Retriever setup and checks](guides/context-retriever-smoke.md): scoped purchases
+  and shipments, JSON fixtures and service verification.
+- [Context Retriever chat integration](architecture/context-retriever-chat.md): runtime
+  flow, failure handling and verification results.
+- [Adviser UI verification](architecture/context-retriever-ui-checks.md): browser
+  journeys, recovery fixes, code review and remaining answer-grounding issues.
+- [Shipment demo verification](architecture/shipment-demo-verification.md): live delivery
+  lookups, status changes, shopper isolation and automated checks.
 - [Dataset and provenance](guides/dataset.md): source records, selection and licences.
 - [Sample passages](guides/sample-passages.md): examples of the indexed data.
 - [Verification](guides/verification.md): automated checks and manual verification.
@@ -25,6 +34,8 @@ or custom memory types.
 - [Search comparison](demos/search.md).
 - [Production patterns](demos/production.md): freshness, performance and index replacement.
 - [Agent memory](demos/agent-memory.md): the core lesson in 15 minutes, after setup.
+- [Context Retriever](demos/context-retriever.md): the missing microphone, live shipment
+  lookups, repeatable status changes and shopper isolation.
 
 ## Prepare presentation material
 

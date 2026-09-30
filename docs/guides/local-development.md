@@ -42,7 +42,7 @@ source text, verified hybrid contributions, and original source fields.
 Use Bash or Zsh for the commands below. The fresh-checkout setup has been verified
 on macOS with Python 3.12; other operating systems have not yet been validated.
 No GPU or model API key is required for search. For chat credentials, follow the
-[agent-memory quickstart](agent-memory-quickstart.md#2-connect-the-memory-service-and-chat-model).
+[adviser quickstart](agent-memory-quickstart.md#2-connect-the-memory-service-retriever-and-chat-model).
 The product dataset is already bundled.
 
 | Install | Requirement |
@@ -72,7 +72,7 @@ While this repository is private, your GitHub account needs access. Accept the
 repository invitation and authenticate Git with that account before cloning.
 
 ```bash
-git clone --branch agent-memory https://github.com/s-agbede/redis-iris-webinars.git
+git clone --branch context-retriever https://github.com/s-agbede/redis-iris-webinars.git
 cd redis-iris-webinars
 cp .env.example .env
 make up
@@ -90,8 +90,11 @@ minutes for CPU embedding. The loader processes one product at a time and prints
 batch progress. Wait for `Application startup complete`,
 then open [the shop](http://127.0.0.1:8000) or
 [the search lab](http://127.0.0.1:8000/?view=compare). Keep this terminal running.
-These commands use the `agent-memory` branch. If Git cannot find that remote
+These commands use the `context-retriever` branch. If Git cannot find that remote
 branch, ask the presenter for the published webinar branch.
+The search lab works with this local setup alone. To enable chat, complete the
+[cloud-service configuration](agent-memory-quickstart.md#2-connect-the-memory-service-retriever-and-chat-model),
+including Context Retriever's endpoint and two shopper-scoped keys.
 
 ### Verify readiness and try a search
 
@@ -178,7 +181,8 @@ make serve
 ```
 
 After preparation, catalogue search runs entirely locally; chat still calls
-Redis Agent Memory and OpenAI over the network. Serving and seeding do not
+Redis Agent Memory, Context Retriever and OpenAI over the network, plus Playbook
+when configured. Serving and catalogue seeding do not
 download a model. An offline restart requires the Docker image, Python dependencies,
 model files, indexed data and frontend build to be present. Later `make up` runs
 verify the cached model and reuse a matching index, but also run npm installation,
@@ -223,8 +227,22 @@ frontend, run `make build` before returning to the single-server `make serve` fl
 | `make build` | Install locked frontend dependencies and build strict TypeScript |
 | `make dev` | Vite frontend with hot reload; API proxy targets port 8000 |
 | `make eval` | Run 10 product-focused queries across four methods, checking full-text/hybrid target ranks |
+| `make context-export` | Export the retriever entity model and eleven fictional fixture documents |
+| `make context-seed` | Seed those records into `CTX_REDIS_URL`, refusing conflicting data |
+| `make context-migrate` | Upgrade recognized purchase-only fixtures to the shipment demo |
+| `make context-publish` | Publish the shipment model to the existing demo surface |
+| `make context-check` | Read-only service and shopper-isolation checks with both scoped keys |
+| `make context-test` | Test service contracts and chat integration; `TEST_REDIS_URL` enables JSON tests |
+| `make shipment-delivered` / `make shipment-delayed` | Replay or reset the microphone's fictional delivery status |
 | `make lint` / `make test` | Python static checks / test suite |
 | `make down` | Stop Compose services while preserving their data |
+
+`REDIS_URL` and `REDIS_PORT` belong to the local catalogue. Keep them aligned with
+the running Docker port. Configure the Cloud database separately as
+`CTX_REDIS_URL`; chat accesses its Context Retriever service through `CTX_MCP_URL`.
+See the [retriever guide](context-retriever-smoke.md) for the schema, access tags
+and required scoped agent keys. Catalogue edits do not update its seeded product
+or purchase records automatically.
 
 `make up` reuses a matching serving index and its maintained passage count, including
 saved demo products, paused changes and deployment state. `make seed` is a bootstrap
@@ -275,8 +293,9 @@ app/
     models.py           # Typed requests, context and responses
     llm.py              # OpenAI model transport
     memory.py           # Redis Agent Memory boundary
+    context_retriever.py # Scoped MCP discovery and generated tool calls
     playbook.py         # Published guidance retrieval
-    settings.py         # Optional adviser configuration
+    settings.py         # Required chat credentials and optional Playbook settings
 ```
 
 Follow the request path for the feature you want to explore:
@@ -286,6 +305,7 @@ Follow the request path for the feature you want to explore:
 | [app/main.py](../../app/main.py) | FastAPI endpoints, readiness, and static frontend |
 | [app/shop/service.py](../../app/shop/service.py) | Camera adviser conversation and tool flow |
 | [app/shop/routes.py](../../app/shop/routes.py) | Adviser HTTP API and dependency construction |
+| [app/shop/context_retriever.py](../../app/shop/context_retriever.py) | Scoped MCP discovery, schema validation, tool execution and safe retrieval errors |
 | [app/runtime.py](../../app/runtime.py) | Starts and restarts API and worker processes |
 | [app/sync.py](../../app/sync.py) | Stream consumption, passage updates and recovery |
 | [app/queries.py](../../app/queries.py) | Full-text, vector, and hybrid RedisVL query builders for the live demo |

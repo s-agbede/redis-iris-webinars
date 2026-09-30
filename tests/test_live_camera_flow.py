@@ -19,9 +19,12 @@ pytestmark = pytest.mark.skipif(
 def test_live_comparison_filters_and_source_evidence() -> None:
     settings = Settings(_env_file=None, redis_url=os.environ["TEST_REDIS_URL"])
     with TestClient(create_app(lambda: build_searcher(settings))) as client:
-        assert client.get("/api/health").status_code == 200
+        health = client.get("/api/health")
+        assert health.status_code == 200
         info = client.get("/api/catalog").json()
-        assert info["product_count"] == 2317
+        # The managed catalogue can also contain presenter-created demo products.
+        assert info["product_count"] == health.json()["products"]
+        assert info["product_count"] > 0
         assert info["vector_dimensions"] == 384
         response = client.post(
             "/api/compare", json={"query": "canon rf lenses", "brands": ["Canon"]}

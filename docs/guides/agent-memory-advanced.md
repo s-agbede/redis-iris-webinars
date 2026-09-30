@@ -158,33 +158,49 @@ search-planning request. Provider reasoning is not exposed as readable text.
 
 Ask the same ownership question with memory off and on, then open both replies.
 The off reply explicitly shows no previous turns and no long-term memories.
+It can still include live purchase-tool results: memory modes control RAM
+context, not Context Retriever access. Inspect tool evidence separately from
+remembered facts when comparing the replies.
 Changing the current mode does not alter either historical request. Replies from
 before this feature show an unavailable-capture notice; they are not reconstructed.
 The request body is saved alongside the local conversation (seven-day session
 retention), without authorization headers, and is not printed to application logs.
 Use fictional details for this teaching view.
 
-## Demonstrate the two retrieval tools
+## Demonstrate generated MCP tools
 
-The adviser chooses whether to call these Python-backed tools during a turn:
+Each turn discovers the selected shopper’s Context Retriever tools through
+MCP `tools/list`. The model receives their original names, descriptions and JSON
+schemas alongside the local catalogue tool. There is no handwritten
+`get_purchase_history` wrapper or predefined purchase-to-product call sequence.
 
-| Tool | Behavior |
+| Tool source | Behavior |
 | --- | --- |
-| `get_purchase_history()` | Returns fictional orders for the current demo shopper, including dates and actual catalogue products. The backend supplies the shopper identity; the model cannot select another shopper. Orders are historical evidence, not proof of current ownership. |
-| `search_catalogue(query)` | Runs the existing hybrid keyword and semantic search and returns up to five catalogue products. The model can refine its query using earlier tool results. Products have descriptions and links, but no prices or live stock. |
+| Generated Context Retriever tools | The model chooses lookups, filters, counts or relationship traversal and supplies schema-validated arguments. Each executes through MCP `tools/call` using the selected shopper’s scoped key. Orders are historical evidence, not proof of current ownership. |
+| Local `search_catalogue(query)` | Runs hybrid keyword and semantic search and returns up to five products from the full local catalogue. The model can refine its query using earlier results. Products have descriptions and links, but no prices or live stock. |
 
 As Alex, ask **“Find a microphone for the camera I bought here.”** Open **What the
-model saw** to inspect the expected sequence: purchase history, a search informed
-by the purchased Sony ZV-E10, then the reply. Model decisions can vary; show the
-actual recorded calls. A greeting or conversation ending can produce a reply
-without retrieval.
+model saw → Available tools** for the generated definitions and **Tool calls**
+for the model’s actual sequence. Purchase/product lookups can inform a catalogue
+search, but the model chooses the steps. A greeting may need no tool calls.
 
-Calls execute sequentially, with at most three tool calls followed by a final
-answer request that disables further calls. Invalid names or arguments and
-unavailable retrieval fail explicitly. An empty successful result is distinct
-from a service failure. Product cards are checked against the supplied evidence,
-including earlier searches in the same turn. Redis Agent Memory reads and event
-writes remain automatic around the model loop.
+Complete the [Context Retriever setup](context-retriever-smoke.md) first.
+The three runtime settings are required for chat readiness. The optional SDK
+extra is used by setup and standalone checks; the runtime adapter uses pooled
+HTTP and JSON Schema validation. For both shoppers and a current-ownership
+correction, follow the [retriever walkthrough](../demos/context-retriever.md).
+
+Calls execute sequentially, with at most six calls followed by a final answer
+request that disables further tools. Invalid names or arguments and unavailable
+retrieval fail explicitly. The adapter rejects foreign or malformed order records,
+expired keys and timeouts with HTTP 503; failed retrieval saves no assistant reply.
+Known unindexed-field errors return safe feedback so the model can correct its
+query; missing and inaccessible IDs share a neutral “no accessible record” result.
+These failed calls remain visible in the evidence and are not empty successful
+lookups. Empty successful results stay empty. Pagination metadata reaches the model,
+which is instructed to disclose incomplete results if it cannot finish paging.
+Product cards must come from returned product records or catalogue evidence.
+Redis Agent Memory reads and event writes remain automatic around the model loop.
 
 See [verification](verification.md) for local checks and their limits. A live
 rehearsal calls your configured external services; transport tests do not establish

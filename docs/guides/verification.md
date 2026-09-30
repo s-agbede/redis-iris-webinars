@@ -8,6 +8,7 @@ This page is for contributors checking code changes. Run commands from the repos
 ```bash
 make lint
 make test
+make context-test
 npm --prefix web run build
 node --experimental-strip-types --test web/src/*.test.mjs
 ```
@@ -16,6 +17,48 @@ The shop tests use controlled transports for external services. Passing them doe
 not prove that your cloud credentials work or that extraction has completed.
 `/api/shop/status` checks settings presence and catalogue availability; verify a
 real reply and actual recalled context with the quickstart.
+`make context-test` installs the optional Context Retriever SDK and covers its
+standalone checker, the runtime HTTP adapter and the complete chat tool loop.
+It verifies generated schema forwarding, model-selected calls, selected-shopper
+keys, all memory modes, pagination, empty results and safe failures without saved
+replies. Nested records and malformed schemas are checked before model use.
+
+## Live Context Retriever and chat checks
+
+Complete the [service setup](context-retriever-smoke.md) and seed its eleven demo
+documents. Restore the delayed snapshot if a rehearsal changed it, then run:
+
+```bash
+make context-check
+```
+
+The 27 read-only probes check both allowed and foreign shopper, purchase and
+shipment lookups, plus shared product reads. This verifies the service and scoped
+keys independently of RAM and the chat model. It does not exercise chat or
+background extraction.
+
+Then follow the [browser walkthrough](../demos/context-retriever.md): retrieve
+Alex's missing microphone, replay its delivery update in the same conversation,
+and verify Jordan's separate hand-strap order. Inspect the actual tool results,
+RAM context and product cards. A correct
+answer alone is insufficient: the history must be present in the recorded tool
+output, under the selected shopper. Keep historical purchases distinct from
+current ownership and remembered preferences.
+
+For the optional fixture-seeding tests, use your actual local Redis port:
+
+```bash
+TEST_REDIS_URL=redis://localhost:6379 make context-test
+```
+
+Those tests use unique temporary keys and remove only their own records.
+The [integration verification record](../architecture/context-retriever-chat.md#verification)
+documents the completed live checks and their limits.
+The [shipment verification record](../architecture/shipment-demo-verification.md)
+covers the current four-entity model, delivery answers and freshness rehearsal.
+The [UI verification record](../architecture/context-retriever-ui-checks.md)
+covers recovery, memory modes, responsive layout and the unresolved technical
+grounding failures found by checking actual replies against their tool evidence.
 
 ## Live search checks
 
@@ -49,3 +92,7 @@ The [advanced memory evaluator](agent-memory-advanced.md#repeatable-live-ram-eva
 writes isolated fictional fixtures to the configured RAM service and observes
 recall, correction and exclusion behaviour. Run it deliberately after cloud setup;
 it is not required for the introductory exercise.
+
+The [generated-tool UI and teaching review](../architecture/context-retriever-pedagogy-checks.md)
+records varied queries, source attribution, memory contrasts, error recovery and
+remaining model-response limitations.

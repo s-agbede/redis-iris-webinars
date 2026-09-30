@@ -10,6 +10,7 @@ from pydantic import BaseModel, ConfigDict, Field
 from redis.exceptions import RedisError
 
 from app.search import Searcher
+from app.shop.context_retriever import ContextRetrieverClient, ContextRetrieverError
 from app.shop.llm import OpenAIShoppingModel
 from app.shop.memory import MemoryError, MemoryRecord, RAMClient
 from app.shop.models import ChatTurn, MemoryMode, Onboarding, ShopperID, ShopSession
@@ -45,6 +46,13 @@ def build_shop(searcher: Searcher) -> ShopService:
     ]
     if any(playbook_fields) and not all(playbook_fields):
         raise ShopError("Complete all three SHOP_PLAYBOOK settings, then restart the app.")
+    context_retriever = ContextRetrieverClient(
+        settings.ctx_mcp_url,
+        {
+            "alex": settings.ctx_alex_agent_key.get_secret_value(),
+            "jordan": settings.ctx_jordan_agent_key.get_secret_value(),
+        },
+    )
     guidance = PlaybookGuidance(*playbook_fields) if all(playbook_fields) else None
     memory = RAMClient(
         settings.agent_memory_base_url,
@@ -61,6 +69,7 @@ def build_shop(searcher: Searcher) -> ShopService:
         RedisSessionStore(searcher, settings.shop_owner_prefix),
         model,
         owner_prefix=settings.shop_owner_prefix,
+        context_retriever=context_retriever,
         guidance=guidance,
     )
 
@@ -73,7 +82,7 @@ def service(request: Request) -> ShopService:
             try:
                 builder = cast(Callable[[Searcher], ShopService], request.app.state.shop_builder)
                 request.app.state.shop = builder(request.app.state.searcher)
-            except (ShopError, MemoryError) as exc:
+            except (ShopError, MemoryError, ContextRetrieverError) as exc:
                 raise HTTPException(503, str(exc)) from None
     return cast(ShopService, request.app.state.shop)
 
@@ -161,17 +170,21 @@ def chat(body: ChatRequest, shop: ShopDep, request: Request) -> ChatTurn:
 def close_shop(shop: ShopService | None) -> None:
     if shop is None:
         return
-    for adapter in (shop.memory, shop.model, shop.guidance):
+    for adapter in (shop.memory, shop.model, shop.guidance, shop.context_retriever):
         close = getattr(adapter, "close", None)
         if callable(close):
             close()
 
 
 async def shop_error_handler(request: Request, exc: Exception) -> JSONResponse:
+    if isinstance(exc, ContextRetrieverError):
+        # Retrieval finishes before turn() starts writing session events.
+        return JSONResponse(status_code=503, content={"detail": str(exc), "retry_safe": True})
     if isinstance(exc, RedisError):
         return JSONResponse(
             status_code=503, content={"detail": "Redis is unavailable. Check the local service."}
         )
     return JSONResponse(
-        status_code=503 if isinstance(exc, MemoryError) else 400, content={"detail": str(exc)}
+        status_code=503 if isinstance(exc, (MemoryError, ContextRetrieverError)) else 400,
+        content={"detail": str(exc)},
     )

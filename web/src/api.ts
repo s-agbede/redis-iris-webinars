@@ -120,10 +120,12 @@ export function createRequestGate() {
 
 export class APIError extends Error {
   readonly status: number;
-  constructor(status: number, message: string) {
+  readonly retrySafe: boolean;
+  constructor(status: number, message: string, retrySafe = false) {
     super(message);
     this.name = "APIError";
     this.status = status;
+    this.retrySafe = retrySafe;
   }
 }
 
@@ -141,7 +143,14 @@ export async function requestJSON<T>(
     const body: unknown = await response.json().catch(() => null);
     const detail =
       body && typeof body === "object" && "detail" in body ? body.detail : null;
-    throw new APIError(response.status, typeof detail === "string" ? detail : fallback);
+    const retrySafe =
+      !!body && typeof body === "object" &&
+      "retry_safe" in body && body.retry_safe === true;
+    throw new APIError(
+      response.status,
+      typeof detail === "string" ? detail : fallback,
+      retrySafe,
+    );
   }
   return response.json() as Promise<T>;
 }
