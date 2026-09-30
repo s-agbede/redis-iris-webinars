@@ -18,6 +18,9 @@ class ShopSettings(BaseSettings):
     shop_playbook_url: str = ""
     shop_playbook_id: str = ""
     shop_playbook_api_key: SecretStr = SecretStr("")
+    ctx_mcp_url: str = ""
+    ctx_alex_agent_key: SecretStr = SecretStr("")
+    ctx_jordan_agent_key: SecretStr = SecretStr("")
 
     def missing(self) -> list[str]:
         values = {
@@ -25,5 +28,8 @@ class ShopSettings(BaseSettings):
             "AGENT_MEMORY_STORE_ID": self.agent_memory_store_id,
             "AGENT_MEMORY_API_KEY": self.agent_memory_api_key.get_secret_value(),
             "OPENAI_API_KEY": self.openai_api_key.get_secret_value(),
+            "CTX_MCP_URL": self.ctx_mcp_url,
+            "CTX_ALEX_AGENT_KEY": self.ctx_alex_agent_key.get_secret_value(),
+            "CTX_JORDAN_AGENT_KEY": self.ctx_jordan_agent_key.get_secret_value(),
         }
         return [key for key, value in values.items() if not value]

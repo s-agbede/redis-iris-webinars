@@ -3,28 +3,40 @@ from collections.abc import Callable
 
 import httpx
 import pytest
+from pydantic import ValidationError
 
-from app.shop.llm import OpenAIShoppingModel
-from app.shop.models import ProductCard, Purchase, TurnContext
-from app.shop.service import ShopError
+from app.shop.llm import MAX_TOOL_CALLS, OpenAIShoppingModel
+from app.shop.models import ProductCard, ToolDefinition, TurnContext
+from app.shop.service import CATALOGUE_TOOL, SearchCatalogueArguments, ShopError
 
 
 class Tools:
     def __init__(self) -> None:
         self.calls: list[str] = []
 
-    def get_purchase_history(self) -> list[Purchase]:
-        self.calls.append("purchases")
+    def definitions(self):
         return [
-            Purchase(
-                order_id="demo-order",
-                shopper_id="alex",
-                purchased_at="2026-04-18",
-                product=ProductCard(
-                    product_id="camera", title="Sony ZV-E10", description="Camera", url="/camera"
-                ),
-            )
+            CATALOGUE_TOOL,
+            ToolDefinition(
+                name="get_product_by_id",
+                description="Generated lookup",
+                parameters={"type": "object", "properties": {}, "additionalProperties": False},
+            ),
         ]
+
+    def call(self, name, arguments):
+        if name == "search_catalogue":
+            try:
+                parsed = SearchCatalogueArguments.model_validate(arguments)
+            except ValidationError:
+                raise ShopError("Invalid tool arguments") from None
+            return {
+                "products": [p.model_dump(mode="json") for p in self.search_catalogue(parsed.query)]
+            }
+        if arguments:
+            raise ShopError("Invalid tool arguments")
+        self.calls.append("product")
+        return {"product_id": "camera", "product_title": "Sony ZV-E10"}
 
     def search_catalogue(self, query: str) -> list[ProductCard]:
         self.calls.append(query)
@@ -68,11 +80,11 @@ def test_native_tools_allow_a_direct_answer_without_a_planning_request() -> None
         body = json.loads(request.content)
         sent.append(body)
         definitions = {tool["name"]: tool for tool in body["tools"]}
-        assert set(definitions) == {"get_purchase_history", "search_catalogue"}
+        assert set(definitions) == {"get_product_by_id", "search_catalogue"}
         for tool in definitions.values():
-            assert tool["type"] == "function" and tool["strict"] is True
+            assert tool["type"] == "function"
             assert tool["parameters"]["additionalProperties"] is False
-        assert definitions["get_purchase_history"]["parameters"]["properties"] == {}
+        assert definitions["get_product_by_id"]["parameters"]["properties"] == {}
         assert definitions["search_catalogue"]["parameters"]["required"] == ["query"]
         assert body["parallel_tool_calls"] is False
         assert body["store"] is False
@@ -92,7 +104,7 @@ def test_native_tools_allow_a_direct_answer_without_a_planning_request() -> None
 def test_purchase_result_can_inform_later_search_and_exact_request_is_preserved() -> None:
     sent: list[dict[str, object]] = []
     reasoning = {"type": "reasoning", "id": "rs-1", "summary": [], "encrypted_content": "opaque"}
-    purchase_call = function_call("get_purchase_history")
+    purchase_call = function_call("get_product_by_id")
     search_call = function_call("search_catalogue", '{"query":"microphone Sony ZV-E10"}', "call-2")
 
     def respond(request: httpx.Request) -> httpx.Response:
@@ -105,7 +117,7 @@ def test_purchase_result_can_inform_later_search_and_exact_request_is_preserved(
             assert body["input"][1:3] == [reasoning, purchase_call]
             result = body["input"][3]
             assert result["type"] == "function_call_output" and result["call_id"] == "call-1"
-            assert json.loads(result["output"])["purchases"][0]["product"]["title"] == "Sony ZV-E10"
+            assert json.loads(result["output"])["product_title"] == "Sony ZV-E10"
             output = [search_call]
         else:
             result = body["input"][-1]
@@ -118,9 +130,9 @@ def test_purchase_result_can_inform_later_search_and_exact_request_is_preserved(
     context = TurnContext(message="A microphone for the camera I bought here", mode="both")
     answer = model_with(respond).answer(context, tools)
 
-    assert tools.calls == ["purchases", "microphone Sony ZV-E10"]
+    assert tools.calls == ["product", "microphone Sony ZV-E10"]
     assert len(sent) == 3
-    assert [call.name for call in answer.tool_calls] == ["get_purchase_history", "search_catalogue"]
+    assert [call.name for call in answer.tool_calls] == ["get_product_by_id", "search_catalogue"]
     assert answer.tool_calls[1].arguments == {"query": "microphone Sony ZV-E10"}
     assert all(call.elapsed_ms >= 0 for call in answer.tool_calls)
     assert answer.request is not None and answer.request.model_dump(mode="json") == sent[-1]
@@ -133,7 +145,7 @@ def test_purchase_result_can_inform_later_search_and_exact_request_is_preserved(
     "name,arguments",
     [
         ("delete_memory", "{}"),
-        ("get_purchase_history", '{"shopper_id":"jordan"}'),
+        ("get_product_by_id", '{"shopper_id":"jordan"}'),
         ("search_catalogue", '{"query":"camera","owner_id":"jordan"}'),
         ("search_catalogue", "not-json"),
         ("search_catalogue", "{}"),
@@ -161,20 +173,20 @@ def test_tool_limit_prevents_unbounded_retrieval() -> None:
         nonlocal requests
         requests += 1
         body = json.loads(request.content)
-        if requests == 4:
+        if requests == MAX_TOOL_CALLS + 1:
             assert body["tool_choice"] == "none"
         return httpx.Response(
             200,
             json={
                 "status": "completed",
-                "output": [function_call("get_purchase_history", call_id=f"call-{requests}")],
+                "output": [function_call("get_product_by_id", call_id=f"call-{requests}")],
             },
         )
 
     tools = Tools()
     with pytest.raises(ShopError, match="limit"):
         model_with(respond).answer(TurnContext(message="Keep looking", mode="both"), tools)
-    assert len(tools.calls) == 3 and requests == 4
+    assert len(tools.calls) == MAX_TOOL_CALLS and requests == MAX_TOOL_CALLS + 1
 
 
 def test_unexpected_parallel_calls_do_not_execute() -> None:
@@ -185,7 +197,7 @@ def test_unexpected_parallel_calls_do_not_execute() -> None:
             json={
                 "status": "completed",
                 "output": [
-                    function_call("get_purchase_history", call_id=f"call-{i}") for i in range(2)
+                    function_call("get_product_by_id", call_id=f"call-{i}") for i in range(2)
                 ],
             },
         )
@@ -202,13 +214,13 @@ def test_reused_call_id_does_not_execute_twice() -> None:
             200,
             json={
                 "status": "completed",
-                "output": [function_call("get_purchase_history")],
+                "output": [function_call("get_product_by_id")],
             },
         )
     )
     with pytest.raises(ShopError, match="tool"):
         model.answer(TurnContext(message="Find gear", mode="both"), tools)
-    assert tools.calls == ["purchases"]
+    assert tools.calls == ["product"]
 
 
 def test_tool_failure_is_not_reported_to_the_model_as_an_empty_result() -> None:
@@ -252,12 +264,10 @@ def test_shop_http_turn_chains_purchases_into_search_and_records_only_the_exchan
         body = json.loads(request.content)
         bodies.append(body)
         if len(bodies) == 1:
-            output = function_call("get_purchase_history")
+            output = function_call("get_product_by_id", '{"id":"fixture"}')
         elif len(bodies) == 2:
-            orders = json.loads(body["input"][-1]["output"])["purchases"]
-            assert len(orders) == 1 and orders[0]["shopper_id"] == "alex"
-            assert orders[0]["fictional"] is True
-            title = orders[0]["product"]["title"]
+            product = json.loads(body["input"][-1]["output"])
+            title = product["product_title"]
             output = function_call(
                 "search_catalogue", json.dumps({"query": f"microphone {title}"}), "call-2"
             )
@@ -296,7 +306,7 @@ def test_shop_http_turn_chains_purchases_into_search_and_records_only_the_exchan
         turn = response.json()
         assert turn["inspector"]["context"]["search_query"] == "microphone Sony ZV-E10"
         assert [call["name"] for call in turn["inspector"]["tool_calls"]] == [
-            "get_purchase_history",
+            "get_product_by_id",
             "search_catalogue",
         ]
         assert turn["inspector"]["answer_request"] == bodies[-1]
@@ -310,21 +320,13 @@ def test_shop_http_turn_chains_purchases_into_search_and_records_only_the_exchan
 
 
 def test_shop_tools_bind_purchase_history_to_the_selected_shopper() -> None:
-    from app.models import CameraProduct
     from app.shop.service import ShopRetrieval
     from tests.test_shop import make_shop
 
     shop, _, _, _ = make_shop()
-    shop.searcher.catalog.products["B09BBKVMCD"] = CameraProduct(
-        product_id="B09BBKVMCD", product_title="Alex's camera"
-    )
-    shop.searcher.catalog.products["B06XG9T25F"] = CameraProduct(
-        product_id="B06XG9T25F", product_title="Jordan's camera"
-    )
     tools = ShopRetrieval(shop, "jordan", TurnContext(message="My orders", mode="both"))
-    orders = tools.get_purchase_history()
-    assert len(orders) == 1 and orders[0].shopper_id == "jordan"
-    assert orders[0].product.title == "Jordan's camera"
+    product = tools.call("get_product_by_id", {"id": "fixture"})
+    assert product["product_title"] == "Jordan's camera"
 
 
 def test_refined_search_retains_products_supplied_by_earlier_searches() -> None:
@@ -339,3 +341,15 @@ def test_refined_search_retains_products_supplied_by_earlier_searches() -> None:
     assert "a" not in {product.product_id for product in tools.search_catalogue("refined camera")}
     assert "a" in {product.product_id for product in context.products}
     assert context.search_query == "refined camera"
+
+
+def test_initial_context_does_not_present_unretrieved_orders_as_empty_history() -> None:
+    def respond(request: httpx.Request) -> httpx.Response:
+        context = json.loads(json.loads(request.content)["input"][0]["content"])
+        assert context["shopper_id"] == "alex"
+        assert "purchases" not in context
+        return httpx.Response(200, json={"status": "completed", "output": [final_response()]})
+
+    model_with(respond).answer(
+        TurnContext(message="What did I purchase?", mode="none", shopper_id="alex"), Tools()
+    )

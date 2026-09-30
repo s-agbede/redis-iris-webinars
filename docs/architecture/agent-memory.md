@@ -1,7 +1,8 @@
 # Sam's Camera Shop: agent memory design
 
-How the `agent-memory` branch implements the camera adviser. For your first run,
-start with the [beginner quickstart](../guides/agent-memory-quickstart.md).
+How the `context-retriever` branch combines RAM and live purchase retrieval in
+the camera adviser. For your first run, start with the
+[beginner quickstart](../guides/agent-memory-quickstart.md).
 The search and management labs share the same catalogue.
 
 ## Experience
@@ -27,8 +28,13 @@ the session ID but preserves the owner. The selected memory mode controls contex
 inclusion: none, session only, or session plus long-term. It does not claim to
 disable the service's background extraction.
 
-Fictional purchase records reference real bundled products. They are historical
-records, separate from current ownership. A sold camera remains a past purchase.
+Context Retriever supplies fictional purchase records and their linked product
+details from a separate Redis database. The backend selects the shopper's scoped
+key for MCP discovery and execution. The model receives the generated tool
+definitions and chooses each lookup, filter or relationship call. Orders
+are historical records, separate from current ownership. A sold camera remains
+a past purchase. Memory modes affect RAM context, while purchase retrieval
+remains available in every mode.
 
 ## Memory and evidence
 
@@ -53,7 +59,7 @@ camera-related fields; it is not a general-purpose PII filtering claim.
 
 Every completed turn exposes the session context and long-term records supplied,
 the catalogue query/results, purchase evidence, guidance source/version, and timings.
-Memory or model failures are explicit, never replaced with simulated successful
+Memory, purchase retrieval or model failures are explicit, never replaced with simulated successful
 responses. Search remains usable independently when chat is unconfigured.
 
 ## Playbook
@@ -69,13 +75,16 @@ Configured Playbook failures are surfaced rather than silently bypassed.
 ## Architecture
 
 Keep Python/FastAPI and strict React/TypeScript. Use small typed modules for memory
-models/client, chat orchestration/model transport, demo purchases and HTTP routes.
+models/client, chat orchestration/model transport, purchase retrieval and HTTP routes.
 Inject adapters for tests. Reuse the existing Searcher and product/photo models.
 Keep server session ownership and saved assistant card IDs in namespaced Redis
 records, enabling refresh without trusting client-supplied transcripts.
 
 The chat model and RAM credentials are loaded from `.env` by `ShopSettings`.
 The default chat model is `gpt-5-mini`. Playbook configuration is optional.
+The [Context Retriever adapter](context-retriever-chat.md) requires its MCP
+endpoint and two scoped agent keys. It supplies historical orders and linked
+product details while RAM continues to supply session context and preferences.
 
 ## Verification
 

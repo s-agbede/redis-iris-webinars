@@ -30,4 +30,11 @@ User decisions recorded on 2026-09-14:
 
 The initial English/US keyword slice contains 5,602 product IDs, 497 queries, and 8,700 query–product judgements. The reviewed photography selection now includes 183 queries, all 3,147 of their original judgements, and 2,317 product records. Unrelated judged candidates are deliberately retained. Default passage preparation yields 8,472 passages from complete source fields.
 
-The user approved implementation with local models. The app uses Python/FastAPI, React/Vite with TypeScript, RedisVL, Redis in Docker, and a pinned MiniLM ONNX embedding model running on CPU. After preparation, no hosted model or API key is required. Later memory, caching and context-retrieval capabilities remain future work.
+The user approved search implementation with local models. The app uses Python/FastAPI, React/Vite with TypeScript, RedisVL, Redis in Docker, and a pinned MiniLM ONNX embedding model running on CPU. After preparation, search needs no hosted model or API key.
+
+Implementation update, 2026-09-30: the adviser now uses Redis Agent Memory for
+session context and preferences, Context Retriever for scoped fictional orders
+and linked products, and OpenAI for replies. These chat features require cloud
+credentials. Semantic caching remains future work. See the
+[memory runbook](../demos/agent-memory.md) and
+[retriever walkthrough](../demos/context-retriever.md).

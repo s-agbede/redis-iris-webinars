@@ -23,3 +23,10 @@ test("unchanged records and timestamp changes do not imply reconciliation", () =
   const record = { id: "camera", text: "Sony", memory_type: "semantic" };
   assert.deepEqual(compareMemories([record], [{ ...record, updated_at: "later" }]), { added: [], removed: [], updated: [] });
 });
+
+test("confirmed retrieval failures explain safe retry without implying saved events", async () => {
+  const { chatFailureMessage } = await import("./shop-evidence.ts");
+  const { APIError } = await import("./api.ts");
+  assert.match(chatFailureMessage(new APIError(503, "Retrieval failed", true)), /No conversation events were saved/);
+  assert.match(chatFailureMessage(new Error("Connection lost")), /may have saved session events/);
+});

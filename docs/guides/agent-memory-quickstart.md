@@ -15,12 +15,13 @@ Redis Agent Memory later extracts a fact about camera ownership. **Extraction**
 means turning messages into useful facts; it runs in the background and takes time.
 The app retrieves relevant facts before asking the model for its next reply.
 
-Three pieces work together:
+Four pieces work together:
 
 | Piece | Where it runs | What it does |
 | --- | --- | --- |
 | Redis for the catalogue | Docker on your computer | Stores products and supports search. |
 | Redis Agent Memory (RAM) | Redis Cloud | Stores conversation history and extracts long-term facts. |
+| Context Retriever | Redis Cloud | Retrieves each demo shopper's fictional purchases and linked products. |
 | Chat model | OpenAI API | Writes the reply using the context supplied by the app. |
 
 Starting Docker does not create the cloud memory service. You will connect that
@@ -47,7 +48,7 @@ uv python install 3.12
 For a **new checkout**, run:
 
 ```bash
-git clone --branch agent-memory https://github.com/s-agbede/redis-iris-webinars.git
+git clone --branch context-retriever https://github.com/s-agbede/redis-iris-webinars.git
 cd redis-iris-webinars
 cp .env.example .env
 ```
@@ -55,9 +56,9 @@ cp .env.example .env
 If you already have this branch checked out, use that directory and keep your
 existing `.env`. Run all subsequent commands from the repository root.
 While the repository is private, you need a GitHub invitation and Git access.
-If `agent-memory` is unavailable, ask the presenter for the published webinar branch.
+If `context-retriever` is unavailable, ask the presenter for the published webinar branch.
 
-## 2. Connect the memory service and chat model
+## 2. Connect the memory service, retriever and chat model
 
 ### Get the memory-service credentials
 
@@ -91,10 +92,25 @@ OPENAI_API_KEY=your-openai-api-key
 Replace every example value with your own. Keep the endpoint’s `https://` prefix.
 Leave `SHOP_CHAT_MODEL=gpt-5-mini` as supplied by the project.
 
+Configure Context Retriever using the [service and shopper-key guide](context-retriever-smoke.md).
+The adviser also requires these three values from that setup:
+
+```dotenv
+CTX_MCP_URL=https://your-service/mcp
+CTX_ALEX_AGENT_KEY=your-alex-scoped-key
+CTX_JORDAN_AGENT_KEY=your-jordan-scoped-key
+```
+
+Run the guide's standalone check before starting the app. These keys must be
+scoped separately to Alex and Jordan, on the service containing the demo orders.
+
 Set `SHOP_OWNER_PREFIX` to a fresh label, such as `sam-camera-01`, using your own
 name or initials. Use 1–48 letters, digits or hyphens. This separates your Alex
 and Jordan from other attendees’ demo shoppers if you share a memory store.
 Keep that label unchanged throughout the exercise.
+The prefix scopes RAM and local conversations. Context Retriever's shopper keys
+still read the same seeded purchase records; changing the prefix does not create
+new orders or a new retriever service.
 
 For this first run, leave the three `SHOP_PLAYBOOK_*` values empty and
 `AGENT_MEMORY_NAMESPACE_ID` commented out. Keep `REDIS_URL`, `REDIS_PORT`,
@@ -150,8 +166,10 @@ Choose **No conversation memory** and ask the same question again, without namin
 the camera in the new message.
 
 **Check:** **What the model saw** should show no previous turns and no long-term
-memories. The adviser should ask for the missing information. Inspect the context
-even if the model guesses: a correct guess alone does not prove recall.
+memories. Purchase history remains available through Context Retriever; the
+adviser may mention a historical purchase and ask whether you still own it.
+Inspect the source of its answer: a matching purchase alone does not prove memory
+recall or current ownership.
 
 These modes control what the next reply receives. Messages are still saved for
 background extraction, even when memory context is off.
@@ -187,7 +205,8 @@ Switch **Demo shopper** to **Jordan**, select **New conversation**, choose
 
 **Check:** Alex’s ownership fact must not appear in Jordan’s **Retrieved memories**.
 With a fresh demo prefix, Jordan’s long-term inventory should be empty. The adviser
-should ask which camera Jordan owns. Shopper selection is a teaching control,
+may mention Jordan's own historical purchase and ask whether it is still owned.
+Shopper selection is a teaching control,
 not a login system.
 
 You have now checked memory within one conversation, across conversations, and
@@ -218,6 +237,7 @@ are retained until the memory service’s configured expiry; this does not delet
 | A command is missing or Docker cannot connect | Finish step 1 and start Docker. `docker info` must succeed. |
 | The page says “Finish connecting your adviser” | Fill the named settings in `.env`, save, stop the backend and run `make serve` again. |
 | Settings say configured, but chat fails | Read the error. Verify the memory endpoint, Store ID and service key belong together, and that the OpenAI key has API/model access. Check your network. Settings presence does not establish connectivity. |
+| Purchase history is unavailable | Run `make context-check`; verify the MCP endpoint and both scoped keys, their expiry and service access tags. Restart after changing `.env`. |
 | Chat works, but no long-term fact appears | Confirm the ownership message is in the session context. Check the service’s extraction settings and expiry in Redis Cloud; wait several extraction intervals. Refresh the inspector. |
 | A new conversation cannot recall the camera | Keep the same shopper and owner prefix, select **Short-term + long-term**, and first verify the ownership fact exists. Inspect **Retrieved memories** to see whether that fact was actually supplied. |
 | Changing mode does not change an old reply | Modes apply to the next message. Send the question again and inspect the new reply. |

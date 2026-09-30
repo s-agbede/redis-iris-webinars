@@ -2,6 +2,7 @@ from collections.abc import Iterator
 from dataclasses import dataclass
 
 import pytest
+from pydantic import JsonValue
 
 from app.models import CameraProduct
 from app.shop.memory import MemoryEvent, MemoryRecord, MemorySession
@@ -9,8 +10,10 @@ from app.shop.models import (
     AnswerDraft,
     ModelAnswer,
     Onboarding,
+    ShopperID,
     ShoppingTools,
     ShopSession,
+    ToolDefinition,
     TurnContext,
 )
 from app.shop.service import SHOP_INSTRUCTIONS, ShopError, ShopService
@@ -83,11 +86,36 @@ class Model:
         self.contexts.append(context.model_copy(deep=True))
         retrieval = next(self.plans)
         if retrieval.query:
-            tools.search_catalogue(retrieval.query)
+            tools.call("search_catalogue", {"query": retrieval.query})
         if retrieval.purchases:
-            tools.get_purchase_history()
+            tools.call("get_product_by_id", {"id": "fixture"})
         self.contexts.append(context.model_copy(deep=True))
         return ModelAnswer(**next(self.answers).model_dump())
+
+
+class Retriever:
+    def list_tools(self, shopper_id: ShopperID) -> list[ToolDefinition]:
+        return [
+            ToolDefinition(
+                name="get_product_by_id",
+                description="Generated product lookup",
+                parameters={
+                    "type": "object",
+                    "properties": {"id": {"type": "string"}},
+                    "required": ["id"],
+                    "additionalProperties": False,
+                },
+            )
+        ]
+
+    def call_tool(
+        self, shopper_id: ShopperID, tool: ToolDefinition, arguments: dict[str, JsonValue]
+    ) -> JsonValue:
+        product_id, title = {
+            "alex": ("B09BBKVMCD", "Sony ZV-E10"),
+            "jordan": ("B06XG9T25F", "Jordan's camera"),
+        }[shopper_id]
+        return CameraProduct(product_id=product_id, product_title=title).model_dump(mode="json")
 
 
 def make_shop(model: Model | None = None) -> tuple[ShopService, Memory, Store, Model]:
@@ -97,7 +125,9 @@ def make_shop(model: Model | None = None) -> tuple[ShopService, Memory, Store, M
     memory, store = Memory(), Store()
     model = model or Model()
     return (
-        ShopService(searcher, memory, store, model, owner_prefix="shop-test"),
+        ShopService(
+            searcher, memory, store, model, owner_prefix="shop-test", context_retriever=Retriever()
+        ),
         memory,
         store,
         model,
@@ -251,9 +281,8 @@ def test_purchase_evidence_is_shopper_scoped_and_historical() -> None:
     )
     session = shop.new_session("alex")
     result = shop.turn("alex", session.session_id, "What did I buy?", "both")
-    assert result.inspector.context.purchases
-    assert all(p.shopper_id == "alex" and p.fictional for p in result.inspector.context.purchases)
-    assert result.inspector.context.purchases[0].product.product_id == "B09BBKVMCD"
+    assert result.inspector.context.products[0].product_id == "B09BBKVMCD"
+    assert result.inspector.context.shopper_id == "alex"
 
 
 def test_blank_onboarding_and_empty_messages_are_rejected() -> None:

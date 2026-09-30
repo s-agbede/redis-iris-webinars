@@ -49,8 +49,9 @@ product IDs, source revisions and evidence passages:
   scope reuse to user constraints, model and source version, with invalidation
   when that context changes.
 
-The [agent-memory demo](agent-memory.md) now implements the simulated shopper flow.
-The dedicated context-retriever session and semantic caching remain future extensions.
+The [agent-memory demo](agent-memory.md) implements the simulated shopper flow.
+The [Context Retriever walkthrough](context-retriever.md) now demonstrates live
+scoped purchase and product retrieval. Semantic caching remains a future extension.
 
 ## Presentation materials
 

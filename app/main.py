@@ -25,6 +25,7 @@ from app.models import (
 )
 from app.search import Searcher, build_searcher
 from app.settings import ROOT
+from app.shop.context_retriever import ContextRetrieverError
 from app.shop.memory import MemoryError
 from app.shop.routes import build_shop, close_shop, shop_error_handler
 from app.shop.routes import router as shop_router
@@ -99,6 +100,7 @@ def create_app(
     application.include_router(shop_router)
     application.add_exception_handler(ShopError, shop_error_handler)
     application.add_exception_handler(MemoryError, shop_error_handler)
+    application.add_exception_handler(ContextRetrieverError, shop_error_handler)
     application.add_exception_handler(RedisError, shop_error_handler)
 
     @application.get("/api/health")

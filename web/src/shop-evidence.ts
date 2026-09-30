@@ -1,5 +1,12 @@
 import type { Memory } from "./shop-api.ts";
-import { APIError } from "./api.ts";
+import { APIError, errorMessage } from "./api.ts";
+
+export function chatFailureMessage(error: unknown): string {
+  const recovery = error instanceof APIError && error.retrySafe
+    ? "No conversation events were saved. Your message is ready to retry."
+    : "A failed request may have saved session events; inspect before resending.";
+  return `${errorMessage(error)} ${recovery}`;
+}
 
 export function shouldForgetSession(error: unknown): boolean {
   return error instanceof APIError && error.status === 400 && (
