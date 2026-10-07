@@ -21,6 +21,16 @@ class ShopSettings(BaseSettings):
     ctx_mcp_url: str = ""
     ctx_alex_agent_key: SecretStr = SecretStr("")
     ctx_jordan_agent_key: SecretStr = SecretStr("")
+    shop_cache_enabled: bool = False
+    shop_cache_distance: float = Field(default=0.2, ge=0, le=2, allow_inf_nan=False)
+    shop_cache_ttl: int = Field(default=3600, ge=1, le=604800)
+    openrouter_api_key: SecretStr = SecretStr("")
+    shop_jev_model: str = "typesafe/jev-1.13"
+    shop_jev_confidence: float = Field(default=0.5, ge=0, le=1, allow_inf_nan=False)
+    shop_jev_timeout: float = Field(default=5, gt=0, le=30, allow_inf_nan=False)
+
+    def cache_missing(self) -> list[str]:
+        return ["OPENROUTER_API_KEY"] if not self.openrouter_api_key.get_secret_value() else []
 
     def missing(self) -> list[str]:
         values = {

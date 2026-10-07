@@ -6,8 +6,8 @@ from urllib.parse import quote
 import httpx
 from pydantic import BaseModel, Field, ValidationError
 
+from app.shop.errors import ShopError
 from app.shop.models import Guidance
-from app.shop.service import ShopError
 
 
 class Entry(BaseModel):

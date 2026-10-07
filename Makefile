@@ -1,4 +1,4 @@
-.PHONY: up redis model seed serve build dev eval memory-eval context-export context-seed context-check context-test context-migrate context-publish shipment-delivered shipment-delayed fmt lint test down
+.PHONY: up redis model seed serve build dev eval memory-eval cache-eval context-export context-seed context-check context-test context-migrate context-publish shipment-delivered shipment-delayed fmt lint test down
 
 SHOP_SCRIPTS = scripts/setup_shop_playbook.py scripts/evaluate_shop_memory.py
 
@@ -30,6 +30,9 @@ eval:
 
 memory-eval: ## Write isolated fictional fixtures and measure real RAM extraction
 	uv run python -m scripts.evaluate_shop_memory --timeout 420
+
+cache-eval: ## Paid Jev applicability checks on labelled synthetic camera-shop cases
+	uv run python -m eval.cache
 
 context-export: ## Print Context Retriever entity schema and eleven fixture records
 	uv run --extra context-retriever python -m scripts.check_context_retriever export

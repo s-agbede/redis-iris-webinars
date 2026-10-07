@@ -10,11 +10,16 @@ from pydantic import BaseModel, ConfigDict, Field
 from redis.exceptions import RedisError
 
 from app.search import Searcher
+from app.shop.cache import CacheError, RedisAnswerCache
 from app.shop.context_retriever import ContextRetrieverClient, ContextRetrieverError
+from app.shop.errors import ShopError
+from app.shop.jev import JevVerifier
 from app.shop.llm import OpenAIShoppingModel
 from app.shop.memory import MemoryError, MemoryRecord, RAMClient
 from app.shop.models import ChatTurn, MemoryMode, Onboarding, ShopperID, ShopSession
-from app.shop.service import ShopError, ShopService
+from app.shop.prompts import TOOL_INSTRUCTIONS
+from app.shop.reuse import AnswerReuse
+from app.shop.service import ShopService
 from app.shop.settings import ShopSettings
 
 router = APIRouter(prefix="/api/shop", tags=["Sam's Camera Shop"])
@@ -63,6 +68,24 @@ def build_shop(searcher: Searcher) -> ShopService:
     model = OpenAIShoppingModel(
         settings.openai_api_key.get_secret_value(), settings.shop_chat_model
     )
+    reuse = None
+    if settings.shop_cache_enabled and not settings.cache_missing():
+        reuse = AnswerReuse(
+            RedisAnswerCache(
+                searcher.index.client,
+                searcher.vectorizer,
+                name=f"{searcher.settings.namespace}:shop:{settings.shop_owner_prefix}:answers-v1",
+                distance=settings.shop_cache_distance,
+            ),
+            JevVerifier(
+                settings.openrouter_api_key.get_secret_value(),
+                settings.shop_jev_model,
+                timeout_seconds=settings.shop_jev_timeout,
+            ),
+            distance=settings.shop_cache_distance,
+            confidence=settings.shop_jev_confidence,
+            ttl=settings.shop_cache_ttl,
+        )
     return ShopService(
         searcher,
         memory,
@@ -71,6 +94,14 @@ def build_shop(searcher: Searcher) -> ShopService:
         owner_prefix=settings.shop_owner_prefix,
         context_retriever=context_retriever,
         guidance=guidance,
+        reuse=reuse,
+        cache_configuration=(
+            "answers-v1:"
+            + settings.shop_chat_model
+            + TOOL_INSTRUCTIONS
+            + searcher.settings.embedding_model
+            + searcher.settings.embedding_revision
+        ),
     )
 
 
@@ -103,6 +134,16 @@ class ChatRequest(NewSession):
     session_id: str = Field(min_length=1, max_length=80, pattern=r"^[a-zA-Z0-9-]+$")
     message: str = Field(min_length=1, max_length=4000)
     mode: MemoryMode = "both"
+    use_cache: bool = True
+
+
+class ClearCacheRequest(NewSession):
+    include_shared: bool = False
+
+
+class RemoveCacheRequest(NewSession):
+    entry_id: str = Field(pattern=r"^[a-f0-9]{32}$")
+    shared: bool = False
 
 
 class MemoryList(BaseModel):
@@ -118,6 +159,9 @@ def status(request: Request) -> dict[str, object]:
         "missing": settings.missing(),
         "catalogue_ready": request.app.state.searcher is not None,
         "model": settings.shop_chat_model,
+        "cache_enabled": settings.shop_cache_enabled,
+        "cache_ready": settings.shop_cache_enabled and not settings.cache_missing(),
+        "cache_missing": settings.cache_missing() if settings.shop_cache_enabled else [],
         "playbook_configured": bool(
             settings.shop_playbook_url
             and settings.shop_playbook_id
@@ -162,7 +206,43 @@ def chat(body: ChatRequest, shop: ShopDep, request: Request) -> ChatTurn:
     if not lock.acquire(blocking=False):
         raise HTTPException(409, "The adviser is finishing another turn. Try again shortly.")
     try:
-        return shop.turn(body.shopper_id, body.session_id, body.message, body.mode)
+        return shop.turn(
+            body.shopper_id, body.session_id, body.message, body.mode, use_cache=body.use_cache
+        )
+    finally:
+        lock.release()
+
+
+@router.post("/cache/clear")
+def clear_cache(body: ClearCacheRequest, shop: ShopDep, request: Request) -> dict[str, int]:
+    if shop.reuse is None:
+        raise HTTPException(503, "Enable and configure semantic caching first.")
+    lock: Lock = request.app.state.shop_turn_lock
+    if not lock.acquire(blocking=False):
+        raise HTTPException(409, "The adviser is finishing another turn. Try again shortly.")
+    try:
+        deleted = shop.reuse.cache.clear(shop.owner(body.shopper_id))
+        if body.include_shared:
+            deleted += shop.reuse.cache.clear("shared")
+        return {"deleted": deleted}
+    except CacheError as exc:
+        raise HTTPException(503, str(exc)) from None
+    finally:
+        lock.release()
+
+
+@router.post("/cache/remove")
+def remove_cache(body: RemoveCacheRequest, shop: ShopDep, request: Request) -> dict[str, bool]:
+    if shop.reuse is None:
+        raise HTTPException(503, "Enable and configure semantic caching first.")
+    lock: Lock = request.app.state.shop_turn_lock
+    if not lock.acquire(blocking=False):
+        raise HTTPException(409, "The adviser is finishing another turn. Try again shortly.")
+    try:
+        scope = "shared" if body.shared else shop.owner(body.shopper_id)
+        return {"deleted": shop.reuse.cache.remove(body.entry_id, scope)}
+    except CacheError as exc:
+        raise HTTPException(503, str(exc)) from None
     finally:
         lock.release()
 
@@ -172,6 +252,10 @@ def close_shop(shop: ShopService | None) -> None:
         return
     for adapter in (shop.memory, shop.model, shop.guidance, shop.context_retriever):
         close = getattr(adapter, "close", None)
+        if callable(close):
+            close()
+    if shop.reuse is not None:
+        close = getattr(shop.reuse.verifier, "close", None)
         if callable(close):
             close()
 

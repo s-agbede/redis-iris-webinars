@@ -5,9 +5,10 @@ import httpx
 import pytest
 from pydantic import ValidationError
 
+from app.shop.errors import ShopError
 from app.shop.llm import MAX_TOOL_CALLS, OpenAIShoppingModel
 from app.shop.models import ProductCard, ToolDefinition, TurnContext
-from app.shop.service import CATALOGUE_TOOL, SearchCatalogueArguments, ShopError
+from app.shop.tools import CATALOGUE_TOOL, SearchCatalogueArguments
 
 
 class Tools:
@@ -320,7 +321,7 @@ def test_shop_http_turn_chains_purchases_into_search_and_records_only_the_exchan
 
 
 def test_shop_tools_bind_purchase_history_to_the_selected_shopper() -> None:
-    from app.shop.service import ShopRetrieval
+    from app.shop.tools import ShopRetrieval
     from tests.test_shop import make_shop
 
     shop, _, _, _ = make_shop()
@@ -330,7 +331,7 @@ def test_shop_tools_bind_purchase_history_to_the_selected_shopper() -> None:
 
 
 def test_refined_search_retains_products_supplied_by_earlier_searches() -> None:
-    from app.shop.service import ShopRetrieval
+    from app.shop.tools import ShopRetrieval
     from tests.test_shop import make_shop
 
     shop, _, _, _ = make_shop()
