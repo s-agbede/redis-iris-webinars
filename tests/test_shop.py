@@ -5,6 +5,7 @@ import pytest
 from pydantic import JsonValue
 
 from app.models import CameraProduct
+from app.shop.errors import ShopError
 from app.shop.memory import MemoryEvent, MemoryRecord, MemorySession
 from app.shop.models import (
     AnswerDraft,
@@ -16,7 +17,8 @@ from app.shop.models import (
     ToolDefinition,
     TurnContext,
 )
-from app.shop.service import SHOP_INSTRUCTIONS, ShopError, ShopService
+from app.shop.prompts import SHOP_INSTRUCTIONS
+from app.shop.service import ShopService
 
 
 class Store:

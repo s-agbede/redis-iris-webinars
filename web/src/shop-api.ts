@@ -65,6 +65,31 @@ export type ToolExecution = {
   output: unknown;
   elapsed_ms: number;
 };
+export type CacheTrace = {
+  status: "disabled" | "miss" | "hit" | "rejected" | "bypass" | "error";
+  reason: string;
+  entry_id: string | null;
+  scope: string | null;
+  matched_question: string | null;
+  age_seconds: number | null;
+  distance: number | null;
+  similarity: number | null;
+  distance_threshold: number | null;
+  decision: string | null;
+  confidence: number | null;
+  confidence_threshold: number | null;
+  probabilities: Record<string, number>;
+  lookup_ms: number;
+  verifier_ms: number;
+  verifier_model: string | null;
+  verifier_input_tokens: number | null;
+  verifier_cost_usd: number | null;
+  store_status: "not_requested" | "stored" | "skipped" | "error";
+  store_reason: string | null;
+  stored_entry_id: string | null;
+  stored_scope?: string | null;
+  original_context: Context | null;
+};
 export type Turn = {
   user: string;
   assistant: string;
@@ -78,6 +103,7 @@ export type Turn = {
     model_ms: number;
     total_ms: number;
     event_ids: string[];
+    cache?: CacheTrace;
     note: string;
   };
 };
@@ -93,6 +119,9 @@ export type ShopStatus = {
   catalogue_ready: boolean;
   model: string;
   playbook_configured: boolean;
+  cache_enabled?: boolean;
+  cache_ready?: boolean;
+  cache_missing?: string[];
 };
 export type MemoryList = { memories: Memory[]; complete: boolean };
 export function shopPost<T>(path: string, body: object): Promise<T> {

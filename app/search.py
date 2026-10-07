@@ -13,7 +13,7 @@ from redis.exceptions import RedisError
 from redisvl.exceptions import RedisSearchError
 from redisvl.index import SearchIndex
 from redisvl.query import HybridQuery, TextQuery, VectorQuery
-from redisvl.query.filter import Tag
+from redisvl.query.filter import FilterExpression, Tag
 from redisvl.redis.utils import convert_bytes
 
 from app.catalog import Catalog, make_passages
@@ -112,6 +112,39 @@ def serving_target(client: Redis, settings: Settings) -> IndexTarget:
 
 
 @dataclass
+class PreparedQuery:
+    """Per-comparison inputs; the lexical query is shared with hybrid when needed."""
+
+    text: str
+    filters: FilterExpression | None
+    vector: list[float] | None
+    embedding_error: str | None
+    embedding_ms: float
+    lexical: TextQuery | None = None
+
+
+def display_product(
+    row: RedisPassage, live_product: CameraProduct | None, request: CompareRequest
+) -> CameraProduct | None:
+    """Use current product metadata, or the passage snapshot in the index inspector."""
+    if request.indexed_view:
+        return CameraProduct(
+            product_id=row.product_id,
+            product_title=row.title or (live_product.product_title if live_product else row.text),
+            product_brand=row.brand,
+            product_color=row.color,
+        )
+    if live_product is None:
+        return None
+    # Product edits can outpace indexing, so the live view rechecks metadata filters.
+    if (request.brands and live_product.product_brand not in request.brands) or (
+        request.colors and normalize_color(live_product.product_color) not in request.colors
+    ):
+        return None
+    return live_product
+
+
+@dataclass
 class Searcher:
     index: SearchIndex
     vectorizer: Encoder
@@ -123,73 +156,247 @@ class Searcher:
     store: ProductStore | None = None
     embedding_cache: EmbeddingCache = field(default_factory=EmbeddingCache)
 
+    def compare(
+        self,
+        request: CompareRequest,
+        *,
+        modes: tuple[SearchMode, ...] = (SearchMode.TEXT, SearchMode.VECTOR, SearchMode.HYBRID),
+        _pinned: bool = False,
+    ) -> Comparison:
+        """Prepare one request, run each retrieval method, and collect its evidence."""
+        if self.store is not None and not _pinned:
+            return self._compare_serving_index(request, modes)
+
+        started = time.perf_counter()
+        inferred_brands = (
+            infer_brand(
+                request.query,
+                (
+                    product.product_brand
+                    for product in self.catalog.products.values()
+                    if product.product_brand
+                ),
+            )
+            if request.interpret_brand and not request.brands
+            else []
+        )
+        if inferred_brands:
+            request = request.model_copy(update={"brands": inferred_brands})
+        labels = self.catalog.labels(request.query)
+        prepared = self._prepare_query(request)
+
+        results: list[ModeResult] = []
+        explanation_ms = 0.0
+        for mode in modes:
+            result, evidence_ms = self._run_mode(mode, request, prepared, labels)
+            results.append(result)
+            explanation_ms += evidence_ms
+        if request.include_basic:
+            results.insert(0, self._basic_result(request))
+
+        return Comparison(
+            inferred_brands=inferred_brands,
+            query=request.query,
+            brands=request.brands,
+            colors=request.colors,
+            embedding_ms=round(prepared.embedding_ms, 2),
+            explanation_ms=round(explanation_ms, 2),
+            total_ms=round((time.perf_counter() - started) * 1000, 2),
+            embedding_model=self.settings.embedding_model,
+            source_revision=self.catalog.manifest.source_revision,
+            candidate_limit=self.settings.candidate_limit,
+            results=results,
+        )
+
+    def _compare_serving_index(
+        self, request: CompareRequest, modes: tuple[SearchMode, ...]
+    ) -> Comparison:
+        """Keep every method on one index version, even during deployment cleanup."""
+        assert self.store is not None
+        started = time.perf_counter()
+        for attempt in range(2):
+            active = self.store.targets()[0]
+            pinned = self.index
+            if pinned.name != active["name"]:
+                schema = self.index.schema.to_dict()
+                schema["index"].update(name=active["name"], prefix=active["prefix"])
+                pinned = SearchIndex.from_dict(schema, redis_client=self.store.client)
+            comparison = replace(self, index=pinned).compare(request, modes=modes, _pinned=True)
+            missing_index = any(
+                marker in (mode.error or "").lower()
+                for mode in comparison.results
+                for marker in ("unknown index name", "no such index")
+            )
+            # Cleanup can retire a version while a request is embedding. Retry
+            # the entire comparison once so all modes use the current version.
+            if (
+                attempt == 1
+                or not missing_index
+                or self.store.targets()[0]["name"] == active["name"]
+            ):
+                break
+        comparison.total_ms = round((time.perf_counter() - started) * 1000, 2)
+        return comparison
+
+    def _prepare_query(self, request: CompareRequest) -> PreparedQuery:
+        """Share metadata filters and one embedding across all requested methods."""
+        expression = Tag("brand") == request.brands if request.brands else None
+        if request.colors:
+            color_filter = Tag("color") == request.colors
+            expression = color_filter if expression is None else expression & color_filter
+        lexical_text = normalize_lexical_query(request.query)
+
+        vector: list[float] | None = None
+        embedding_error: str | None = None
+        embed_started = time.perf_counter()
+        try:
+            # Embeddings keep the user's wording; only lexical search splits punctuation.
+            vector = (
+                self.embedding_cache.get(
+                    f"{self.settings.embedding_model}@{self.settings.embedding_revision}",
+                    request.query,
+                    self.vectorizer.embed,
+                )
+                if request.cache_embedding
+                else self.vectorizer.embed(request.query)
+            )
+        except (ValueError, RuntimeError) as exc:
+            embedding_error = str(exc)
+        return PreparedQuery(
+            text=lexical_text,
+            filters=expression,
+            vector=vector,
+            embedding_error=embedding_error,
+            embedding_ms=(time.perf_counter() - embed_started) * 1000,
+        )
+
+    def _query_for_mode(
+        self, mode: SearchMode, prepared: PreparedQuery
+    ) -> TextQuery | VectorQuery | HybridQuery:
+        """Give hybrid the same lexical expression used by standalone text search."""
+        if mode is SearchMode.TEXT:
+            prepared.lexical = build_text_query(
+                prepared.text,
+                filters=prepared.filters,
+                candidate_limit=self.settings.candidate_limit,
+            )
+            return prepared.lexical
+
+        assert prepared.vector is not None
+        if mode is SearchMode.VECTOR:
+            return build_vector_query(
+                prepared.vector,
+                filters=prepared.filters,
+                candidate_limit=self.settings.candidate_limit,
+            )
+        if prepared.lexical is None:
+            prepared.lexical = build_text_query(
+                prepared.text,
+                filters=prepared.filters,
+                candidate_limit=self.settings.candidate_limit,
+            )
+        return build_hybrid_query(
+            prepared.text,
+            prepared.vector,
+            lexical=prepared.lexical,
+            filters=prepared.filters,
+            candidate_limit=self.settings.candidate_limit,
+        )
+
+    def _run_mode(
+        self,
+        mode: SearchMode,
+        request: CompareRequest,
+        prepared: PreparedQuery,
+        labels: dict[str, Label],
+    ) -> tuple[ModeResult, float]:
+        """Isolate each mode's error and measure Redis execution apart from evidence."""
+        result = ModeResult(mode=mode, query_ms=0, score_kind=SCORE_KINDS[mode], redis_query="")
+        explanation_ms = 0.0
+        if mode is not SearchMode.TEXT and prepared.vector is None:
+            result.error = prepared.embedding_error or "Local embedding failed."
+            return result, explanation_ms
+        try:
+            query = self._query_for_mode(mode, prepared)
+            result.redis_query = describe_query(query, self.index.name)
+            query_started = time.perf_counter()
+            try:
+                rows = (
+                    self._hybrid_rows(query)
+                    if isinstance(query, HybridQuery)
+                    else self.index.query(query)
+                )
+            finally:
+                result.query_ms = round((time.perf_counter() - query_started) * 1000, 2)
+
+            explanation_started = time.perf_counter()
+            try:
+                fusion = (
+                    explain_fusion(rows, self.settings.candidate_limit)
+                    if mode is SearchMode.HYBRID
+                    else {}
+                )
+                passages = [RedisPassage.model_validate(row) for row in rows]
+                fetch_started = time.perf_counter()
+                result.hits = self._hits(passages, mode, request, prepared, labels, fusion)
+                result.product_processing_ms = round(
+                    (time.perf_counter() - fetch_started) * 1000, 2
+                )
+            finally:
+                explanation_ms = (time.perf_counter() - explanation_started) * 1000
+        except (RedisError, RedisSearchError, ValueError) as exc:
+            result.error = str(exc)
+        return result, explanation_ms
+
     def _hits(
         self,
         rows: list[RedisPassage],
         mode: SearchMode,
+        request: CompareRequest,
+        prepared: PreparedQuery,
         labels: dict[str, Label],
-        limit: int,
         fusion: dict[str, FusionEvidence],
-        query_text: str,
-        stopwords: set[str],
-        indexed_view: bool = False,
-        *,
-        brands: list[str] | None = None,
-        colors: list[str] | None = None,
     ) -> list[SearchHit]:
-        hits: list[SearchHit] = []
+        """Keep the best eligible passage per product, preserving Redis passage ranks."""
         products = (
             self.store.get_many(row.product_id for row in rows)
             if self.store
             else self.catalog.products
         )
+        stopwords = prepared.lexical.stopwords if prepared.lexical else set()
+        hits: list[SearchHit] = []
         seen: set[str] = set()
         for passage_rank, row in enumerate(rows, start=1):
             pid = row.product_id
             if pid in seen:
                 continue
-            product = products.get(pid)
-            available = product is not None
-            if indexed_view:
-                product = CameraProduct(
-                    product_id=pid,
-                    product_title=row.title or (product.product_title if product else row.text),
-                    product_brand=row.brand,
-                    product_color=row.color,
-                )
+            live_product = products.get(pid)
+            product = display_product(row, live_product, request)
             if product is None:
                 continue
-            if not indexed_view and (
-                (brands and product.product_brand not in brands)
-                or (colors and normalize_color(product.product_color) not in colors)
-            ):
-                continue
-            score = row.relevance_score(mode)
-            indexed_text = row.search_text
-            matches = (
-                literal_query_matches(indexed_text, query_text, stopwords)
-                if mode is SearchMode.TEXT
-                else []
-            )
             hits.append(
                 SearchHit(
-                    available=available,
+                    available=live_product is not None,
                     product_id=pid,
                     title=product.product_title,
                     brand=product.product_brand,
                     color=product.product_color,
-                    score=score,
+                    score=row.relevance_score(mode),
                     source_label=labels.get(pid),
                     photo=self.photos.get(pid),
-                    indexed_text=indexed_text,
-                    lexical_matches=matches,
+                    indexed_text=row.search_text,
+                    lexical_matches=(
+                        literal_query_matches(row.search_text, prepared.text, stopwords)
+                        if mode is SearchMode.TEXT
+                        else []
+                    ),
                     title_matches=(
-                        literal_query_matches(product.product_title, query_text, stopwords)
+                        literal_query_matches(product.product_title, prepared.text, stopwords)
                         if mode is SearchMode.TEXT
                         else []
                     ),
                     passage_matches=(
-                        literal_query_matches(row.text, query_text, stopwords)
+                        literal_query_matches(row.text, prepared.text, stopwords)
                         if mode is SearchMode.TEXT
                         else []
                     ),
@@ -198,8 +405,9 @@ class Searcher:
                     passage=row.passage(),
                 )
             )
+            # Filter and hydrate before deduplicating or applying the product limit.
             seen.add(pid)
-            if len(hits) == limit:
+            if len(hits) == request.num_results:
                 break
         return hits
 
@@ -266,167 +474,6 @@ class Searcher:
             score_kind="Literal title match (alphabetical)",
             redis_query="",
             hits=hits,
-        )
-
-    def compare(
-        self,
-        request: CompareRequest,
-        *,
-        modes: tuple[SearchMode, ...] = (SearchMode.TEXT, SearchMode.VECTOR, SearchMode.HYBRID),
-        _pinned: bool = False,
-    ) -> Comparison:
-        if self.store is not None and not _pinned:
-            started = time.perf_counter()
-            for attempt in range(2):
-                active = self.store.targets()[0]
-                pinned = self.index
-                if pinned.name != active["name"]:
-                    schema = self.index.schema.to_dict()
-                    schema["index"].update(name=active["name"], prefix=active["prefix"])
-                    pinned = SearchIndex.from_dict(schema, redis_client=self.store.client)
-                comparison = replace(self, index=pinned).compare(request, modes=modes, _pinned=True)
-                missing_index = any(
-                    marker in (mode.error or "").lower()
-                    for mode in comparison.results
-                    for marker in ("unknown index name", "no such index")
-                )
-                # Cleanup can retire a version while a request is embedding. Retry
-                # the entire comparison once so all modes use the current version.
-                if (
-                    attempt == 1
-                    or not missing_index
-                    or self.store.targets()[0]["name"] == active["name"]
-                ):
-                    comparison.total_ms = round((time.perf_counter() - started) * 1000, 2)
-                    return comparison
-        started = time.perf_counter()
-        inferred_brands = (
-            infer_brand(
-                request.query,
-                (
-                    product.product_brand
-                    for product in self.catalog.products.values()
-                    if product.product_brand
-                ),
-            )
-            if request.interpret_brand and not request.brands
-            else []
-        )
-        if inferred_brands:
-            request = request.model_copy(update={"brands": inferred_brands})
-        labels = self.catalog.labels(request.query)
-        expression = Tag("brand") == request.brands if request.brands else None
-        if request.colors:
-            color_filter = Tag("color") == request.colors
-            expression = color_filter if expression is None else expression & color_filter
-        lexical_text = normalize_lexical_query(request.query)
-        vector: list[float] | None = None
-        embedding_error: str | None = None
-        embed_started = time.perf_counter()
-        try:
-            vector = (
-                self.embedding_cache.get(
-                    f"{self.settings.embedding_model}@{self.settings.embedding_revision}",
-                    request.query,
-                    self.vectorizer.embed,
-                )
-                if request.cache_embedding
-                else self.vectorizer.embed(request.query)
-            )
-        except (ValueError, RuntimeError) as exc:
-            embedding_error = str(exc)
-        embedding_ms = (time.perf_counter() - embed_started) * 1000
-        explanation_ms = 0.0
-        results: list[ModeResult] = []
-        lexical: TextQuery | None = None
-        for mode in modes:
-            result = ModeResult(mode=mode, query_ms=0, score_kind=SCORE_KINDS[mode], redis_query="")
-            if mode is not SearchMode.TEXT and vector is None:
-                result.error = embedding_error or "Local embedding failed."
-                results.append(result)
-                continue
-            try:
-                query: TextQuery | VectorQuery | HybridQuery
-                if mode is SearchMode.TEXT:
-                    lexical = build_text_query(
-                        lexical_text,
-                        filters=expression,
-                        candidate_limit=self.settings.candidate_limit,
-                    )
-                    query = lexical
-                elif mode is SearchMode.VECTOR:
-                    assert vector is not None
-                    query = build_vector_query(
-                        vector, filters=expression, candidate_limit=self.settings.candidate_limit
-                    )
-                else:
-                    assert vector is not None
-                    if lexical is None:
-                        lexical = build_text_query(
-                            lexical_text,
-                            filters=expression,
-                            candidate_limit=self.settings.candidate_limit,
-                        )
-                    query = build_hybrid_query(
-                        lexical_text,
-                        vector,
-                        lexical=lexical,
-                        filters=expression,
-                        candidate_limit=self.settings.candidate_limit,
-                    )
-                result.redis_query = describe_query(query, self.index.name)
-                query_started = time.perf_counter()
-                try:
-                    rows = (
-                        self._hybrid_rows(query)
-                        if isinstance(query, HybridQuery)
-                        else self.index.query(query)
-                    )
-                finally:
-                    result.query_ms = round((time.perf_counter() - query_started) * 1000, 2)
-                explanation_started = time.perf_counter()
-                try:
-                    fusion = (
-                        explain_fusion(rows, self.settings.candidate_limit)
-                        if mode is SearchMode.HYBRID
-                        else {}
-                    )
-                    passages = [RedisPassage.model_validate(row) for row in rows]
-                    fetch_started = time.perf_counter()
-                    result.hits = self._hits(
-                        passages,
-                        mode,
-                        labels,
-                        request.num_results,
-                        fusion,
-                        lexical_text,
-                        lexical.stopwords if lexical else set(),
-                        request.indexed_view,
-                        brands=request.brands,
-                        colors=request.colors,
-                    )
-                    result.product_processing_ms = round(
-                        (time.perf_counter() - fetch_started) * 1000, 2
-                    )
-                finally:
-                    explanation_ms += (time.perf_counter() - explanation_started) * 1000
-            except (RedisError, RedisSearchError, ValueError) as exc:
-                result.error = str(exc)
-            results.append(result)
-        if request.include_basic:
-            results.insert(0, self._basic_result(request))
-        return Comparison(
-            inferred_brands=inferred_brands,
-            query=request.query,
-            brands=request.brands,
-            colors=request.colors,
-            embedding_ms=round(embedding_ms, 2),
-            explanation_ms=round(explanation_ms, 2),
-            total_ms=round((time.perf_counter() - started) * 1000, 2),
-            embedding_model=self.settings.embedding_model,
-            source_revision=self.catalog.manifest.source_revision,
-            candidate_limit=self.settings.candidate_limit,
-            results=results,
         )
 
     def info(self) -> CatalogInfo:

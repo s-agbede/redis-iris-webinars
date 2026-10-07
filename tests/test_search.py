@@ -1,3 +1,4 @@
+from collections.abc import Iterable
 from typing import Any, cast
 
 import pytest
@@ -7,6 +8,7 @@ from redisvl.index import SearchIndex
 
 from app.catalog import Catalog, DataManifest
 from app.models import CameraProduct, CompareRequest, Judgement, SearchMode
+from app.product_store import IndexTarget, ProductStore
 from app.search import Searcher
 from app.settings import Settings
 
@@ -144,6 +146,75 @@ def test_a_failed_mode_is_reported_without_erasing_successful_results() -> None:
     assert result.results[1].hits
     assert result.results[2].error
     assert not result.results[2].hits
+
+
+@pytest.mark.parametrize("error_type", [ValueError, RuntimeError])
+def test_embedding_failure_preserves_text_and_basic_results(
+    error_type: type[Exception],
+) -> None:
+    class UnavailableEncoder(Encoder):
+        def embed(self, text: str) -> list[float]:
+            raise error_type("Local model unavailable")
+
+    searcher, _, index = service()
+    searcher.vectorizer = UnavailableEncoder()
+    result = searcher.compare(CompareRequest(query="lens", include_basic=True))
+
+    basic, text, vector, hybrid = result.results
+    assert basic.hits and basic.error is None
+    assert text.hits and text.error is None
+    assert len(index.queries) == 1
+    for mode in (vector, hybrid):
+        assert mode.error == "Local model unavailable"
+        assert mode.hits == []
+        assert mode.redis_query == ""
+        assert mode.query_ms == 0
+
+
+def test_retired_index_retries_the_whole_comparison_on_the_new_serving_version(
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class Schema:
+        def to_dict(self) -> dict[str, Any]:
+            return {"index": {"name": "retired", "prefix": "retired:passage"}}
+
+    class RetiredIndex(Index):
+        name = "retired"
+        schema = Schema()
+
+        def query(self, query: Any) -> list[dict[str, Any]]:
+            super().query(query)
+            raise ResponseError("Unknown index name")
+
+    searcher, encoder, retired = service(RetiredIndex())
+    current = Index()
+    current.name = "current"
+
+    class SwitchingStore:
+        client = object()
+        target_reads = 0
+
+        def targets(self) -> list[IndexTarget]:
+            name = "retired" if self.target_reads == 0 else "current"
+            self.target_reads += 1
+            return [IndexTarget(name=name, prefix=f"{name}:passage", count_key=f"{name}:count")]
+
+        def get_many(self, ids: Iterable[str]) -> dict[str, CameraProduct]:
+            return {pid: searcher.catalog.products[pid] for pid in ids}
+
+    def serving_index(schema: dict[str, Any], **kwargs: Any) -> SearchIndex:
+        assert schema["index"]["name"] == "current"
+        assert schema["index"]["prefix"] == "current:passage"
+        return cast(SearchIndex, current)
+
+    monkeypatch.setattr(SearchIndex, "from_dict", serving_index)
+    searcher.store = cast(ProductStore, SwitchingStore())
+    result = searcher.compare(CompareRequest(query="lens"))
+
+    assert all(mode.error is None and mode.hits for mode in result.results)
+    assert all(" current " in mode.redis_query for mode in result.results)
+    assert len(retired.queries) == len(current.queries) == 3
+    assert encoder.calls == 2
 
 
 def test_passage_rank_precedes_product_deduplication_and_indexed_context_is_visible() -> None:

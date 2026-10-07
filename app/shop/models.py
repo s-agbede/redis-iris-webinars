@@ -1,6 +1,7 @@
 """Typed boundaries for the camera adviser and its teaching evidence."""
 
 from typing import Literal, Protocol
+from uuid import uuid4
 
 from pydantic import BaseModel, ConfigDict, Field, JsonValue
 
@@ -106,6 +107,61 @@ class ModelAnswer(AnswerDraft):
     tool_calls: list[ToolExecution] = Field(default_factory=list)
 
 
+class CacheEntry(BaseModel):
+    """Historical evidence, not a claim that RAM is a complete current profile."""
+
+    model_config = ConfigDict(extra="forbid", allow_inf_nan=False)
+    entry_id: str = Field(default_factory=lambda: uuid4().hex, pattern=r"^[a-f0-9]{32}$")
+    scope: str = Field(min_length=1)
+    mode: MemoryMode
+    version: str
+    question: str = Field(min_length=1, max_length=4000)
+    answer: str = Field(min_length=1)
+    products: list[ProductCard]
+    context: TurnContext
+    created_at: float
+    expires_at: float
+
+
+class CacheCandidate(BaseModel):
+    entry: CacheEntry
+    distance: float = Field(ge=0, le=2, allow_inf_nan=False)
+
+
+class CacheTrace(BaseModel):
+    status: Literal["disabled", "miss", "hit", "rejected", "bypass", "error"] = "disabled"
+    reason: str = "Semantic caching is disabled."
+    entry_id: str | None = None
+    scope: str | None = None
+    matched_question: str | None = None
+    age_seconds: float | None = None
+    distance: float | None = None
+    similarity: float | None = None
+    distance_threshold: float | None = None
+    decision: str | None = None
+    confidence: float | None = None
+    confidence_threshold: float | None = None
+    probabilities: dict[str, float] = Field(default_factory=dict)
+    lookup_ms: float = 0
+    verifier_ms: float = 0
+    verifier_model: str | None = None
+    verifier_input_tokens: int | None = None
+    verifier_cost_usd: float | None = None
+    store_status: Literal["not_requested", "stored", "skipped", "error"] = "not_requested"
+    store_reason: str | None = None
+    stored_entry_id: str | None = None
+    stored_scope: str | None = None
+    original_context: TurnContext | None = None
+
+
+class ReuseResult(BaseModel):
+    """Lookup outcome, with product evidence returned explicitly on a hit."""
+
+    answer: ModelAnswer | None = None
+    products: list[ProductCard] = Field(default_factory=list)
+    trace: CacheTrace = Field(default_factory=CacheTrace)
+
+
 class TurnInspector(BaseModel):
     answer_request: ModelRequest | None = None
     tool_calls: list[ToolExecution] = Field(default_factory=list)
@@ -115,6 +171,7 @@ class TurnInspector(BaseModel):
     model_ms: float
     total_ms: float
     event_ids: list[str]
+    cache: CacheTrace = Field(default_factory=CacheTrace)
     note: str = (
         "Events saved. Automatic extraction is asynchronous; refresh memories to observe it."
     )

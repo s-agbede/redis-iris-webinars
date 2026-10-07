@@ -3,9 +3,9 @@ import json
 import httpx
 import pytest
 
+from app.shop.errors import ShopError
 from app.shop.llm import OpenAIShoppingModel
 from app.shop.models import TurnContext
-from app.shop.service import ShopError
 from tests.test_shop_tools import Tools
 
 

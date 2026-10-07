@@ -77,3 +77,16 @@
 .request-fact, .request-message { padding: 10px 12px; margin: 8px 0; border-left: 2px solid #8bbca9; background: #142f37; white-space: pre-wrap; }
 .request-fact p { margin: 3px 0; }
 .request-absent { padding: 10px 12px; color: var(--muted); border: 1px dashed var(--border); border-radius: 6px; }
+
+.shop-cache-settings { border-top: 1px solid var(--border); padding-top: 16px; }
+.shop-cache-settings > button { margin-top: 12px; }
+.cache-evidence { margin: 18px 0; padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+.cache-outcomes { display: flex; flex-wrap: wrap; gap: 5px 14px; }
+.cache-outcomes strong { color: var(--shop-accent); font-weight: 500; }
+.cache-metrics { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 7px 12px; margin: 15px 0; font-size: 11px; }
+.cache-metrics > div { display: contents; }
+.cache-metrics dt { color: var(--muted); }
+.cache-metrics dd { margin: 0; overflow-wrap: anywhere; }
+.cache-evidence details { margin-top: 12px; }
+.cache-removal > div { margin-top: 8px; }
+.cache-removal button { font-size: 11px; }

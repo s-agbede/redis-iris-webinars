@@ -2,10 +2,11 @@
 
 import logging
 from threading import Event, Thread
-from typing import Any
+from typing import Any, cast
 from uuid import uuid4
 
 from redis.exceptions import ConnectionError, LockError, RedisError, TimeoutError, WatchError
+from redis.lock import Lock
 from redisvl.index import SearchIndex
 
 from app.failures import SyncFailures
@@ -45,57 +46,12 @@ class SyncWorker:
         try:
             if client.get(self.store.paused_key) == b"1":
                 return False
-            claimed: Any = client.xautoclaim(
-                self.store.events_key,
-                self.store.group,
-                self.consumer,
-                reclaim_idle_ms,
-                start_id=self.claim_cursor,
-                count=10,
-            )
-            self.claim_cursor = claimed[0].decode()
-            messages = [row for row in claimed[1] if self.failures.ready(row[0])]
-            if not messages:
-                batches: Any = client.xreadgroup(
-                    self.store.group, self.consumer, {self.store.events_key: ">"}, count=1
-                )
-                messages = batches[0][1] if batches else []
-            if not messages:
+            event = self._next_event(reclaim_idle_ms)
+            if event is None:
                 return False
-            event_id, payload = messages[0]
+            event_id, payload = event
             pid = payload[b"product_id"].decode()
-            with client.pipeline() as pipe:
-                # A concurrent update, delete, or expired ownership invalidates this write.
-                pipe.watch(  # type: ignore[no-untyped-call]
-                    self.store.revision_key(pid), self.store.key(pid), self.store.lock_key
-                )
-                product = self.store.get(pid)
-                passages = prepare_product_passages(product, self.encoder, self.store.settings)
-                targets = [
-                    (target, self.store.passage_keys(pid, target["prefix"]))
-                    for target in self.store.targets()
-                ]
-                if not lock.owned():
-                    raise RuntimeError("Synchronization lease expired; event remains pending.")
-                pipe.multi()
-                for target, old_keys in targets:
-                    if old_keys:
-                        pipe.delete(*old_keys)
-                    for p in passages:
-                        pipe.json().set(
-                            f"{target['prefix']}:{p.passage_id}",
-                            "$",
-                            p.model_dump(),
-                        )
-                    pipe.incrby(target["count_key"], len(passages) - len(old_keys))
-                if product is None and client.sismember(self.store.reset_key, pid):
-                    pipe.srem(self.store.demo_key, pid)
-                    pipe.srem(self.store.reset_key, pid)
-                    pipe.hdel(self.store.titles_key, pid)
-                pipe.xack(self.store.events_key, self.store.group, event_id)
-                self.failures.clear(pipe, event_id)
-                pipe.delete(self.store.error_key)
-                pipe.execute()
+            self._publish_current_product(event_id, pid, lock)
             return True
         except WatchError:
             # Current state changed during embedding; retry the pending event later.
@@ -120,6 +76,65 @@ class SyncWorker:
                 lock.release()
             except LockError:
                 logger.warning("Synchronization ownership expired; pending work will be recovered.")
+
+    def _next_event(self, reclaim_idle_ms: int) -> tuple[bytes, dict[bytes, bytes]] | None:
+        """Recover a ready pending event before reading newly arrived work."""
+        client = self.store.client
+        claimed: Any = client.xautoclaim(
+            self.store.events_key,
+            self.store.group,
+            self.consumer,
+            reclaim_idle_ms,
+            start_id=self.claim_cursor,
+            count=10,
+        )
+        self.claim_cursor = claimed[0].decode()
+        messages = [row for row in claimed[1] if self.failures.ready(row[0])]
+        if not messages:
+            batches: Any = client.xreadgroup(
+                self.store.group, self.consumer, {self.store.events_key: ">"}, count=1
+            )
+            messages = batches[0][1] if batches else []
+        if not messages:
+            return None
+        return cast(tuple[bytes, dict[bytes, bytes]], messages[0])
+
+    def _publish_current_product(self, event_id: bytes, pid: str, lock: Lock) -> None:
+        """Derive from current source state, then publish and acknowledge atomically."""
+        client = self.store.client
+        with client.pipeline() as pipe:
+            # A concurrent update, delete, or expired ownership invalidates this write.
+            pipe.watch(  # type: ignore[no-untyped-call]
+                self.store.revision_key(pid), self.store.key(pid), self.store.lock_key
+            )
+            product = self.store.get(pid)
+            passages = prepare_product_passages(product, self.encoder, self.store.settings)
+            targets = [
+                (target, self.store.passage_keys(pid, target["prefix"]))
+                for target in self.store.targets()
+            ]
+            if not lock.owned():
+                raise RuntimeError("Synchronization lease expired; event remains pending.")
+            pipe.multi()
+            for target, old_keys in targets:
+                if old_keys:
+                    pipe.delete(*old_keys)
+                for p in passages:
+                    pipe.json().set(
+                        f"{target['prefix']}:{p.passage_id}",
+                        "$",
+                        p.model_dump(),
+                    )
+                pipe.incrby(target["count_key"], len(passages) - len(old_keys))
+            if product is None and client.sismember(self.store.reset_key, pid):
+                pipe.srem(self.store.demo_key, pid)
+                pipe.srem(self.store.reset_key, pid)
+                pipe.hdel(self.store.titles_key, pid)
+            # A crash before EXEC leaves both the old passages and the pending event.
+            pipe.xack(self.store.events_key, self.store.group, event_id)
+            self.failures.clear(pipe, event_id)
+            pipe.delete(self.store.error_key)
+            pipe.execute()
 
     def run(self) -> None:
         connection_delay = 1.0

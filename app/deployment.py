@@ -203,76 +203,13 @@ class DeploymentManager:
                 raise ValueError("Build a candidate successfully before validation.")
             self._caught_up()
             revision = int(cast(bytes, self.store.client.get(self.store.catalog_revision_key)) or 0)
-            expected: dict[str, dict[str, Any]] = {}
-            for product in self.store.all().values():
-                for passage in make_passages(
-                    product,
-                    self.encoder.tokenizer,
-                    self.store.settings.passage_tokens,
-                    self.store.settings.passage_overlap,
-                ):
-                    expected[f"{target['prefix']}:{passage.passage_id}"] = passage.model_dump()
-            keys = [
-                key.decode()
-                for key in self.store.client.scan_iter(match=f"{target['prefix']}:*", count=10000)
-            ]
-            coverage = set(keys) == set(expected)
-            content = coverage
-            for key in keys:
-                raw = self.store.client.json().get(key)
-                content = (
-                    content
-                    and isinstance(raw, dict)
-                    and all(
-                        raw.get(field) == value for field, value in expected.get(key, {}).items()
-                    )
-                )
-                content = (
-                    content
-                    and isinstance(raw, dict)
-                    and len(raw.get("embedding", [])) == self.store.settings.embedding_dims
-                )
+            expected = self._expected_passages(target)
             index = SearchIndex.from_existing(target["name"], redis_client=self.store.client)
-            count = int(index.info()["num_docs"])
-            checks = [
-                {
-                    "name": "Live passage coverage",
-                    "passed": coverage,
-                    "detail": f"{len(keys)} stored passages; {len(expected)} expected.",
-                },
-                {
-                    "name": "Source content and vectors",
-                    "passed": bool(content),
-                    "detail": "Passages match current source fields and vector dimensions.",
-                },
-                {
-                    "name": "Search index count",
-                    "passed": count == len(expected),
-                    "detail": f"{count} searchable passages.",
-                },
-            ]
-            # Small deterministic retrieval cases exercise tag filtering on the real candidate.
-            for pid in sorted({row["product_id"] for row in expected.values()})[:3]:
-                from redisvl.query import FilterQuery
-                from redisvl.query.filter import Tag
-
-                rows = index.query(
-                    FilterQuery(
-                        filter_expression=Tag("product_id") == pid,
-                        return_fields=["product_id"],
-                        num_results=1,
-                    )
-                )
-                checks.append(
-                    {
-                        "name": f"Reachability: {pid}",
-                        "passed": bool(rows),
-                        "detail": "Current product is retrievable through the candidate index.",
-                    }
-                )
-            checks.extend(
-                self._quality_checks(index, {row["product_id"] for row in expected.values()})
-            )
+            product_ids = {row["product_id"] for row in expected.values()}
+            checks = self._content_checks(index, target, expected)
+            checks.extend(self._reachability_checks(index, product_ids))
+            checks.extend(self._quality_checks(index, product_ids))
+            # A passing check is only valid for the source revision it actually examined.
             with self.store.client.pipeline() as pipe:
                 pipe.watch(self.store.catalog_revision_key)  # type: ignore[no-untyped-call]
                 if int(cast(bytes, pipe.get(self.store.catalog_revision_key)) or 0) != revision:
@@ -287,6 +224,85 @@ class DeploymentManager:
                 pipe.set(self.key, json.dumps(state))
                 pipe.execute()
         return self.status()
+
+    def _expected_passages(self, target: dict[str, str]) -> dict[str, dict[str, Any]]:
+        """Rebuild expected source fields without regenerating embedding vectors."""
+        expected: dict[str, dict[str, Any]] = {}
+        for product in self.store.all().values():
+            for passage in make_passages(
+                product,
+                self.encoder.tokenizer,
+                self.store.settings.passage_tokens,
+                self.store.settings.passage_overlap,
+            ):
+                expected[f"{target['prefix']}:{passage.passage_id}"] = passage.model_dump()
+        return expected
+
+    def _content_checks(
+        self, index: SearchIndex, target: dict[str, str], expected: dict[str, dict[str, Any]]
+    ) -> list[dict[str, Any]]:
+        keys = [
+            key.decode()
+            for key in self.store.client.scan_iter(match=f"{target['prefix']}:*", count=10000)
+        ]
+        coverage = set(keys) == set(expected)
+        content = coverage
+        for key in keys:
+            raw = self.store.client.json().get(key)
+            content = (
+                content
+                and isinstance(raw, dict)
+                and all(raw.get(field) == value for field, value in expected.get(key, {}).items())
+            )
+            content = (
+                content
+                and isinstance(raw, dict)
+                and len(raw.get("embedding", [])) == self.store.settings.embedding_dims
+            )
+        count = int(index.info()["num_docs"])
+        checks = [
+            {
+                "name": "Live passage coverage",
+                "passed": coverage,
+                "detail": f"{len(keys)} stored passages; {len(expected)} expected.",
+            },
+            {
+                "name": "Source content and vectors",
+                "passed": bool(content),
+                "detail": "Passages match current source fields and vector dimensions.",
+            },
+            {
+                "name": "Search index count",
+                "passed": count == len(expected),
+                "detail": f"{count} searchable passages.",
+            },
+        ]
+        return checks
+
+    def _reachability_checks(
+        self, index: SearchIndex, product_ids: set[str]
+    ) -> list[dict[str, Any]]:
+        checks: list[dict[str, Any]] = []
+        # Small deterministic retrieval cases exercise tag filtering on the real candidate.
+        for pid in sorted(product_ids)[:3]:
+            from redisvl.query import FilterQuery
+            from redisvl.query.filter import Tag
+
+            rows = index.query(
+                FilterQuery(
+                    filter_expression=Tag("product_id") == pid,
+                    return_fields=["product_id"],
+                    num_results=1,
+                )
+            )
+            checks.append(
+                {
+                    "name": f"Reachability: {pid}",
+                    "passed": bool(rows),
+                    "detail": "Current product is retrievable through the candidate index.",
+                }
+            )
+        return checks
 
     def _quality_checks(self, index: SearchIndex, product_ids: set[str]) -> list[dict[str, Any]]:
         """Run the existing reviewed top-three expectations against this candidate."""

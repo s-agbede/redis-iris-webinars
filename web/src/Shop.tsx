@@ -1,23 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { ProductPhotoView } from "./ProductPhoto";
 import { ModelEvidence } from "./ModelEvidence";
 import { ShopInspector } from "./ShopInspector";
-import { chatFailureMessage, shouldForgetSession } from "./shop-evidence";
-import {
-  shopPost,
-  type MemoryMode,
-  type Session,
-  type Shopper,
-  type ShopStatus,
-  type Turn,
-} from "./shop-api";
+import { ShopSettings } from "./ShopSettings";
+import { useShopConversation } from "./useShopConversation";
+import type { MemoryMode, Session, Shopper, Turn } from "./shop-api";
 import "./shop.css";
 
 export function Shop() {
   const [shopper, setShopper] = useState<Shopper>("alex");
   return (
     <div className="app-shell shop-shell">
+      {/* Switching shoppers remounts all conversation state and cancels restoration. */}
       <ShopConversation
         key={shopper}
         shopper={shopper}
@@ -33,189 +27,50 @@ type ShopConversationProps = {
 };
 
 function ShopConversation({ shopper, onShopperChange }: ShopConversationProps) {
-  const [status, setStatus] = useState<ShopStatus | null>(null);
-  const [session, setSession] = useState<Session | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [restoreFailed, setRestoreFailed] = useState(false);
-  const [restoreAttempt, setRestoreAttempt] = useState(0);
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState("");
-  const [notice, setNotice] = useState("");
-  const [message, setMessage] = useState("");
-  const [pending, setPending] = useState("");
   const [mode, setMode] = useState<MemoryMode>("both");
+  const [useCache, setUseCache] = useState(true);
   const [inspect, setInspect] = useState(false);
-  const [revision, setRevision] = useState(0);
-  const bottom = useRef<HTMLDivElement>(null);
-  const settings = useRef<HTMLDivElement>(null);
   const settingsTrigger = useRef<HTMLButtonElement>(null);
-  const storageKey = `sams-camera-shop-session-${shopper}`;
-  useEffect(() => {
-    const controller = new AbortController();
-    async function load() {
-      setLoading(true);
-      setError("");
-      setNotice("");
-      try {
-        const data = await requestJSON<ShopStatus>("/shop/status", {
-          signal: controller.signal,
-        });
-        if (controller.signal.aborted) return;
-        setStatus(data);
-        const saved = localStorage.getItem(storageKey);
-        if (saved && data.configured && data.catalogue_ready) {
-          try {
-            const restored = await requestJSON<Session>(
-              `/shop/sessions/${encodeURIComponent(saved)}?shopper_id=${shopper}`,
-              { signal: controller.signal },
-            );
-            if (!controller.signal.aborted) {
-              setSession(restored);
-              setRestoreFailed(false);
-            }
-          } catch (cause) {
-            if (!controller.signal.aborted) {
-              if (shouldForgetSession(cause)) {
-                localStorage.removeItem(storageKey);
-                setRestoreFailed(false);
-              } else setRestoreFailed(true);
-              setNotice(
-                `Previous conversation could not be restored: ${errorMessage(cause)}`,
-              );
-            }
-          }
-        } else if (!saved) setRestoreFailed(false);
-      } catch (cause) {
-        if (!controller.signal.aborted) setError(errorMessage(cause));
-      } finally {
-        if (!controller.signal.aborted) setLoading(false);
-      }
-    }
-    void load();
-    return () => controller.abort();
-  }, [shopper, storageKey, restoreAttempt]);
-  useEffect(() => {
-    if (session?.turns.length || pending)
-      bottom.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [session?.turns.length, pending]);
-  function rememberSession(value: Session) {
-    setSession(value);
-    localStorage.setItem(storageKey, value.session_id);
-  }
-  async function newConversation() {
-    settings.current?.hidePopover();
-    setBusy(true);
-    setError("");
-    try {
-      rememberSession(
-        await shopPost<Session>("sessions", { shopper_id: shopper }),
-      );
-      setRestoreFailed(false);
-      setNotice("New conversation. Your long-term memories remain available.");
-    } catch (cause) {
-      setError(errorMessage(cause));
-    } finally {
-      setBusy(false);
-    }
-  }
-  async function send(text = message) {
-    if (busy || restoreFailed || !text.trim()) return;
-    setBusy(true);
-    setError("");
-    setNotice("");
-    setPending(text.trim());
-    setMessage("");
-    try {
-      const active =
-        session ??
-        (await shopPost<Session>("sessions", { shopper_id: shopper }));
-      if (!session) rememberSession(active);
-      const turn = await shopPost<Turn>("chat", {
-        shopper_id: shopper,
-        session_id: active.session_id,
-        message: text.trim(),
-        mode,
-      });
-      rememberSession({ ...active, turns: [...active.turns, turn] });
-      setRevision((value) => value + 1);
-    } catch (cause) {
-      setMessage(text);
-      setError(chatFailureMessage(cause));
-    } finally {
-      setPending("");
-      setBusy(false);
-    }
-  }
-  const ready = !!status?.configured && status.catalogue_ready && !loading;
+  const {
+    status,
+    session,
+    loading,
+    restoreFailed,
+    busy,
+    setBusy,
+    error,
+    notice,
+    message,
+    setMessage,
+    pending,
+    revision,
+    ready,
+    newConversation,
+    retryRestoration,
+    send,
+  } = useShopConversation(shopper, mode, useCache);
+
   return (
     <main
       className={`shop-layout ${inspect ? "with-inspector" : ""}`}
       aria-label="Camera adviser"
     >
       <h1 className="sr-only">Chat with your camera adviser</h1>
-      <div
-        ref={settings}
-        id="shop-settings"
-        popover="auto"
-        className="shop-settings"
-        aria-label="Chat settings"
-      >
-        <h2>Chat settings</h2>
-        <button
-          className="shop-menu-action"
-          disabled={busy || !ready}
-          onClick={() => void newConversation()}
-        >
-          ＋ New conversation
-        </button>
-        <button
-          className="shop-menu-action"
-          disabled={!ready}
-          aria-pressed={inspect}
-          onClick={() => {
-            setInspect((value) => !value);
-            settings.current?.hidePopover();
-          }}
-        >
-          {inspect ? "Close" : "Open"} memory inspector
-        </button>
-        <label className="shop-field">
-          Demo shopper
-          <select
-            value={shopper}
-            disabled={busy}
-            onChange={(event) => {
-              settings.current?.hidePopover();
-              onShopperChange(event.target.value as Shopper);
-            }}
-          >
-            <option value="alex">Alex · travel filmmaker</option>
-            <option value="jordan">Jordan · separate shopper</option>
-          </select>
-        </label>
-        <label className="shop-field">
-          Memory for the next reply
-          <select
-            value={mode}
-            disabled={busy}
-            onChange={(event) => setMode(event.target.value as MemoryMode)}
-          >
-            <option value="none">No conversation memory</option>
-            <option value="session">Short-term: this session only</option>
-            <option value="both">Short-term + long-term</option>
-          </select>
-        </label>
-        <p className="shop-small">
-          Controls conversation memory supplied to the model. Order records and
-          catalogue search remain available in every mode. Turns still save events
-          for background extraction. Orders are fictional. Model:{" "}
-          {status?.model ?? "…"}.
-        </p>
-        <nav className="shop-settings-links" aria-label="Demo labs">
-          <a href="/?view=compare">Search lab ↗</a>
-          <a href="/?view=manage">Manage shop ↗</a>
-        </nav>
-      </div>
+      <ShopSettings
+        shopper={shopper}
+        status={status}
+        ready={ready}
+        busy={busy}
+        setBusy={setBusy}
+        inspect={inspect}
+        mode={mode}
+        useCache={useCache}
+        onNewConversation={newConversation}
+        onInspectorToggle={() => setInspect((value) => !value)}
+        onShopperChange={onShopperChange}
+        onModeChange={setMode}
+        onUseCacheChange={setUseCache}
+      />
       <section className="shop-main" aria-label="Shopping conversation">
         <div className="shop-scroll">
           {loading && <p role="status">Connecting to the shop…</p>}
@@ -246,110 +101,35 @@ function ShopConversation({ shopper, onShopperChange }: ShopConversationProps) {
               <button
                 disabled={busy || loading}
                 className="shop-secondary"
-                onClick={() => setRestoreAttempt((value) => value + 1)}
+                onClick={retryRestoration}
               >
                 Retry restoring conversation
               </button>
             </p>
           )}
-          <div
-            className="shop-conversation"
-            role="log"
-            aria-label="Conversation"
-            aria-live="polite"
-            aria-busy={busy}
-          >
-            {!session?.turns.length && !pending && !restoreFailed && (
-              <div className="shop-welcome">
-                <h2>What would you like to do today?</h2>
-              </div>
-            )}
-            {session?.turns.map((turn, index) => (
-              <ConversationTurn key={index} shopper={shopper} turn={turn} />
-            ))}
-            {pending && (
-              <>
-                <div className="shop-user">
-                  <span>{shopper}</span>
-                  <p>{pending}</p>
-                </div>
-                <p className="shop-thinking" role="status">
-                  Your adviser is gathering a little context…
-                </p>
-              </>
-            )}
-            <div ref={bottom} />
-          </div>
-        </div>
-        <form
-          className="shop-composer"
-          onSubmit={(event) => {
-            event.preventDefault();
-            void send();
-          }}
-        >
-          <label className="sr-only" htmlFor="shop-message">
-            Message your camera adviser
-          </label>
-          <textarea
-            id="shop-message"
-            value={message}
-            maxLength={4000}
-            rows={2}
-            placeholder="Type your message…"
-            disabled={busy || !ready || restoreFailed}
-            onChange={(event) => setMessage(event.target.value)}
-            onKeyDown={(event) => {
-              if (
-                event.key === "Enter" &&
-                !event.shiftKey &&
-                !event.nativeEvent.isComposing
-              ) {
-                event.preventDefault();
-                void send();
-              }
-            }}
+          <ConversationLog
+            shopper={shopper}
+            session={session}
+            pending={pending}
+            busy={busy}
+            restoreFailed={restoreFailed}
           />
-          <div>
-            <button
-              type="button"
-              ref={settingsTrigger}
-              className="shop-settings-trigger"
-              popoverTarget="shop-settings"
-              aria-label="Chat settings"
-              title="Chat settings"
-            >
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <circle cx="5" cy="12" r="1.7" />
-                <circle cx="12" cy="12" r="1.7" />
-                <circle cx="19" cy="12" r="1.7" />
-              </svg>
-            </button>
-            <span className="shop-small">
-              Check product details before buying.
-            </span>
-            <button
-              className="primary-button"
-              type="submit"
-              disabled={busy || !ready || restoreFailed || !message.trim()}
-              aria-label="Send message"
-            >
-              Send ↑
-            </button>
-          </div>
-        </form>
+        </div>
+        <MessageComposer
+          message={message}
+          disabled={busy || !ready || restoreFailed}
+          settingsTrigger={settingsTrigger}
+          onMessageChange={setMessage}
+          onSend={send}
+        />
       </section>
       {inspect && ready && (
         <ShopInspector
           shopper={shopper}
           session={session}
           revision={revision}
+          cacheReady={!!status?.cache_ready}
+          busy={busy}
           onClose={() => {
             setInspect(false);
             settingsTrigger.current?.focus();
@@ -357,6 +137,137 @@ function ShopConversation({ shopper, onShopperChange }: ShopConversationProps) {
         />
       )}
     </main>
+  );
+}
+
+function ConversationLog({
+  shopper,
+  session,
+  pending,
+  busy,
+  restoreFailed,
+}: {
+  shopper: Shopper;
+  session: Session | null;
+  pending: string;
+  busy: boolean;
+  restoreFailed: boolean;
+}) {
+  const bottom = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (session?.turns.length || pending)
+      bottom.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [session?.turns.length, pending]);
+
+  return (
+    <div
+      className="shop-conversation"
+      role="log"
+      aria-label="Conversation"
+      aria-live="polite"
+      aria-busy={busy}
+    >
+      {!session?.turns.length && !pending && !restoreFailed && (
+        <div className="shop-welcome">
+          <h2>What would you like to do today?</h2>
+        </div>
+      )}
+      {session?.turns.map((turn, index) => (
+        <ConversationTurn key={index} shopper={shopper} turn={turn} />
+      ))}
+      {pending && (
+        <>
+          <div className="shop-user">
+            <span>{shopper}</span>
+            <p>{pending}</p>
+          </div>
+          <p className="shop-thinking" role="status">
+            Your adviser is gathering a little context…
+          </p>
+        </>
+      )}
+      <div ref={bottom} />
+    </div>
+  );
+}
+
+function MessageComposer({
+  message,
+  disabled,
+  settingsTrigger,
+  onMessageChange,
+  onSend,
+}: {
+  message: string;
+  disabled: boolean;
+  settingsTrigger: RefObject<HTMLButtonElement | null>;
+  onMessageChange: (message: string) => void;
+  onSend: () => Promise<void>;
+}) {
+  return (
+    <form
+      className="shop-composer"
+      onSubmit={(event) => {
+        event.preventDefault();
+        void onSend();
+      }}
+    >
+      <label className="sr-only" htmlFor="shop-message">
+        Message your camera adviser
+      </label>
+      <textarea
+        id="shop-message"
+        value={message}
+        maxLength={4000}
+        rows={2}
+        placeholder="Type your message…"
+        disabled={disabled}
+        onChange={(event) => onMessageChange(event.target.value)}
+        onKeyDown={(event) => {
+          if (
+            event.key === "Enter" &&
+            !event.shiftKey &&
+            !event.nativeEvent.isComposing
+          ) {
+            event.preventDefault();
+            void onSend();
+          }
+        }}
+      />
+      <div>
+        <button
+          type="button"
+          ref={settingsTrigger}
+          className="shop-settings-trigger"
+          popoverTarget="shop-settings"
+          aria-label="Chat settings"
+          title="Chat settings"
+        >
+          <svg
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            aria-hidden="true"
+          >
+            <circle cx="5" cy="12" r="1.7" />
+            <circle cx="12" cy="12" r="1.7" />
+            <circle cx="19" cy="12" r="1.7" />
+          </svg>
+        </button>
+        <span className="shop-small">
+          Check product details before buying.
+        </span>
+        <button
+          className="primary-button"
+          type="submit"
+          disabled={disabled || !message.trim()}
+          aria-label="Send message"
+        >
+          Send ↑
+        </button>
+      </div>
+    </form>
   );
 }
 
@@ -373,7 +284,9 @@ function ConversationTurn({ shopper, turn }: { shopper: Shopper; turn: Turn }) {
           <span className="eyebrow">Sam’s adviser</span>
           <p className="reply-text">{turn.assistant}</p>
           <ProductCards products={turn.products} />
-          <ModelEvidence request={turn.inspector.answer_request} />
+          {turn.inspector.cache?.status !== "hit" && (
+            <ModelEvidence request={turn.inspector.answer_request} />
+          )}
         </div>
       </div>
     </div>

@@ -48,7 +48,7 @@ uv python install 3.12
 For a **new checkout**, run:
 
 ```bash
-git clone --branch context-retriever https://github.com/s-agbede/redis-iris-webinars.git
+git clone --branch semantic-caching https://github.com/s-agbede/redis-iris-webinars.git
 cd redis-iris-webinars
 cp .env.example .env
 ```
@@ -56,7 +56,7 @@ cp .env.example .env
 If you already have this branch checked out, use that directory and keep your
 existing `.env`. Run all subsequent commands from the repository root.
 While the repository is private, you need a GitHub invitation and Git access.
-If `context-retriever` is unavailable, ask the presenter for the published webinar branch.
+If `semantic-caching` is unavailable, ask the presenter for the published webinar branch.
 
 ## 2. Connect the memory service, retriever and chat model
 
@@ -112,9 +112,11 @@ The prefix scopes RAM and local conversations. Context Retriever's shopper keys
 still read the same seeded purchase records; changing the prefix does not create
 new orders or a new retriever service.
 
-For this first run, leave the three `SHOP_PLAYBOOK_*` values empty and
-`AGENT_MEMORY_NAMESPACE_ID` commented out. Keep `REDIS_URL`, `REDIS_PORT`,
-`NAMESPACE` and the other defaults. Save `.env`; it is ignored by Git.
+For this first memory exercise, keep `SHOP_CACHE_ENABLED=false`, leave the three
+`SHOP_PLAYBOOK_*` values empty and `AGENT_MEMORY_NAMESPACE_ID` commented out.
+Keep `REDIS_URL`, `REDIS_PORT`, `NAMESPACE` and the other defaults. Save `.env`;
+it is ignored by Git. Afterwards, follow the
+[semantic-cache runbook](../demos/semantic-caching.md) to enable reuse.
 
 ## 3. Start the app
 
@@ -176,7 +178,7 @@ background extraction, even when memory context is off.
 
 ### Wait for a long-term fact
 
-Open **⋯ Chat settings → Open memory inspector**. Under **Long-term memory**, use
+Open **⋯ Chat settings → Open memory & cache inspector**. Under **Long-term memory**, use
 **Refresh** or enable **Refresh every 10 seconds**. Wait until a record says that
 Alex owns the Sony ZV-E10. Its wording may differ from your message.
 

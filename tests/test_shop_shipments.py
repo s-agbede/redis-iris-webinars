@@ -91,7 +91,7 @@ def test_incomplete_shipments_are_rejected(field: str) -> None:
 
 def test_demo_product_reaches_model_without_a_broken_catalogue_card() -> None:
     from app.shop.models import TurnContext
-    from app.shop.service import ShopRetrieval
+    from app.shop.tools import ShopRetrieval
     from tests.test_shop import make_shop
 
     record = {

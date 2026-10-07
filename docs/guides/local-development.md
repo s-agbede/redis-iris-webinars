@@ -72,7 +72,7 @@ While this repository is private, your GitHub account needs access. Accept the
 repository invitation and authenticate Git with that account before cloning.
 
 ```bash
-git clone --branch context-retriever https://github.com/s-agbede/redis-iris-webinars.git
+git clone --branch semantic-caching https://github.com/s-agbede/redis-iris-webinars.git
 cd redis-iris-webinars
 cp .env.example .env
 make up
@@ -90,7 +90,7 @@ minutes for CPU embedding. The loader processes one product at a time and prints
 batch progress. Wait for `Application startup complete`,
 then open [the shop](http://127.0.0.1:8000) or
 [the search lab](http://127.0.0.1:8000/?view=compare). Keep this terminal running.
-These commands use the `context-retriever` branch. If Git cannot find that remote
+These commands use the `semantic-caching` branch. If Git cannot find that remote
 branch, ask the presenter for the published webinar branch.
 The search lab works with this local setup alone. To enable chat, complete the
 [cloud-service configuration](agent-memory-quickstart.md#2-connect-the-memory-service-retriever-and-chat-model),
@@ -280,6 +280,7 @@ adviser grouped under `app/shop/`. Start with the feature you want to change:
 ```text
 app/
   main.py               # HTTP application and startup
+  search_routes.py      # Search lab HTTP endpoints
   runtime.py            # Supervises API and worker processes
   worker.py             # Indexing-worker process entry point
   queries.py            # Three RedisVL retrieval query builders
@@ -288,7 +289,12 @@ app/
   sync.py               # Consume catalogue changes and update indexes
   freshness_routes.py   # Catalogue-change and retry controls
   shop/                 # Conversational camera adviser
-    service.py          # Conversation flow and tool orchestration
+    service.py          # Conversation flow: context, answer, persistence
+    tools.py            # Catalogue/MCP tools and cache nomination
+    prompts.py          # Adviser and tool-use instructions
+    reuse.py            # Answer applicability and storage policy
+    cache.py            # RedisVL semantic-cache adapter
+    jev.py              # Typed Jev request and Decisions API adapter
     routes.py           # HTTP endpoints and service construction
     models.py           # Typed requests, context and responses
     llm.py              # OpenAI model transport
@@ -302,8 +308,11 @@ Follow the request path for the feature you want to explore:
 
 | Read | Responsibility |
 |---|---|
-| [app/main.py](../../app/main.py) | FastAPI endpoints, readiness, and static frontend |
-| [app/shop/service.py](../../app/shop/service.py) | Camera adviser conversation and tool flow |
+| [app/main.py](../../app/main.py) | App assembly, service lifetime, and static frontend |
+| [app/search_routes.py](../../app/search_routes.py) | Search HTTP endpoints and readiness |
+| [app/shop/service.py](../../app/shop/service.py) | One adviser turn: context, reuse or generation, persistence |
+| [app/shop/tools.py](../../app/shop/tools.py) | Catalogue/MCP tools and deferred cache nomination |
+| [app/shop/reuse.py](../../app/shop/reuse.py) | Semantic-cache eligibility and answer applicability |
 | [app/shop/routes.py](../../app/shop/routes.py) | Adviser HTTP API and dependency construction |
 | [app/shop/context_retriever.py](../../app/shop/context_retriever.py) | Scoped MCP discovery, schema validation, tool execution and safe retrieval errors |
 | [app/runtime.py](../../app/runtime.py) | Starts and restarts API and worker processes |
@@ -339,8 +348,9 @@ The current app implements search comparison and three working production-patter
 demos: freshness, measured traffic and safe index replacement. See the
 [production demo runbook](../demos/production.md). The conversational adviser also
 implements the [agent-memory demo](../demos/agent-memory.md), using external RAM
-and model services when configured. Semantic caching and the dedicated context-retriever
-session remain future extensions.
+and model services when configured, the [Context Retriever demo](../demos/context-retriever.md)
+for scoped live records, and optional [semantic caching](../demos/semantic-caching.md)
+using RedisVL and Jev.
 
 ### Worker recovery and failed changes
 

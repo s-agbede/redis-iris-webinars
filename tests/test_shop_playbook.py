@@ -3,8 +3,8 @@ import json
 import httpx
 import pytest
 
+from app.shop.errors import ShopError
 from app.shop.playbook import PlaybookGuidance
-from app.shop.service import ShopError
 
 
 def test_playbook_loads_exact_discovered_published_skill_version() -> None:

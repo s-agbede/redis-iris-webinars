@@ -2,6 +2,9 @@
 
 ## Start here
 
+Want to understand or present the implementation? Follow the
+[code walkthrough](guides/code-walkthrough.md) for the reading order and a short live tour.
+
 New to the adviser? Follow the [beginner quickstart](guides/agent-memory-quickstart.md):
 connect RAM, Context Retriever and the model, then try a conversation with a check
 at each step. You do not need Playbook
@@ -34,8 +37,13 @@ or custom memory types.
 - [Search comparison](demos/search.md).
 - [Production patterns](demos/production.md): freshness, performance and index replacement.
 - [Agent memory](demos/agent-memory.md): the core lesson in 15 minutes, after setup.
+- [Semantic caching](demos/semantic-caching.md): scoped RedisVL lookup, Jev verification,
+  expiry and the production trade-offs in 15 minutes.
 - [Context Retriever](demos/context-retriever.md): the missing microphone, live shipment
   lookups, repeatable status changes and shopper isolation.
+
+The [semantic-cache architecture](architecture/semantic-caching.md) describes the
+integration boundaries, stored evidence and deliberate freshness limitations.
 
 ## Prepare presentation material
 
